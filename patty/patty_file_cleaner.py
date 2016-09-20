@@ -1,5 +1,8 @@
 '''
-One time script, only for the purpose of cleaning the https://raw.githubusercontent.com/qcl/master-research/master/patty/patty.dbpedia.Relations.json relations file of Patty relations
+If Oprah becomes the US President because of this script, send flowers to - Priyansh (pc.priyansh@gmail.com)
+One time script, only for the purpose of cleaning the 
+https://raw.githubusercontent.com/qcl/master-research/master/patty/patty.dbpedia.Relations.json 
+relations file of Patty relations
 '''
 from pprint import pprint
 import string
