@@ -6,6 +6,9 @@ Refer to this document for a list of templates we have or will be focusing on - 
 
 `Note: If you don't have access to the doc, please drop me a mail at pc.priyansh@gmail.com`
 
+##Branch Specific Introduction
+The branch tries to create a list of useful DBPedia relations, using already found stuff on patty, and the DBPedia predicates used in QALD Training set. Maybe we can fall back to inhouse approaches down the line, although not anytime soon.
+
 ## Branches
 ### master
 Will have the code for converting SPARQL templates to valid SPARQL Queries which retrieve something from DBPedia, and then to convert them to pseudo-nl query.
