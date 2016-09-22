@@ -68,7 +68,7 @@ class DBPedia:
 			The boolean flag can be used if we want to return the (R,O) tuples instead of just R
 
 			Return Type 
-				if _with_connected_resource == True, [ (R,O), (R,O), (R,O) ...]
+				if _with_connected_resource == True, [ [R,O], [R,O], [R,O] ...]
 				else [ R,R,R,R...]
 		'''
 		#Check if the resource URI is shorthand or a proper URI
@@ -90,7 +90,7 @@ class DBPedia:
 
 		try:
 			if _with_connected_resource:
-				property_list = [ (x[u'property'][u'value'].encode('ascii','ignore'), x[u'resource'][u'value'].encode('ascii','ignore')) for x in response[u'results'][u'bindings'] ]
+				property_list = [ [x[u'property'][u'value'].encode('ascii','ignore'), x[u'resource'][u'value'].encode('ascii','ignore')] for x in response[u'results'][u'bindings'] ]
 			else:
 				property_list = [x[u'property'][u'value'].encode('ascii','ignore') for x in response[u'results'][u'bindings']]
 		except:
