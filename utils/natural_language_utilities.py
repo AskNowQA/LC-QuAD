@@ -31,6 +31,14 @@ def has_literal(_string):
 	if has_url(_string) or has_shorthand(_string):
 		return False
 	return True
+
+def convert_to_no_symbols(_string):
+	new_string = ''
+	for char in _string:
+		if char not in string.letters+string.digits+' *':
+			continue
+		new_string += char
+	return new_string
 	
 
 def convert_shorthand_to_uri(_string):
