@@ -22,7 +22,7 @@
 
 import utils.dbpedia_interface as db_interface
 import utils.natural_language_utilities as nlutils
-import polishing.microsoft_api_4gram as polishing
+import polishing.microsoft_api_5gram as polishing
 from pprint import pprint
 import time
 
