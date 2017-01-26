@@ -20,11 +20,14 @@ import random
 import natural_language_utilities as nlutils
 
 #GLOBAL MACROS
+# DBPEDIA_ENDPOINTS = ['http://live.dbpedia.org/sparql/']
 DBPEDIA_ENDPOINTS = ['http://dbpedia.org/sparql/','http://live.dbpedia.org/sparql/']
 MAX_WAIT_TIME = 1.0
 
 #SPARQL Templates
 GET_PROPERTIES_OF_RESOURCE = '''SELECT DISTINCT ?property WHERE { %(target_resource)s ?property ?useless_resource }'''
+
+GET_PROPERTIES_ON_RESOURCE = '''SELECT DISTINCT ?property WHERE { ?useless_resource  ?property %(target_resource)s }'''
 
 GET_PROPERTIES_OF_RESOURCE_WITH_OBJECTS = '''SELECT DISTINCT ?property ?resource WHERE { %(target_resource)s ?property ?resource	}'''
 
@@ -62,6 +65,22 @@ class DBPedia:
 		if selection_method == 'random':
 			return random.choice(DBPEDIA_ENDPOINTS)
 
+	def get_properties_on_resource(self, _resource_uri):
+		'''
+			Fetch properties that point to this resource. 
+			Eg. 
+			Barack Obama -> Ex-President of -> _resource_uri would yield ex-president of as the relation
+		'''
+		if not nlutils.has_url(_resource_uri):
+			warnings.warn("The passed resource %s is not a proper URI but is in shorthand. This is strongly discouraged." % _resource_uri)
+			_resource_uri = nlutils.convert_shorthand_to_uri(_resource_uri)
+
+		sparql = SPARQLWrapper(self.select_sparql_endpoint())
+		sparql.setQuery(GET_PROPERTIES_ON_RESOURCE % {'target_resource':_resource_uri} )
+		sparql.setReturnFormat(JSON)
+		response = sparql.query().convert()
+
+
 	def get_properties_of_resource(self,_resource_uri,_with_connected_resource = False):
 		'''
 			This function can fetch the properties connected to this '_resource', in the format - _resource -> R -> O
@@ -79,11 +98,10 @@ class DBPedia:
 		#Prepare the SPARQL Request
 		sparql = SPARQLWrapper(self.select_sparql_endpoint())
 		# with SPARQLWrapper(self.sparql_endpoint) as sparql:
+		_resource_uri = '<'+_resource_uri+'>'
 		if _with_connected_resource:
-			_resource_uri = '<'+_resource_uri+'>'
 			sparql.setQuery(GET_PROPERTIES_OF_RESOURCE_WITH_OBJECTS % {'target_resource':_resource_uri} )
 		else:
-			_resource_uri = '<'+_resource_uri+'>'
 			sparql.setQuery(GET_PROPERTIES_OF_RESOURCE % {'target_resource':_resource_uri} )
 		sparql.setReturnFormat(JSON)
 		response = sparql.query().convert()
@@ -99,7 +117,6 @@ class DBPedia:
 			# pass
 
 		return property_list
-
 
 	def get_entities_of_class(self, _class_uri):
 		'''
@@ -129,7 +146,6 @@ class DBPedia:
 			# pass
 
 		return entity_list
-
 
 	def get_type_of_resource(self, _resource_uri, _filter_dbpedia = False):
 		'''
@@ -216,6 +232,14 @@ class DBPedia:
 
 		return results[0]
 
+	def shoot_custom_query(self, _custom_query):
+		'''	
+			Shoot any custom query and get the SPARQL results as a dictionary
+		'''
+		sparql = SPARQLWrapper(self.select_sparql_endpoint())
+		sparql.setQuery(_custom_query)
+		sparql.setReturnFormat(JSON)
+		return sparql.query().convert()
 
 
 if __name__ == '__main__':
