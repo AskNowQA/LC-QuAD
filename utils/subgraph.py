@@ -4,7 +4,7 @@
 
 	This code is responsible for finding a localsubgraph for every important DBpedia entry (based on pagerank) and using it to fill the templates found in templates.py file	
 '''
-
+from pprint import pprint
 import matplotlib.pyplot as plt
 import networkx as nx
 				
@@ -64,7 +64,7 @@ class accessGraph():
 		outnodes_list = []
 		for node in node_list:
 			#temp will have the following structure --> ('Gaurav', 'books', {'object': 'likes'}), ('Gaurav', 'Pizza', {'object': 'loves'})]
-			temp = self.G.out_edges(node)
+			temp = self.G.out_edges(node,data=True)
 			outnodes_list.append(temp)
 		return outnodes_list
 	
@@ -73,7 +73,7 @@ class accessGraph():
 		innodes_list = []
 		for node in node_list:
 			#temp will have the following structure --> ('Gaurav', 'books', {'object': 'likes'}), ('Gaurav', 'Pizza', {'object': 'loves'})]
-			temp = self.G.in_edges(node)
+			temp = self.G.in_edges(node,data=True)
 			innodes_list.append(temp)
 		return innodes_list
 

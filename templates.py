@@ -1,9 +1,9 @@
 [{
-	"template": " SELECT DISTINCT ?uri WHERE {?uri <%(rel_to_a)s> <%(ent_a)s> } ",
+	"template": " SELECT DISTINCT ?uri WHERE {?uri <%(e_to_e_out)s> <%(e_out)s> } ",
 	"id": 1,
 	"n_entities": 1
 }, {
-	"template": " SELECT DISTINCT ?uri WHERE { <%(ent_a)s> <%(rel_from_a)s> ?uri } ",
+	"template": " SELECT DISTINCT ?uri WHERE { <%(e_in)s> <%(e_in_to_e)s> ?uri } ",
 	"id": 2,
 	"n_entities": 1
 }, {
