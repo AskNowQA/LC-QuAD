@@ -7,11 +7,11 @@
 	"id": 2,
 	"n_entities": 1
 }, {
-	"template": " SELECT DISTINCT ?uri WHERE { <%(ent_a)s> <%(rel_from_a)s> ?x . ?x <%(rel_from_x)s> ?uri } ",
+	"template": " SELECT DISTINCT ?uri WHERE { <%(e_in_in)s> <%(e_in_in_to_e_in)s> ?x . ?x <%(e_in_to_e)s> ?uri } ",
 	"id": 3,
 	"n_entities": 1
 }, {
-	"template": " SELECT DISTINCT ?uri WHERE { <%(ent_a)s> <%(rel_from_a)s> ?x . ?uri <%(rel_to_x)s> ?x } ",
+	"template": " SELECT DISTINCT ?uri WHERE { <%(e_out_in)s> <%(e_out_in_to_e_out)s> ?x . ?uri <%(e_to_e_out)s> ?x } ",
 	"id": 4,
 	"n_entities": 1
 }, {
