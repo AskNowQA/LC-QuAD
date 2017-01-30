@@ -11,6 +11,7 @@
 	A: Because I can, bitch.
 '''
 from SPARQLWrapper import SPARQLWrapper, JSON
+from operator import itemgetter
 from pprint import pprint
 import traceback
 import warnings
@@ -36,6 +37,8 @@ GET_ENTITIES_OF_CLASS = '''SELECT DISTINCT ?entity WHERE {	?entity <http://www.w
 GET_LABEL_OF_RESOURCE = '''SELECT DISTINCT ?label WHERE { %(target_resource)s <http://www.w3.org/2000/01/rdf-schema#label> ?label . FILTER (lang(?label) = 'en')	} '''
 
 GET_TYPE_OF_RESOURCE = '''SELECT DISTINCT ?type WHERE { %(target_resource)s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?type } '''
+
+GET_CLASS_PATH = '''SELECT DISTINCT ?type WHERE { %(target_class)s rdfs:subClassOf* ?type }'''
 
 class DBPedia:
 	def __init__(self,_method='round-robin',_verbose=False):
@@ -241,6 +244,45 @@ class DBPedia:
 		sparql.setReturnFormat(JSON)
 		return sparql.query().convert()
 
+	def get_most_specific_class(self, _resource_uri):
+		'''
+			Query to find the most specific DBPedia Ontology class given a URI.
+			Limitation: works only with resources.
+			@TODO: Extend this to work with ontology (not entities) too. Or properties.
+		'''
+		if not nlutils.has_url(_resource_uri):
+			warnings.warn("The passed resource %s is not a proper URI but probably a shorthand. This is strongly discouraged." % _resource_uri)
+			_resource_uri = nlutils.convert_shorthand_to_uri(_resource_uri)
+
+		#Get the DBpedia classes of resource
+		classes = self.get_type_of_resource(_resource_uri, _filter_dbpedia = True)
+		length_array = []	#A list of tuples, it's use explained below
+
+		#For every class, find the length of path to owl:Thing.
+		for class_uri in classes:
+
+			#Preparing the query
+			sparql =  SPARQLWrapper(self.select_sparql_endpoint())
+			target_class = '<'+class_uri+'>'
+			sparql.setQuery(GET_CLASS_PATH % {'target_class':target_class} )
+			sparql.setReturnFormat(JSON)
+			try:
+				response = sparql.query().convert()
+			except:
+				traceback.print_exc()
+
+			#Parsing the Result
+			try:
+				results = [x[u'type'][u'value'].encode('ascii','ignore') for x in response[u'results'][u'bindings'] ]
+			except:
+				traceback.print_exc()
+
+			#Count the number of returned classes and store it in the dictionary.
+			length_array.append( (class_uri,len(results)) )
+
+		#Find the class_uri with the biggest path. And return it.
+		pprint(length_array)
+		return max(length_array,key=itemgetter(1))[0]
 
 if __name__ == '__main__':
 	pass
@@ -252,7 +294,9 @@ if __name__ == '__main__':
 	# q = 'SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/ontology/birthPlace> <http://dbpedia.org/resource/Mengo,_Uganda> . ?uri <http://dbpedia.org/ontology/birthPlace> <http://dbpedia.org/resource/Uganda> }'
 	# pprint(dbp.get_answer(q))
 
-	# dbp = DBPedia()
+	dbp = DBPedia()
+	uri = 'http://dbpedia.org/resource/Donald_Trump'
+	print dbp.get_most_specific_class(uri)
 
 	# q = 'http://dbpedia.org/ontology/birthPlace'
 	# pprint(dbp.get_label(q))
