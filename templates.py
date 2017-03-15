@@ -7,7 +7,7 @@
 	"id": 2,
 	"n_entities": 1
 }, {
-	"template": " SELECT DISTINCT ?uri WHERE { <%(e_in_in)s> <%(e_in_in_to_e_in)s> ?x . ?x <%(e_in_to_e)s> ?uri } ",
+	"template": " SELECT DISTINCT ?uri, ?x WHERE { <%(e_in_in)s> <%(e_in_in_to_e_in)s> ?x . ?x <%(e_in_to_e)s> ?uri } ",
 	"id": 3,
 	"n_entities": 1
 }, {

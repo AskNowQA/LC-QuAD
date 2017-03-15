@@ -201,9 +201,11 @@ class DBPedia:
 		variables = [x for x in response[u'head'][u'vars']]
 
 		#NOTE: Assuming that there's only one variable
-		value = [ x[variables[0]][u'value'].encode('ascii','ignore') for x in response[u'results'][u'bindings'] ]
-
-		return value
+		values = {}
+		for index in xrange(0,len(variables)):
+			value = [ x[variables[index]][u'value'].encode('ascii','ignore') for x in response[u'results'][u'bindings'] ]
+			values[variables[index]] = value 
+		return values
 
 	def get_label(self, _resource_uri):
 		'''
@@ -299,13 +301,13 @@ if __name__ == '__main__':
 	# pprint(dbp.get_type_of_resource('http://dbpedia.org/resource/Bill_Gates', _filter_dbpedia = True))
 	# print "\n\nIndia"
 	# pprint(dbp.get_type_of_resource('http://dbpedia.org/resource/India', _filter_dbpedia = True))
-
-	# q = 'SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/ontology/birthPlace> <http://dbpedia.org/resource/Mengo,_Uganda> . ?uri <http://dbpedia.org/ontology/birthPlace> <http://dbpedia.org/resource/Uganda> }'
+	# dbp = DBPedia()
+	# q = 'SELECT DISTINCT ?uri, ?a WHERE { ?uri <http://dbpedia.org/ontology/birthPlace> <http://dbpedia.org/resource/Mengo,_Uganda> . ?uri <http://dbpedia.org/ontology/birthPlace> ?a }'
 	# pprint(dbp.get_answer(q))
 
-	dbp = DBPedia()
-	uri = 'http://dbpedia.org/resource/Donald_Trump'
-	print dbp.get_most_specific_class(uri)
+	
+	# uri = 'http://dbpedia.org/resource/Donald_Trump'
+	# print dbp.get_most_specific_class(uri)
 
 	# q = 'http://dbpedia.org/ontology/birthPlace'
 	# pprint(dbp.get_label(q))
