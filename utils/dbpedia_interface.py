@@ -256,6 +256,13 @@ class DBPedia:
 
 		#Get the DBpedia classes of resource
 		classes = self.get_type_of_resource(_resource_uri, _filter_dbpedia = True)
+
+		'''debug'''
+		# print "resource uri is " + _resource_uri
+		# print "returned classes are " + str(len(classes))
+		# for x in classes:
+		# 	print x
+		
 		length_array = []	#A list of tuples, it's use explained below
 
 		#For every class, find the length of path to owl:Thing.
@@ -277,12 +284,14 @@ class DBPedia:
 			except:
 				traceback.print_exc()
 
-			#Count the number of returned classes and store it in the dictionary.
+			#Count the number of returned classes and store it in treturn max(length_array,key=itemgetter(1))[0]he list.
 			length_array.append( (class_uri,len(results)) )
-
-		#Find the class_uri with the biggest path. And return it.
 		pprint(length_array)
-		return max(length_array,key=itemgetter(1))[0]
+		if len(length_array) > 0:
+			return max(length_array,key=itemgetter(1))[0]
+		else:
+			#if there is no results from the filter type , return it as owl Thing 
+			return "http://www.w3.org/2002/07/owl#Thing"	
 
 if __name__ == '__main__':
 	pass
