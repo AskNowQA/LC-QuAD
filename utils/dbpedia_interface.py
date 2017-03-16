@@ -22,7 +22,8 @@ import natural_language_utilities as nlutils
 
 #GLOBAL MACROS
 # DBPEDIA_ENDPOINTS = ['http://live.dbpedia.org/sparql/']
-DBPEDIA_ENDPOINTS = ['http://dbpedia.org/sparql/','http://live.dbpedia.org/sparql/']
+# 'http://dbpedia.org/sparql/','http://live.dbpedia.org/sparql/'
+DBPEDIA_ENDPOINTS = ['http://131.220.153.66:8900/sparql']
 MAX_WAIT_TIME = 1.0
 
 #SPARQL Templates
@@ -39,6 +40,8 @@ GET_LABEL_OF_RESOURCE = '''SELECT DISTINCT ?label WHERE { %(target_resource)s <h
 GET_TYPE_OF_RESOURCE = '''SELECT DISTINCT ?type WHERE { %(target_resource)s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?type } '''
 
 GET_CLASS_PATH = '''SELECT DISTINCT ?type WHERE { %(target_class)s rdfs:subClassOf* ?type }'''
+
+
 
 class DBPedia:
 	def __init__(self,_method='round-robin',_verbose=False):
@@ -288,13 +291,12 @@ class DBPedia:
 
 			#Count the number of returned classes and store it in treturn max(length_array,key=itemgetter(1))[0]he list.
 			length_array.append( (class_uri,len(results)) )
-		pprint(length_array)
+		# pprint(length_array)
 		if len(length_array) > 0:
 			return max(length_array,key=itemgetter(1))[0]
 		else:
 			#if there is no results from the filter type , return it as owl Thing 
 			return "http://www.w3.org/2002/07/owl#Thing"	
-
 if __name__ == '__main__':
 	pass
 	# print "\n\nBill Gates"

@@ -1,9 +1,16 @@
 import validators
 import string
 import re
+import os.path
+from urlparse import urlparse
 
 #SOME MACROS
 KNOWN_SHORTHANDS = ['dbo','dbp','rdf','rdfs','dbr']	
+
+#Few regex to convert camelCase to _ i.e DonaldTrump to donald trump
+first_cap_re = re.compile('(.)([A-Z][a-z]+)')
+all_cap_re = re.compile('([a-z0-9])([A-Z])')
+
 #TODO Import the above list from http://dbpedia.org/sparql?nsdecl
 
 def has_url(_string):
@@ -51,3 +58,22 @@ def is_alpha_with_underscores(_string):
 			return False
 			
 	return True
+
+def convert(_string):
+	s1 = first_cap_re.sub(r'\1_\2', _string)
+	return all_cap_re.sub(r'\1_\2', s1)
+
+def get_label_via_parsing(_uri):
+	parsed = urlparse(_uri)
+	path = os.path.split(parsed.path)
+	unformated_label = path[-1]
+	label = convert(unformated_label)
+	label = " ".join(label.split("_"))
+	return label
+
+def test_get_label_via_parsing():
+	uris = ["http://dbpedia.org/ontology/Airport", "http://dbpedia.org/property/garrison", "<http://dbpedia.org/property/MohnishDubey"]
+	for uri in uris:
+		print get_label_via_parsing(uri)
+
+test_get_label_via_parsing()
