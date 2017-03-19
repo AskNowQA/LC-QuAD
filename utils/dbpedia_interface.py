@@ -16,6 +16,8 @@ from pprint import pprint
 import traceback
 import warnings
 import random
+import redis
+import json
 
 #Our scripts
 import natural_language_utilities as nlutils
@@ -45,7 +47,7 @@ GET_CLASS_PATH = '''SELECT DISTINCT ?type WHERE { %(target_class)s rdfs:subClass
 
 
 class DBPedia:
-	def __init__(self,_method='round-robin',_verbose=False):
+	def __init__(self,_method='round-robin',_verbose=False,_db_name = 0):
 		
 		#Explanation: selection_method is used to select from the DBPEDIA_ENDPOINTS, hoping that we're not blocked too soon
 		if _method in ['round-robin','random','select-one']:
@@ -56,6 +58,9 @@ class DBPedia:
 
 		self.verbose = _verbose
 		self.sparql_endpoint = DBPEDIA_ENDPOINTS[0]
+		self.r  = redis.StrictRedis(host='localhost', port=6379, db=_db_name)
+
+		#initilizing the redis server.
 
 	def select_sparql_endpoint(self):
 		'''
@@ -76,10 +81,16 @@ class DBPedia:
 		'''
 			Shoot any custom query and get the SPARQL results as a dictionary
 		'''
+		caching_answer = self.r.get(_custom_query)
+		if caching_answer:
+			print "@caching layer"
+			return json.loads(caching_answer)
 		sparql = SPARQLWrapper(self.select_sparql_endpoint())
 		sparql.setQuery(_custom_query)
 		sparql.setReturnFormat(JSON)
-		return sparql.query().convert()
+		caching_answer = sparql.query().convert()
+		self.r.set(_custom_query,json.dumps(caching_answer))
+		return caching_answer
 
 	def get_properties_on_resource(self, _resource_uri):
 		'''
@@ -279,21 +290,21 @@ class DBPedia:
 			return "http://www.w3.org/2002/07/owl#Thing"	
 if __name__ == '__main__':
 	pass
-	print "\n\nBill Gates"
-	dbp = DBPedia()
-	pprint(dbp.get_type_of_resource('http://dbpedia.org/resource/Bill_Gates', _filter_dbpedia = True))
-	print "\n\nIndia"
-	pprint(dbp.get_type_of_resource('http://dbpedia.org/resource/India', _filter_dbpedia = True))
-
-	q = 'SELECT DISTINCT ?uri, ?a WHERE { ?uri <http://dbpedia.org/ontology/birthPlace> <http://dbpedia.org/resource/Mengo,_Uganda> . ?uri <http://dbpedia.org/ontology/birthPlace> ?a }'
-	pprint(dbp.get_answer(q))
-
-	
-	uri = 'http://dbpedia.org/resource/Donald_Trump'
-	print dbp.get_most_specific_class(uri)
-
-	q = 'http://dbpedia.org/ontology/birthPlace'
-	pprint(dbp.get_label(q))
-
-	q = 'http://dbpedia.org/resource/Bill_Gates'
-	pprint(dbp.get_label(q))
+	# print "\n\nBill Gates"
+	# dbp = DBPedia()
+	# pprint(dbp.get_type_of_resource('http://dbpedia.org/resource/Bill_Gates', _filter_dbpedia = True))
+	# print "\n\nIndia"
+	# pprint(dbp.get_type_of_resource('http://dbpedia.org/resource/India', _filter_dbpedia = True))
+    #
+	# q = 'SELECT DISTINCT ?uri, ?a WHERE { ?uri <http://dbpedia.org/ontology/birthPlace> <http://dbpedia.org/resource/Mengo,_Uganda> . ?uri <http://dbpedia.org/ontology/birthPlace> ?a }'
+	# pprint(dbp.get_answer(q))
+    #
+    #
+	# uri = 'http://dbpedia.org/resource/Donald_Trump'
+	# print dbp.get_most_specific_class(uri)
+    #
+	# q = 'http://dbpedia.org/ontology/birthPlace'
+	# pprint(dbp.get_label(q))
+    #
+	# q = 'http://dbpedia.org/resource/Bill_Gates'
+	# pprint(dbp.get_label(q))

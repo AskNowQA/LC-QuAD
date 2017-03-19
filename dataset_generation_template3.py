@@ -191,7 +191,7 @@ def get_local_subgraph(_uri):
     return G
 
 
-def fill_specific_template(_template_id, _mapping, _debug=False):
+def fill_specific_template(_template_id, _mapping, _mapping_type ,_debug=False):
     '''
         Function to fill a specific template.
         Given the template ID, it is expected to fetch the template from the set
@@ -221,6 +221,7 @@ def fill_specific_template(_template_id, _mapping, _debug=False):
 
     # Include the mapping within the template object
     template['mapping'] = _mapping
+    template['mapping_type'] = _mapping_type
 
     # Get the Answer of the query
     # get_answer now returns a dictionary with appropriate variable bindings.
@@ -291,6 +292,7 @@ def fill_templates(_graph, _uri):
 
     # Collect all e_in_in and e_in_in_to_e_in
     op = access.return_innodes('e_in')
+    counter_template1 = 0
 
     # This 'op' has the e_in_in and the prop for all e_in's. We now need to map one to the other.
     for list_of_triples in op:
@@ -320,10 +322,10 @@ def fill_templates(_graph, _uri):
                 mapping_type[key] = dbp.get_most_specific_class(mapping[key])
             # Throw it to a function who will put it in the list with appropriate bookkeeping
             try:
-                fill_specific_template(_template_id=3, _mapping=mapping)
+                fill_specific_template(_template_id=3, _mapping=mapping,_mapping_type = mapping_type)
                 counter_template3 = counter_template3 + 1
                 print str(counter_template3), "tempalte3"
-                if counter_template1 > 10:
+                if counter_template3 > 10:
                     pass
                     #                     break
             except:
@@ -349,11 +351,11 @@ graph = get_local_subgraph(uri)
 fill_templates(graph, _uri=uri)
 
 # Write the SPARQLs to disk in Pretty Print format
-for i in range(1, 5):
-    with open('output/template%d.txt' % i, 'wt') as out:
+for i in range(1, len(sparqls)):
+    with open('output/template%d.txt' % i, 'a+') as out:
         pprint(sparqls[i], stream=out)
-for i in range(1, 5):
-    f = open('output/template%s.json' % i, 'wt')
+for i in range(1, len(sparqls)):
+    f = open('output/template%s.json' % i, 'a+')
     json.dump(sparqls[i], f)
     f.close()
 print "DONE"
