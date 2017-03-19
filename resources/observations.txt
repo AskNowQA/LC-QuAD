@@ -1,0 +1,8 @@
+There are 228 whitelist relationships
+
+Now with answer always as Bareilly , which is a type of Metrapolis
+    >To observer
+        >How does the type of answer effects the grammer structure
+        >What other entity and relation affects the grammer structure
+        >How generalizable the grammer structure is
+>May be need to define whitelist relationship based on Entites type. For example - ispartOf might not be needed for location based questions because it makes gramaitical structure more difficult.

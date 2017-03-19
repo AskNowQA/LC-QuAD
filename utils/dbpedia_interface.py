@@ -23,7 +23,8 @@ import natural_language_utilities as nlutils
 #GLOBAL MACROS
 # DBPEDIA_ENDPOINTS = ['http://live.dbpedia.org/sparql/']
 # 'http://dbpedia.org/sparql/','http://live.dbpedia.org/sparql/'
-DBPEDIA_ENDPOINTS = ['http://131.220.153.66:8900/sparql']
+#EIS dbpedia endpoint - 'http://131.220.153.66:8900/sparql'
+DBPEDIA_ENDPOINTS = ['http://dbpedia.org/sparql/','http://live.dbpedia.org/sparql/']
 MAX_WAIT_TIME = 1.0
 
 #SPARQL Templates
@@ -71,6 +72,15 @@ class DBPedia:
 		if selection_method == 'random':
 			return random.choice(DBPEDIA_ENDPOINTS)
 
+	def shoot_custom_query(self, _custom_query):
+		'''
+			Shoot any custom query and get the SPARQL results as a dictionary
+		'''
+		sparql = SPARQLWrapper(self.select_sparql_endpoint())
+		sparql.setQuery(_custom_query)
+		sparql.setReturnFormat(JSON)
+		return sparql.query().convert()
+
 	def get_properties_on_resource(self, _resource_uri):
 		'''
 			Fetch properties that point to this resource. 
@@ -80,12 +90,7 @@ class DBPedia:
 		if not nlutils.has_url(_resource_uri):
 			warnings.warn("The passed resource %s is not a proper URI but is in shorthand. This is strongly discouraged." % _resource_uri)
 			_resource_uri = nlutils.convert_shorthand_to_uri(_resource_uri)
-
-		sparql = SPARQLWrapper(self.select_sparql_endpoint())
-		sparql.setQuery(GET_PROPERTIES_ON_RESOURCE % {'target_resource':_resource_uri} )
-		sparql.setReturnFormat(JSON)
-		response = sparql.query().convert()
-
+		response = self.shoot_custom_query(GET_PROPERTIES_ON_RESOURCE % {'target_resource':_resource_uri})
 
 	def get_properties_of_resource(self,_resource_uri,_with_connected_resource = False):
 		'''
@@ -97,20 +102,19 @@ class DBPedia:
 				else [ R,R,R,R...]
 		'''
 		#Check if the resource URI is shorthand or a proper URI
+		temp_query = ""
 		if not nlutils.has_url(_resource_uri):
 			warnings.warn("The passed resource %s is not a proper URI but is in shorthand. This is strongly discouraged." % _resource_uri)
 			_resource_uri = nlutils.convert_shorthand_to_uri(_resource_uri)
 
-		#Prepare the SPARQL Request
-		sparql = SPARQLWrapper(self.select_sparql_endpoint())
+		#Prepare the SPARQL Request		sparql = SPARQLWrapper(self.select_sparql_endpoint())
 		# with SPARQLWrapper(self.sparql_endpoint) as sparql:
 		_resource_uri = '<'+_resource_uri+'>'
 		if _with_connected_resource:
-			sparql.setQuery(GET_PROPERTIES_OF_RESOURCE_WITH_OBJECTS % {'target_resource':_resource_uri} )
+			temp_query = GET_PROPERTIES_OF_RESOURCE_WITH_OBJECTS % {'target_resource':_resource_uri}
 		else:
-			sparql.setQuery(GET_PROPERTIES_OF_RESOURCE % {'target_resource':_resource_uri} )
-		sparql.setReturnFormat(JSON)
-		response = sparql.query().convert()
+			temp_query = GET_PROPERTIES_OF_RESOURCE % {'target_resource':_resource_uri}
+		response = self.shoot_custom_query(temp_query)
 
 		try:
 			if _with_connected_resource:
@@ -135,14 +139,9 @@ class DBPedia:
 		if not nlutils.has_url(_class_uri):
 			warnings.warn("The passed class %s is not a proper URI but is in shorthand. This is strongly discouraged." % _class_uri)
 			_class_uri = nlutils.convert_shorthand_to_uri(_class_uri)
-
-		#Preparing the SPARQL Query
-		sparql = SPARQLWrapper(self.select_sparql_endpoint())
 		# with SPARQLWrapper(self.sparql_endpoint) as sparql:
-		_class_uri = '<'+_class_uri+'>'
-		sparql.setQuery(GET_ENTITIES_OF_CLASS % {'target_class':_class_uri} )
-		sparql.setReturnFormat(JSON)
-		response = sparql.query().convert()
+		_class_uri = '<' + _class_uri + '>'
+		response = self.shoot_custom_query(GET_ENTITIES_OF_CLASS % {'target_class':_class_uri})
 
 		try:
 			entity_list = [ x[u'entity'][u'value'].encode('ascii','ignore') for x in response[u'results'][u'bindings'] ]
@@ -158,18 +157,12 @@ class DBPedia:
 			Function fetches the type of a given entity
 			and can optionally filter out the ones of DBPedia only
 		'''
-
+	#@TODO: Add basic caching setup.
 		if not nlutils.has_url(_resource_uri):
 			warnings.warn("The passed resource %s is not a proper URI but probably a shorthand. This is strongly discouraged." % _resource_uri)
 			_resource_uri = nlutils.convert_shorthand_to_uri(_resource_uri)
-
-		#Perparing the SPARQL Query
-		sparql = SPARQLWrapper(self.select_sparql_endpoint())
-		_resource_uri = '<'+_resource_uri+'>'
-		sparql.setQuery(GET_TYPE_OF_RESOURCE % {'target_resource': _resource_uri} )
-		sparql.setReturnFormat(JSON)
-		response = sparql.query().convert()
-
+		_resource_uri = '<' + _resource_uri + '>'
+		response = self.shoot_custom_query(GET_TYPE_OF_RESOURCE % {'target_resource': _resource_uri} )
 		try:
 			type_list = [ x[u'type'][u'value'].encode('ascii','ignore') for x in response[u'results'][u'bindings'] ]
 		except:
@@ -191,12 +184,8 @@ class DBPedia:
 			Return - array of values of first variable of query
 			NOTE: Only give it queries with one variable
 		'''
-
-		sparql = SPARQLWrapper(self.select_sparql_endpoint())
-		sparql.setQuery(_sparql_query)
-		sparql.setReturnFormat(JSON)
 		try:
-			response = sparql.query().convert()
+			response = self.shoot_custom_query(_sparql_query)
 		except:
 			traceback.print_exc()
 
@@ -223,12 +212,10 @@ class DBPedia:
 			_resource_uri = nlutils.convert_shorthand_to_uri(_resource_uri)
 
 		#Preparing the Query
-		sparql = SPARQLWrapper(self.select_sparql_endpoint())
 		_resource_uri = '<'+_resource_uri+'>'
-		sparql.setQuery(GET_LABEL_OF_RESOURCE % {'target_resource': _resource_uri} )
-		sparql.setReturnFormat(JSON)
+
 		try:
-			response = sparql.query().convert()
+			response = self.shoot_custom_query(GET_LABEL_OF_RESOURCE % {'target_resource': _resource_uri})
 		except:
 			traceback.print_exc()
 
@@ -240,20 +227,16 @@ class DBPedia:
 
 		return results[0]
 
-	def shoot_custom_query(self, _custom_query):
-		'''	
-			Shoot any custom query and get the SPARQL results as a dictionary
-		'''
-		sparql = SPARQLWrapper(self.select_sparql_endpoint())
-		sparql.setQuery(_custom_query)
-		sparql.setReturnFormat(JSON)
-		return sparql.query().convert()
-
 	def get_most_specific_class(self, _resource_uri):
 		'''
 			Query to find the most specific DBPedia Ontology class given a URI.
 			Limitation: works only with resources.
 			@TODO: Extend this to work with ontology (not entities) too. Or properties.
+		'''
+		#@TODO: Add caching.
+
+		'''
+			A simple key value store would work, because the same resource would be repeated again.
 		'''
 		if not nlutils.has_url(_resource_uri):
 			warnings.warn("The passed resource %s is not a proper URI but probably a shorthand. This is strongly discouraged." % _resource_uri)
@@ -274,12 +257,9 @@ class DBPedia:
 		for class_uri in classes:
 
 			#Preparing the query
-			sparql =  SPARQLWrapper(self.select_sparql_endpoint())
 			target_class = '<'+class_uri+'>'
-			sparql.setQuery(GET_CLASS_PATH % {'target_class':target_class} )
-			sparql.setReturnFormat(JSON)
 			try:
-				response = sparql.query().convert()
+				response = self.shoot_custom_query(GET_CLASS_PATH % {'target_class':target_class})
 			except:
 				traceback.print_exc()
 
@@ -299,20 +279,21 @@ class DBPedia:
 			return "http://www.w3.org/2002/07/owl#Thing"	
 if __name__ == '__main__':
 	pass
-	# print "\n\nBill Gates"
-	# pprint(dbp.get_type_of_resource('http://dbpedia.org/resource/Bill_Gates', _filter_dbpedia = True))
-	# print "\n\nIndia"
-	# pprint(dbp.get_type_of_resource('http://dbpedia.org/resource/India', _filter_dbpedia = True))
-	# dbp = DBPedia()
-	# q = 'SELECT DISTINCT ?uri, ?a WHERE { ?uri <http://dbpedia.org/ontology/birthPlace> <http://dbpedia.org/resource/Mengo,_Uganda> . ?uri <http://dbpedia.org/ontology/birthPlace> ?a }'
-	# pprint(dbp.get_answer(q))
+	print "\n\nBill Gates"
+	dbp = DBPedia()
+	pprint(dbp.get_type_of_resource('http://dbpedia.org/resource/Bill_Gates', _filter_dbpedia = True))
+	print "\n\nIndia"
+	pprint(dbp.get_type_of_resource('http://dbpedia.org/resource/India', _filter_dbpedia = True))
+
+	q = 'SELECT DISTINCT ?uri, ?a WHERE { ?uri <http://dbpedia.org/ontology/birthPlace> <http://dbpedia.org/resource/Mengo,_Uganda> . ?uri <http://dbpedia.org/ontology/birthPlace> ?a }'
+	pprint(dbp.get_answer(q))
 
 	
-	# uri = 'http://dbpedia.org/resource/Donald_Trump'
-	# print dbp.get_most_specific_class(uri)
+	uri = 'http://dbpedia.org/resource/Donald_Trump'
+	print dbp.get_most_specific_class(uri)
 
-	# q = 'http://dbpedia.org/ontology/birthPlace'
-	# pprint(dbp.get_label(q))
+	q = 'http://dbpedia.org/ontology/birthPlace'
+	pprint(dbp.get_label(q))
 
-	# q = 'http://dbpedia.org/resource/Bill_Gates'
-	# pprint(dbp.get_label(q))
+	q = 'http://dbpedia.org/resource/Bill_Gates'
+	pprint(dbp.get_label(q))
