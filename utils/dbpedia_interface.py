@@ -244,11 +244,6 @@ class DBPedia:
 			Limitation: works only with resources.
 			@TODO: Extend this to work with ontology (not entities) too. Or properties.
 		'''
-		#@TODO: Add caching.
-
-		'''
-			A simple key value store would work, because the same resource would be repeated again.
-		'''
 		if not nlutils.has_url(_resource_uri):
 			warnings.warn("The passed resource %s is not a proper URI but probably a shorthand. This is strongly discouraged." % _resource_uri)
 			_resource_uri = nlutils.convert_shorthand_to_uri(_resource_uri)
@@ -256,11 +251,6 @@ class DBPedia:
 		#Get the DBpedia classes of resource
 		classes = self.get_type_of_resource(_resource_uri, _filter_dbpedia = True)
 
-		'''debug'''
-		# print "resource uri is " + _resource_uri
-		# print "returned classes are " + str(len(classes))
-		# for x in classes:
-		# 	print x
 		
 		length_array = []	#A list of tuples, it's use explained below
 

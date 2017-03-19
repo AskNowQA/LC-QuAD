@@ -191,7 +191,7 @@ def get_local_subgraph(_uri):
     return G
 
 
-def fill_specific_template(_template_id, _mapping, _mapping_type ,_debug=False):
+def fill_specific_template(_template_id, _mapping,_debug=False):
     '''
         Function to fill a specific template.
         Given the template ID, it is expected to fetch the template from the set
@@ -221,7 +221,6 @@ def fill_specific_template(_template_id, _mapping, _mapping_type ,_debug=False):
 
     # Include the mapping within the template object
     template['mapping'] = _mapping
-    template['mapping_type'] = _mapping_type
 
     # Get the Answer of the query
     # get_answer now returns a dictionary with appropriate variable bindings.
@@ -240,10 +239,15 @@ def fill_specific_template(_template_id, _mapping, _mapping_type ,_debug=False):
     template['answer_type'] = {}
     for variable in template['answer']:
         template['answer_type'][variable] = dbp.get_most_specific_class(template['answer'][variable][0])
+        template['mapping'][variable] = template['answer'][variable][0]
 
+    mapping_type = {}
+    for key in template['mapping']:
+        mapping_type[key] = dbp.get_type_of_resource(template['mapping'][key])
+
+    template['mapping_type'] = mapping_type
     if _debug:
         pprint(template)
-
     # Push it onto the SPARQL List
     # perodic write in file.
     # @TODO: instead of file use a database.
@@ -318,11 +322,9 @@ def fill_templates(_graph, _uri):
             # Create a mapping (in keeping with the templates' placeholder names)
             mapping = {'e_in_in': e_in_in, 'e_in_in_to_e_in': e_in_in_to_e_in, 'e_in_to_e': e_in_to_e, 'e_in': e_in}
             mapping_type = {}
-            for key in mapping:
-                mapping_type[key] = dbp.get_most_specific_class(mapping[key])
             # Throw it to a function who will put it in the list with appropriate bookkeeping
             try:
-                fill_specific_template(_template_id=3, _mapping=mapping,_mapping_type = mapping_type)
+                fill_specific_template(_template_id=3, _mapping=mapping)
                 counter_template3 = counter_template3 + 1
                 print str(counter_template3), "tempalte3"
                 if counter_template3 > 10:
