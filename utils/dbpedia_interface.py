@@ -26,7 +26,7 @@ import natural_language_utilities as nlutils
 # DBPEDIA_ENDPOINTS = ['http://live.dbpedia.org/sparql/']
 # 'http://dbpedia.org/sparql/','http://live.dbpedia.org/sparql/'
 #EIS dbpedia endpoint - 'http://131.220.153.66:8900/sparql'
-DBPEDIA_ENDPOINTS = ['http://dbpedia.org/sparql/','http://live.dbpedia.org/sparql/']
+DBPEDIA_ENDPOINTS = ['http://131.220.153.66:8900/sparql']
 MAX_WAIT_TIME = 1.0
 
 #SPARQL Templates
@@ -41,6 +41,8 @@ GET_ENTITIES_OF_CLASS = '''SELECT DISTINCT ?entity WHERE {	?entity <http://www.w
 GET_LABEL_OF_RESOURCE = '''SELECT DISTINCT ?label WHERE { %(target_resource)s <http://www.w3.org/2000/01/rdf-schema#label> ?label . FILTER (lang(?label) = 'en')	} '''
 
 GET_TYPE_OF_RESOURCE = '''SELECT DISTINCT ?type WHERE { %(target_resource)s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?type } '''
+
+# GET_TYPE_OF_RESOURCE = '''SELECT DISTINCT ?type WHERE { %(target_resource)s <http://dbpedia.org/ontology/type> ?type } '''
 
 GET_CLASS_PATH = '''SELECT DISTINCT ?type WHERE { %(target_class)s rdfs:subClassOf* ?type }'''
 
@@ -281,8 +283,8 @@ class DBPedia:
 if __name__ == '__main__':
 	pass
 	# print "\n\nBill Gates"
-	# dbp = DBPedia()
-	# pprint(dbp.get_type_of_resource('http://dbpedia.org/resource/Bill_Gates', _filter_dbpedia = True))
+	dbp = DBPedia()
+	pprint(dbp.get_type_of_resource('http://dbpedia.org/resource/M._J._P._Rohilkhand_University', _filter_dbpedia = True))
 	# print "\n\nIndia"
 	# pprint(dbp.get_type_of_resource('http://dbpedia.org/resource/India', _filter_dbpedia = True))
     #

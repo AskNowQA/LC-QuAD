@@ -446,7 +446,7 @@ def fill_templates(_graph,_uri):
 '''
 sparqls = {}
 dbp =  db_interface.DBPedia(_verbose = True)
-uri = 'http://dbpedia.org/resource/Bareilly'
+uri = 'http://dbpedia.org/resource/Chicago'
 
 #Generate the local subgraph
 graph = get_local_subgraph(uri)

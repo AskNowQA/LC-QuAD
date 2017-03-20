@@ -1,0 +1,109 @@
+/usr/bin/python2.7 /home/gaurav/codes/questionGeneration/QueryDataSet/template3_verbalizer.py
+Airport
+garrison
+Mohnish Dubey
+What is the <city> of the <University> which is the <affiliation> of <Swami  Shukdevanand  Post  Graduate  College> ?
+What is the <city> of the <University> which is the <alma Mater> of <Lokendra  Singh (politician)> ?
+What is the <city> of the <University> which is the <affiliation> of <Kedar  Nath  Girdharilal  Khatri PG  College  Moradabad> ?
+What is the <city> of the <University> which is the <alma Mater> of <Sanjay  Kapoor (politician)> ?
+What is the <city> of the <University> which is the <alma Mater> of <Laxmi  Gautam> ?
+What is the <city> of the <University> which is the <affiliation> of <Gandhi  Faiz-E- Aam  College> ?
+What is the <city> of the <University> which is the <alma Mater> of <Dharmpal  Singh> ?
+What is the <city> of the <University> which is the <alma Mater> of <Abid  Raza  Khan> ?
+What is the <city> of the <University> which is the <affiliation> of <Bareilly  College> ?
+What is the <city> of the <University> which is the <affiliation> of <N.K.B.M.G  Postgraduate  College> ?
+What is the <city> of the <University> which is the <alma Mater> of <Ramkhiladi  Singh  Yadav> ?
+What is the <city> of the <University> which is the <alma Mater> of <Mohammad  Irfan ( Politician)> ?
+What is the <city> of the <University> which is the <alma Mater> of <Ruchi  Veera> ?
+What is the <is Part Of> of the <Settlement> which is the <region> of <Manohar  Bhushan  Inter  College> ?
+What is the <is Part Of> of the <Settlement> which is the <region> of <Hartmann  College> ?
+What is the <is Part Of> of the <Settlement> which is the <location> of <Bareilly  Airport> ?
+What is the <is Part Of> of the <Settlement> which is the <birth Place> of <Sandy  Brown (musician)> ?
+What is the <location> of the <Airport> which is the <garrison> of <No. 24  Squadron IAF> ?
+What is the <location> of the <Airport> which is the <garrison> of <No. 8  Squadron IAF> ?
+What is the <location> of the <Airport> which is the <garrison> of <No. 111  Helicopter  Unit, IAF> ?
+What is the <birth Place> of the <Musical Artist> who is the <music Composer> of <Yeh  Mera  India> ?
+What is the <birth Place> of the <Person> who is the <governor> of <Veerendra  Patil> ?
+What is the <birth Place> of the <Office Holder> who is the <successor> of <Harish  Kumar  Gangawar> ?
+What is the <birth Place> of the <Office Holder> who is the <governor> of <Sarekoppa  Bangarappa> ?
+What is the <birth Place> of the <Office Holder> who is the <predecessor> of <Maneka  Gandhi> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Udaan (2014 TV series)> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Rajjo> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Veer  Shivaji> ?
+What is the <birth Place> of the <Person> who is the <influenced By> of <Husain  Ahmad  Madani> ?
+What is the <birth Place> of the <Office Holder> who is the <influenced By> of <Israr  Ahmed> ?
+What is the <birth Place> of the <Person> who is the <key Person> of <Magnon%5 CTBWA> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Main  Madhuri  Dixit  Banna  Chahti  Hoon> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Lal  Salaam (2002 film)> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Bhoothnath> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Baankey  Ki  Crazy  Baraat> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Chandni  Bar> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Hastey  Hastey> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Gang of  Ghosts> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Daddy  Cool (2009  Hindi film)> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Rangrezz> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Four  Two  Ka  One> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Dhol (film)> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Taarzan:  The  Wonder  Car> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Tukkaa  Fitt> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Amma (2015 film)> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Dil  Bechara  Pyaar  Ka  Maara> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Chal  Chala  Chal> ?
+What is the <birth Place> of the <Person> who is the <starring> of <James (2005 film)> ?
+What is the <birth Place> of the <Office Holder> who is the <starring> of <C  Kkompany> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Main,  Meri  Patni  Aur  Woh> ?
+What is the <birth Place> of the <Person> who is the <starring> of <De  Dana  Dan> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Yeh  Mera  India> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Bhagam  Bhag> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Garam  Masala (2005 film)> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Fauj  Mein  Mauj> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Hungama> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Khallballi!> ?
+What is the <birth Place> of the <Person> who is the <director> of <Ata  Pata  Laapata> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Hello!  Hum  Lallan  Bol  Rahe  Hain> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Jumbo (film)> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Krazzy 4> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Mere  Dost  Picture  Abhi  Baki  Hai> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Thoda  Lutf  Thoda  Ishq> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Undertrial> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Love in  Japan> ?
+What is the <birth Place> of the <Musical Artist> who is the <starring> of <Balwinder  Singh  Famous  Ho  Gaya> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Banda  Yeh  Bindaas  Hai> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Darna  Mana  Hai> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Bin  Bulaye  Baraati> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Khatta  Meetha (2010 film)> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Malamaal  Weekly> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Paheli> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Bye  Bye  Miss  Goodnight> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Bhopal: A  Prayer for  Rain> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Zindagi 50-50> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Hogaya  Dimaagh  Ka  Dahi> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Satrangee  Parachute> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Benny and  Babloo> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Darna  Zaroori  Hai> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Billu> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Rama  Rama  Kya  Hai  Dramaa%3 F> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Bumper  Draw> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Maine  Dil  Tujhko  Diya> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Mere  Baap  Pehle  Aap> ?
+What is the <birth Place> of the <Cricketer> who is the <predecessor> of <Raashid  Alvi> ?
+What is the <birth Place> of the <Office Holder> who is the <predecessor> of <B. D.  Jatti> ?
+What is the <birth Place> of the <Office Holder> who is the <successor> of <V. V.  Giri> ?
+What is the <birth Place> of the <Office Holder> who is the <governor> of <S.  Nijalingappa> ?
+What is the <residence> of the <Office Holder> who is the <predecessor> of <Bhanu  Pratap  Singh> ?
+What is the <residence> of the <Office Holder> who is the <successor> of <Md  Shamsul  Hasan  Khan> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Loafer (2015 film)> ?
+What is the <birth Place> of the <Office Holder> who is the <predecessor> of <Md  Shamsul  Hasan  Khan> ?
+What is the <garrison> of the <Military Unit> which is the <military Unit> of <Anuj  Nayyar> ?
+What is the <garrison> of the <Military Unit> which is the <military Unit> of <Sis  Pal  Singh> ?
+What is the <garrison> of the <Military Unit> which is the <military Unit> of <Saurabh  Kalia> ?
+What is the <garrison> of the <Military Unit> which is the <military Unit> of <G. G.  Dwivedi> ?
+What is the <garrison> of the <Military Unit> which is the <military Unit> of <Desmond  Hayde> ?
+What is the <city> of the <University> which is the <alma Mater> of <Virendra  Singh (politician)> ?
+What is the <city> of the <University> which is the <alma Mater> of <Vimla  Batham> ?
+What is the <city> of the <University> which is the <alma Mater> of <Lokendra  Singh (politician)> ?
+What is the <city> of the <University> which is the <alma Mater> of <Agys  Ramsaran  Verma> ?
+*******************
+101
+
+Process finished with exit code 0

@@ -16,10 +16,10 @@ for filler in data:
     # replace each path by label
     for element in maps:
         maps[element] = nlutils.get_label_via_parsing(maps[element])  # obtain just elements.
-    if "http://dbpedia.org/ontology/Agent" in filler['mapping_type']["x"]:
-        questions.append(question_format2 % maps)
-    else:
+    if "http://dbpedia.org/ontology/Agent" in filler['mapping_type']["x"] and "http://dbpedia.org/ontology/Organisation" not in filler['mapping_type']["x"]:
         questions.append(question_format % maps)
+    else:
+        questions.append(question_format2 % maps)
 
 for question in questions:
     print question

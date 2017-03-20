@@ -243,7 +243,7 @@ def fill_specific_template(_template_id, _mapping,_debug=False):
 
     mapping_type = {}
     for key in template['mapping']:
-        mapping_type[key] = dbp.get_type_of_resource(template['mapping'][key])
+        mapping_type[key] = dbp.get_type_of_resource(template['mapping'][key],_filter_dbpedia = True)
 
     template['mapping_type'] = mapping_type
     if _debug:
