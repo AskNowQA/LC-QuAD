@@ -2,108 +2,195 @@
 Airport
 garrison
 Mohnish Dubey
-What is the <city> of the <University> which is the <affiliation> of <Swami  Shukdevanand  Post  Graduate  College> ?
-What is the <city> of the <University> which is the <alma Mater> of <Lokendra  Singh (politician)> ?
-What is the <city> of the <University> which is the <affiliation> of <Kedar  Nath  Girdharilal  Khatri PG  College  Moradabad> ?
-What is the <city> of the <University> which is the <alma Mater> of <Sanjay  Kapoor (politician)> ?
-What is the <city> of the <University> which is the <alma Mater> of <Laxmi  Gautam> ?
-What is the <city> of the <University> which is the <affiliation> of <Gandhi  Faiz-E- Aam  College> ?
-What is the <city> of the <University> which is the <alma Mater> of <Dharmpal  Singh> ?
-What is the <city> of the <University> which is the <alma Mater> of <Abid  Raza  Khan> ?
-What is the <city> of the <University> which is the <affiliation> of <Bareilly  College> ?
-What is the <city> of the <University> which is the <affiliation> of <N.K.B.M.G  Postgraduate  College> ?
-What is the <city> of the <University> which is the <alma Mater> of <Ramkhiladi  Singh  Yadav> ?
-What is the <city> of the <University> which is the <alma Mater> of <Mohammad  Irfan ( Politician)> ?
-What is the <city> of the <University> which is the <alma Mater> of <Ruchi  Veera> ?
-What is the <is Part Of> of the <Settlement> which is the <region> of <Manohar  Bhushan  Inter  College> ?
-What is the <is Part Of> of the <Settlement> which is the <region> of <Hartmann  College> ?
-What is the <is Part Of> of the <Settlement> which is the <location> of <Bareilly  Airport> ?
-What is the <is Part Of> of the <Settlement> which is the <birth Place> of <Sandy  Brown (musician)> ?
-What is the <location> of the <Airport> which is the <garrison> of <No. 24  Squadron IAF> ?
-What is the <location> of the <Airport> which is the <garrison> of <No. 8  Squadron IAF> ?
-What is the <location> of the <Airport> which is the <garrison> of <No. 111  Helicopter  Unit, IAF> ?
-What is the <birth Place> of the <Musical Artist> who is the <music Composer> of <Yeh  Mera  India> ?
-What is the <birth Place> of the <Person> who is the <governor> of <Veerendra  Patil> ?
-What is the <birth Place> of the <Office Holder> who is the <successor> of <Harish  Kumar  Gangawar> ?
-What is the <birth Place> of the <Office Holder> who is the <governor> of <Sarekoppa  Bangarappa> ?
-What is the <birth Place> of the <Office Holder> who is the <predecessor> of <Maneka  Gandhi> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Udaan (2014 TV series)> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Rajjo> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Veer  Shivaji> ?
-What is the <birth Place> of the <Person> who is the <influenced By> of <Husain  Ahmad  Madani> ?
-What is the <birth Place> of the <Office Holder> who is the <influenced By> of <Israr  Ahmed> ?
-What is the <birth Place> of the <Person> who is the <key Person> of <Magnon%5 CTBWA> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Main  Madhuri  Dixit  Banna  Chahti  Hoon> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Lal  Salaam (2002 film)> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Bhoothnath> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Baankey  Ki  Crazy  Baraat> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Chandni  Bar> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Hastey  Hastey> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Gang of  Ghosts> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Daddy  Cool (2009  Hindi film)> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Rangrezz> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Four  Two  Ka  One> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Dhol (film)> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Taarzan:  The  Wonder  Car> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Tukkaa  Fitt> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Amma (2015 film)> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Dil  Bechara  Pyaar  Ka  Maara> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Chal  Chala  Chal> ?
-What is the <birth Place> of the <Person> who is the <starring> of <James (2005 film)> ?
-What is the <birth Place> of the <Office Holder> who is the <starring> of <C  Kkompany> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Main,  Meri  Patni  Aur  Woh> ?
-What is the <birth Place> of the <Person> who is the <starring> of <De  Dana  Dan> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Yeh  Mera  India> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Bhagam  Bhag> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Garam  Masala (2005 film)> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Fauj  Mein  Mauj> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Hungama> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Khallballi!> ?
-What is the <birth Place> of the <Person> who is the <director> of <Ata  Pata  Laapata> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Hello!  Hum  Lallan  Bol  Rahe  Hain> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Jumbo (film)> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Krazzy 4> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Mere  Dost  Picture  Abhi  Baki  Hai> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Thoda  Lutf  Thoda  Ishq> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Undertrial> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Love in  Japan> ?
-What is the <birth Place> of the <Musical Artist> who is the <starring> of <Balwinder  Singh  Famous  Ho  Gaya> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Banda  Yeh  Bindaas  Hai> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Darna  Mana  Hai> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Bin  Bulaye  Baraati> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Khatta  Meetha (2010 film)> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Malamaal  Weekly> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Paheli> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Bye  Bye  Miss  Goodnight> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Bhopal: A  Prayer for  Rain> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Zindagi 50-50> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Hogaya  Dimaagh  Ka  Dahi> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Satrangee  Parachute> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Benny and  Babloo> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Darna  Zaroori  Hai> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Billu> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Rama  Rama  Kya  Hai  Dramaa%3 F> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Bumper  Draw> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Maine  Dil  Tujhko  Diya> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Mere  Baap  Pehle  Aap> ?
-What is the <birth Place> of the <Cricketer> who is the <predecessor> of <Raashid  Alvi> ?
-What is the <birth Place> of the <Office Holder> who is the <predecessor> of <B. D.  Jatti> ?
-What is the <birth Place> of the <Office Holder> who is the <successor> of <V. V.  Giri> ?
-What is the <birth Place> of the <Office Holder> who is the <governor> of <S.  Nijalingappa> ?
-What is the <residence> of the <Office Holder> who is the <predecessor> of <Bhanu  Pratap  Singh> ?
-What is the <residence> of the <Office Holder> who is the <successor> of <Md  Shamsul  Hasan  Khan> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Loafer (2015 film)> ?
-What is the <birth Place> of the <Office Holder> who is the <predecessor> of <Md  Shamsul  Hasan  Khan> ?
-What is the <garrison> of the <Military Unit> which is the <military Unit> of <Anuj  Nayyar> ?
-What is the <garrison> of the <Military Unit> which is the <military Unit> of <Sis  Pal  Singh> ?
-What is the <garrison> of the <Military Unit> which is the <military Unit> of <Saurabh  Kalia> ?
-What is the <garrison> of the <Military Unit> which is the <military Unit> of <G. G.  Dwivedi> ?
-What is the <garrison> of the <Military Unit> which is the <military Unit> of <Desmond  Hayde> ?
-What is the <city> of the <University> which is the <alma Mater> of <Virendra  Singh (politician)> ?
-What is the <city> of the <University> which is the <alma Mater> of <Vimla  Batham> ?
-What is the <city> of the <University> which is the <alma Mater> of <Lokendra  Singh (politician)> ?
-What is the <city> of the <University> which is the <alma Mater> of <Agys  Ramsaran  Verma> ?
+What is the <river Mouth> of the <River> which is the <crosses> of <Lake  Shore and  Michigan  Southern  Railway,  Bridge  No. 6> ?
+What is the <river Mouth> of the <River> which is the <outflow> of <Wolf  Lake ( Indiana– Illinois)> ?
+What is the <operated By> of the <Railway Line> which is the <operator> of <Kenwood branch (CTA)> ?
+What is the <operated By> of the <Railway Line> which is the <operator> of <Normal  Park branch (CTA)> ?
+What is the <operated By> of the <Railway Line> which is the <operator> of <Ashland branch> ?
+What is the <occupation> of the <Fictional Character> who is the <relative> of <Teri  Joseph> ?
+What is the <occupation> of the <Fictional Character> who is the <relative> of <Lem  Van  Adams> ?
+What is the <occupation> of the <Fictional Character> who is the <relative> of <Maxine  Chadway> ?
+What is the <occupation> of the <Fictional Character> who is the <child> of <Kenny  Chadway> ?
+What is the <billed> of the <Wrestler> who is the <artist> of <Sevin  Sins> ?
+What is the <city> of the <School> which is the <highschool> of <Mario  Little> ?
+What is the <recorded In> of the <Album> which is the <previous Work> of <The  Mountain (EP)> ?
+What is the <recorded In> of the <Album> which is the <subsequent Work> of <An  Arrow  Through the  Bitch> ?
+What is the <significant Building> of the <Architect> who is the <architect> of <New  York  Life  Insurance  Building ( Chicago)> ?
+What is the <significant Building> of the <Architect> who is the <architect> of <Second  Leiter  Building> ?
+What is the <significant Building> of the <Architect> who is the <architect> of <Manhattan  Building ( Chicago,  Illinois)> ?
+What is the <headquarters> of the <Organisation> which is the <affiliation> of <Oklahoma  City  Community  College> ?
+What is the <headquarters> of the <Organisation> which is the <affiliation> of <Cleary  University> ?
+What is the <headquarters> of the <Organisation> which is the <affiliation> of <Roosevelt  University> ?
+What is the <headquarters> of the <Organisation> which is the <affiliation> of <Kent  State  University> ?
+What is the <headquarters> of the <Organisation> which is the <occupation> of <Louis  Farrakhan> ?
+What is the <headquarters> of the <Organisation> which is the <religion> of <Wallace  Fard  Muhammad> ?
+What is the <headquarters> of the <Organisation> which is the <religion> of <Elijah  Muhammad> ?
+What is the <headquarters> of the <Organisation> which is the <religion> of <Quanell X> ?
+What is the <destination> of the <Airline> which is the <manufacturer> of <Parks P-1> ?
+What is the <maintained By> of the <Road> which is the <part> of <Chicago  Loop> ?
+What is the <death Place> of the <Musical Artist> who is the <artist> of <Blind  Lemon  Jefferson discography> ?
+What is the <death Place> of the <Musical Artist> who is the <associated Musical Artist> of <John T.  Smith (blues musician)> ?
+What is the <death Place> of the <Musical Artist> who is the <associated Musical Artist> of <Alger %22 Texas%22  Alexander> ?
+What is the <death Place> of the <Musical Artist> who is the <artist> of <See  That  My  Grave  Is  Kept  Clean> ?
+What is the <recorded In> of the <Single> which is the <subsequent Work> of <Come  On ( Chuck  Berry song)> ?
+What is the <recorded In> of the <Single> which is the <previous Work> of <No  Particular  Place to  Go> ?
+What is the <occupation> of the <Fictional Character> who is the <spouse> of <Kenny  Chadway> ?
+What is the <occupation> of the <Fictional Character> who is the <relative> of <Teri  Joseph> ?
+What is the <occupation> of the <Fictional Character> who is the <child> of <Josephine  Joseph ( Soul  Food)> ?
+What is the <occupation> of the <Fictional Character> who is the <relative> of <Lem  Van  Adams> ?
+What is the <occupation> of the <Fictional Character> who is the <relative> of <Ahmad  Chadway> ?
+What is the <death Place> of the <Scientist> who is the <doctoral Advisor> of <Geoffrey  Chew> ?
+What is the <death Place> of the <Scientist> who is the <doctoral Advisor> of <Tsung- Dao  Lee> ?
+What is the <death Place> of the <Scientist> who is the <doctoral Student> of <Luigi  Puccianti> ?
+What is the <death Place> of the <Scientist> who is the <academic Advisor> of <Chen- Ning  Yang> ?
+What is the <death Place> of the <Scientist> who is the <starring> of <Atomic  Power (film)> ?
+What is the <death Place> of the <Scientist> who is the <doctoral Advisor> of <Harold  Agnew> ?
+What is the <death Place> of the <Scientist> who is the <influenced By> of <Hideki  Yukawa> ?
+What is the <death Place> of the <Scientist> who is the <influenced By> of <J.  Ernest  Wilkins,  Jr.> ?
+What is the <death Place> of the <Scientist> who is the <influenced> of <Otto  Hahn> ?
+What is the <death Place> of the <Scientist> who is the <academic Advisor> of <Jack  Steinberger> ?
+What is the <death Place> of the <Scientist> who is the <academic Advisor> of <Bruno  Pontecorvo> ?
+What is the <death Place> of the <Scientist> who is the <influenced By> of <Jorge  Allende> ?
+What is the <location> of the <Television Show> which is the <known For> of <William O.  Harbach> ?
+What is the <location> of the <Television Show> which is the <distributor> of <The  Flying  Car> ?
+What is the <location> of the <Television Show> which is the <previous Work> of <Late  Night (NBC)> ?
+What is the <residence> of the <Politician> who is the <successor> of <Bobbie L.  Steele> ?
+What is the <route Start> of the <Road> which is the <location> of <Emil  Bach  House> ?
+What is the <route Start> of the <Road> which is the <route Start> of <Devon  Avenue ( Chicago)> ?
+What is the <route Start> of the <Road> which is the <route End> of <Lake  Cook  Road> ?
+What is the <route Start> of the <Road> which is the <route Start> of <Howard  Street ( Chicago)> ?
+What is the <route Start> of the <Road> which is the <location> of <Bailey– Michelet  House> ?
+What is the <route Start> of the <Road> which is the <route End> of <Central  Street ( Evanston,  Illinois)> ?
+What is the <route Start> of the <Road> which is the <route Start> of <Sheffield  Avenue> ?
+What is the <route Start> of the <Road> which is the <location> of <Berger  Park> ?
+What is the <route Start> of the <Road> which is the <route End> of <Ridge  Avenue ( Chicago)> ?
+What is the <assembly> of the <Automobile> which is the <predecessor> of <Ford  Taurus (second generation)> ?
+What is the <assembly> of the <Automobile> which is the <related Mean Of Transportation> of <Ford  Taurus SHO   First generation  1> ?
+What is the <assembly> of the <Automobile> which is the <related Mean Of Transportation> of <Mercury  Sable   First generation  1> ?
+What is the <assembly> of the <Automobile> which is the <successor> of <Ford LTD ( Americas)> ?
+What is the <death Place> of the <Scientist> who is the <doctoral Student> of <John  Lennard- Jones> ?
+What is the <death Place> of the <Scientist> who is the <doctoral Advisor> of <Martin  Head- Gordon> ?
+What is the <death Place> of the <Scientist> who is the <doctoral Advisor> of <A.  David  Buckingham> ?
+What is the <hometown> of the <Person> who is the <spouse> of <Kimberley  Conrad> ?
+What is the <hometown> of the <Person> who is the <creator> of <The  Girls  Next  Door> ?
+What is the <hometown> of the <Person> who is the <producer> of <The  Crazy  World of  Julius  Vrooder> ?
+What is the <hometown> of the <Person> who is the <starring> of <Playboy  After  Dark> ?
+What is the <hometown> of the <Person> who is the <founded By> of <Playboy  Enterprises> ?
+What is the <hometown> of the <Person> who is the <editor> of <Playboy> ?
+What is the <hometown> of the <Person> who is the <producer> of <The  Fiendish  Plot of  Dr.  Fu  Manchu> ?
+What is the <hometown> of the <Person> who is the <starring> of <Hugh  Hefner:  Playboy,  Activist and  Rebel> ?
+What is the <hometown> of the <Person> who is the <parent> of <Christie  Hefner> ?
+What is the <hometown> of the <Person> who is the <producer> of <The  Third  Girl from the  Left> ?
+What is the <hometown> of the <Person> who is the <partner> of <Holly  Madison> ?
+What is the <is Part Of> of the <City> which is the <is Part Of> of <Legends  South,  Chicago> ?
+What is the <resting Place> of the <Person> who is the <composer> of <On the  Banks of the  Wabash,  Far  Away> ?
+What is the <place> of the <Military Conflict> which is the <known For> of <Black  Partridge (chief)> ?
+What is the <place> of the <Military Conflict> which is the <battle> of <George  Ronan> ?
+What is the <city> of the <American Football Team> which is the <tenant> of <Memorial  Stadium ( Champaign)> ?
+What is the <city> of the <American Football Team> which is the <former Team> of <Chilo  Rachal> ?
+What is the <city> of the <American Football Team> which is the <tenant> of <Soldier  Field> ?
+What is the <city> of the <American Football Team> which is the <team> of <Chris  Gray ( American football)> ?
+What is the <city> of the <American Football Team> which is the <debut Team> of <John  Gilmore ( American football)> ?
+What is the <city> of the <American Football Team> which is the <former Team> of <Keith  Jennings ( American football)> ?
+What is the <city> of the <American Football Team> which is the <team> of <John  Tait ( American football)> ?
+What is the <city> of the <American Football Team> which is the <debut Team> of <Marcus  Spears (offensive tackle)> ?
+What is the <city> of the <American Football Team> which is the <former Team> of <M. D.  Jennings> ?
+What is the <city> of the <American Football Team> which is the <tenant> of <Wrigley  Field> ?
+What is the <city> of the <American Football Team> which is the <debut Team> of <Thomas  Sanders ( American football)> ?
+What is the <city> of the <American Football Team> which is the <team> of <Bill  Brown ( American football)> ?
+What is the <city> of the <American Football Team> which is the <board> of <George  Mc Caskey> ?
+What is the <hometown> of the <Person> who is the <narrator> of <Raoni> ?
+What is the <hometown> of the <Person> who is the <parent> of <Cheyenne  Brando> ?
+What is the <hometown> of the <Person> who is the <starring> of <Last  Tango in  Paris> ?
+What is the <hometown> of the <Person> who is the <spouse> of <Tarita  Teriipaia> ?
+What is the <hometown> of the <Person> who is the <narrator> of <The  Wild  One> ?
+What is the <hometown> of the <Person> who is the <portrayer> of <Vito  Corleone> ?
+What is the <hometown> of the <Person> who is the <starring> of <Viva  Zapata!> ?
+What is the <hometown> of the <Person> who is the <spouse> of <Movita  Castaneda> ?
+What is the <hometown> of the <Person> who is the <director> of <One- Eyed  Jacks> ?
+What is the <hometown> of the <Person> who is the <portrayer> of <Stanley  Kowalski> ?
+What is the <hometown> of the <Person> who is the <starring> of <Bedtime  Story (1964 film)> ?
+What is the <hometown> of the <Person> who is the <spouse> of <Anna  Kashfi> ?
+What is the <hometown> of the <Person> who is the <parent> of <Christian  Brando> ?
+What is the <hometown> of the <Person> who is the <portrayer> of <Colonel  Kurtz> ?
+What is the <hometown> of the <Person> who is the <influenced By> of <Pierre  Angelo> ?
+What is the <city> of the <University> which is the <education> of <Zelana  Montminy> ?
+What is the <ground> of the <Soccer Club> which is the <team> of <Horst  Szymaniak  10> ?
+What is the <ground> of the <Soccer Club> which is the <team> of <Horst  Szymaniak> ?
+What is the <ground> of the <Soccer Club> which is the <team> of <José  María  Silvero> ?
+What is the <ground> of the <Soccer Club> which is the <tenant> of <Soldier  Field> ?
+What is the <ground> of the <Soccer Club> which is the <manager Club> of <Alan  Rogers (football manager)> ?
+What is the <billed> of the <Wrestler> who is the <producer> of <Brake  Lights (mixtape)> ?
+What is the <billed> of the <Wrestler> who is the <writer> of <Platinum ( Snoop  Dogg song)> ?
+What is the <billed> of the <Wrestler> who is the <writer> of <Hustle  Hard> ?
+What is the <billed> of the <Wrestler> who is the <producer> of <Coke  Boys 3> ?
+What is the <headquarters> of the <Law Firm> which is the <tenant> of <One  South  Dearborn> ?
+What is the <is Part Of> of the <Settlement> which is the <location> of <Berlin  Wall  Monument ( Chicago)> ?
+What is the <location> of the <Road> which is the <route End> of <159th  Street ( Chicago)> ?
+What is the <recorded In> of the <Single> which is the <subsequent Work> of <Sweet  Little  Sixteen> ?
+What is the <recorded In> of the <Single> which is the <subsequent Work> of <Ram  It  Down (song)> ?
+What is the <recorded In> of the <Single> which is the <subsequent Work> of <Ripple (song)> ?
+What is the <recorded In> of the <Single> which is the <previous Work> of <Painkiller ( Judas  Priest song)> ?
+What is the <recorded In> of the <Single> which is the <previous Work> of <Little  Jeannie> ?
+What is the <recorded In> of the <Single> which is the <previous Work> of <Tall  Dark  Stranger> ?
+What is the <location> of the <Building> which is the <headquarters> of <Segal  Mc Cambridge  Singer &  Mahoney> ?
+What is the <location> of the <Building> which is the <headquarters> of <United  Airlines> ?
+What is the <location> of the <Building> which is the <location> of <Heidrick &  Struggles> ?
+What is the <location> of the <Building> which is the <location> of <YMCA SCUBA  Program> ?
+What is the <location> of the <Building> which is the <location City> of <United  Continental  Holdings> ?
+What is the <region Served> of the <Company> which is the <board> of <Austin  Ligon> ?
+What is the <education> of the <Person> who is the <producer> of <Hare  Ram> ?
+What is the <education> of the <Person> who is the <child> of <Nandamuri  Harikrishna> ?
+What is the <education> of the <Person> who is the <starring> of <Abhimanyu (2003 film)> ?
+What is the <education> of the <Person> who is the <starring> of <Kalyanram  Kathi> ?
+What is the <education> of the <Person> who is the <producer> of <Pataas> ?
+What is the <education> of the <Person> who is the <relative> of <N. T.  Rama  Rao  Jr.> ?
+What is the <education> of the <Person> who is the <owner> of <N.T.R.  Arts> ?
+What is the <education> of the <Person> who is the <starring> of <Lakshmi  Kalyanam (2007 film)> ?
+What is the <city> of the <School> which is the <alma Mater> of <Bonnie  Hunt> ?
+What is the <campus> of the <University> which is the <education> of <Doris E.  Saunders> ?
+What is the <campus> of the <University> which is the <tenant> of <Schaumburg  Boomers  Stadium> ?
+What is the <campus> of the <University> which is the <alma Mater> of <Morris H.  De Groot> ?
+What is the <campus> of the <University> which is the <owner> of <Auditorium  Theatre> ?
+What is the <campus> of the <University> which is the <alma Mater> of <Gus  Savage> ?
+What is the <campus> of the <University> which is the <tenant> of <Rosemont  Stadium> ?
+What is the <campus> of the <University> which is the <alma Mater> of <Mike  Quigley (politician)> ?
+What is the <campus> of the <University> which is the <education> of <Dempsey  Travis> ?
+What is the <campus> of the <University> which is the <tenant> of <Toyota  Park> ?
+What is the <province> of the <Diocese> which is the <province> of <Roman  Catholic  Diocese of  Springfield in  Illinois> ?
+What is the <province> of the <Diocese> which is the <religion> of <Our  Lady of  Tepeyac  High  School> ?
+What is the <province> of the <Diocese> which is the <birth Place> of <Edward  Francis  Hoban> ?
+What is the <province> of the <Diocese> which is the <province> of <Roman  Catholic  Diocese of  Peoria> ?
+What is the <province> of the <Diocese> which is the <location> of <Canons  Regular of  Saint  John  Cantius> ?
+What is the <province> of the <Diocese> which is the <province> of <Roman  Catholic  Diocese of  Belleville> ?
+What is the <assembly> of the <Automobile> which is the <vehicle> of <Volvo P2 platform> ?
+What is the <assembly> of the <Automobile> which is the <successor> of <Ford V platform> ?
+What is the <assembly> of the <Automobile> which is the <automobile Platform> of <Lincoln MKT> ?
+What is the <assembly> of the <Automobile> which is the <vehicle> of <Ford D3 platform> ?
+What is the <assembly> of the <Automobile> which is the <automobile Platform> of <Ford  Explorer   Fifth generation U502  1> ?
+What is the <assembly> of the <Automobile> which is the <automobile Platform> of <Ford  Taurus (fifth generation)> ?
+What is the <assembly> of the <Automobile> which is the <successor> of <Ford  Panther platform> ?
+What is the <assembly> of the <Automobile> which is the <successor> of <Ford D186 platform> ?
+What is the <location> of the <Company> which is the <publisher> of <Earthdawn> ?
+What is the <location> of the <Company> which is the <publisher> of <Battle Troops> ?
+What is the <location> of the <Company> which is the <publisher> of <Battle Force> ?
+What is the <significant Building> of the <Architect> who is the <architect> of <First  Church of  Christ,  Scientist,  Albion  Avenue ( Fairmont,  Minnesota)> ?
+What is the <significant Building> of the <Architect> who is the <architect> of <First  Church of  Christ,  Scientist ( Lakewood,  Ohio)> ?
+What is the <significant Building> of the <Architect> who is the <architect> of <First  Church of  Christ,  Scientist ( Mt.  Lebanon,  Pennsylvania)> ?
+What is the <location> of the <Road> which is the <headquarter> of <Illinois  Library  Association> ?
+What is the <route Junction> of the <Road> which is the <route Start> of <Illinois  Route 15> ?
+What is the <route Junction> of the <Road> which is the <route End> of <Interstate 55> ?
+What is the <birth Place> of the <Person> who is the <director> of <L.A.  Takedown> ?
+What is the <birth Place> of the <Person> who is the <producer> of <Texas  Killing  Fields> ?
+What is the <birth Place> of the <Person> who is the <writer> of <The  Keep (film)> ?
+What is the <birth Place> of the <Person> who is the <creator> of <Vega$> ?
+What is the <birth Place> of the <Person> who is the <writer> of <Drug  Wars:  The  Camarena  Story> ?
+What is the <birth Place> of the <Person> who is the <writer> of <Miami  Vice (film)> ?
+What is the <birth Place> of the <Person> who is the <parent> of <Ami  Canaan  Mann> ?
+What is the <birth Place> of the <Person> who is the <company> of <Crime  Story (TV series)> ?
+What is the <birth Place> of the <Person> who is the <executive Producer> of <Luck (TV series)> ?
+What is the <birth Place> of the <Person> who is the <executive Producer> of <Miami  Vice> ?
 *******************
-101
+188
 
 Process finished with exit code 0

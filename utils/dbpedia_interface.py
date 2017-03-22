@@ -85,7 +85,7 @@ class DBPedia:
 		'''
 		caching_answer = self.r.get(_custom_query)
 		if caching_answer:
-			print "@caching layer"
+			# print "@caching layer"
 			return json.loads(caching_answer)
 		sparql = SPARQLWrapper(self.select_sparql_endpoint())
 		sparql.setQuery(_custom_query)

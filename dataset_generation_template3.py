@@ -76,6 +76,7 @@ def pruning(_results, _keep_no_results = 100, _filter_properties = True, _filter
 
     '''
     temp_results = []
+    properties_count = {}
     for result in _results[u'results'][u'bindings']:
         # Parse the results into local variables (for readibility)
 
@@ -93,6 +94,13 @@ def pruning(_results, _keep_no_results = 100, _filter_properties = True, _filter
             if not prop.split('/')[-1] in relevant_properties:
                 continue
 
+            try:
+                if properties_count[prop.split('/')[-1]] > 2:
+                    continue
+                else:
+                    properties_count[prop.split('/')[-1]] = properties_count[prop.split('/')[-1]] + 1
+            except:
+                properties_count[prop.split('/')[-1]] = 1
         if _filter_entities:
                 # filter entities based on class
             if not [i for i in dbp.get_type_of_resource(ent) if i in relevent_entity_classes]:
