@@ -13,7 +13,7 @@ def insert(G, data):
 	#G is the graph object
 	node1 = ""
 	node2 = ""
-
+	# print "total number of nodes in graph are ", str(len(G.node))
 	for node in G.node:
 		if data[0][1] == node.getUri():
 			node1 = node

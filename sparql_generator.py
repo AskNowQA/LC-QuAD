@@ -21,6 +21,7 @@ import utils.subgraph as subgraph
 
 dbp = None  #DBpedia interface object #To be instantiated when the code is run by main script/unit testing script
 relevant_properties = open('resources/relation_whitelist.txt').read().split('\n')    #Contains the whitelisted props types
+relevent_entity_classes = open('resources/entity_classes.txt').read().split('\n') #Contains whitelisted entities classes
 templates = json.load(open('templates.py'))   #Contains all the templates existing in templates.py
 sparqls = []   #List of the generated SPARQL Queries. It will be a good idea to write them to disk once in a while.
 
@@ -34,15 +35,17 @@ sparqls = []   #List of the generated SPARQL Queries. It will be a good idea to 
 '''
 
 one_triple_right = '''
-            SELECT DISTINCT ?p ?e 
-            WHERE { 
-                <%(e)s> ?p ?e 
+            SELECT DISTINCT ?p ?e ?type
+            WHERE {
+                <%(e)s> ?p ?e
+                ?e <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?type
             }'''
 
 one_triple_left = '''
-            SELECT DISTINCT ?e ?p
+            SELECT DISTINCT ?e ?p ?type
             WHERE {
                 ?e ?p <%(e)s>
+                ?e <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?type
             }'''
 
 '''
@@ -51,13 +54,12 @@ one_triple_left = '''
             Will the code throw errors? How to you take care of them?
 '''
 
-def insert_triple_in_subgraph(G, _results, _labels, _direction, _origin_node, _filter_properties = True, _filter_literals = True):
+def insert_triple_in_subgraph(G, _results, _labels, _direction, _origin_node, _filter_properties = True,_filter_entities = True, _filter_literals = True):
     '''
         Function used to push the results of different queries into the subgraph.
         USAGE: only within the get_local_subgraph function.
-        
-        INPUTS:
-        _subgraph: the subgraph object within which the triples are to be pushed
+         INPUTS:
+        _subgraph: the subgraph object within which the triples are to be pushed,
         _results: a result list which contains the sparql variables 'e' and 'p'. 
                 They can be of either left or right queries as the cell above
         _labels: a tuple with three strings, which depict the nomenclature of the resources to be pushed
@@ -65,6 +67,7 @@ def insert_triple_in_subgraph(G, _results, _labels, _direction, _origin_node, _f
         _origin_node: the results variable only gives us one p and one e. 
                 Depending on the direction, this node will act as the other e to complete the triple  
         _filter_properties: if True, only properties existing in properties whitelist will be pushed in.
+        _filter_entities: if True, only entites belonging to a particular classes present in the whitelist will be pushed in.
     '''
     
     
@@ -72,7 +75,9 @@ def insert_triple_in_subgraph(G, _results, _labels, _direction, _origin_node, _f
         #Parse the results into local variables (for readibility)
         prop = result[u'p'][u'value']
         ent = result[u'e'][u'value']
-        
+        ent_type = result[u'type'][u'value']
+        print ent_type
+        raw_input("check for the command ")
         if _filter_literals:
             if nlutils.has_literal(ent):
                 continue
@@ -82,7 +87,13 @@ def insert_triple_in_subgraph(G, _results, _labels, _direction, _origin_node, _f
             #Filter results based on important properties
             if not prop.split('/')[-1] in relevant_properties:
                 continue
-        
+
+        if _filter_entities:
+            #filter entities based on class
+            if not ent_type.split('/')[-1] in relevent_entity_classes:
+                continue
+
+
         #Finally, insert, based on direction
         if _direction == True:
             #Right
@@ -287,9 +298,4 @@ def fill_templates(_graph):
         
         
 if __name__ == '__main__':
-    dbp =  db_interface.DBPedia(_verbose = True)
-    uri = 'http://dbpedia.org/resource/Bareilly'
-    graph = get_local_subgraph(uri)
-    f = open('output/graph.pickle','w+')
-    pickle.dump(graph,f)
-    fill_templates(graph)
+    pass

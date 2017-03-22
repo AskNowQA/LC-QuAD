@@ -7,11 +7,13 @@ import pickle
 import json
 import copy
 import traceback
+import random
 
 # Importing internal classes/libraries
 import utils.dbpedia_interface as db_interface
 import utils.natural_language_utilities as nlutils
 import utils.subgraph as subgraph
+import time
 
 # @TODO: put this class there
 
@@ -21,11 +23,11 @@ import utils.subgraph as subgraph
 '''
 
 dbp = None  # DBpedia interface object #To be instantiated when the code is run by main script/unit testing script
-relevant_properties = open('resources/relation_whitelist.txt').read().split(
-    '\n')  # Contains the whitelisted props types
+relevant_properties = open('resources/relation_whitelist.txt').read().split('\n')  # Contains the whitelisted props types
+relevent_entity_classes = open('resources/entity_classes.txt').read().split('\n') #Contains whitelisted entities classes
 templates = json.load(open('templates.py'))  # Contains all the templates existing in templates.py
 sparqls = {}  # Dict of the generated SPARQL Queries.
-
+print relevent_entity_classes
 '''
     Some SPARQL Queries.
     Since this part of the code requires sending numerous convoluted queries to DBpedia,
@@ -37,24 +39,73 @@ sparqls = {}  # Dict of the generated SPARQL Queries.
 one_triple_right = '''
             SELECT DISTINCT ?p ?e
             WHERE {
-                <%(e)s> ?p ?e
+                <%(e)s> ?p ?e.
+
             }'''
 
 one_triple_left = '''
-            SELECT DISTINCT ?e ?p
+            SELECT DISTINCT ?e ?p ?type
             WHERE {
-                ?e ?p <%(e)s>
+                ?e ?p <%(e)s>.
+
             }'''
 
 '''
+    ?e <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?type
     This cell houses the script which will build a subgraph as shown in picture above for each a given URI.
     @TODO: do something in cases where certain nodes of the local subgraph are not found.
             Will the code throw errors? How to you take care of them?
 '''
 
 
+def pruning(_results, _keep_no_results = 100, _filter_properties = True, _filter_literals = True, _filter_entities = False ):
+    '''
+    Function: Implements pruing in the results . used to push the results of different queries into the subgraph.
+        >First prunes based on properties and entite classes. After this if the result length is still more than
+        _keep_no_result , randomly selects _keep_no_results from the result list. The output can then be sent for insertion in the graph
+
+    :return: A list of results which can directly be used for inserting into a graph
+    _results: a result list which contains the sparql variables 'e' and 'p'.
+                They can be of either left or right queries as the cell above
+        _labels: a tuple with three strings, which depict the nomenclature of the resources to be pushed
+        _direction: True -> one triple right; False -> one triple left
+        _origin_node: the results variable only gives us one p and one e.
+                Depending on the direction, this node will act as the other e to complete the triple
+        _filter_properties: if True, only properties existing in properties whitelist will be pushed in.
+        _filter_entities: if True, only entites belonging to a particular classes present in the whitelist will be pushed in.
+
+    '''
+    temp_results = []
+    for result in _results[u'results'][u'bindings']:
+        # Parse the results into local variables (for readibility)
+
+        prop = result[u'p'][u'value']
+        ent = result[u'e'][u'value']
+        # ent_type = result[u'type'][u'value']
+        # print ent_type
+
+        if _filter_literals:
+            if nlutils.has_literal(ent):
+                continue
+
+        if _filter_properties:
+            # Filter results based on important properties
+            if not prop.split('/')[-1] in relevant_properties:
+                continue
+
+        if _filter_entities:
+                # filter entities based on class
+            if not [i for i in dbp.get_type_of_resource(ent) if i in relevent_entity_classes]:
+                continue
+        # Finally, insert, in a temporary list for random pruning
+        temp_results.append(result)
+
+    if (len(temp_results) > _keep_no_results):
+        return random.sample(temp_results,_keep_no_results)
+    return temp_results
+
 def insert_triple_in_subgraph(G, _results, _labels, _direction, _origin_node, _filter_properties=True,
-                              _filter_literals=True):
+                              _filter_literals=True,_filter_entities = False):
     '''
         Function used to push the results of different queries into the subgraph.
         USAGE: only within the get_local_subgraph function.
@@ -68,24 +119,15 @@ def insert_triple_in_subgraph(G, _results, _labels, _direction, _origin_node, _f
         _origin_node: the results variable only gives us one p and one e.
                 Depending on the direction, this node will act as the other e to complete the triple
         _filter_properties: if True, only properties existing in properties whitelist will be pushed in.
+        _filter_entities: if True, only entites belonging to a particular classes present in the whitelist will be pushed in.
     '''
 
-    for result in _results[u'results'][u'bindings']:
+    for result in _results:
         # Parse the results into local variables (for readibility)
+
         prop = result[u'p'][u'value']
         ent = result[u'e'][u'value']
 
-        if _filter_literals:
-            if nlutils.has_literal(ent):
-                continue
-
-        if _filter_properties:
-
-            # Filter results based on important properties
-            if not prop.split('/')[-1] in relevant_properties:
-                continue
-
-        # Finally, insert, based on direction
         if _direction == True:
             # Right
             subgraph.insert(G=G, data=[(_labels[0], _origin_node), (_labels[1], prop), (_labels[2], ent)])
@@ -104,53 +146,75 @@ def get_local_subgraph(_uri):
     access = subgraph.accessGraph(G)
 
     ########### e ?p ?e (e_to_e_out and e_out) ###########
-
+    start = time.clock()
     results = dbp.shoot_custom_query(one_triple_right % {'e': _uri})
+    print "shooting custom query to get one triple right from the central entity e" , str(time.clock() - start)
+    print "total number of entities in right of the central entity is e ", str(len(results))
     labels = ('e', 'e_to_e_out', 'e_out')
 
     # Insert results in subgraph
+    print "inserting triples in right graph "
+    start = time.clock()
+    results = pruning(_results=results, _keep_no_results=10, _filter_properties=True, _filter_literals=True, _filter_entities=False)
     insert_triple_in_subgraph(G, _results=results,
                               _labels=labels, _direction=True,
                               _origin_node=_uri, _filter_properties=True)
-
+    print "inserting the right triple took " , str(time.clock() - start)
     ########### ?e ?p e (e_in and e_in_to_e) ###########
-
+    # raw_input("check for right")
     results = dbp.shoot_custom_query(one_triple_left % {'e': _uri})
     labels = ('e_in', 'e_in_to_e', 'e')
-
+    print "total number of entity left of the central entity e is " , str(len(results))
     # Insert results in subgraph
+    print "inserting into left graph "
+    start = time.clock()
+    results = pruning(_results=results, _keep_no_results=100, _filter_properties=True, _filter_literals=True,
+                      _filter_entities=False)
     insert_triple_in_subgraph(G, _results=results,
                               _labels=labels, _direction=False,
                               _origin_node=_uri, _filter_properties=True)
-
+    print "inserting triples for left of the central entity  took ", str(time.clock() - start)
     ########### e p eout . eout ?p ?e (e_out_to_e_out_out and e_out_out) ###########
 
     # Get all the eout nodes back from the subgraph.
+    start = time.clock()
     e_outs = []
     op = access.return_outnodes('e')
     for x in op:
         for tup in x:
+            print tup
             e_outs.append(tup[1].getUri())
+    print "total time taken to retrive from subgraph is " , str(time.clock() - start)
+    print "total number of entites retirved from subgraph which are right is " , str(len(op))
 
     labels = ('e_out', 'e_out_to_e_out_out', 'e_out_out')
 
+    print "insert into e_out_to_e_out_out", str(len(e_outs))
+    # raw_input("check !!")
     for e_out in e_outs:
+        start = time.clock()
         results = dbp.shoot_custom_query(one_triple_right % {'e': e_out})
-
+        print "time required to shoot query is " , str(time.clock() - start)
         # Insert results in subgraph
+        results = pruning(_results=results, _keep_no_results=100, _filter_properties=True, _filter_literals=True,
+                          _filter_entities=False)
         insert_triple_in_subgraph(G, _results=results,
                                   _labels=labels, _direction=True,
                                   _origin_node=e_out, _filter_properties=True)
+        print "time required to shoot query is ", str(time.clock() - start)
+        print "done"
 
     ########### e p eout . ?e ?p eout  (e_out_in and e_out_in_to_e_out) ###########
 
     # Use the old e_outs variable
     labels = ('e_out_in', 'e_out_in_to_e_out', 'e_out')
-
+    print "insert into e_out_in_to_e_out_out", str(len(e_outs))
     for e_out in e_outs:
         results = dbp.shoot_custom_query(one_triple_left % {'e': e_out})
 
         # Insert results in subgraph
+        results = pruning(_results=results, _keep_no_results=20, _filter_properties=True, _filter_literals=True,
+                          _filter_entities=False)
         insert_triple_in_subgraph(G, _results=results,
                                   _labels=labels, _direction=False,
                                   _origin_node=e_out, _filter_properties=True)
@@ -166,26 +230,32 @@ def get_local_subgraph(_uri):
 
     labels = ('e_in_in', 'e_in_in_to_e_in', 'e_in')
 
+    print "insert into sub sub sub graph" , str(len(e_ins))
     for e_in in e_ins:
         results = dbp.shoot_custom_query(one_triple_left % {'e': e_in})
 
         # Insert results in subgraph
+        results = pruning(_results=results, _keep_no_results=20, _filter_properties=True, _filter_literals=True,
+                          _filter_entities=False)
         insert_triple_in_subgraph(G, _results=results,
                                   _labels=labels, _direction=False,
                                   _origin_node=e_in, _filter_properties=True)
-
+        print "done"
     ########### ein ?p ?e . ein p e  (e_in_to_e_in_out and e_in_out) ###########
 
     # Use the old e_ins variable
     labels = ('e_in', 'e_in_to_e_in_out', 'e_in_out')
-
+    print "insert into sub sub sub sub graph", str(len(e_ins))
     for e_in in e_ins:
         results = dbp.shoot_custom_query(one_triple_right % {'e': e_in})
 
         # Insert results in subgraph
+        results = pruning(_results=results, _keep_no_results=10, _filter_properties=True, _filter_literals=True,
+                          _filter_entities=False)
         insert_triple_in_subgraph(G, _results=results,
                                   _labels=labels, _direction=True,
                                   _origin_node=e_in, _filter_properties=True)
+        print "done"
 
     # Pushed all the six kind of nodes in the subgraph. Done!
     return G
@@ -254,7 +324,7 @@ def fill_specific_template(_template_id, _mapping,_debug=False):
     try:
         sparqls[_template_id].append(template)
         print len(sparqls[_template_id])
-        if len(sparqls[_template_id]) > 100:
+        if len(sparqls[_template_id]) > 100000:
             print "in if condition"
             print "tempalte id is ", str(_template_id)
             with open('output/template%s.txt' % str(_template_id), "a+") as out:
@@ -289,6 +359,7 @@ def fill_templates(_graph, _uri):
 
     # Query the graph for innode to e and relevant properties
     op = access.return_innodes('e')
+    print "length of innodes is " , str(len(op))
     counter_template3 = 0
     # Create a list of all these (e_in, e_in_to_e)
     one_triple_left_map = {triple[0].getUri(): triple[2]['object'].getUri() for triple in op[0]}
@@ -296,6 +367,7 @@ def fill_templates(_graph, _uri):
 
     # Collect all e_in_in and e_in_in_to_e_in
     op = access.return_innodes('e_in')
+    print "length of innodes is ", str(len(op))
     counter_template1 = 0
 
     # This 'op' has the e_in_in and the prop for all e_in's. We now need to map one to the other.
@@ -327,8 +399,8 @@ def fill_templates(_graph, _uri):
                 fill_specific_template(_template_id=3, _mapping=mapping)
                 counter_template3 = counter_template3 + 1
                 print str(counter_template3), "tempalte3"
-                if counter_template3 > 10:
-                    pass
+                if counter_template3 > 500:
+                    break
                     #                     break
             except:
                 print "check error stack"
@@ -344,20 +416,29 @@ def fill_templates(_graph, _uri):
 '''
 sparqls = {}
 dbp = db_interface.DBPedia(_verbose=True)
-uri = 'http://dbpedia.org/resource/Bareilly'
+uri = 'http://dbpedia.org/resource/Chicago'
 
 # Generate the local subgraph
 graph = get_local_subgraph(uri)
-
+print "the graph is completed"
 # Generate SPARQLS based on subgraph
 fill_templates(graph, _uri=uri)
 
 # Write the SPARQLs to disk in Pretty Print format
-for i in range(1, len(sparqls)):
-    with open('output/template%d.txt' % i, 'a+') as out:
-        pprint(sparqls[i], stream=out)
-for i in range(1, len(sparqls)):
-    f = open('output/template%s.json' % i, 'a+')
-    json.dump(sparqls[i], f)
+
+for key in sparqls:
+    with open('output/template%d.txt' % key, 'a+') as out:
+        pprint(sparqls[key], stream=out)
+for key in sparqls:
+    f = open('output/template%s.json' % key, 'a+')
+    json.dump(sparqls[key], f)
     f.close()
+
+# for i in range(1, len(sparqls)):
+#     with open('output/template%d.txt' % i, 'a+') as out:
+#         pprint(sparqls[i], stream=out)
+# for i in range(1, len(sparqls)):
+#     f = open('output/template%s.json' % i, 'a+')
+#     json.dump(sparqls[i], f)
+#     f.close()
 print "DONE"

@@ -4,8 +4,19 @@ import json
 from pprint import pprint
 import utils.natural_language_utilities as nlutils
 
+import csv
+def generate_CSV(questions):
+    with open('mturk_upload.csv', 'w') as csvfile:
+        writer = csv.DictWriter(
+            csvfile, fieldnames=['question'])
+        writer.writeheader()
+        for question in questions:
+            writer.writerow({
+                'question': question.replace(">", "").replace("<","")})
+
 with open('output/template3.json') as data_file:
     data = json.load(data_file)
+
 questions = []
 question_format = "What is the <%(e_in_to_e)s> of the <%(x)s> who is the <%(e_in_in_to_e_in)s> of <%(e_in_in)s> ?"
 question_format2 = "What is the <%(e_in_to_e)s> of the <%(x)s> which is the <%(e_in_in_to_e_in)s> of <%(e_in_in)s> ?"

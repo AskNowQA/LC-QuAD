@@ -26,7 +26,7 @@ import natural_language_utilities as nlutils
 # DBPEDIA_ENDPOINTS = ['http://live.dbpedia.org/sparql/']
 # 'http://dbpedia.org/sparql/','http://live.dbpedia.org/sparql/'
 #EIS dbpedia endpoint - 'http://131.220.153.66:8900/sparql'
-DBPEDIA_ENDPOINTS = ['http://131.220.153.66:8900/sparql']
+DBPEDIA_ENDPOINTS = ['http://dbpedia.org/sparql/','http://live.dbpedia.org/sparql/']
 MAX_WAIT_TIME = 1.0
 
 #SPARQL Templates
