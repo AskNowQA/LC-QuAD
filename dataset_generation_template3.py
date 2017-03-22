@@ -95,7 +95,7 @@ def pruning(_results, _keep_no_results = 100, _filter_properties = True, _filter
                 continue
 
             try:
-                if properties_count[prop.split('/')[-1]] > 2:
+                if properties_count[prop.split('/')[-1]] > 1:
                     continue
                 else:
                     properties_count[prop.split('/')[-1]] = properties_count[prop.split('/')[-1]] + 1
