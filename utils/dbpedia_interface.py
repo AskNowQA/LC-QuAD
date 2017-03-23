@@ -48,7 +48,6 @@ GET_CLASS_PATH = '''SELECT DISTINCT ?type WHERE { %(target_class)s rdfs:subClass
 
 GET_SUPERCLASS = '''SELECT DISTINCT ?type WHERE { %(target_class)s rdfs:subClassOf ?type }'''
 
-
 class DBPedia:
 	def __init__(self,_method='round-robin',_verbose=False,_db_name = 0):
 
@@ -326,6 +325,7 @@ class DBPedia:
 				return filtered_type_list_1
 			else:
 				return "http://www.w3.org/2002/07/owl#Thing"
+
 
 if __name__ == '__main__':
 	pass

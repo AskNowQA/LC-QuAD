@@ -25,7 +25,7 @@ import time
 dbp = None  # DBpedia interface object #To be instantiated when the code is run by main script/unit testing script
 relevant_properties = open('resources/relation_whitelist.txt').read().split('\n')  # Contains the whitelisted props types
 relevent_entity_classes = open('resources/entity_classes.txt').read().split('\n') #Contains whitelisted entities classes
-list_of_entities = open('resources/entities.txt').read().split('\n')
+list_of_entities = open('resources/entity.txt').read().split('\n')
 '''contains list of entites for which the question would be asked '''
 
 templates = json.load(open('templates.py'))  # Contains all the templates existing in templates.py
@@ -92,8 +92,8 @@ def pruning(_results, _keep_no_results = 100, _filter_properties = True, _filter
             if not prop.split('/')[-1] in relevant_properties:
                 continue
         results_list.append(result)
-    if len(results_list) > 2000:
-        results_list = random.sample(results_list,1000)
+    if len(results_list) > 500:
+        results_list = random.sample(results_list,500)
     print len(results_list)
     for result in results_list:
         # Parse the results into local variables (for readibility)
@@ -448,18 +448,25 @@ def fill_templates(_graph, _uri):
 sparqls = {}
 dbp = db_interface.DBPedia(_verbose=True)
 def generate_answer(_uri, dbp):
-    uri = _uri
+    print _uri
+    try:
+        uri = _uri
 
-    # Generate the local subgraph
-    graph = get_local_subgraph(uri)
-    print "the graph is completed"
-    # Generate SPARQLS based on subgraph
-    fill_templates(graph, _uri=uri)
-    print "done with one entity"
+        # Generate the local subgraph
+        graph = get_local_subgraph(uri)
+        print "the graph is completed"
+        # Generate SPARQLS based on subgraph
+        fill_templates(graph, _uri=uri)
+        print "done with one entity"
+    except:
+        print traceback.print_exception()
 
 for entity in list_of_entities:
-    generate_answer(entity,dbp)
-
+    try:
+        generate_answer(entity,dbp)
+    except:
+        print traceback.print_exc()
+        continue
 for key in sparqls:
     with open('output/template%d.txt' % key, 'a+') as out:
         pprint(sparqls[key], stream=out)
