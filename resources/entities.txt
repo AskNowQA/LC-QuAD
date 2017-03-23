@@ -1,0 +1,2 @@
+http://dbpedia.org/resource/Mumbai
+http://dbpedia.org/resource/Donald_Trump

@@ -77,9 +77,6 @@ class DBPedia:
 		if self.selection_method == 'select-one':
 			return self.sparql_endpoint
 
-		if selection_method == 'random':
-			return random.choice(DBPEDIA_ENDPOINTS)
-
 	def shoot_custom_query(self, _custom_query):
 		'''
 			Shoot any custom query and get the SPARQL results as a dictionary
@@ -247,6 +244,7 @@ class DBPedia:
 			Limitation: works only with resources.
 			@TODO: Extend this to work with ontology (not entities) too. Or properties.
 		'''
+		# print _resource_uri
 		if not nlutils.has_url(_resource_uri):
 			warnings.warn("The passed resource %s is not a proper URI but probably a shorthand. This is strongly discouraged." % _resource_uri)
 			_resource_uri = nlutils.convert_shorthand_to_uri(_resource_uri)
@@ -308,10 +306,31 @@ class DBPedia:
 		else:
 			return False
 
+	def get_parent(self,_resource_uri):
+		specific_class_uri_1 = "<" + self.get_most_specific_class(_resource_uri) + ">"
+		try:
+			response_uri_1 = self.shoot_custom_query(GET_SUPERCLASS % {'target_class': specific_class_uri_1})
+		except:
+			print traceback.print_exception()
+		try:
+			results_1 = [x[u'type'][u'value'].encode('ascii', 'ignore') for x in
+						 response_uri_1[u'results'][u'bindings']]
+		except:
+			print traceback.print_exception()
+		filtered_type_list_1 = [x for x in results_1 if
+								x[:28] in ['http://dbpedia.org/ontology/', 'http://dbpedia.org/property/']]
+		if len(filtered_type_list_1) >= 1:
+			return  filtered_type_list_1[0]
+		else:
+			if filtered_type_list_1:
+				return filtered_type_list_1
+			else:
+				return "http://www.w3.org/2002/07/owl#Thing"
+
 if __name__ == '__main__':
 	pass
 	# print "\n\nBill Gates"
-	# dbp = DBPedia()
+	dbp = DBPedia()
 	# pprint(dbp.get_type_of_resource('http://dbpedia.org/resource/M._J._P._Rohilkhand_University', _filter_dbpedia = True))
 	# print "\n\nIndia"
 	# pprint(dbp.get_type_of_resource('http://dbpedia.org/resource/India', _filter_dbpedia = True))
@@ -320,11 +339,11 @@ if __name__ == '__main__':
 	# pprint(dbp.get_answer(q))
     #
     #
-	# uri = 'http://dbpedia.org/resource/Donald_Trump'
+	uri = 'http://dbpedia.org/resource/Donald_Trump'
 	# print dbp.get_most_specific_class(uri)
     #
 	# q = 'http://dbpedia.org/ontology/birthPlace'
 	# pprint(dbp.get_label(q))
-    #
 	# q = 'http://dbpedia.org/resource/Mumbai'
+	print dbp.get_parent(uri)
 	# r = 'http://dbpedia.org/resource/India'

@@ -1,4 +1,4 @@
-'''This file specifically generates dataset for template 3.'''
+'''This file specifically generates dataset for template 3 with a given set of entites.'''
 
 # Importing some external libraries
 from pprint import pprint
@@ -65,7 +65,7 @@ one_triple_left = '''
 '''
 
 
-def pruning(_results, _keep_no_results = 100, _filter_properties = True, _filter_literals = True, _filter_entities = False ):
+def pruning(_results, _keep_no_results = 100, _filter_properties = True, _filter_literals = True, _filter_entities = True ):
     '''
     Function: Implements pruing in the results . used to push the results of different queries into the subgraph.
         >First prunes based on properties and entite classes. After this if the result length is still more than
@@ -82,34 +82,49 @@ def pruning(_results, _keep_no_results = 100, _filter_properties = True, _filter
         _filter_entities: if True, only entites belonging to a particular classes present in the whitelist will be pushed in.
 
     '''
+    print "@pruning"
     temp_results = []
-    properties_count = {}
+    # properties_count = {}
+    results_list = []
     for result in _results[u'results'][u'bindings']:
+        prop = result[u'p'][u'value']
+        if _filter_properties:
+            if not prop.split('/')[-1] in relevant_properties:
+                continue
+        results_list.append(result)
+    if len(results_list) > 2000:
+        results_list = random.sample(results_list,1000)
+    print len(results_list)
+    for result in results_list:
         # Parse the results into local variables (for readibility)
-
         prop = result[u'p'][u'value']
         ent = result[u'e'][u'value']
         # ent_type = result[u'type'][u'value']
         # print ent_type
-
         if _filter_literals:
             if nlutils.has_literal(ent):
                 continue
 
         if _filter_properties:
             # Filter results based on important properties
+
+
             if not prop.split('/')[-1] in relevant_properties:
                 continue
-
+            ent_parent = dbp.get_most_specific_class(ent)
             try:
-                if properties_count[prop.split('/')[-1]] > 1:
+                if properties_count[ent_parent][prop.split('/')[-1]] > 1:
                     continue
                 else:
-                    properties_count[prop.split('/')[-1]] = properties_count[prop.split('/')[-1]] + 1
+                    properties_count[ent_parent][prop.split('/')[-1]] = properties_count[prop.split('/')[-1]] + 1
             except:
-                properties_count[prop.split('/')[-1]] = 1
+                try:
+                    properties_count[ent_parent][prop.split('/')[-1]] = 1
+                except:
+                    properties_count[ent_parent] = {}
+
         if _filter_entities:
-                # filter entities based on class
+            # filter entities based on class
             if not [i for i in dbp.get_type_of_resource(ent) if i in relevent_entity_classes]:
                 continue
         # Finally, insert, in a temporary list for random pruning
@@ -117,6 +132,7 @@ def pruning(_results, _keep_no_results = 100, _filter_properties = True, _filter
 
     if (len(temp_results) > _keep_no_results):
         return random.sample(temp_results,_keep_no_results)
+    print len(temp_results)
     return temp_results
 
 def insert_triple_in_subgraph(G, _results, _labels, _direction, _origin_node, _filter_properties=True,
@@ -184,7 +200,7 @@ def get_local_subgraph(_uri):
     print "inserting into left graph "
     start = time.clock()
     results = pruning(_results=results, _keep_no_results=100, _filter_properties=True, _filter_literals=True,
-                      _filter_entities=False)
+                      _filter_entities=True)
     insert_triple_in_subgraph(G, _results=results,
                               _labels=labels, _direction=False,
                               _origin_node=_uri, _filter_properties=True)
@@ -431,15 +447,18 @@ def fill_templates(_graph, _uri):
 '''
 sparqls = {}
 dbp = db_interface.DBPedia(_verbose=True)
-uri = 'http://dbpedia.org/resource/Donald_Trump'
+def generate_answer(_uri, dbp):
+    uri = _uri
 
-# Generate the local subgraph
-graph = get_local_subgraph(uri)
-print "the graph is completed"
-# Generate SPARQLS based on subgraph
-fill_templates(graph, _uri=uri)
+    # Generate the local subgraph
+    graph = get_local_subgraph(uri)
+    print "the graph is completed"
+    # Generate SPARQLS based on subgraph
+    fill_templates(graph, _uri=uri)
+    print "done with one entity"
 
-# Write the SPARQLs to disk in Pretty Print format
+for entity in list_of_entities:
+    generate_answer(entity,dbp)
 
 for key in sparqls:
     with open('output/template%d.txt' % key, 'a+') as out:
