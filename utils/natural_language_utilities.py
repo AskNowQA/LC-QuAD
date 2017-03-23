@@ -75,5 +75,3 @@ def test_get_label_via_parsing():
 	uris = ["http://dbpedia.org/ontology/Airport", "http://dbpedia.org/property/garrison", "<http://dbpedia.org/property/MohnishDubey"]
 	for uri in uris:
 		print get_label_via_parsing(uri)
-
-test_get_label_via_parsing()

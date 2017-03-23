@@ -46,14 +46,15 @@ GET_TYPE_OF_RESOURCE = '''SELECT DISTINCT ?type WHERE { %(target_resource)s <htt
 
 GET_CLASS_PATH = '''SELECT DISTINCT ?type WHERE { %(target_class)s rdfs:subClassOf* ?type }'''
 
+GET_SUPERCLASS = '''SELECT DISTINCT ?type WHERE { %(target_class)s rdfs:subClassOf ?type }'''
 
 
 class DBPedia:
 	def __init__(self,_method='round-robin',_verbose=False,_db_name = 0):
-		
+
 		#Explanation: selection_method is used to select from the DBPEDIA_ENDPOINTS, hoping that we're not blocked too soon
 		if _method in ['round-robin','random','select-one']:
-			self.selection_method = _method 
+			self.selection_method = _method
 		else:
 			warnings.warn("Selection method not understood, proceeding with 'select-one'")
 			self.selection_method = 'select-one'
@@ -62,7 +63,7 @@ class DBPedia:
 		self.sparql_endpoint = DBPEDIA_ENDPOINTS[0]
 		self.r  = redis.StrictRedis(host='localhost', port=6379, db=_db_name)
 
-		#initilizing the redis server.
+	#initilizing the redis server.
 
 	def select_sparql_endpoint(self):
 		'''
@@ -137,7 +138,7 @@ class DBPedia:
 		except:
 			#TODO: Find and handle exceptions appropriately 
 			traceback.print_exc()
-			# pass
+		# pass
 
 		return property_list
 
@@ -161,7 +162,7 @@ class DBPedia:
 		except:
 			#TODO: Find and handle exceptions appropriately
 			traceback.print_exc()
-			# pass
+		# pass
 
 		return entity_list
 
@@ -170,7 +171,7 @@ class DBPedia:
 			Function fetches the type of a given entity
 			and can optionally filter out the ones of DBPedia only
 		'''
-	#@TODO: Add basic caching setup.
+		#@TODO: Add basic caching setup.
 		if not nlutils.has_url(_resource_uri):
 			warnings.warn("The passed resource %s is not a proper URI but probably a shorthand. This is strongly discouraged." % _resource_uri)
 			_resource_uri = nlutils.convert_shorthand_to_uri(_resource_uri)
@@ -209,7 +210,7 @@ class DBPedia:
 		values = {}
 		for index in xrange(0,len(variables)):
 			value = [ x[variables[index]][u'value'].encode('ascii','ignore') for x in response[u'results'][u'bindings'] ]
-			values[variables[index]] = value 
+			values[variables[index]] = value
 		return values
 
 	def get_label(self, _resource_uri):
@@ -253,7 +254,7 @@ class DBPedia:
 		#Get the DBpedia classes of resource
 		classes = self.get_type_of_resource(_resource_uri, _filter_dbpedia = True)
 
-		
+
 		length_array = []	#A list of tuples, it's use explained below
 
 		#For every class, find the length of path to owl:Thing.
@@ -269,6 +270,7 @@ class DBPedia:
 			#Parsing the Result
 			try:
 				results = [x[u'type'][u'value'].encode('ascii','ignore') for x in response[u'results'][u'bindings'] ]
+
 			except:
 				traceback.print_exc()
 
@@ -279,12 +281,38 @@ class DBPedia:
 			return max(length_array,key=itemgetter(1))[0]
 		else:
 			#if there is no results from the filter type , return it as owl Thing 
-			return "http://www.w3.org/2002/07/owl#Thing"	
+			return "http://www.w3.org/2002/07/owl#Thing"
+
+	def isCommonParent(self,_resource_uri_1 , _resource_uri_2):
+		specific_class_uri_1 = "<" + self.get_most_specific_class(_resource_uri_1) + ">"
+		specific_class_uri_2 = "<" + self.get_most_specific_class(_resource_uri_2) + ">"
+		try:
+			response_uri_1 = self.shoot_custom_query(GET_SUPERCLASS % {'target_class': specific_class_uri_1})
+			response_uri_2 = self.shoot_custom_query(GET_SUPERCLASS % {'target_class': specific_class_uri_2})
+		except:
+			traceback.print_exc()
+
+		#Parsing the results
+		try:
+			results_1 = [x[u'type'][u'value'].encode('ascii','ignore') for x in response_uri_1[u'results'][u'bindings'] ]
+			results_2 = [x[u'type'][u'value'].encode('ascii', 'ignore') for x in
+						 response_uri_2[u'results'][u'bindings']]
+		except:
+			traceback.print_exc()
+		filtered_type_list_1 = [x for x in results_1 if
+							  x[:28] in ['http://dbpedia.org/ontology/', 'http://dbpedia.org/property/']]
+		filtered_type_list_2 = [x for x in results_2 if
+							  x[:28] in ['http://dbpedia.org/ontology/', 'http://dbpedia.org/property/']]
+		if filtered_type_list_1 == filtered_type_list_2 :
+			return True
+		else:
+			return False
+
 if __name__ == '__main__':
 	pass
 	# print "\n\nBill Gates"
 	dbp = DBPedia()
-	pprint(dbp.get_type_of_resource('http://dbpedia.org/resource/M._J._P._Rohilkhand_University', _filter_dbpedia = True))
+	# pprint(dbp.get_type_of_resource('http://dbpedia.org/resource/M._J._P._Rohilkhand_University', _filter_dbpedia = True))
 	# print "\n\nIndia"
 	# pprint(dbp.get_type_of_resource('http://dbpedia.org/resource/India', _filter_dbpedia = True))
     #
@@ -298,5 +326,6 @@ if __name__ == '__main__':
 	# q = 'http://dbpedia.org/ontology/birthPlace'
 	# pprint(dbp.get_label(q))
     #
-	# q = 'http://dbpedia.org/resource/Bill_Gates'
-	# pprint(dbp.get_label(q))
+	q = 'http://dbpedia.org/resource/Mumbai'
+	r = 'http://dbpedia.org/resource/India'
+	print dbp.isCommonParent(q,r)

@@ -210,7 +210,7 @@ def get_local_subgraph(_uri):
                                   _labels=labels, _direction=True,
                                   _origin_node=e_out, _filter_properties=True)
         print "time required to shoot query is ", str(time.clock() - start)
-        print "done"
+        # print "done"
 
     ########### e p eout . ?e ?p eout  (e_out_in and e_out_in_to_e_out) ###########
 
@@ -424,7 +424,7 @@ def fill_templates(_graph, _uri):
 '''
 sparqls = {}
 dbp = db_interface.DBPedia(_verbose=True)
-uri = 'http://dbpedia.org/resource/Chicago'
+uri = 'http://dbpedia.org/resource/Mumbai'
 
 # Generate the local subgraph
 graph = get_local_subgraph(uri)

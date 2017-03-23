@@ -20,6 +20,8 @@ with open('output/template3.json') as data_file:
 questions = []
 question_format = "What is the <%(e_in_to_e)s> of the <%(x)s> who is the <%(e_in_in_to_e_in)s> of <%(e_in_in)s> ?"
 question_format2 = "What is the <%(e_in_to_e)s> of the <%(x)s> which is the <%(e_in_in_to_e_in)s> of <%(e_in_in)s> ?"
+
+
 e_in_to_e = {}
 for filler in data:
     x = filler["answer_type"]['x']
