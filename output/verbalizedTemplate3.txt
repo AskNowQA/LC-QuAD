@@ -1,24 +1,37 @@
-What is the <residence> of the <Person> who is the <starring> of <Kyaa  Kool  Hain  Hum 3> ?
-What is the <location> of the <Lake> which is the <source> of <Mithi  River> ?
-What is the <birth Place> of the <Person> who is the <producer> of <Sahi  Dhandhe  Galat  Bande> ?
-What is the <headquarters> of the <Organisation> which is the <publisher> of <Journal of the  Bombay  Natural  History  Society> ?
-What is the <residence> of the <Person> who is the <starring> of <Havan (TV series)> ?
-What is the <location> of the <Company> which is the <award> of <Nagarur  Gopinath> ?
-What is the <location City> of the <Company> which is the <creator> of <Ek  Mahal  Ho  Sapno  Ka (TV series)> ?
-What is the <city> of the <University> which is the <alma Mater> of <Prakruti  Mishra> ?
-What is the <birth Place> of the <Person> who is the <starring> of <Ivan  Veramathiri> ?
-What is the <death Place> of the <Scientist> who is the <academic Advisor> of <C. S.  Venkataraman> ?
-What is the <location City> of the <Company> which is the <subsidiary> of <Bajaj  Group> ?
-What is the <death Place> of the <Person> who is the <producer> of <Ramayan (1954 film)> ?
-What is the <headquarter> of the <Television Station> which is the <sister Station> of <Sony  Aath> ?
-What is the <foundation Place> of the <Company> which is the <parent> of <Grasim  Bhiwani  Textiles> ?
-What is the <alma Mater> of the <Scientist> who is the <editor> of <Pramana (journal)> ?
-What is the <spouse> of the <Person> who is the <spouse> of <Donald  Trump> ?
-What is the <parent> of the <Person> who is the <relation> of <Jared  Kushner> ?
-What is the <relation> of the <Office Holder> who is the <relation> of <Donald  Trump> ?
-What is the <key Person> of the <Company> which is the <owner> of <555  California  Street> ?
+/usr/bin/python2.7 /home/gaurav/codes/questionGeneration/QueryDataSet/template3_verbalizer.py
+What is the <residence> of the <Person> who is the <spouse> of <Yash  Sinha> ?
+What is the <headquarter> of the <Television Station> which is the <predecessor> of <&TV> ?
+What is the <location> of the <Company> which is the <manufacturer> of <Premier  Padmini> ?
+What is the <birth Place> of the <Person> who is the <starring> of <Such a  Long  Journey (film)> ?
+What is the <birth Place> of the <Musical Artist> who is the <child> of <Beena  Kak> ?
+What is the <residence> of the <Office Holder> who is the <predecessor> of <P. M.  Sayeed> ?
+What is the <location City> of the <Company> which is the <producer> of <Aandhali  Koshimbir> ?
+What is the <death Place> of the <Person> who is the <parent> of <Amitabh  Bachchan> ?
+What is the <location Country> of the <Company> which is the <company> of <The  Suite  Life of  Karan &  Kabir> ?
+What is the <death Place> of the <Writer> who is the <writer> of <Dil  Hai  Ke  Manta  Nahin> ?
+What is the <location> of the <Company> which is the <channel> of <Fear  Factor:  Khatron  Ke  Khiladi> ?
+What is the <location City> of the <Company> which is the <builder> of <INS  Mumbai (D62)> ?
+What is the <relation> of the <Person> who is the <child> of <Charles  Kushner> ?
+What is the <relative> of the <Person> who is the <child> of <Ivana  Trump> ?
+What is the <child> of the <Person> who is the <child> of <Frederick  Trump> ?
 What is the <owner> of the <Building> which is the <location> of <The  Trump  Organization> ?
+What is the <owner> of the <Company> which is the <owner> of <Trump  Productions> ?
+What is the <key Person> of the <Company> which is the <owner> of <Etess  Arena> ?
+What is the <spouse> of the <Person> who is the <parent> of <Donald  Trump,  Jr.> ?
+What is the <parent> of the <Person> who is the <child> of <Ivana  Trump> ?
+What is the <manager Club> of the <Soccer Manager> who is the <manager> of <1975–76  Manchester  United F.C. season> ?
+What is the <team> of the <Soccer Manager> who is the <manager> of <Manchester  City F.C.  Reserves and  Academy> ?
+What is the <genre> of the <Software> which is the <known For> of <Marco  Arment> ?
+What is the <employer> of the <Person> who is the <designer> of <Swift (programming language)> ?
+What is the <employer> of the <Person> who is the <author> of <Sound Jam MP> ?
+What is the <known For> of the <Person> who is the <key Person> of <Echelon  Corporation> ?
+What is the <occupation> of the <Person> who is the <owner> of <Truemors> ?
+What is the <board> of the <Business Person> who is the <key Person> of <Apple  Inc.> ?
+What is the <occupation> of the <Person> who is the <writer> of <The  Face  Behind the  Mask (1941 film)> ?
+What is the <product> of the <Company> which is the <developer> of <Steven  Universe:  Attack the  Light!> ?
+What is the <parent> of the <Company> which is the <service> of <Apple  Inc.> ?
+What is the <parent Company> of the <Company> which is the <known For> of <Barbara  Bestor> ?
 *******************
-20
+32
 
 Process finished with exit code 0
