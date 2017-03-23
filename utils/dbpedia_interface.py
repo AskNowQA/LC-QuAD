@@ -283,7 +283,7 @@ class DBPedia:
 			#if there is no results from the filter type , return it as owl Thing 
 			return "http://www.w3.org/2002/07/owl#Thing"
 
-	def isCommonParent(self,_resource_uri_1 , _resource_uri_2):
+	def is_common_parent(self,_resource_uri_1 , _resource_uri_2):
 		specific_class_uri_1 = "<" + self.get_most_specific_class(_resource_uri_1) + ">"
 		specific_class_uri_2 = "<" + self.get_most_specific_class(_resource_uri_2) + ">"
 		try:
@@ -311,7 +311,7 @@ class DBPedia:
 if __name__ == '__main__':
 	pass
 	# print "\n\nBill Gates"
-	dbp = DBPedia()
+	# dbp = DBPedia()
 	# pprint(dbp.get_type_of_resource('http://dbpedia.org/resource/M._J._P._Rohilkhand_University', _filter_dbpedia = True))
 	# print "\n\nIndia"
 	# pprint(dbp.get_type_of_resource('http://dbpedia.org/resource/India', _filter_dbpedia = True))
@@ -326,6 +326,5 @@ if __name__ == '__main__':
 	# q = 'http://dbpedia.org/ontology/birthPlace'
 	# pprint(dbp.get_label(q))
     #
-	q = 'http://dbpedia.org/resource/Mumbai'
-	r = 'http://dbpedia.org/resource/India'
-	print dbp.isCommonParent(q,r)
+	# q = 'http://dbpedia.org/resource/Mumbai'
+	# r = 'http://dbpedia.org/resource/India'
