@@ -13,9 +13,10 @@ def generate_CSV(questions):
         for question in questions:
             writer.writerow({
                 'question': question.replace(">", "").replace("<","")})
-
-with open('output/template3.json') as data_file:
-    data = json.load(data_file)
+data = []
+with open('output/json_template3.txt') as data_file:
+    for line in data_file:
+        data.append(json.loads(line.rstrip('\n')))
 
 questions = []
 question_format = "What is the <%(e_in_to_e)s> of the <%(x)s> who is the <%(e_in_in_to_e_in)s> of <%(e_in_in)s> ?"
@@ -49,3 +50,8 @@ for question in questions:
 print "*******************"
 print len(questions)
 print counter
+#
+# with open('json_template3.txt') as file_handler:
+# ...     for line in file_handler:
+# ...             print line.rstrip('\n')
+# ...             raw_input()

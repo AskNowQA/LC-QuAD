@@ -25,7 +25,7 @@ import time
 dbp = None  # DBpedia interface object #To be instantiated when the code is run by main script/unit testing script
 relevant_properties = open('resources/relation_whitelist.txt').read().split('\n')  # Contains the whitelisted props types
 relevent_entity_classes = open('resources/entity_classes.txt').read().split('\n') #Contains whitelisted entities classes
-list_of_entities = open('resources/dbpedia_url.txt').read().split('\n')
+list_of_entities = open('resources/single_entity.txt').read().split('\n')
 '''contains list of entites for which the question would be asked '''
 
 templates = json.load(open('templates.py'))  # Contains all the templates existing in templates.py
@@ -474,6 +474,11 @@ for key in sparqls:
     f = open('output/template%s.json' % key, 'a+')
     json.dump(sparqls[key], f)
     f.close()
+for key in sparqls:
+    fo = open('output/json_template%d.txt' % key, 'a+')
+    for value in sparqls[key]:
+        fo.writelines(json.dumps(value) + "\n")
+    fo.close()
 
 # for i in range(1, len(sparqls)):
 #     with open('output/template%d.txt' % i, 'a+') as out:

@@ -18,3 +18,4 @@ Further steps thats needs to be taken
 >Discuss and start correcting grammer
 >Verbalize other templates
 >Clean up the codes.
+>Better read and write strategy
