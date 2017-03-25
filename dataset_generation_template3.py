@@ -1,4 +1,4 @@
-'''This file specifically generates dataset for template 3.'''
+'''This file specifically generates dataset for template 3. This only runs for one single entity'''
 
 # Importing some external libraries
 from pprint import pprint

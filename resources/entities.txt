@@ -1,5 +1,9 @@
 http://dbpedia.org/resource/Mumbai
 http://dbpedia.org/resource/Donald_Trump
-http://dbpedia.org/resource/Manchester_United_F.C.
 http://dbpedia.org/resource/TechCrunch
 http://dbpedia.org/resource/Apple_Inc.
+http://dbpedia.org/resource/Cricket
+http://dbpedia.org/resource/Roger_Federer
+http://dbpedia.org/resource/Python
+http://dbpedia.org/resource/Stanford_University
+http://dbpedia.org/resource/Facebook

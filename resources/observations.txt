@@ -6,3 +6,15 @@ Now with answer always as Bareilly , which is a type of Metrapolis
         >What other entity and relation affects the grammer structure
         >How generalizable the grammer structure is
 >May be need to define whitelist relationship based on Entites type. For example - ispartOf might not be needed for location based questions because it makes gramaitical structure more difficult.
+
+>37 - with 5 entites
+>33 - with 4 entites
+>15 - Mumbai
+
+
+Further steps thats needs to be taken
+
+>Run the code for 500 entites
+>Discuss and start correcting grammer
+>Verbalize other templates
+>Clean up the codes.

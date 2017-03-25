@@ -23,7 +23,9 @@ question_format2 = "What is the <%(e_in_to_e)s> of the <%(x)s> which is the <%(e
 
 
 e_in_to_e = {}
+counter = 0
 for filler in data:
+    counter = counter + 1
     x = filler["answer_type"]['x']
     maps = filler['mapping']
     maps['x'] = x
@@ -46,3 +48,4 @@ for question in questions:
 
 print "*******************"
 print len(questions)
+print counter
