@@ -437,6 +437,104 @@ def fill_templates(_graph, _uri):
                 print "check error stack"
                 traceback.print_exc()
                 continue
+    '''
+            Template #4:
+                SELECT DISTINCT ?uri WHERE { <%(e_out_in)s> <%(e_out_in_to_e_out)s> ?x . ?uri <%(e_to_e_out)s> ?x }
+            Find e_in and e_in_to_e.
+        '''
+
+    # Query the graph for outnodes from e and relevant properties
+    op = access.return_outnodes('e')
+    counter_template4 = 0
+    # Create a list of all these (e_to_e_out, e_out)
+    one_triple_right_map = {triple[1].getUri(): triple[2]['object'].getUri() for triple in op[0]}
+    pprint(one_triple_right_map)
+
+    # Collect all e_out_in and e_out_in_to_e_out
+    op = access.return_innodes('e_out')
+
+    # This 'op' has the e_out_in and the prop for all e_out's. We now need to map one to the other.
+    for list_of_triples in op:
+
+        # Some triple are simply empty. Ignore them.
+        if len(list_of_triples) == 0:
+            continue
+
+        ### Mapping e_out_in's to relevant e_out's ###
+
+        # Pick one triple from the list.
+        e_out = list_of_triples[0][1].getUri()
+        e_to_e_out = one_triple_right_map[e_out]  # Find the relevant property from the map
+
+        # Given this information, lets create mappings of template four
+        for triple in list_of_triples:
+
+            # Making the variables explicit (for the sake of readability)
+            e_out_in = triple[0].getUri()
+            e_out_in_to_e_out = triple[2]['object'].getUri()
+
+            # Create a mapping (in keeping with the templates' placeholder names)
+            mapping = {'e_out_in': e_out_in, 'e_out_in_to_e_out': e_out_in_to_e_out, 'e_to_e_out': e_to_e_out,
+                       'e_out': e_out}
+
+            # Throw it to a function who will put it in the list with appropriate bookkeeping
+            try:
+                fill_specific_template(_template_id=4, _mapping=mapping, _debug=False)
+                counter_template4 = counter_template4 + 1
+                print str(counter_template4), "tempalte4"
+            except:
+                print "check error stack"
+                continue
+            if counter_template4 > 10:
+                pass
+    '''Template 5
+
+        SELECT DISTINCT ?uri WHERE { ?x <%(e_in_to_e_in_out)s> <%(e_in_out)s> . ?x <%(e_in_to_e)s> ?uri }
+    '''
+    # Query the graph for outnodes from e and relevant properties
+    op = access.return_innodes('e')
+    counter_template5 = 0
+    # Create a list of all these (e_in,e_in_to_e)
+    one_triple_left_map = {triple[0].getUri(): triple[2]['object'].getUri() for triple in op[0]}
+    pprint(one_triple_left_map)
+
+    # Collect all e_out_in and e_in_to_e_in_out
+    op = access.return_outnodes('e_in')
+
+    # This 'op' has the e_out_in and the prop for all e_out's. We now need to map one to the other.
+    for list_of_triples in op:
+
+        # Some triple are simply empty. Ignore them.
+        if len(list_of_triples) == 0:
+            continue
+
+        ### Mapping e_out_in's to relevant e_out's ###
+
+        # Pick one triple from the list.
+        e_in = list_of_triples[0][0].getUri()
+        e_in_to_e = one_triple_left_map[e_in]  # Find the relevant property from the map
+
+        # Given this information, lets create mappings of template four
+        for triple in list_of_triples:
+
+            # Making the variables explicit (for the sake of readability)
+            e_in_out = triple[1].getUri()
+            e_in_to_e_in_out = triple[2]['object'].getUri()
+
+            # Create a mapping (in keeping with the templates' placeholder names)
+            mapping = {'e_in_out': e_in_out, 'e_in_to_e_in_out': e_in_to_e_in_out, 'e_in_to_e': e_in_to_e,
+                       'e_in': e_in}
+
+            # Throw it to a function who will put it in the list with appropriate bookkeeping
+            try:
+                fill_specific_template(_template_id=5, _mapping=mapping, _debug=False)
+                counter_template4 = counter_template5 + 1
+                print str(counter_template5), "tempalte5"
+            except:
+                print "check error stack"
+                continue
+            if counter_template4 > 10:
+                pass
 
 
 # break
@@ -480,11 +578,5 @@ for key in sparqls:
         fo.writelines(json.dumps(value) + "\n")
     fo.close()
 
-# for i in range(1, len(sparqls)):
-#     with open('output/template%d.txt' % i, 'a+') as out:
-#         pprint(sparqls[i], stream=out)
-# for i in range(1, len(sparqls)):
-#     f = open('output/template%s.json' % i, 'a+')
-#     json.dump(sparqls[i], f)
-#     f.close()
+
 print "DONE"

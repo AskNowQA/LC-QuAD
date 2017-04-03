@@ -15,7 +15,7 @@
 	"id": 4,
 	"n_entities": 1
 }, {
-	"template": " SELECT DISTINCT ?uri WHERE { ?x <%(rel_to_a)s> <%(ent_a)s> . ?x <%(rel_from_x)s> ?uri } ",
+	"template": " SELECT DISTINCT ?uri WHERE { ?x <%(e_in_to_e_in_out)s> <%(e_in_out)s> . ?x <%(e_in_to_e)s> ?uri } ",
 	"id": 5,
 	"n_entities": 1
 }, {
@@ -45,5 +45,9 @@
 }, {
 	"template": " SELECT DISTINCT ?uri WHERE { ?x <%(rel_to_a)s> <%(ent_a)s> . ?x <%(rel_to_a)s> ?uri",
 	"id": 12,
+	"n_entities": 1
+},{
+	"template": "SELECT DISTINCT count(?uri) WHERE { <%(e_in)s> <%(e_in_to_e)s> <%(e)s> . <%(e)s> <%(e_to_e_out)s> ?uri }",
+	"id": 20,
 	"n_entities": 1
 }]

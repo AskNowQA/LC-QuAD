@@ -1,1 +1,1 @@
-http://dbpedia.org/resource/Donald_Trump
+http://dbpedia.org/resource/Albert_Einstein
