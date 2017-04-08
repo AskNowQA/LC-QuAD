@@ -83,7 +83,6 @@ formerBandMember
 battle
 federalState
 hubAirport
-isPartOf
 subsidiary
 locationCity
 primeMinister
@@ -102,7 +101,6 @@ author
 militaryUnit
 almaMater
 routeJunction
-knownFor
 formerChoreographer
 inflow
 artist
@@ -125,7 +123,6 @@ service
 governingBody
 formerPartner
 owningCompany
-influencedBy
 manager
 associatedMusicalArtist
 governor
@@ -135,7 +132,6 @@ chancellor
 basedOn
 affiliation
 automobilePlatform
-influenced
 industry
 foundationPlace
 homeport
@@ -208,7 +204,6 @@ citizenship
 network
 opponent
 order
-isPartOfMilitaryConflict
 leader
 distributor
 mouthPlace

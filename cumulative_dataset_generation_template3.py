@@ -25,7 +25,7 @@ import time
 dbp = None  # DBpedia interface object #To be instantiated when the code is run by main script/unit testing script
 relevant_properties = open('resources/relation_whitelist.txt').read().split('\n')  # Contains the whitelisted props types
 relevent_entity_classes = open('resources/entity_classes.txt').read().split('\n') #Contains whitelisted entities classes
-list_of_entities = open('resources/single_entity.txt').read().split('\n')
+list_of_entities = open('resources/entities.txt').read().split('\n')
 '''contains list of entites for which the question would be asked '''
 
 templates = json.load(open('templates.py'))  # Contains all the templates existing in templates.py
@@ -111,6 +111,7 @@ def pruning(_results, _keep_no_results = 100, _filter_properties = True, _filter
 
             if not prop.split('/')[-1] in relevant_properties:
                 continue
+
             ent_parent = dbp.get_most_specific_class(ent)
             try:
                 if properties_count[ent_parent][prop.split('/')[-1]] > 1:
@@ -366,7 +367,6 @@ def fill_specific_template(_template_id, _mapping,_debug=False):
     except:
         print traceback.print_exc()
         sparqls[_template_id] = [template]
-
     return True
 
 
@@ -394,11 +394,11 @@ def fill_templates(_graph, _uri):
     counter_template3 = 0
     # Create a list of all these (e_in, e_in_to_e)
     one_triple_left_map = {triple[0].getUri(): triple[2]['object'].getUri() for triple in op[0]}
-    pprint(one_triple_left)
+    # pprint(one_triple_left)
 
     # Collect all e_in_in and e_in_in_to_e_in
     op = access.return_innodes('e_in')
-    print "length of innodes is ", str(len(op))
+    # print "length of innodes is ", str(len(op))
     counter_template1 = 0
 
     # This 'op' has the e_in_in and the prop for all e_in's. We now need to map one to the other.
@@ -438,10 +438,10 @@ def fill_templates(_graph, _uri):
                 traceback.print_exc()
                 continue
     '''
-            Template #4:
-                SELECT DISTINCT ?uri WHERE { <%(e_out_in)s> <%(e_out_in_to_e_out)s> ?x . ?uri <%(e_to_e_out)s> ?x }
-            Find e_in and e_in_to_e.
-        '''
+        Template #4:
+            SELECT DISTINCT ?uri WHERE { <%(e_out_in)s> <%(e_out_in_to_e_out)s> ?x . ?uri <%(e_to_e_out)s> ?x }
+        Find e_in and e_in_to_e.
+    '''
 
     # Query the graph for outnodes from e and relevant properties
     op = access.return_outnodes('e')
@@ -477,18 +477,21 @@ def fill_templates(_graph, _uri):
             mapping = {'e_out_in': e_out_in, 'e_out_in_to_e_out': e_out_in_to_e_out, 'e_to_e_out': e_to_e_out,
                        'e_out': e_out}
 
+            if  e_out_in_to_e_out == e_to_e_out:
+                continue
+
             # Throw it to a function who will put it in the list with appropriate bookkeeping
             try:
                 fill_specific_template(_template_id=4, _mapping=mapping, _debug=False)
                 counter_template4 = counter_template4 + 1
-                print str(counter_template4), "tempalte4"
+                print str(counter_template4), "template4"
             except:
                 print "check error stack"
                 continue
-            if counter_template4 > 10:
-                pass
-    '''Template 5
-
+            if counter_template4 > 100:
+                break  #NOTE THE CAP
+    '''
+        Template 5
         SELECT DISTINCT ?uri WHERE { ?x <%(e_in_to_e_in_out)s> <%(e_in_out)s> . ?x <%(e_in_to_e)s> ?uri }
     '''
     # Query the graph for outnodes from e and relevant properties
@@ -528,14 +531,61 @@ def fill_templates(_graph, _uri):
             # Throw it to a function who will put it in the list with appropriate bookkeeping
             try:
                 fill_specific_template(_template_id=5, _mapping=mapping, _debug=False)
-                counter_template4 = counter_template5 + 1
+                counter_template5 = counter_template5 + 1
                 print str(counter_template5), "tempalte5"
             except:
                 print "check error stack"
                 continue
-            if counter_template4 > 10:
+            if counter_template5 > 10:
                 pass
 
+    '''
+    Template 6-
+        SELECT DISTINCT ?uri WHERE { ?x <%(e_out_to_e_out_out)s> <%(e_out_out)s> . ?uri <%(e_to_e_out)s> ?x }
+    '''
+    # Query the graph for outnodes from e and relevant properties
+    op = access.return_outnodes('e')
+    counter_template6 = 0
+    # Create a list of all these (e_in,e_in_to_e)
+    one_triple_right_map = {triple[1].getUri(): triple[2]['object'].getUri() for triple in op[0]}
+
+    # Collect all e_out_in and e_in_to_e_in_out
+    op = access.return_outnodes('e_out')
+
+    # This 'op' has the e_out_in and the prop for all e_out's. We now need to map one to the other.
+    for list_of_triples in op:
+
+        # Some triple are simply empty. Ignore them.
+        if len(list_of_triples) == 0:
+            continue
+
+        ### Mapping e_out_in's to relevant e_out's ###
+
+        # Pick one triple from the list.
+        e_out = list_of_triples[0][0].getUri()
+        e_to_e_out = one_triple_right_map[e_out]  # Find the relevant property from the map
+
+        # Given this information, lets create mappings of template six
+        for triple in list_of_triples:
+
+            # Making the variables explicit (for the sake of readability)
+            e_out_out = triple[1].getUri()
+            e_out_to_e_out_out = triple[2]['object'].getUri()
+
+            # Create a mapping (in keeping with the templates' placeholder names)
+            mapping = {'e_out_out': e_out_out, 'e_out_to_e_out_out': e_out_to_e_out_out, 'e_to_e_out': e_to_e_out,
+                       'e_out': e_out}
+
+            # Throw it to a function who will put it in the list with appropriate bookkeeping
+            try:
+                fill_specific_template(_template_id=6, _mapping=mapping, _debug=False)
+                counter_template6 = counter_template6 + 1
+                print str(counter_template6), "tempalte6"
+            except:
+                print "check error stack"
+                continue
+            if counter_template6 > 10:
+                pass
 
 # break
 

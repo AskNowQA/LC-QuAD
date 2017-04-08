@@ -31,7 +31,7 @@ list_of_entities = open('resources/entities.txt').read().split('\n')
 templates = json.load(open('templates.py'))  # Contains all the templates existing in templates.py
 sparqls = {}  # Dict of the generated SPARQL Queries.
 properties_count = {}
-''' dictionary of properties. with key being the parent entity and value would be a dictionary with key peing name
+''' dictionary of properties. with key being the parent entity and value would be a dictionary with key being name
     of property and value being number of times it has already occured .
     {"/agent" : [ {"/birthPlace" : 1 }, {"/deathPlace" : 2}] }
     '''

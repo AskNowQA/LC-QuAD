@@ -19,7 +19,7 @@
 	"id": 5,
 	"n_entities": 1
 }, {
-	"template": " SELECT DISTINCT ?uri WHERE { ?x <%(rel_to_a)s> <%(ent_a)s> . ?uri <%(rel_to_x)s> ?x } ",
+	"template": "SELECT DISTINCT ?uri WHERE { ?x <%(e_out_to_e_out_out)s> <%(e_out_out)s> . ?uri <%(e_to_e_out)s> ?x }",
 	"id": 6,
 	"n_entities": 1
 }, {

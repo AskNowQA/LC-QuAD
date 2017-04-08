@@ -14,6 +14,7 @@ def generate_CSV(questions):
             writer.writerow({
                 'question': question.replace(">", "").replace("<","")})
 data = []
+#read from the file
 with open('output/json_template3.txt') as data_file:
     for line in data_file:
         data.append(json.loads(line.rstrip('\n')))
@@ -25,6 +26,7 @@ question_format2 = "What is the <%(e_in_to_e)s> of the <%(x)s> which is the <%(e
 
 e_in_to_e = {}
 counter = 0
+
 for filler in data:
     counter = counter + 1
     x = filler["answer_type"]['x']
