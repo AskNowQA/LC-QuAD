@@ -1,6 +1,7 @@
 [{
 	"template": " SELECT DISTINCT ?uri WHERE {?uri <%(e_to_e_out)s> <%(e_out)s> } ",
 	"id": 1,
+	"type"
 	"n_entities": 1
 }, {
 	"template": " SELECT DISTINCT ?uri WHERE { <%(e_in)s> <%(e_in_to_e)s> ?uri } ",
@@ -15,23 +16,23 @@
 	"id": 4,
 	"n_entities": 1
 }, {
-	"template": " SELECT DISTINCT ?uri WHERE { ?x <%(e_in_to_e_in_out)s> <%(e_in_out)s> . ?x <%(e_in_to_e)s> ?uri } ",
+	"template": " SELECT DISTINCT ?uri, ?x WHERE { ?x <%(e_in_to_e_in_out)s> <%(e_in_out)s> . ?x <%(e_in_to_e)s> ?uri } ",
 	"id": 5,
 	"n_entities": 1
 }, {
-	"template": "SELECT DISTINCT ?uri WHERE { ?x <%(e_out_to_e_out_out)s> <%(e_out_out)s> . ?uri <%(e_to_e_out)s> ?x }",
+	"template": "SELECT DISTINCT ?uri WHERE { ?x <%(e_out_to_e_out_out)s> <%(e_out_out)s> . ?uri <%(e_to_e_out)s> ?x } ",
 	"id": 6,
 	"n_entities": 1
 }, {
-	"template": " SELECT DISTINCT ?uri WHERE { ?uri <%(rel_to_a)s> <%(ent_a)s> . ?uri <%(rel_to_a_and_b)s> <%(ent_b)s> } ",
+	"template": " SELECT DISTINCT ?uri WHERE { ?uri <%(e_to_e_out)s> <%(e_out_1)s> . ?uri <%(e_to_e_out)s> <%(e_out_2)s>} ",
 	"id": 7,
 	"n_entities": 2
 }, {
-	"template": " SELECT DISTINCT ?uri WHERE { ?uri <%(rel_to_a)s> <%(ent_a)s> . ?uri <%(rel_to_b)s> <%(ent_b)s> } ",
+	"template": " SELECT DISTINCT ?uri WHERE {?uri <%(e_to_e_out_1)s> <%(e_out_1)s> . ?uri <%(e_to_e_out_2)s> <%(e_out_2)s> } ",
 	"id": 8,
 	"n_entities": 2
 }, {
-	"template": " SELECT DISTINCT ?uri WHERE { <%(ent_a)s> <%(rel_from_a)s> ?x . ?x <%(rel_from_a)s> ?uri",
+	"template": " SELECT DISTINCT ?uri WHERE { <%(e_in_in)s>  <%(e_in_in _to_e_in)s> ?x .  ?x <%(e_in_to_e)s> ?uri}",
 	"id": 9,
 	"n_entities": 1
 }, {
