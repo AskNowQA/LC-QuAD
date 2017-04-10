@@ -1,6 +1,7 @@
 import csv
 import json
 from pprint import pprint
+from pattern.en import pluralize
 import utils.natural_language_utilities as nlutils
 
 def generate_CSV(questions):
@@ -20,7 +21,10 @@ with open('output/json_template5.txt') as data_file:
         data.append(json.loads(line.rstrip('\n')))
 
 questions = []      #Variable to keep all the verbalized questions
-question_format = "What is the <%(e_in_to_e)s> of the <%(x)s> which is the <%(e_in_to_e_in_out)s> of <%(e_in_out)s> ?"
+vanilla_template_singular = "What is the <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s> ?"
+vanilla_template_plural = "List the <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>."
+type_template_singular = "What is the <%(e_in_to_e)s> of the <%(x)s> which is a <%(e_in_out)s> ?"
+type_template_plural = "List the <%(e_in_to_e)s> of the <%(x)s> which are <%(e_in_out)s>."
 # question_format2 = "What is the <%(e_in_to_e)s> of the <%(x)s> which is the <%(e_in_in_to_e_in)s> of <%(e_in_in)s> ?"
 
 e_in_to_e = {}
@@ -31,14 +35,13 @@ for filler in data:
     counter = counter + 1
 
     #Get intermediate var
-    #DEBUG
     try:
         x = filler["answer_type"]['x']
     except:
         continue
+
     #Get the entire mapping dict
     maps = filler['mapping']
-    #Push the intermediate var in the dict
     maps['x'] = x
 
     #What does this block do?
@@ -51,10 +54,41 @@ for filler in data:
     except:
         e_in_to_e[maps['e_in_to_e']] = 1
 
+
+
+    #@TODO: Instead of parsing them, have a hashmap to retrieve all labels from DBPedia
     for element in maps:
-        #@TODO: Instead of parsing them, have a hashmap to retrieve all labels from DBPedia
         maps[element] = nlutils.get_label_via_parsing(maps[element])  #Get their labels
-        
+
+    ''' 
+        ### RULES ###
+        1. List Rule:
+            if there are more than one ?x, then use a list template. Also pluralize ?x's token
+        2. Type Rule:
+            if e_in_to_e_in_out is 'type', use a type template (singular or plural)
+    '''    
+    
+    #Check if singular or plural
+    if len(filler['answer']['x']) > 2:
+        #Plural
+        maps['x'] = pluralize(maps['x'])
+
+        #Check for the type rule
+        if maps['e_in_to_e_in_out'] == 'type':
+            question_format = type_template_plural
+
+        else:
+            question_format = vanilla_template_plural
+    else:
+        #Singular
+
+        #Check for the type rule
+        if maps['e_in_to_e_in_out'] == 'type':
+            question_format = type_template_singular
+
+        else:
+            question_format = vanilla_template_singular
+
     #All barriers in place, and all variables collected. Now let's verbalize (put the mapping in the tempates)
     questions.append(( filler[u'query'], question_format % maps ))
 
