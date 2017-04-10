@@ -8,6 +8,7 @@ import json
 import copy
 import traceback
 import random
+import uuid
 
 # Importing internal classes/libraries
 import utils.dbpedia_interface as db_interface
@@ -323,6 +324,8 @@ def fill_specific_template(_template_id, _mapping,_debug=False):
     # From the template, make a rigid query using mappings
     try:
         template['query'] = template['template'] % _mapping
+        uid = uuid.uuid4()
+        template['question_id'] = uid.hex
     except KeyError:
         print "fill_specific_template: ERROR. Mapping does not match."
         return False
@@ -334,11 +337,13 @@ def fill_specific_template(_template_id, _mapping,_debug=False):
     # get_answer now returns a dictionary with appropriate variable bindings.
     #claming answer to not more than 10.
     temp_answer = dbp.get_answer(template['query'])
-    if len(temp_answer) > 10:
-        template['answer'] = temp_answer[0:9]
-    else:
-      template['answer'] = temp_answer
-
+    temp_new_answer = {}
+    for key in temp_answer:
+        if len(temp_answer[key]) > 10:
+            temp_new_answer[key] = temp_answer[key][0:9]
+        else:
+            temp_new_answer[key] = temp_answer[key]
+    template['answer'] = temp_new_answer
     # Get the most specific type of the answers.
     '''
         ATTENTION: This can create major problems in the future.
@@ -420,10 +425,10 @@ def fill_templates(_graph, _uri):
             #DEBUG print str(counter_template1), "tempalte1"
             if counter_template1 > 500:
                 break
-            except:
-                print "check error stack"
-                traceback.print_exc()
-                continue
+        except:
+            print "check error stack"
+            traceback.print_exc()
+            continue
     
     ''' 
         Template #2: 
@@ -606,7 +611,7 @@ def fill_templates(_graph, _uri):
                        'e_in': e_in}
 
             #Skipping duplicate e_in_to_e_in_out and e_in_to_e
-             if  e_in_to_e_in_out.split('/')[-1] == e_in_to_e.split('/')[-1]:
+            if e_in_to_e_in_out.split('/')[-1] == e_in_to_e.split('/')[-1]:
                 continue
 
             # Throw it to a function who will put it in the list with appropriate bookkeeping
