@@ -1,0 +1,72 @@
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/leader> <http://dbpedia.org/resource/Shiv_Sena> . ?uri <http://dbpedia.org/property/governingBody> ?x } 
+What are the <settlements> whose <governing body>'s <leader> is <shiv  sena>?
+
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/leader> <http://dbpedia.org/resource/Sumitra_Mahajan> . ?uri <http://dbpedia.org/ontology/country> ?x } 
+What are the <universities> whose <country>'s <leader> is <sumitra  mahajan>?
+
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/predecessor> <http://dbpedia.org/resource/Sunil_Prabhu> . ?uri <http://dbpedia.org/property/leaderName> ?x } 
+What is the <city> whose <leader name>'s <predecessor> is <sunil  prabhu>?
+
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/headquarters> <http://dbpedia.org/resource/Washington,_D.C.> . ?uri <http://dbpedia.org/ontology/party> ?x } 
+What are the <politicians> whose <party>'s <headquarters> is <washington, d.c.>?
+
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/leaderName> <http://dbpedia.org/resource/Paul_Ryan> . ?uri <http://dbpedia.org/property/birthPlace> ?x } 
+List the <wrestlers> whose <birth place>'s <leader name> is <paul  ryan>.
+
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/splitFromParty> <http://dbpedia.org/resource/Republican_Party_(United_States)> . ?uri <http://dbpedia.org/property/party> ?x } 
+What are the <office holders> whose <party>'s <split from party> is <republican  party ( united  states)>?
+
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/type> <http://dbpedia.org/resource/Independent_school> . ?uri <http://dbpedia.org/property/almaMater> ?x } 
+List the <people> whose <alma mater> is a kind of a <independent school>?
+
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/occupation> <http://dbpedia.org/resource/Model_(people)> . ?uri <http://dbpedia.org/property/spouse> ?x } 
+What are the <people> whose <spouse>'s <occupation> is <model (people)>?
+
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/country> <http://dbpedia.org/resource/United_States> . ?uri <http://dbpedia.org/property/education> ?x } 
+What are the <people> whose <education>'s <country> is <united  states>?
+
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/birthPlace> <http://dbpedia.org/resource/New_York> . ?uri <http://dbpedia.org/ontology/relation> ?x } 
+List the <military people> whose <relation>'s <birth place> is <new  york>.
+
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/birthPlace> <http://dbpedia.org/resource/United_Kingdom> . ?uri <http://dbpedia.org/property/author> ?x } 
+What are the <books> whose <author>'s <birth place> is <united  kingdom>?
+
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/type> <http://dbpedia.org/resource/Subsidiary> . ?uri <http://dbpedia.org/property/owner> ?x } 
+List the <companies> whose <owner> is a <subsidiary>?
+
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/occupation> <http://dbpedia.org/resource/Chief_design_officer> . ?uri <http://dbpedia.org/ontology/keyPerson> ?x } 
+What is the <company> whose <key person>'s <occupation> is <chief design officer>?
+
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/locationCity> <http://dbpedia.org/resource/Herzliya_Pituah> . ?uri <http://dbpedia.org/ontology/subsidiary> ?x } 
+What is the <company> whose <subsidiary>'s <location city> is <herzliya  pituah>?
+
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/operatingSystem> <http://dbpedia.org/resource/Mac_OS> . ?uri <http://dbpedia.org/ontology/product> ?x } 
+What are the <companies> whose <product>'s <operating system> is <mac os>?
+
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/country> <http://dbpedia.org/resource/United_States> . ?uri <http://dbpedia.org/property/locationCity> ?x } 
+What are the <companies> whose <location city>'s <country> is <united  states>?
+
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/broadcastArea> <http://dbpedia.org/resource/Microsoft_Windows> . ?uri <http://dbpedia.org/ontology/service> ?x } 
+What is the <company> whose <service>'s <broadcast area> is <microsoft  windows>?
+
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/leaderName> <http://dbpedia.org/resource/Guy_Parmelin> . ?uri <http://dbpedia.org/ontology/birthPlace> ?x } 
+What are the <office holders> whose <birth place>'s <leader name> is <guy  parmelin>?
+
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/district> <http://dbpedia.org/resource/Arlesheim_District> . ?uri <http://dbpedia.org/ontology/residence> ?x } 
+What is the <owl> whose <residence>'s <district> is <arlesheim  district>?
+
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/country> <http://dbpedia.org/resource/United_States> . ?uri <http://dbpedia.org/ontology/city> ?x } 
+List the <rivers> whose <city>'s <country> is <united  states>.
+
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/country> <http://dbpedia.org/resource/United_States> . ?uri <http://dbpedia.org/property/state> ?x } 
+What are the <office holders> whose <state>'s <country> is <united  states>?
+
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/successor> <http://dbpedia.org/resource/Marc_Tessier-Lavigne> . ?uri <http://dbpedia.org/property/president> ?x } 
+What is the <university> whose <president>'s <successor> is <marc  tessier- lavigne>?
+
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/country> <http://dbpedia.org/resource/United_States> . ?uri <http://dbpedia.org/ontology/location> ?x } 
+List the <buildings> whose <location>'s <country> is <united  states>.
+
+SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/almaMater> <http://dbpedia.org/resource/Harvard_University> . ?uri <http://dbpedia.org/ontology/foundedBy> ?x } 
+What are the <companies> whose <founded by>'s <alma mater> is <harvard  university>?
+
