@@ -11,7 +11,7 @@ KNOWN_SHORTHANDS = ['dbo','dbp','rdf','rdfs','dbr']
 first_cap_re = re.compile('(.)([A-Z][a-z]+)')
 all_cap_re = re.compile('([a-z0-9])([A-Z])')
 
-#TODO Import the above list from http://dbpedia.org/sparql?nsdecl
+#@TODO Import the above list from http://dbpedia.org/sparql?nsdecl
 
 def has_url(_string):
 	if validators.url(_string):
@@ -46,7 +46,6 @@ def convert_to_no_symbols(_string):
 			continue
 		new_string += char
 	return new_string
-	
 
 def convert_shorthand_to_uri(_string):
 	#TODO: Dis function
@@ -71,7 +70,7 @@ def get_label_via_parsing(_uri):
 	label = " ".join(label.split("_"))
 	return label
 
-def test_get_label_via_parsing():
+if __name__ == "__main__":
 	uris = ["http://dbpedia.org/ontology/Airport", "http://dbpedia.org/property/garrison", "<http://dbpedia.org/property/MohnishDubey"]
 	for uri in uris:
 		print get_label_via_parsing(uri)
