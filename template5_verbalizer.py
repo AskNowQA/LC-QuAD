@@ -1,5 +1,6 @@
 import csv
 import json
+import numpy as np
 from pprint import pprint
 from pattern.en import pluralize
 import utils.natural_language_utilities as nlutils
@@ -22,9 +23,9 @@ with open('output/json_template5.txt') as data_file:
 
 questions = []      #Variable to keep all the verbalized questions
 vanilla_template_singular = "What is the <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s> ?"
-vanilla_template_plural = "List the <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>."
+vanilla_template_plural = ["List the <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.","What is the <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>."]
 type_template_singular = "What is the <%(e_in_to_e)s> of the <%(x)s> which is a <%(e_in_out)s> ?"
-type_template_plural = "List the <%(e_in_to_e)s> of the <%(x)s> which are <%(e_in_out)s>."
+type_template_plural = ["List the <%(e_in_to_e)s> of the <%(x)s> which are <%(e_in_out)s>.","What is the <%(e_in_to_e)s> of the <%(x)s> which are <%(e_in_out)s>."]
 # question_format2 = "What is the <%(e_in_to_e)s> of the <%(x)s> which is the <%(e_in_in_to_e_in)s> of <%(e_in_in)s> ?"
 
 e_in_to_e = {}
@@ -58,12 +59,13 @@ for filler in data:
 
     #@TODO: Instead of parsing them, have a hashmap to retrieve all labels from DBPedia
     for element in maps:
-        maps[element] = nlutils.get_label_via_parsing(maps[element])  #Get their labels
+        maps[element] = nlutils.get_label_via_parsing(maps[element],lower = True)  #Get their labels
 
     ''' 
         ### RULES ###
         1. List Rule:
             if there are more than one ?x, then use a list template. Also pluralize ?x's token
+             -> use list template only 20% of the time. use 'what is the' rest of the times.
         2. Type Rule:
             if e_in_to_e_in_out is 'type', use a type template (singular or plural)
     '''    
@@ -75,10 +77,10 @@ for filler in data:
 
         #Check for the type rule
         if maps['e_in_to_e_in_out'] == 'type':
-            question_format = type_template_plural
+            question_format = np.random.choice(type_template_plural, p = [0.2,0.8])
 
         else:
-            question_format = vanilla_template_plural
+            question_format = np.random.choice(vanilla_template_plural, p = [0.2,0.8])
     else:
         #Singular
 

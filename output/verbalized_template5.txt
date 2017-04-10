@@ -1,153 +1,153 @@
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/almaMater> <http://dbpedia.org/resource/New_Delhi> . ?x <http://dbpedia.org/ontology/residence> ?uri } 
-List the <residence> of the <Scientists> whose <alma Mater> is <New  Delhi>.
+What is the <residence> of the <scientists> whose <alma mater> is <new  delhi>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/ontology/residence> <http://dbpedia.org/resource/Pune> . ?x <http://dbpedia.org/property/birthPlace> ?uri } 
-List the <birth Place> of the <Office Holders> whose <residence> is <Pune>.
+What is the <birth place> of the <office holders> whose <residence> is <pune>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/religion> <http://dbpedia.org/resource/Hinduism> . ?x <http://dbpedia.org/ontology/deathPlace> ?uri } 
-List the <death Place> of the <Office Holders> whose <religion> is <Hinduism>.
+What is the <death place> of the <office holders> whose <religion> is <hinduism>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/owner> <http://dbpedia.org/resource/Government_of_Maharashtra> . ?x <http://dbpedia.org/property/location> ?uri } 
-List the <location> of the <Dams> whose <owner> is <Government of  Maharashtra>.
+List the <location> of the <dams> whose <owner> is <government of  maharashtra>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/ontology/occupation> <http://dbpedia.org/resource/Editing> . ?x <http://dbpedia.org/ontology/hometown> ?uri } 
-List the <hometown> of the <Musical Artists> whose <occupation> is <Editing>.
+What is the <hometown> of the <musical artists> whose <occupation> is <editing>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/ontology/bandMember> <http://dbpedia.org/resource/Suzanne_D'Mello> . ?x <http://dbpedia.org/property/origin> ?uri } 
-What is the <origin> of the <Band> whose <band Member> is <Suzanne D' Mello> ?
+What is the <origin> of the <band> whose <band member> is <suzanne d' mello> ?
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/residence> <http://dbpedia.org/resource/Chennai> . ?x <http://dbpedia.org/ontology/birthPlace> ?uri } 
-List the <birth Place> of the <Office Holders> whose <residence> is <Chennai>.
+What is the <birth place> of the <office holders> whose <residence> is <chennai>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/ontology/industry> <http://dbpedia.org/resource/Home_appliance> . ?x <http://dbpedia.org/property/locationCity> ?uri } 
-List the <location City> of the <Companys> whose <industry> is <Home appliance>.
+What is the <location city> of the <companies> whose <industry> is <home appliance>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/industry> <http://dbpedia.org/resource/Retail> . ?x <http://dbpedia.org/ontology/locationCity> ?uri } 
-List the <location City> of the <Companys> whose <industry> is <Retail>.
+What is the <location city> of the <companies> whose <industry> is <retail>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/industry> <http://dbpedia.org/resource/Insurance> . ?x <http://dbpedia.org/ontology/location> ?uri } 
-List the <location> of the <Banks> whose <industry> is <Insurance>.
+What is the <location> of the <banks> whose <industry> is <insurance>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/nationality> <http://dbpedia.org/resource/India> . ?x <http://dbpedia.org/property/deathPlace> ?uri } 
-List the <death Place> of the <Office Holders> whose <nationality> is <India>.
+What is the <death place> of the <office holders> whose <nationality> is <india>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/ontology/occupation> <http://dbpedia.org/resource/Shivani_Tanksale__1> . ?x <http://dbpedia.org/property/residence> ?uri } 
-What is the <residence> of the <Person> whose <occupation> is <Shivani  Tanksale  1> ?
+What is the <residence> of the <person> whose <occupation> is <shivani  tanksale  1> ?
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/industry> <http://dbpedia.org/resource/Advertising> . ?x <http://dbpedia.org/ontology/foundationPlace> ?uri } 
-List the <foundation Place> of the <Companys> whose <industry> is <Advertising>.
+What is the <foundation place> of the <companies> whose <industry> is <advertising>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/location> <http://dbpedia.org/resource/Sanjay_Gandhi_National_Park> . ?x <http://dbpedia.org/ontology/nearestCity> ?uri } 
-What is the <nearest City> of the <Lake> whose <location> is <Sanjay  Gandhi  National  Park> ?
+What is the <nearest city> of the <lake> whose <location> is <sanjay  gandhi  national  park> ?
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/state> <http://dbpedia.org/resource/Maharashtra> . ?x <http://dbpedia.org/property/city> ?uri } 
-List the <city> of the <Schools> whose <state> is <Maharashtra>.
+List the <city> of the <schools> whose <state> is <maharashtra>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/type> <http://dbpedia.org/resource/Privately_held_company> . ?x <http://dbpedia.org/ontology/regionServed> ?uri } 
-List the <region Served> of the <Companys> which are <Privately held company>.
+What is the <region served> of the <companies> which are <privately held company>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/country> <http://dbpedia.org/resource/India> . ?x <http://dbpedia.org/ontology/city> ?uri } 
-List the <city> of the <Universitys> whose <country> is <India>.
+List the <city> of the <universities> whose <country> is <india>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/ontology/leader> <http://dbpedia.org/resource/U._K._Sinha> . ?x <http://dbpedia.org/property/headquarters> ?uri } 
-What is the <headquarters> of the <Government Agency> whose <leader> is <U. K.  Sinha> ?
+What is the <headquarters> of the <government agency> whose <leader> is <u. k.  sinha> ?
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/ontology/broadcastArea> <http://dbpedia.org/resource/Nepal> . ?x <http://dbpedia.org/ontology/headquarter> ?uri } 
-List the <headquarter> of the <Television Stations> whose <broadcast Area> is <Nepal>.
+What is the <headquarter> of the <television stations> whose <broadcast area> is <nepal>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/location> <http://dbpedia.org/resource/Bandra> . ?x <http://dbpedia.org/property/region> ?uri } 
-List the <region> of the <Hospitals> whose <location> is <Bandra>.
+List the <region> of the <hospitals> whose <location> is <bandra>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/locationCity> <http://dbpedia.org/resource/New_York> . ?x <http://dbpedia.org/ontology/foundedBy> ?uri } 
-List the <founded By> of the <Companys> whose <location City> is <New  York>.
+What is the <founded by> of the <companies> whose <location city> is <new  york>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/location> <http://dbpedia.org/resource/Manhattan> . ?x <http://dbpedia.org/property/owner> ?uri } 
-List the <owner> of the <Companys> whose <location> is <Manhattan>.
+What is the <owner> of the <companies> whose <location> is <manhattan>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/ontology/occupation> <http://dbpedia.org/resource/Fred_Trump__1> . ?x <http://dbpedia.org/ontology/child> ?uri } 
-What is the <child> of the <Person> whose <occupation> is <Fred  Trump  1> ?
+What is the <child> of the <person> whose <occupation> is <fred  trump  1> ?
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/locationCity> <http://dbpedia.org/resource/New_York_City> . ?x <http://dbpedia.org/ontology/keyPerson> ?uri } 
-List the <key Person> of the <Companys> whose <location City> is <New  York  City>.
+List the <key person> of the <companies> whose <location city> is <new  york  city>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/ontology/keyPerson> <http://dbpedia.org/resource/Michael_D._Cohen_(lawyer)> . ?x <http://dbpedia.org/ontology/owningCompany> ?uri } 
-What is the <owning Company> of the <Company> whose <key Person> is <Michael D.  Cohen (lawyer)> ?
+What is the <owning company> of the <company> whose <key person> is <michael d.  cohen (lawyer)> ?
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/ontology/birthPlace> <http://dbpedia.org/resource/Cohutta,_Georgia> . ?x <http://dbpedia.org/property/spouse> ?uri } 
-List the <spouse> of the <Persons> whose <birth Place> is <Cohutta,  Georgia>.
+What is the <spouse> of the <people> whose <birth place> is <cohutta,  georgia>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/ontology/relative> <http://dbpedia.org/resource/Maryanne_Trump_Barry> . ?x <http://dbpedia.org/ontology/parent> ?uri } 
-What is the <parent> of the <Person> whose <relative> is <Maryanne  Trump  Barry> ?
+What is the <parent> of the <person> whose <relative> is <maryanne  trump  barry> ?
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/ontology/occupation> <http://dbpedia.org/resource/Trump_Winery> . ?x <http://dbpedia.org/ontology/relative> ?uri } 
-List the <relative> of the <Persons> whose <occupation> is <Trump  Winery>.
+What is the <relative> of the <people> whose <occupation> is <trump  winery>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/ontology/birthPlace> <http://dbpedia.org/resource/Zlín> . ?x <http://dbpedia.org/ontology/spouse> ?uri } 
-List the <spouse> of the <Persons> whose <birth Place> is <Zlín>.
+What is the <spouse> of the <people> whose <birth place> is <zlín>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/ontology/almaMater> <http://dbpedia.org/resource/New_York_University> . ?x <http://dbpedia.org/ontology/relation> ?uri } 
-List the <relation> of the <Persons> whose <alma Mater> is <New  York  University>.
+What is the <relation> of the <people> whose <alma mater> is <new  york  university>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/almaMater> <http://dbpedia.org/resource/University_of_California,_Berkeley> . ?x <http://dbpedia.org/ontology/occupation> ?uri } 
-List the <occupation> of the <Persons> whose <alma Mater> is <University of  California,  Berkeley>.
+What is the <occupation> of the <people> whose <alma mater> is <university of  california,  berkeley>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/ontology/product> <http://dbpedia.org/resource/AppleWorks> . ?x <http://dbpedia.org/ontology/parentCompany> ?uri } 
-What is the <parent Company> of the <Company> whose <product> is <Apple Works> ?
+What is the <parent company> of the <company> whose <product> is <apple works> ?
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/birthPlace> <http://dbpedia.org/resource/Zagreb> . ?x <http://dbpedia.org/property/employer> ?uri } 
-List the <employer> of the <owls> whose <birth Place> is <Zagreb>.
+What is the <employer> of the <owls> whose <birth place> is <zagreb>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/ontology/keyPerson> <http://dbpedia.org/resource/Noel_Lee_(executive)> . ?x <http://dbpedia.org/property/parent> ?uri } 
-What is the <parent> of the <Company> whose <key Person> is <Noel  Lee (executive)> ?
+What is the <parent> of the <company> whose <key person> is <noel  lee (executive)> ?
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/ontology/nationality> <http://dbpedia.org/resource/United_States> . ?x <http://dbpedia.org/ontology/board> ?uri } 
-List the <board> of the <Persons> whose <nationality> is <United  States>.
+What is the <board> of the <people> whose <nationality> is <united  states>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/location> <http://dbpedia.org/resource/Austria> . ?x <http://dbpedia.org/ontology/product> ?uri } 
-List the <product> of the <Companys> whose <location> is <Austria>.
+What is the <product> of the <companies> whose <location> is <austria>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/residence> <http://dbpedia.org/resource/California> . ?x <http://dbpedia.org/ontology/employer> ?uri } 
-List the <employer> of the <Cyclists> whose <residence> is <California>.
+What is the <employer> of the <cyclists> whose <residence> is <california>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/ontology/industry> <http://dbpedia.org/resource/Management_consulting> . ?x <http://dbpedia.org/ontology/service> ?uri } 
-List the <service> of the <Companys> whose <industry> is <Management consulting>.
+What is the <service> of the <companies> whose <industry> is <management consulting>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/ontology/locationCountry> <http://dbpedia.org/resource/United_States> . ?x <http://dbpedia.org/ontology/owner> ?uri } 
-List the <owner> of the <Companys> whose <location Country> is <United  States>.
+List the <owner> of the <companies> whose <location country> is <united  states>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/city> <http://dbpedia.org/resource/Cupertino,_California> . ?x <http://dbpedia.org/ontology/affiliation> ?uri } 
-What is the <affiliation> of the <University> whose <city> is <Cupertino,  California> ?
+What is the <affiliation> of the <university> whose <city> is <cupertino,  california> ?
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/ontology/locationCountry> <http://dbpedia.org/resource/United_States> . ?x <http://dbpedia.org/property/genre> ?uri } 
-List the <genre> of the <Companys> whose <location Country> is <United  States>.
+List the <genre> of the <companies> whose <location country> is <united  states>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/successor> <http://dbpedia.org/resource/Henry_Pollock> . ?x <http://dbpedia.org/ontology/profession> ?uri } 
-What is the <profession> of the <Office Holder> whose <successor> is <Henry  Pollock> ?
+What is the <profession> of the <office holder> whose <successor> is <henry  pollock> ?
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/ontology/religion> <http://dbpedia.org/resource/Hindu> . ?x <http://dbpedia.org/property/occupation> ?uri } 
-List the <occupation> of the <Persons> whose <religion> is <Hindu>.
+What is the <occupation> of the <people> whose <religion> is <hindu>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/deputy> <http://dbpedia.org/resource/Shah_Mehmood_Qureshi> . ?x <http://dbpedia.org/property/profession> ?uri } 
-List the <profession> of the <Office Holders> whose <deputy> is <Shah  Mehmood  Qureshi>.
+What is the <profession> of the <office holders> whose <deputy> is <shah  mehmood  qureshi>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/citizenship> <http://dbpedia.org/resource/United_States> . ?x <http://dbpedia.org/property/almaMater> ?uri } 
-List the <alma Mater> of the <Scientists> whose <citizenship> is <United  States>.
+What is the <alma mater> of the <scientists> whose <citizenship> is <united  states>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/nationality> <http://dbpedia.org/resource/United_States> . ?x <http://dbpedia.org/ontology/training> ?uri } 
-List the <training> of the <Artists> whose <nationality> is <United  States>.
+What is the <training> of the <artists> whose <nationality> is <united  states>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/birthPlace> <http://dbpedia.org/resource/East_Baton_Rouge_Parish,_Louisiana> . ?x <http://dbpedia.org/ontology/almaMater> ?uri } 
-List the <alma Mater> of the <Office Holders> whose <birth Place> is <East  Baton  Rouge  Parish,  Louisiana>.
+What is the <alma mater> of the <office holders> whose <birth place> is <east  baton  rouge  parish,  louisiana>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/property/residence> <http://dbpedia.org/resource/Manhattan> . ?x <http://dbpedia.org/ontology/education> ?uri } 
-List the <education> of the <Persons> whose <residence> is <Manhattan>.
+List the <education> of the <people> whose <residence> is <manhattan>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/ontology/occupation> <http://dbpedia.org/resource/Betty_Cohen__1> . ?x <http://dbpedia.org/property/education> ?uri } 
-What is the <education> of the <Person> whose <occupation> is <Betty  Cohen  1> ?
+What is the <education> of the <person> whose <occupation> is <betty  cohen  1> ?
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/ontology/nationality> <http://dbpedia.org/resource/United_States> . ?x <http://dbpedia.org/property/college> ?uri } 
-List the <college> of the <Golf Players> whose <nationality> is <United  States>.
+What is the <college> of the <golf players> whose <nationality> is <united  states>.
 
  SELECT DISTINCT ?uri, ?x WHERE { ?x <http://dbpedia.org/ontology/field> <http://dbpedia.org/resource/Sculpture> . ?x <http://dbpedia.org/property/training> ?uri } 
-List the <training> of the <Artists> whose <field> is <Sculpture>.
+What is the <training> of the <artists> whose <field> is <sculpture>.
 

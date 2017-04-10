@@ -62,12 +62,14 @@ def convert(_string):
 	s1 = first_cap_re.sub(r'\1_\2', _string)
 	return all_cap_re.sub(r'\1_\2', s1)
 
-def get_label_via_parsing(_uri):
+def get_label_via_parsing(_uri, lower = False):
 	parsed = urlparse(_uri)
 	path = os.path.split(parsed.path)
 	unformated_label = path[-1]
 	label = convert(unformated_label)
 	label = " ".join(label.split("_"))
+	if lower:
+		return label.lower()
 	return label
 
 if __name__ == "__main__":
