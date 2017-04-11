@@ -6,6 +6,7 @@ from pymongo import MongoClient
 client = MongoClient()
 client = MongoClient('localhost', 27017)
 db = client.question_test_database
+posts = db.posts
 
 @get('/static/<filename>')
 def server_static(filename):
@@ -33,8 +34,14 @@ def do_login():
     	response.set_cookie("username",username)
     	response.set_cookie("template_id",template_id)
     	#query for a question from the database. 
+    	question = retriveQuestion(template_id)
         return template('question.tpl')
     else:
         return "<p>Login failed. Please start from the index url</p>"
+
+def retriveQuestion(template_id):
+	'''connects to a database and retrives question based on template type'''
+	question = posts.find_one({"template_id": template_id,"corrected" : "false"})
+	return question
 
 run(host='localhost', port=8080)
