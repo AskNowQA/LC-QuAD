@@ -93,6 +93,7 @@ for filler in data:
 
     #All barriers in place, and all variables collected. Now let's verbalize (put the mapping in the tempates)
     questions.append(( filler[u'query'], question_format % maps ))
+    filler['verbalized_question'] =  question_format % maps
 
 for question in questions:
     print question
@@ -108,4 +109,7 @@ with open('output/verbalized_template5.txt','w+') as output_file:
         output_file.write(question[0].encode('utf-8')+'\n')
         output_file.write(question[1].encode('utf-8')+'\n\n')
 
-
+fo = open('output/verbalized_json_template_5.txt', 'a+')
+for key in data:
+    fo.writelines(json.dumps(key) + "\n")
+fo.close()
