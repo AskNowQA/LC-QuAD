@@ -3,7 +3,7 @@
 from bottle import route, run, template, get, post, request, response, static_file
 import pymongo, traceback
 from pymongo import MongoClient
-
+from pprint import pprint
 #database conneections 
 client = MongoClient('localhost', 27017)
 db = client.test_database
@@ -36,12 +36,13 @@ def do_login():
     	response.set_cookie("template_id",template_id)
     	#query for a question from the database. 
     	question = retriveQuestion(template_id)
+    	pprint(question)
     	if not question:
     		return "<p>All questions of template id is completed. Return to login page</p>"
     	#setting the question id as the cookie for state tracking
     	data = {"verbalized_question":question["verbalized_question"]}
-    	response.set_cookie("question_id":data["_id"])
-        return template('question.tpl')
+    	response.set_cookie("question_id",question["_id"])
+        return template('question.tpl',data)
     else:
         return "<p>Login failed. Please start from the index url</p>"
 
@@ -49,16 +50,18 @@ def do_login():
 def new_question():
 	if request.get_cookie('username') and request.get_cookie('template_id'):
 		if request.get_cookie('number'):
-			request.set_cookie('number') = int(request.set_cookie('number')) + 1
+			number = request.get_cookie('number')
+			request.set_cookie('number', int(number) + 1)
 		else:
-			request.set_cookie('number') = 1
+			request.set_cookie('number', 1)
 		question = retriveQuestion(template_id)
     	if not question:
     		return "<p>All questions of template id is completed. Return to login page</p>"
     	#setting the question id as the cookie for state tracking
-    	data = {"verbalized_question":question["verbalized_question"]}
-    	response.set_cookie("question_id":data["_id"])
-        return template('question.tpl')		
+    	pprint(question)
+    	data = {"verbalized_question":question[u"verbalized_question"]}
+    	response.set_cookie("question_id",question["_id"])
+        return template('question.tpl',data)		
 
 @post('/submitQuestion')
 def submit_question():
@@ -76,7 +79,7 @@ def submit_question():
 				redirect("/newquestion")
 			except:
 				print traceback.print_exc()
-					return "<p>Database error. Contact the admin.</p>"
+				return "<p>Database error. Contact the admin.</p>"
 	else:
 		return "<p>Login failed. Please start from the index url</p>"
 
@@ -95,8 +98,8 @@ def delete_question():
 			redirect("/newquestion")
 		except:
 			print traceback.print_exc()
-				return "<p>Database error. Contact the admin.</p>"
-	
+			return "<p>Database error. Contact the admin.</p>"
+
 def retriveQuestion(template_id):
 	'''connects to a database and retrives question based on template type'''
 	question = posts.find_one({u"id":int(template_id),u"corrected" : u"false"})

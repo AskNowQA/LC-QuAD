@@ -37,14 +37,14 @@
     <div class= "column">
       <form class="ui form">
         <div class="ui text container segment">
-          <p>Hello world</p>
+          <p>{{verbalized_question}}</p>
         </div>
         <div class="field">
           <label>Correct Question</label>
-          <input name="question" placeholder="question" type="text">
+          <input name="corrected_answer" placeholder="question" type="text">
         </div>
-        <button class="ui button" type="submit">Submit</button>
-        <button class="ui button" type="submit">Delete</button>
+        <button class="ui button" type="submit" formaction="/submitQuestion/">Submit</button>
+        <button class="ui button" type="submit" formaction="/deleteQuestion" >Delete</button>
       </form>
     </div>
   </div>
