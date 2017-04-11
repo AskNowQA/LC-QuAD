@@ -25,5 +25,5 @@ def insert_into_db(data):
 		print traceback.print_exc()
 		return False
 
-print insert_into_db(read_from_file("json_template6.txt"))
+print insert_into_db(read_from_file("verbalized_json_template_5.txt"))
 #For searching:- pprint.pprint(posts.find_one({u"id":"6"}))
