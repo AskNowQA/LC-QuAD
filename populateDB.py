@@ -5,7 +5,7 @@ from pymongo import MongoClient
 
 #database conneections 
 client = MongoClient('localhost', 27017)
-db = client.test_database
+db = client.document_database
 posts = db.posts
 #read from file and form a list of json 
 

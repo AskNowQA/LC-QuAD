@@ -1,12 +1,13 @@
 '''The central server and orchestrator for the turk job.'''
 
-from bottle import route, run, template, get, post, request, response, static_file
+from bottle import route, run, template, get, post, request, response, static_file, redirect
 import pymongo, traceback
 from pymongo import MongoClient
 from pprint import pprint
+from pprint import pformat
 #database conneections 
 client = MongoClient('localhost', 27017)
-db = client.test_database
+db = client.document_database
 posts = db.posts
 
 @get('/static/<filename>')
@@ -40,7 +41,7 @@ def do_login():
     	if not question:
     		return "<p>All questions of template id is completed. Return to login page</p>"
     	#setting the question id as the cookie for state tracking
-    	data = {"verbalized_question":question["verbalized_question"]}
+    	data = {"verbalized_question":question["verbalized_question"],"json_content":str(pformat(question))}
     	response.set_cookie("question_id",question["_id"])
         return template('question.tpl',data)
     else:
@@ -48,18 +49,20 @@ def do_login():
 
 @get("/newquestion")
 def new_question():
+	print "here"
 	if request.get_cookie('username') and request.get_cookie('template_id'):
+		template_id = request.get_cookie('template_id')
 		if request.get_cookie('number'):
 			number = request.get_cookie('number')
-			request.set_cookie('number', int(number) + 1)
+			response.set_cookie('number', str(int(number) + 1))
 		else:
-			request.set_cookie('number', 1)
+			response.set_cookie('number', str(1))
 		question = retriveQuestion(template_id)
     	if not question:
     		return "<p>All questions of template id is completed. Return to login page</p>"
     	#setting the question id as the cookie for state tracking
     	pprint(question)
-    	data = {"verbalized_question":question[u"verbalized_question"]}
+    	data = {"verbalized_question":question[u"verbalized_question"],"json_content":str(pformat(question))}
     	response.set_cookie("question_id",question["_id"])
         return template('question.tpl',data)		
 
@@ -67,7 +70,7 @@ def new_question():
 def submit_question():
 	if request.get_cookie('username') and request.get_cookie('template_id') and request.get_cookie('question_id'):
 		#parse the form for answer
-		corrected_answer = request.form.get("corrected_answer")
+		corrected_answer = request.forms.get("corrected_answer")
 		if corrected_answer:
 			username = request.get_cookie('username')
 			template_id = request.get_cookie('template_id')
@@ -76,10 +79,11 @@ def submit_question():
 			try:
 				update_db(question_id,data)
 				#rerout to the next url
-				redirect("/newquestion")
+				
 			except:
 				print traceback.print_exc()
 				return "<p>Database error. Contact the admin.</p>"
+			redirect("http://localhost:8080/newquestion")	
 	else:
 		return "<p>Login failed. Please start from the index url</p>"
 
@@ -87,7 +91,7 @@ def submit_question():
 def delete_question():
 	if request.get_cookie('username') and request.get_cookie('template_id') and request.get_cookie('question_id'):
 		#parse the form for answer
-		corrected_answer = request.form.get("corrected_answer")
+		corrected_answer = request.forms.get("corrected_answer")
 		username = request.get_cookie('username')
 		template_id = request.get_cookie('template_id')
 		question_id = request.get_cookie('question_id')
@@ -95,18 +99,18 @@ def delete_question():
 		try:
 			update_db(question_id,data)
 			#rerout to the next url
-			redirect("/newquestion")
 		except:
 			print traceback.print_exc()
 			return "<p>Database error. Contact the admin.</p>"
+		redirect("/newquestion")
 
 def retriveQuestion(template_id):
 	'''connects to a database and retrives question based on template type'''
-	question = posts.find_one({u"id":int(template_id),u"corrected" : u"false"})
+	question = posts.find_one({u"id":int(template_id),u"corrected" : u"false", u"verbalized":True})
 	if question:
 		return question
 	else:
-		return false
+		return False
 
 def retrive_question_id(_question_id):
 	#retrives the question from database based on id
