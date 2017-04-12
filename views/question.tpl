@@ -41,7 +41,7 @@
         </div>
         <div class="field">
           <label>Correct Question</label>
-          <input name="corrected_answer" placeholder={{verbalized_question}} type="text">
+          <input name="corrected_answer" value = "{{verbalized_question}}" type="text" autofocus>
         </div>
         <button class="ui button" type="submit" formaction="/submitQuestion">Submit</button>
         <button class="ui button" type="submit" formaction="/deleteQuestion" >Delete</button>
