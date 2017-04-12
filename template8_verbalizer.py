@@ -8,19 +8,16 @@ import utils.natural_language_utilities as nlutils
 data = []           #Variable to keep all the unverbalized queries
 
 #Read from the file and fill the data variable
-with open('output/json_template7.txt') as data_file:
+with open('output/json_template8.txt') as data_file:
     for line in data_file:
         data.append(json.loads(line.rstrip('\n')))
 
-vanilla_template_a = "Whose <%(e_to_e_out)s> are <%(e_out_1)s> and <%(e_out_2)s>?"
-vanilla_template_b = "What is the <%(uri)s> whose <%(e_to_e_out)s> are <%(e_out_1)s> and <%(e_out_2)s>?"
+vanilla_template = "%(prefix)s is the <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>?"
+vanilla_template_type_a = "%(prefix)s is the <%(uri)s> which is a <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>?"
+vanilla_template_type_b = "%(prefix)s is the <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and which is a <%(e_out_2)s>?"
+vanilla_template_type_a_b = "%(prefix)s is the <%(uri)s> which is a <%(e_out_1)s> and a <%(e_out_2)s>?"
 
-vanilla_template_person_a = "Whose <%(e_to_e_out)s> are <%(e_out_1)s> and <%(e_out_2)s>?"
-vanilla_template_person_b = "Who is the <%(uri)s> whose <%(e_to_e_out)s> are <%(e_out_1)s> and <%(e_out_2)s>?"
-
-preposition_template = "What is <%(e_to_e_out)s> <%(e_out_1)s> and <%(e_out_2)s>?"
-
-e_to_e_out = {}
+e_to_e_out_1 = {}
 counter = 0
 
 #The process of verbalizing starts here
@@ -44,62 +41,53 @@ for counter in range(len(data)):
         #Its a limitation on the generation where we only generate one question per relation. 
         #Not sure why this filters out the bad questions but god it does!
     try:
-        if e_to_e_out[maps['e_to_e_out']] > 0:
+        if e_to_e_out_1[maps['e_to_e_out_1']] > 0:
             continue
-        e_to_e_out[maps['e_to_e_out']] = e_to_e_out[maps['e_to_e_out']] + 1
+        e_to_e_out_1[maps['e_to_e_out_1']] = e_to_e_out_1[maps['e_to_e_out_1']] + 1
     except:
-        e_to_e_out[maps['e_to_e_out']] = 1
+        e_to_e_out_1[maps['e_to_e_out_1']] = 1
 
     #@TODO: Instead of parsing them, have a hashmap to retrieve all labels from DBPedia
     for element in maps:
         maps[element] = nlutils.get_label_via_parsing(maps[element], lower = True)  #Get their labels
 
-    #In this template, e_to_e_out needs to be plural.
-    maps['e_to_e_out'] = pluralize(maps['e_to_e_out'])
-
-
     '''
         ### RULES ###
-        1. Preposition Rule
-            If the e_to_e_out ends in a by, use a different template
 
-        2. Prefix variation (only for without prepositons)
-            adding 'What is the ?uri whose ...' and 'Whose.. ' will create semantically similar questions. So let's do a variation of both
-        
-        3. Person Variation. If the question is about a person (uri = person), change this what to who.
-
-        4. Plural Rule: If the number of answers to the query is more than 3, simply return a plural query. (Only if prefix rule adds the 'what if')
+            1. Person Variation. If the question is about a person (uri = person), change this what to who.
+            2. Type Rule (if either of the rel is a type, change the template appropriately)
     '''
 
     #Check for the preposition rule
-    if maps['e_to_e_out'].split()[-1] == 'by':
-        question_format = preposition_template
+
+    #Person Rule
+    if maps['uri'] == "person":
+        maps['prefix'] = 'Who'
     else:
+        maps['prefix'] = 'What'
 
-        #Person Rule
-        if maps['uri'] == "person":
-            question_format = np.random.choice(vanilla_template_person, p=[0.25,0.75])
-        else:
-            question_format = np.random.choice(vanilla_template, p=[0.25,0.75])
-
-    # #Check for plural rule
-    # if question_format.startswith('What'):
-    #     #Then check if there are more than or equal to 3 answers
-    #     if len(datum['answer']['uri']) >= 3:
-            
+    #Checking for 'type' in the 'e_to_e_out_1'
+    if maps['e_to_e_out_1'] == 'type' and maps['e_to_e_out_2'] == 'type':
+        question_format = vanilla_template_type_a_b
+    elif maps['e_to_e_out_1'] == 'type':
+        question_format = vanilla_template_type_a
+    elif maps['e_to_e_out_2'] == 'type':
+        question_format = vanilla_template_type_b
+    else:
+        question_format = vanilla_template
 
     #All barriers in place, and all variables collected. Now let's verbalize (put the mapping in the tempates)
     data[counter]['verbalized_question'] = question_format % maps
     data[counter]['verbalized'] = True             #Since the question is now verbalized, we can set the flag to true.
 
 #Writing them to a file
-fo = open('output/verbalized_template7.txt', 'w+')
+fo = open('output/verbalized_template8.txt', 'w+')
 for key in data:
     fo.writelines(json.dumps(key) + "\n")
 fo.close()
 
 questions = 0
-with open('output/verbalized_template7_readable.txt','w+') as output_file:
+with open('output/verbalized_template8_readable.txt','w+') as output_file:
     for datum in data:
         try:
             output_file.write(datum['verbalized_question'].encode('utf-8')+'\n')
