@@ -1,0 +1,33 @@
+Whose <child> are <donald  trump> and <eric  trump>?
+ SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/ontology/child> <http://dbpedia.org/resource/Donald_Trump> . ?uri <http://dbpedia.org/ontology/child> <http://dbpedia.org/resource/Eric_Trump>} 
+
+Whose <relation> are <frederick  trump> and <maryanne  trump  barry>?
+ SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/ontology/relation> <http://dbpedia.org/resource/Frederick_Trump> . ?uri <http://dbpedia.org/ontology/relation> <http://dbpedia.org/resource/Maryanne_Trump_Barry>} 
+
+Whose <spouse> are <marla  maples> and <ivana  trump>?
+ SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/property/spouse> <http://dbpedia.org/resource/Marla_Maples> . ?uri <http://dbpedia.org/property/spouse> <http://dbpedia.org/resource/Ivana_Trump>} 
+
+Whose <birth place> are <new  york  city> and <united  states>?
+ SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/property/birthPlace> <http://dbpedia.org/resource/New_York_City> . ?uri <http://dbpedia.org/property/birthPlace> <http://dbpedia.org/resource/United_States>} 
+
+Whose <party> are <independent politician> and <republican  party ( united  states)>?
+ SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/property/party> <http://dbpedia.org/resource/Independent_politician> . ?uri <http://dbpedia.org/property/party> <http://dbpedia.org/resource/Republican_Party_(United_States)>} 
+
+Whose <author> are <keith  teare> and <michael  arrington>?
+ SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/property/author> <http://dbpedia.org/resource/Keith_Teare> . ?uri <http://dbpedia.org/property/author> <http://dbpedia.org/resource/Michael_Arrington>} 
+
+Whose <key person> are <arthur d.  levinson> and <tim  cook>?
+ SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/ontology/keyPerson> <http://dbpedia.org/resource/Arthur_D._Levinson> . ?uri <http://dbpedia.org/ontology/keyPerson> <http://dbpedia.org/resource/Tim_Cook>} 
+
+Whose <service> are <apple  music> and <apple  store (online)>?
+ SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/ontology/service> <http://dbpedia.org/resource/Apple_Music> . ?uri <http://dbpedia.org/ontology/service> <http://dbpedia.org/resource/Apple_Store_(online)>} 
+
+Whose <subsidiary> are <anobit> and <file maker  inc.>?
+ SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/ontology/subsidiary> <http://dbpedia.org/resource/Anobit> . ?uri <http://dbpedia.org/ontology/subsidiary> <http://dbpedia.org/resource/FileMaker_Inc.>} 
+
+Whose <birth place> are <basel> and <switzerland>?
+ SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/ontology/birthPlace> <http://dbpedia.org/resource/Basel> . ?uri <http://dbpedia.org/ontology/birthPlace> <http://dbpedia.org/resource/Switzerland>} 
+
+What is <founded by> <dustin  moskovitz> and <andrew  mc collum>?
+ SELECT DISTINCT ?uri WHERE { ?uri <http://dbpedia.org/ontology/foundedBy> <http://dbpedia.org/resource/Dustin_Moskovitz> . ?uri <http://dbpedia.org/ontology/foundedBy> <http://dbpedia.org/resource/Andrew_McCollum>} 
+

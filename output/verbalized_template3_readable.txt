@@ -1,0 +1,111 @@
+What is the <location Country> of the <Company> which is the <creator> of <Dil  Se  Diya  Vachan> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Dil_Se_Diya_Vachan> <http://dbpedia.org/property/creator> ?x . ?x <http://dbpedia.org/property/locationCountry> ?uri } 
+
+What is the <birth Place> of the <Person> who is the <director> of <Lamhaa> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Lamhaa> <http://dbpedia.org/property/director> ?x . ?x <http://dbpedia.org/property/birthPlace> ?uri } 
+
+What is the <birth Place> of the <Office Holder> who is the <successor> of <D. V.  Sadananda  Gowda> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/D._V._Sadananda_Gowda> <http://dbpedia.org/property/successor> ?x . ?x <http://dbpedia.org/ontology/birthPlace> ?uri } 
+
+What is the <residence> of the <Person> who is the <starring> of <Dharmakshetra> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Dharmakshetra> <http://dbpedia.org/property/starring> ?x . ?x <http://dbpedia.org/property/residence> ?uri } 
+
+What is the <headquarters> of the <Television Station> which is the <sister Station> of <9x  Jalwa> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/9x_Jalwa> <http://dbpedia.org/ontology/sisterStation> ?x . ?x <http://dbpedia.org/property/headquarters> ?uri } 
+
+What is the <location> of the <Company> which is the <employer> of <Nishi  Vasudeva> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Nishi_Vasudeva> <http://dbpedia.org/property/employer> ?x . ?x <http://dbpedia.org/ontology/location> ?uri } 
+
+What is the <death Place> of the <Writer> who is the <writer> of <Yeh  Jo  Hai  Zindagi> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Yeh_Jo_Hai_Zindagi> <http://dbpedia.org/property/writer> ?x . ?x <http://dbpedia.org/property/deathPlace> ?uri } 
+
+What is the <residence> of the <Person> who is the <starring> of <Second  Show> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Second_Show> <http://dbpedia.org/property/starring> ?x . ?x <http://dbpedia.org/ontology/residence> ?uri } 
+
+What is the <death Place> of the <Person> who is the <starring> of <Shrimaan  Shrimati (TV series)> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Shrimaan_Shrimati_(TV_series)> <http://dbpedia.org/property/starring> ?x . ?x <http://dbpedia.org/ontology/deathPlace> ?uri } 
+
+What is the <city> of the <Airport> which is the <hub Airport> of <Pawan  Hans> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Pawan_Hans> <http://dbpedia.org/ontology/hubAirport> ?x . ?x <http://dbpedia.org/ontology/city> ?uri } 
+
+What is the <city> of the <University> which is the <alma Mater> of <Ramanuja  Vijayaraghavan> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Ramanuja_Vijayaraghavan> <http://dbpedia.org/property/almaMater> ?x . ?x <http://dbpedia.org/property/city> ?uri } 
+
+What is the <location City> of the <Company> which is the <award> of <Ranjit  Roy  Chaudhury> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Ranjit_Roy_Chaudhury> <http://dbpedia.org/ontology/award> ?x . ?x <http://dbpedia.org/ontology/locationCity> ?uri } 
+
+What is the <hometown> of the <Band> which is the <associated Musical Artist> of <Ibex (band)> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Ibex_(band)> <http://dbpedia.org/ontology/associatedMusicalArtist> ?x . ?x <http://dbpedia.org/ontology/hometown> ?uri } 
+
+What is the <foundation Place> of the <Company> which is the <operator> of <Mumbai BRTS> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Mumbai_BRTS> <http://dbpedia.org/property/operator> ?x . ?x <http://dbpedia.org/ontology/foundationPlace> ?uri } 
+
+What is the <location City> of the <Company> which is the <occupation> of <Samprada  Singh> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Samprada_Singh> <http://dbpedia.org/ontology/occupation> ?x . ?x <http://dbpedia.org/property/locationCity> ?uri } 
+
+What is the <relation> of the <Office Holder> who is the <predecessor> of <Patty  Shwartz> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Patty_Shwartz> <http://dbpedia.org/property/predecessor> ?x . ?x <http://dbpedia.org/ontology/relation> ?uri } 
+
+What is the <spouse> of the <Person> who is the <parent> of <Donald  Trump,  Jr.> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Donald_Trump,_Jr.> <http://dbpedia.org/ontology/parent> ?x . ?x <http://dbpedia.org/property/spouse> ?uri } 
+
+What is the <key Person> of the <Company> which is the <owner> of <Etess  Arena> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Etess_Arena> <http://dbpedia.org/property/owner> ?x . ?x <http://dbpedia.org/ontology/keyPerson> ?uri } 
+
+What is the <parent> of the <Person> who is the <child> of <Donald  Trump> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Donald_Trump> <http://dbpedia.org/ontology/child> ?x . ?x <http://dbpedia.org/ontology/parent> ?uri } 
+
+What is the <spouse> of the <Person> who is the <relation> of <Jared  Kushner> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Jared_Kushner> <http://dbpedia.org/ontology/relation> ?x . ?x <http://dbpedia.org/ontology/spouse> ?uri } 
+
+What is the <child> of the <Person> who is the <child> of <Frederick  Trump> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Frederick_Trump> <http://dbpedia.org/ontology/child> ?x . ?x <http://dbpedia.org/ontology/child> ?uri } 
+
+What is the <owner> of the <Building> which is the <location> of <The  Trump  Organization> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/The_Trump_Organization> <http://dbpedia.org/property/location> ?x . ?x <http://dbpedia.org/property/owner> ?uri } 
+
+What is the <occupation> of the <Person> who is the <key Person> of <Misfit  Wearables> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Misfit_Wearables> <http://dbpedia.org/ontology/keyPerson> ?x . ?x <http://dbpedia.org/property/occupation> ?uri } 
+
+What is the <employer> of the <Person> who is the <key Person> of <ICOM  Simulations> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/ICOM_Simulations> <http://dbpedia.org/ontology/keyPerson> ?x . ?x <http://dbpedia.org/property/employer> ?uri } 
+
+What is the <parent> of the <Company> which is the <developer> of <Junaio> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Junaio> <http://dbpedia.org/property/developer> ?x . ?x <http://dbpedia.org/property/parent> ?uri } 
+
+What is the <occupation> of the <Person> who is the <key Person> of <Apple  Inc.> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Apple_Inc.> <http://dbpedia.org/ontology/keyPerson> ?x . ?x <http://dbpedia.org/ontology/occupation> ?uri } 
+
+What is the <employer> of the <Person> who is the <author> of <Sound Jam MP> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/SoundJam_MP> <http://dbpedia.org/ontology/author> ?x . ?x <http://dbpedia.org/ontology/employer> ?uri } 
+
+What is the <parent Company> of the <Company> which is the <subsidiary> of <Apple  Inc.> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Apple_Inc.> <http://dbpedia.org/ontology/subsidiary> ?x . ?x <http://dbpedia.org/ontology/parentCompany> ?uri } 
+
+What is the <product> of the <Company> which is the <publisher> of <Galaxy on  Fire> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Galaxy_on_Fire> <http://dbpedia.org/property/publisher> ?x . ?x <http://dbpedia.org/ontology/product> ?uri } 
+
+What is the <board> of the <Person> who is the <founded By> of <Ne XT> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/NeXT> <http://dbpedia.org/ontology/foundedBy> ?x . ?x <http://dbpedia.org/ontology/board> ?uri } 
+
+What is the <profession> of the <Office Holder> who is the <predecessor> of <Henry  Pollock> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Henry_Pollock> <http://dbpedia.org/property/predecessor> ?x . ?x <http://dbpedia.org/ontology/profession> ?uri } 
+
+What is the <alma Mater> of the <Office Holder> who is the <award> of <Morrough  Parker O' Brien> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Morrough_Parker_O'Brien> <http://dbpedia.org/ontology/award> ?x . ?x <http://dbpedia.org/ontology/almaMater> ?uri } 
+
+What is the <alma Mater> of the <Office Holder> who is the <predecessor> of <Heidi  Heitkamp> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Heidi_Heitkamp> <http://dbpedia.org/property/predecessor> ?x . ?x <http://dbpedia.org/property/almaMater> ?uri } 
+
+What is the <training> of the <Artist> who is the <training> of <Lynne  Mapp  Drexler> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Lynne_Mapp_Drexler> <http://dbpedia.org/property/training> ?x . ?x <http://dbpedia.org/property/training> ?uri } 
+
+What is the <education> of the <Person> who is the <developer> of <Snapchat> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Snapchat> <http://dbpedia.org/property/developer> ?x . ?x <http://dbpedia.org/property/education> ?uri } 
+
+What is the <education> of the <Journalist> who is the <author> of <The  Geography of  Bliss> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/The_Geography_of_Bliss> <http://dbpedia.org/property/author> ?x . ?x <http://dbpedia.org/ontology/education> ?uri } 
+
+What is the <broadcast Area> of the <Broadcast Network> which is the <company> of <Video  Game  High  School> ?
+ SELECT DISTINCT ?uri, ?x WHERE { <http://dbpedia.org/resource/Video_Game_High_School> <http://dbpedia.org/ontology/company> ?x . ?x <http://dbpedia.org/property/broadcastArea> ?uri } 
+

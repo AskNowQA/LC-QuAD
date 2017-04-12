@@ -5,15 +5,6 @@ from pprint import pprint
 from pattern.en import pluralize
 import utils.natural_language_utilities as nlutils
 
-def generate_CSV(questions):
-    with open('mturk_upload.csv', 'w') as csvfile:
-        writer = csv.DictWriter(
-            csvfile, fieldnames=['question'])
-        writer.writeheader()
-        for question in questions:
-            writer.writerow({
-                'question': question.replace(">", "").replace("<","")})
-
 data = []           #Variable to keep all the unverbalized queries
 
 #Read from the file and fill the data variable
@@ -21,7 +12,6 @@ with open('output/json_template5.txt') as data_file:
     for line in data_file:
         data.append(json.loads(line.rstrip('\n')))
 
-questions = []      #Variable to keep all the verbalized questions
 vanilla_template_singular = "What is the <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s> ?"
 vanilla_template_plural = ["List the <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.","What is the <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>."]
 type_template_singular = "What is the <%(e_in_to_e)s> of the <%(x)s> which is a <%(e_in_out)s> ?"
@@ -29,11 +19,13 @@ type_template_plural = ["List the <%(e_in_to_e)s> of the <%(x)s> which are <%(e_
 # question_format2 = "What is the <%(e_in_to_e)s> of the <%(x)s> which is the <%(e_in_in_to_e_in)s> of <%(e_in_in)s> ?"
 
 e_in_to_e = {}
-counter = 0
 
 #The process of verbalizing starts here
-for filler in data:
-    counter = counter + 1
+for counter in range(len(data)):
+    #Declare verbalization flag
+    data[counter]['verbalized'] = False
+
+    filler = data[counter]
 
     #Get intermediate var
     try:
@@ -69,7 +61,6 @@ for filler in data:
         2. Type Rule:
             if e_in_to_e_in_out is 'type', use a type template (singular or plural)
     '''    
-    
     #Check if singular or plural
     if len(filler['answer']['x']) > 2:
         #Plural
@@ -91,25 +82,30 @@ for filler in data:
         else:
             question_format = vanilla_template_singular
 
-    #All barriers in place, and all variables collected. Now let's verbalize (put the mapping in the tempates)
-    questions.append(( filler[u'query'], question_format % maps ))
-    filler['verbalized_question'] =  question_format % maps
-
-for question in questions:
-    print question
-
-print "*******************"
-print "Generated Questions: ", len(questions)
-print "Total data items: ", counter
+    #All barriers in place, and all variables collected. Now let's verbalize (put the mapping in the tempates), and put it back in the data variable
+    data[counter]['verbalized_question'] =  question_format % maps
+    data[counter]['verbalized'] = True             #Since the question is now verbalized, we can set the flag to true.
 
 #Writing them to a file
-
-with open('output/verbalized_template5.txt','w+') as output_file:
-    for question in questions:
-        output_file.write(question[0].encode('utf-8')+'\n')
-        output_file.write(question[1].encode('utf-8')+'\n\n')
-
-fo = open('output/verbalized_json_template_5.txt', 'a+')
+fo = open('output/verbalized_template5.txt', 'w+')
 for key in data:
     fo.writelines(json.dumps(key) + "\n")
 fo.close()
+
+questions = 0
+with open('output/verbalized_template5_readable.txt','w+') as output_file:
+    for datum in data:
+        try:
+            output_file.write(datum['verbalized_question'].encode('utf-8')+'\n')
+            output_file.write(datum['query'].encode('utf-8')+'\n\n')
+            questions += 1
+        except:
+            continue
+
+        #Count the number of verbalized questions
+
+# for question in questions:
+#     print question
+
+print "Generated Questions: ", questions
+print "Total data items: ", len(data)
