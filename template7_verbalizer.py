@@ -12,13 +12,9 @@ with open('output/json_template7.txt') as data_file:
     for line in data_file:
         data.append(json.loads(line.rstrip('\n')))
 
-vanilla_template_a = "Whose <%(e_to_e_out)s> are <%(e_out_1)s> and <%(e_out_2)s>?"
-vanilla_template_b = "What is the <%(uri)s> whose <%(e_to_e_out)s> are <%(e_out_1)s> and <%(e_out_2)s>?"
-
-vanilla_template_person_a = "Whose <%(e_to_e_out)s> are <%(e_out_1)s> and <%(e_out_2)s>?"
-vanilla_template_person_b = "Who is the <%(uri)s> whose <%(e_to_e_out)s> are <%(e_out_1)s> and <%(e_out_2)s>?"
-
 preposition_template = "What is <%(e_to_e_out)s> <%(e_out_1)s> and <%(e_out_2)s>?"
+singular_template = ["Whose <%(e_to_e_out)s> are <%(e_out_1)s> and <%(e_out_2)s>?","What is the <%(uri)s> whose <%(e_to_e_out)s> are <%(e_out_1)s> and <%(e_out_2)s>?"]
+plural_template = ["Whose <%(e_to_e_out)s> are <%(e_out_1)s> and <%(e_out_2)s>?","What are the <%(uri)s> whose <%(e_to_e_out)s> are <%(e_out_1)s> and <%(e_out_2)s>?"]
 
 e_to_e_out = {}
 counter = 0
@@ -54,8 +50,6 @@ for counter in range(len(data)):
     for element in maps:
         maps[element] = nlutils.get_label_via_parsing(maps[element], lower = True)  #Get their labels
 
-    #In this template, e_to_e_out needs to be plural.
-    maps['e_to_e_out'] = pluralize(maps['e_to_e_out'])
 
 
     '''
@@ -68,24 +62,27 @@ for counter in range(len(data)):
         
         3. Person Variation. If the question is about a person (uri = person), change this what to who.
 
-        4. Plural Rule: If the number of answers to the query is more than 3, simply return a plural query. (Only if prefix rule adds the 'what if')
+        4. Plural Rule: If the number of answers to the query is more than 3, pluralize the URI and if prefix variation gives a 'What is the' prefix, change it to 'What are the'
     '''
 
     #Check for the preposition rule
     if maps['e_to_e_out'].split()[-1] == 'by':
         question_format = preposition_template
     else:
+        #In this template, e_to_e_out needs to be plural.
+        maps['e_to_e_out'] = pluralize(maps['e_to_e_out'])
 
-        #Person Rule
-        if maps['uri'] == "person":
-            question_format = np.random.choice(vanilla_template_person, p=[0.25,0.75])
+        #Check for singular or plural ?uri
+        if len(datum['answer']['uri']) >= 3:
+            maps['uri'] = pluralize(maps['uri'])
+            question_format = np.random.choice(plural_template, p=[0.25,0.75])
         else:
-            question_format = np.random.choice(vanilla_template, p=[0.25,0.75])
+            question_format = np.random.choice(singular_template, p=[0.25,0.75])
 
-    # #Check for plural rule
-    # if question_format.startswith('What'):
-    #     #Then check if there are more than or equal to 3 answers
-    #     if len(datum['answer']['uri']) >= 3:
+        #Person Rule Condition: If the question has a 'What' as it's first word.
+        if question_format.startswith('What'):
+            if maps['uri'] in ["person","people"]:
+                question_format = question_format.replace('What','Who')
             
 
     #All barriers in place, and all variables collected. Now let's verbalize (put the mapping in the tempates)
