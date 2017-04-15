@@ -44,23 +44,33 @@
 	"n_entities": 1,
 	"type": "vanilla"
 }, {
-	"template": " SELECT DISTINCT ?uri WHERE { <%(ent_a)s> <%(rel_from_a)s> ?x . ?uri <%(rel_from_a)s> ?x",
+	"template": " SELECT DISTINCT ?uri WHERE { <%(ent_a)s> <%(rel_from_a)s> ?x . ?uri <%(rel_from_a)s> ?x}",
 	"id": 10,
 	"n_entities": 1,
 	"type": "vanilla"
 }, {
-	"template": " SELECT DISTINCT ?uri WHERE { ?x <%(rel_to_a)s> <%(ent_a)s> . ?x <%(rel_to_a)s> ?uri",
+	"template": " SELECT DISTINCT ?uri WHERE { ?x <%(rel_to_a)s> <%(ent_a)s> . ?x <%(rel_to_a)s> ?uri}",
 	"id": 11,
 	"n_entities": 1,
 	"type": "vanilla"
 }, {
-	"template": " SELECT DISTINCT ?uri WHERE { ?x <%(rel_to_a)s> <%(ent_a)s> . ?x <%(rel_to_a)s> ?uri",
+	"template": " SELECT DISTINCT ?uri WHERE { ?x <%(rel_to_a)s> <%(ent_a)s> . ?x <%(rel_to_a)s> ?uri}",
 	"id": 12,
 	"n_entities": 1,
 	"type": "vanilla"
 }, {
-	"template": " SELECT DISTINCT ?uri WHERE { <%(e_in)s> <%(e_in_to_e_1)s> ?uri. <%(e_in)s> <%(e_in_to_e_2)s> ?uri}.",
+	"template": " SELECT DISTINCT ?uri WHERE { <%(e_in)s> <%(e_in_to_e_1)s> ?uri. <%(e_in)s> <%(e_in_to_e_2)s> ?uri} ",
 	"id": 14,
+	"n_entities": 2,
+	"type": "vanilla"
+}, {
+	"template": " SELECT DISTINCT ?uri WHERE { <%(e_in_1)s> <%(e_in_to_e)s> ?uri. <%(e_in_2)s> <%(e_in_to_e)s> ?uri} ",
+	"id": 15,
+	"n_entities": 2,
+	"type": "vanilla"
+}, {
+	"template": " SELECT DISTINCT ?uri WHERE { <%(e_in_1)s> <%(e_in_to_e_1)s> ?uri. <%(e_in_2)s> <%(e_in_to_e_2)s> ?uri} ",
+	"id": 16,
 	"n_entities": 2,
 	"type": "vanilla"
 }, {

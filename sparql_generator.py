@@ -340,6 +340,15 @@ def fill_specific_template(_template_id, _mapping,_debug=False):
     temp_answer = dbp.get_answer(template['query'])
     temp_new_answer = {}
     for key in temp_answer:
+
+        #For count templates
+        if key == "uri":
+            if len(temp_answer[key]) > 5:
+                #can act as a count query 
+                template['countable'] = "true"
+            else:
+                template['countable'] = "false"
+
         if len(temp_answer[key]) > 10:
             temp_new_answer[key] = temp_answer[key][0:9]
         else:
@@ -776,7 +785,6 @@ def fill_templates(_graph, _uri):
             Reuse code of template 3 but with a check
     '''
 
-
     # Query the graph for innode to e and relevant properties
     op = access.return_innodes('e')
     #DEBUG print "length of innodes is " , str(len(op))
@@ -831,73 +839,141 @@ def fill_templates(_graph, _uri):
                 traceback.print_exc()
                 continue
 
+    '''
+        TEMPLATE 14: SELECT DISTINCT ?uri WHERE { <%(e_in)s> <%(e_in_to_e_1)s> ?uri. <%(e_in)s> <%(e_in_to_e_2)s> ?uri} 
+        Take return in nodes
+        Two level loop. 
+
+        Let's not do a left triple map.
+    '''
+
+
     # Query the graph for innode to e and relevant properties
     op = access.return_innodes('e')
-    #DEBUG print "length of innodes is " , str(len(op))
-    counter_template3 = 0
+    counter_template14 = 0
+
     # Create a list of all these (e_in, e_in_to_e)
-    one_triple_left_map = {triple[0].getUri(): triple[2]['object'].getUri() for triple in op[0]}
-    # pprint(one_triple_left)
+    # one_triple_left_map = {triple[0].getUri(): triple[2]['object'].getUri() for triple in op[0]}
 
-    # Collect all e_in_in and e_in_in_to_e_in
-    op = access.return_innodes('e_in')
-    # print "length of innodes is ", str(len(op))
+    for triple_a in op[0]:
 
-    # This 'op' has the e_in_in and the prop for all e_in's. We now need to map one to the other.
-    for list_of_triples in op:
+        #Collecting the first terminal
+        e_in = triple_a[0].getUri()
+        e_in_to_e_1 = triple_a[2]['object'].getUri()
 
-        # Some triple are simply empty. Ignore them.
-        if len(list_of_triples) == 0:
-            continue
+        #Second Loop
+        for triple_b in op[0]:
 
-        ### Mapping e_in_in's to relevant e_in's ###
+            #Check Conditions
+            if triple_b[0].getUri() ==  e_in and not triple_b[2]['object'].getUri() == e_in_to_e_1:
 
-        # Pick one triple from the list.
-        e_in = list_of_triples[0][1].getUri()
-        e_in_to_e = one_triple_left_map[e_in]
-        # Find the relevant property from the map
+                #Getting stuff for the second triple
+                e_in_to_e_2 = triple_b[2]['object'].getUri()
 
-        # Given this information, lets create mappings of template three
-        for triple in list_of_triples:
+                #Create a mapping
+                mapping = { 'e_in': e_in, 'e_in_to_e_1':e_in_to_e_1, 'e_in_to_e_2':e_in_to_e_2, 'uri': _uri}
 
-            # Making the variables explicit (for the sake of readability)
-            e_in_in = triple[0].getUri()
-            e_in_in_to_e_in = triple[2]['object'].getUri()
+                #Throw it in a functoin which will put it in the list with appropriate bookkeeping
+                try:
+                    fill_specific_template(_template_id=14, _mapping = mapping)
+                    counter_template14 += 1
 
-            #Check condition
+                    if counter_template14 > 500:
+                        break
+                except:
+                    print "check error stack"
+                    traceback.print_exc()
+                    continue
 
-            if not e_in_in_to_e_in == e_in_to_e:
-                continue
 
-            # Create a mapping (in keeping with the templates' placeholder names)
-            mapping = {'e_in_in': e_in_in, 'e_in_in_to_e_in': e_in_in_to_e_in, 'e_in_to_e': e_in_to_e, 'e_in': e_in}
-            mapping_type = {}
+    '''
+        Template 15:
+            SELECT DISTINCT ?uri WHERE { <%(e_in_1)s> <%(e_in_to_e)s> ?uri. <%(e_in_2)s> <%(e_in_to_e)s> ?uri} 
             
-            # Throw it to a function who will put it in the list with appropriate bookkeeping
-            try:
-                fill_specific_template(_template_id=3, _mapping=mapping)
-                counter_template3 = counter_template3 + 1
-                print str(counter_template3), "tempalte3"
-                if counter_template3 > 500:
-                    break
-
-            except:
-                print "check error stack"
-                traceback.print_exc()
-                continue
-
-    '''
-        Template 14:
-            SELECT DISTINCT ?uri WHERE { <%(e_in)s> <%(e_in_to_e_1)s> ?uri. <%(e_in)s> <%(e_in_to_e_2)s> ?uri}
-
-            Same e_in but different rels.
+            Same as template 14, but different conditions
     '''
 
+    # Query the graph for innode to e and relevant properties
+    op = access.return_innodes('e')
+    counter_template15 = 0
 
+    # Create a list of all these (e_in, e_in_to_e)
+    # one_triple_left_map = {triple[0].getUri(): triple[2]['object'].getUri() for triple in op[0]}
 
+    for triple_a in op[0]:
 
+        #Collecting the first terminal
+        e_in_1 = triple_a[0].getUri()
+        e_in_to_e = triple_a[2]['object'].getUri()
 
+        #Second Loop
+        for triple_b in op[0]:
 
+            #Check Conditions
+            if not triple_b[0].getUri() ==  e_in_1 and triple_b[2]['object'].getUri() == e_in_to_e:
+
+                #Getting stuff for the second triple
+                e_in_2 = triple_b[0].getUri()
+
+                #Create a mapping
+                mapping = { 'e_in_1': e_in_1, 'e_in_2':e_in_2, 'e_in_to_e':e_in_to_e, 'uri': _uri}
+
+                #Throw it in a functoin which will put it in the list with appropriate bookkeeping
+                try:
+                    fill_specific_template(_template_id=15, _mapping = mapping)
+                    counter_template15 += 1
+
+                    if counter_template15 > 500:
+                        break
+                except:
+                    print "check error stack"
+                    traceback.print_exc()
+                    continue
+
+    '''
+        Template 16:
+            SELECT DISTINCT ?uri WHERE { <%(e_in_1)s> <%(e_in_to_e_1)s> ?uri. <%(e_in_2)s> <%(e_in_to_e_2)s> ?uri} 
+            
+            Same as template 14, but different conditions
+    '''
+
+    # Query the graph for innode to e and relevant properties
+    op = access.return_innodes('e')
+    counter_template16 = 0
+
+    # Create a list of all these (e_in, e_in_to_e)
+    # one_triple_left_map = {triple[0].getUri(): triple[2]['object'].getUri() for triple in op[0]}
+
+    for triple_a in op[0]:
+
+        #Collecting the first terminal
+        e_in_1 = triple_a[0].getUri()
+        e_in_to_e_1 = triple_a[2]['object'].getUri()
+
+        #Second Loop
+        for triple_b in op[0]:
+
+            #Check Conditions
+            if not triple_b[0].getUri() ==  e_in_1 and not triple_b[2]['object'].getUri() == e_in_to_e_1:
+
+                #Getting stuff for the second triple
+                e_in_2 = triple_b[0].getUri()
+                e_in_to_e_2 = triple_b[2]['object'].getUri()
+
+                #Create a mapping
+                mapping = { 'e_in_1': e_in_1, 'e_in_2':e_in_2, 'e_in_to_e_2':e_in_to_e_2, 'e_in_to_e_1':e_in_to_e_1, 'uri': _uri}
+
+                #Throw it in a functoin which will put it in the list with appropriate bookkeeping
+                try:
+                    fill_specific_template(_template_id=16, _mapping = mapping)
+                    counter_template16 += 1
+
+                    if counter_template16 > 500:
+                        break
+                except:
+                    print "check error stack"
+                    traceback.print_exc()
+                    continue
 
 '''
     Testing the ability to create subgraph given a URI
