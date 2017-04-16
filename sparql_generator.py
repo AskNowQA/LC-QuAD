@@ -83,7 +83,6 @@ def pruning(_results, _keep_no_results = 100, _filter_properties = True, _filter
         _filter_entities: if True, only entites belonging to a particular classes present in the whitelist will be pushed in.
 
     '''
-    print "@pruning"
     temp_results = []
     # properties_count = {}
 
@@ -140,7 +139,7 @@ def pruning(_results, _keep_no_results = 100, _filter_properties = True, _filter
 
     if (len(temp_results) > _keep_no_results):
         return random.sample(temp_results,_keep_no_results)
-    print len(temp_results)
+    # print len(temp_results)
     return temp_results
 
 def insert_triple_in_subgraph(G, _results, _labels, _direction, _origin_node, _filter_properties=True,
@@ -354,6 +353,7 @@ def fill_specific_template(_template_id, _mapping,_debug=False):
         else:
             temp_new_answer[key] = temp_answer[key]
     template['answer'] = temp_new_answer
+    
     # Get the most specific type of the answers.
     '''
         ATTENTION: This can create major problems in the future.
@@ -379,17 +379,19 @@ def fill_specific_template(_template_id, _mapping,_debug=False):
     # Push it onto the SPARQL List
     # perodic write in file.
     # @TODO: instead of file use a database.
+
+    #WRITING MOVED TO THE LAST OF THE FILE PERMANENTLY
     try:
         sparqls[_template_id].append(template)
-        print len(sparqls[_template_id])
+        # print len(sparqls[_template_id])
         if len(sparqls[_template_id]) > 100000:
-            print "in if condition"
-            print "tempalte id is ", str(_template_id)
+
             with open('output/template%s.txt' % str(_template_id), "a+") as out:
                 pprint(sparqls[_template_id], stream=out)
             with open('output/template%s.json' % str(_template_id), "a+") as out:
                 json.dump(sparqls[_template_id], out)
             sparqls[_template_id] = []
+
     except:
         print traceback.print_exc()
         sparqls[_template_id] = [template]
@@ -1001,18 +1003,17 @@ for entity in list_of_entities:
     except:
         print traceback.print_exc()
         continue
+
+# Commented it out to help the case of cluttered output folder        
+# for key in sparqls:
+#     with open('output/template%d.txt' % key, 'a+') as out:
+#         pprint(sparqls[key], stream=out)
+
+print "Trying to write to file!"
 for key in sparqls:
-    with open('output/template%d.txt' % key, 'a+') as out:
-        pprint(sparqls[key], stream=out)
-for key in sparqls:
-    f = open('output/template%s.json' % key, 'a+')
-    json.dump(sparqls[key], f)
-    f.close()
-for key in sparqls:
-    fo = open('output/json_template%d.txt' % key, 'a+')
+    fo = open('sparqls/template%d.txt' % key, 'w+')
     for value in sparqls[key]:
         fo.writelines(json.dumps(value) + "\n")
     fo.close()
-
 
 print "DONE"
