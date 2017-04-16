@@ -343,7 +343,7 @@ def fill_specific_template(_template_id, _mapping,_debug=False):
 
         #For count templates
         if key == "uri":
-            if len(temp_answer[key]) > 5:
+            if len(temp_answer[key]) > 7:
                 #can act as a count query 
                 template['countable'] = "true"
             else:

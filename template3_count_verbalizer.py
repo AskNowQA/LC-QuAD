@@ -7,7 +7,7 @@ from pattern.en import pluralize
 
 data = []
 #read from the file
-with open('output/count/json_template3.txt') as data_file:
+with open('output/json_template3.txt') as data_file:
     for line in data_file:
         data.append(json.loads(line.rstrip('\n')))
 
@@ -20,13 +20,20 @@ e_in_to_e = {}
 
 for counter in range(len(data)):
     data[counter]['verbalized'] = False
-    if data[counter]["count"] != "true":
-            pass
     datum = data[counter]
 
     x = datum["answer_type"]['x']
     maps = datum['mapping']
     maps['x'] = x
+
+    '''
+        !!!! FILTERS !!!!
+        -> The typical more than a rel filter
+        -> If the count variable is true
+    '''
+
+    if data[counter]["countable"] != "true":
+        continue
 
     try:
         if e_in_to_e[maps['e_in_to_e']] > 0:
@@ -36,7 +43,8 @@ for counter in range(len(data)):
         e_in_to_e[maps['e_in_to_e']] = 1
     
     # replace each path by label
-    ''' Simple rules 
+    ''' 
+        !!!! RULES !!!! 
         >If ing in e_in_in_to_e_in like staring use in else of 
             >If person then use who else use which 
     '''
@@ -59,13 +67,13 @@ for counter in range(len(data)):
             data[counter]['verbalized'] = True
 
 #Writing them to a file
-fo = open('output/count/verbalized_template3.txt', 'w+')
+fo = open('output/verbalized_template3_count.txt', 'w+')
 for key in data:
     fo.writelines(json.dumps(key) + "\n")
 fo.close()
 
 questions = 0
-with open('output/count/verbalized_template3_readable.txt','w+') as output_file:
+with open('output/verbalized_template3_count_readable.txt','w+') as output_file:
     for datum in data:
         try:
             output_file.write(datum['verbalized_question'].encode('utf-8')+'\n')
