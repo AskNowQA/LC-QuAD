@@ -232,37 +232,45 @@ class Verbalizer_08_Count(verbalizer.Verbalizer):
 	has_uri = True
 	question_templates = {
 
-		'vanilla': {
-			'singular':
-				["%(prefix)s is the <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>?"],
-			'plural':
-				["%(prefix)s are the <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>?"]
-		},	
-
+		'vanilla': 
+				[ "Give me the total number of <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>.",
+				"Give me the count of <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>.",
+				"Count the number of <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>.",  
+				"Count the <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>.",  
+				"How many <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s> are there?", 
+				"How many <%(uri)s> are there whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s> ?", 
+				"What is the total number of <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>?" ],	
 		'type': {
 
-			'e_to_e_out_1': {
-				'singular': 
-					[ "%(prefix)s is the <%(uri)s> which is a <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>?" ],
-				'plural': 
-					[ "%(prefix)s are the <%(uri)s> which are a <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>?" ]
-			},
+			'e_to_e_out_1': 
+					[ "Give me the total number of <%(uri)s> which are a <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>.", 
+					"Give me the count of <%(uri)s> which are a <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>.", 
+					"Count the number of <%(uri)s> which are a <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>.", 
+					"Count the <%(uri)s> which are a <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>.", 
+					"How many <%(uri)s> are there which are a <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>?",
+					"How many <%(uri)s> which are a <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s> are there.", 
+					"Whatis the total number of <%(uri)s> which are a <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>?" ],
+			'e_to_e_out_2': 
+					[ 
+					"Give me the total number of <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and which are a <%(e_out_2)s>.", 
+					"Give me the count of <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and which are a <%(e_out_2)s>.", 
+					"Count the number of <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and which are a <%(e_out_2)s>.", 
+					"Count the <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and which are a <%(e_out_2)s>.", 
+					"How many <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and which are a <%(e_out_2)s> are there?", 
+					"How many <%(uri)s> are there whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and which are a <%(e_out_2)s>?",
+					"What is the total number of <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and which are a <%(e_out_2)s>?" ],
+			'both': 
+					[ 
+					"Give me the total number of of <%(uri)s> which are a <%(e_out_1)s> and a <%(e_out_2)s>.", 
+					"Give me the count of <%(uri)s> which are a <%(e_out_1)s> and a <%(e_out_2)s>.", 
+					"Count the number of <%(uri)s> which are a <%(e_out_1)s> and a <%(e_out_2)s>.", 
+					"Count the <%(uri)s> which are a <%(e_out_1)s> and a <%(e_out_2)s>.", 
+					"How many <%(uri)s> which are a <%(e_out_1)s> and a <%(e_out_2)s> are there?", 
+					"How many <%(uri)s> are there which are a <%(e_out_1)s> and a <%(e_out_2)s>?", 
+					"What is the total number of <%(uri)s> which are a <%(e_out_1)s> and a <%(e_out_2)s>?" 
+					]	
 
-			'e_to_e_out_2': {
-				'singular': 
-					[ "%(prefix)s is the <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and which is a <%(e_out_2)s>?" ],
-				'plural': 
-					[ "%(prefix)s are the <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and which are a <%(e_out_2)s>?" ]
-			},
-
-			'both': {
-				'singular': 
-					[ "%(prefix)s is the <%(uri)s> which is a <%(e_out_1)s> and a <%(e_out_2)s>?" ],	
-				'plural': 
-					[ "%(prefix)s are the <%(uri)s> which are a <%(e_out_1)s> and a <%(e_out_2)s>?" ]	
-			}
 		}
-
 	}
 
 	def filter(self, _datum, _maps):
@@ -280,7 +288,6 @@ class Verbalizer_08_Count(verbalizer.Verbalizer):
 			2. Vanilla Rule:
 				if no type, use vanilla template
 
-			<finally> if type of URI is person, AND the question begins with 'what', change 'what' to 'who'.			
 
 			Pseudocode:
 				-> see if R1 and R2 are type:
@@ -291,14 +298,23 @@ class Verbalizer_08_Count(verbalizer.Verbalizer):
 							-> yes? use type's e_to_e_out_2 template
 							-> no? use vanilla template
 
-				-> see if uri is person/people
-						-> yes?: set maps's prefix to 'who'
-						-> no?: set maps's preix to 'what'
 		'''
+
+		_maps['uri'] = pluralize(_maps['uri'])
+
+		if _maps['e_to_e_out_1'] == 'type' and _maps['e_to_e_out_2'] == 'type':
+			question_format = np.random.choice(self.question_templates['type']['both'], p = [ 0.05,0.05,0.07,0.08,0.25,0.05,0.45])
+		elif _maps['e_to_e_out_1'] == 'type':
+			question_format = np.random.choice(self.question_templates['type']['e_to_e_out_1'],p = [ 0.05,0.05,0.07,0.08,0.25,0.05,0.45])
+		elif _maps['e_to_e_out_2'] == 'type':
+			question_format = np.random.choice(self.question_templates['type']['e_to_e_out_2'],p = [ 0.05,0.05,0.07,0.08,0.25,0.05,0.45])
+		else:
+			question_format = np.random.choice(self.question_templates['vanilla'], p = [ 0.05,0.05,0.07,0.08,0.25,0.05,0.45])
+
+		return _maps, question_format
 
 		
 
-		return _maps, 'poop'
 
 if __name__ == "__main__":
 	template3verbalizer = Verbalizer_03_Count()
