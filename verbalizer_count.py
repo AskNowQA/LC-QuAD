@@ -1,0 +1,232 @@
+'''
+	Authro: Priyansh Trivedi
+
+	Script to verbalize the count templates
+	Each template ID will have a different class
+		All extend the class created in verbalizer.py and edit it as per their requirements.
+
+	Finally, a function will create an object of all of them and run it.
+
+'''
+
+import numpy as np
+from pprint import pprint
+from pattern.en import pluralize
+import utils.natural_language_utilities as nlutils
+
+import verbalizer
+
+class Verbalizer_03_Count(verbalizer.Verbalizer):
+
+	template_id = 3
+	template_type = 'Count'
+	template_id_offset = 100
+	has_x = True
+	has_uri = False
+	question_templates = {
+		'vanilla':
+			[ "How many <%(e_in_to_e)s> are there of the <%(x)s> %(prefix)s is the <%(e_in_in_to_e_in)s> of <%(e_in_in)s> ?" ],
+		'continous tense':
+			[ "How many <%(e_in_to_e)s> are there of the <%(x)s> %(prefix)s is the <%(e_in_in_to_e_in)s> in <%(e_in_in)s> ?" ]
+	}
+
+	def filter(self, _datum, _maps):
+		if _datum['countable'] != 'true':
+			return False
+
+		return self.hard_relation_filter(_maps['e_in_to_e'])
+
+	def rules(self, _datum, _maps):
+		'''
+			Continous Tense Rule: if e_in_in_to_e_in has 'ing'?
+				select continous tense template
+			Else: vanilla template
+
+			<finally> based on whether agent occurs in mapping type of x, change prefix (who/which)
+
+			Pseudocode:
+				-> see if 'ing' in e in in to e in
+					-> yes?: use continous tense template
+					-> no?: use vanilla template
+
+				-> see if uri is person/people
+					-> yes?: set maps's prefix to 'who'
+					-> no?: set maps's preix to 'what'
+		'''
+		if 'ing' in _maps['e_in_in_to_e_in']:
+			question_format = np.random.choice(self.question_templates['continous tense'])
+		else: 
+			question_format = np.random.choice(self.question_templates['vanilla'])
+
+		if 'http://dbpedia.org/ontology/Agent' in _datum['mapping_type']['x'] and "http://dbpedia.org/ontology/Organisation" not in _datum['mapping_type']["x"]:
+			_maps['prefix'] = 'who'
+		else:
+			_maps['prefix'] = 'which'
+
+		return _maps, question_format
+
+class Verbalizer_05_Count(verbalizer.Verbalizer):
+	template_id = 5
+	template_type = 'Count'
+	template_id_offset = 100
+	has_x = True
+	has_uri = False
+	question_templates = {
+		'vanilla': 
+			[ "Give the total number of <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.",
+			"Count the <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.",
+			"Count the number of <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.",
+			"How many <%(e_in_to_e)s> are there, of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s> ?",
+			"How many <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>, are there ?",
+			"What is the total number of <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s> ?" ],
+
+		'type': 
+			[ "Give the total number of <%(e_in_to_e)s> of the <%(x)s> which are <%(e_in_out)s>.", 
+			"Count the <%(e_in_to_e)s> of the <%(x)s> which are <%(e_in_out)s>.", 
+			"Count the number of <%(e_in_to_e)s> of the <%(x)s> which are <%(e_in_out)s>.", 
+			"How many <%(e_in_to_e)s> are there, of the <%(x)s> which are <%(e_in_out)s> ?", 
+			"How many <%(e_in_to_e)s> of the <%(x)s> which are <%(e_in_out)s>, are there ?", 
+			"What is the total nummber of <%(e_in_to_e)s> of the <%(x)s> which are <%(e_in_out)s> ?" ]
+	}
+	
+	def filter(self, _datum, _maps):
+		if _datum['countable'] != 'true':
+			return False
+
+		return self.hard_relation_filter(_maps['e_in_to_e'])
+
+	def rules(self, _datum, _maps):
+		'''
+
+			2. Type Mode:
+				if e_in_to_e_in_out is type, use a type template
+				else use vanilla template
+
+			Pseudocode:
+
+				-> see if the type rule is activated or not
+					-> yes?: use type's plural template
+					-> no?: use vanilla's plural template
+		'''
+
+
+		_maps['x'] = pluralize(_maps['x'])
+
+		#Check for the type rule
+		if _maps['e_in_to_e_in_out'] == 'type':
+			question_format = np.random.choice(self.question_templates['type'], p = [0.10,0.07,0.08,0.30,0.05,0.40])
+		else:
+			question_format = np.random.choice(self.question_templates['vanilla'], p = [0.10,0.07,0.08,0.30,0.05,0.40])
+
+
+		return _maps, question_format
+
+class Verbalizer_06_Count(verbalizer.Verbalizer):
+	template_id = 6
+	template_type = 'Count'
+	template_id_offset = 100
+	has_x = False
+	has_uri = True
+	question_templates = {
+		'vanilla': 
+			[ "Give the total number of <%(uri)s> whose <%(e_to_e_out)s>'s <%(e_out_to_e_out_out)s> is <%(e_out_out)s>.",
+			"Count the <%(uri)s> whose <%(e_to_e_out)s>'s <%(e_out_to_e_out_out)s> is <%(e_out_out)s>.",
+			"Count the number of <%(uri)s> whose <%(e_to_e_out)s>'s <%(e_out_to_e_out_out)s> is <%(e_out_out)s>.",
+			"How many <%(uri)s> are there whose <%(e_to_e_out)s>'s <%(e_out_to_e_out_out)s> is <%(e_out_out)s> ?",
+			"How many <%(uri)s> whose <%(e_to_e_out)s>'s <%(e_out_to_e_out_out)s> is <%(e_out_out)s> are there?",
+			"What is the total number of <%(uri)s> whose <%(e_to_e_out)s>'s <%(e_out_to_e_out_out)s> is <%(e_out_out)s>?"],
+
+		'type': 
+			[ "Give the total number of <%(uri)s> whose <%(e_to_e_out)s> is a kind of <%(e_out_out)s>.",
+            "Give the total number of <%(uri)s> whose <%(e_to_e_out)s> is a <%(e_out_out)s>." , 
+            "Count the <%(uri)s> whose <%(e_to_e_out)s> is a kind of <%(e_out_out)s>.",
+            "Count the <%(uri)s> whose <%(e_to_e_out)s> is a <%(e_out_out)s>." , 
+            "Count the number of <%(uri)s> whose <%(e_to_e_out)s> is a kind of <%(e_out_out)s>.",
+            "Count the number of <%(uri)s> whose <%(e_to_e_out)s> is a <%(e_out_out)s>." , 
+            "How many <%(uri)s> are there whose <%(e_to_e_out)s> is a kind of <%(e_out_out)s>?",
+            "How many <%(uri)s> are there whose <%(e_to_e_out)s> is a <%(e_out_out)s>?" , 
+            "How many <%(uri)s> whose <%(e_to_e_out)s> is a <%(e_out_out)s> are there?" , 
+            "How many <%(uri)s> whose <%(e_to_e_out)s> is a kind of <%(e_out_out)s>, are there?",
+            "What is the total number of <%(uri)s> whose <%(e_to_e_out)s> is a kind of a <%(e_out_out)s>?", 
+            "What is the total number of <%(uri)s> whose <%(e_to_e_out)s> is a <%(e_out_out)s>?" ]
+	}
+	
+	def filter(self, _datum, _maps):
+		if _datum['countable'] != 'true':
+			return False
+
+		return self.hard_relation_filter(_maps['e_to_e_out'])
+
+	def rules(self, _datum, _maps):
+		'''
+
+			2. Type Mode:
+				if e_in_to_e_in_out is type, use a type template
+				else use vanilla template
+
+			Pseudocode:
+
+				-> see if the type rule is activated or not
+					-> yes?: use type's plural template
+					-> no?: use vanilla's plural template
+		'''
+
+
+		_maps['uri'] = pluralize(_maps['uri'])
+
+		#Check for the type rule
+		if _maps['e_out_to_e_out_out'] == 'type':
+			question_format = np.random.choice(self.question_templates['type'], p = [0.05,0.05,0.035,0.035,0.04,0.04,0.15,0.15,0.025,0.025,0.2,0.2])
+		else:
+			question_format = np.random.choice(self.question_templates['vanilla'], p = [0.1,0.07,0.08,0.3,0.05,0.4])
+
+		return _maps, question_format
+
+
+class Verbalizer_07_Count(verbalizer.Verbalizer):
+	template_id = 7
+	template_type = 'Count'
+	template_id_offset = 100
+	has_x = False
+	has_uri = True
+	question_templates = {
+		
+		'vanilla': 
+			[ "Give me the total number of <%(uri)s> are there whose <%(e_to_e_out)s> are <%(e_out_1)s> and <%(e_out_2)s>.",
+			"Count the <%(uri)s> are there whose <%(e_to_e_out)s> are <%(e_out_1)s> and <%(e_out_2)s>.",
+			"Count the number of <%(uri)s> are there whose <%(e_to_e_out)s> are <%(e_out_1)s> and <%(e_out_2)s>.",
+			"How many <%(uri)s> are there whose <%(e_to_e_out)s> are <%(e_out_1)s> and <%(e_out_2)s>?",
+			"What is the number of <%(uri)s> whose <%(e_to_e_out)s> are <%(e_out_1)s> and <%(e_out_2)s>?" ]
+
+	}
+
+	def filter(self, _datum, _maps):
+		if _datum['countable'] != 'true':
+			return False
+
+		return self.hard_relation_filter(_maps['e_to_e_out'])
+	
+	def rules(self, _datum, _maps):
+		'''
+			No variations
+
+			<finally> if type of URI is person, AND the question begins with 'what', change 'what' to 'who'.			
+
+			Pseudocode:
+				-> pluralize the R, and the uri
+		'''
+		
+		#In this template, e_to_e_out needs to be plural.
+		_maps['e_to_e_out'] = pluralize(_maps['e_to_e_out'])
+		_maps['uri'] = pluralize(_maps['uri'])
+
+		question_format = np.random.choice(self.question_templates['vanilla'], p=[0.1,0.07,0.08,0.25,0.50])
+
+		return _maps, question_format
+
+
+if __name__ == "__main__":
+	template3verbalizer = Verbalizer_03_Count()
+	template5verbalizer = Verbalizer_05_Count()
+	template6verbalizer = Verbalizer_06_Count()
+	template7verbalizer = Verbalizer_07_Count()
