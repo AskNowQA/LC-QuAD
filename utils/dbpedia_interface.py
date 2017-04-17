@@ -48,6 +48,8 @@ GET_CLASS_PATH = '''SELECT DISTINCT ?type WHERE { %(target_class)s rdfs:subClass
 
 GET_SUPERCLASS = '''SELECT DISTINCT ?type WHERE { %(target_class)s rdfs:subClassOf ?type }'''
 
+CHECK_URL = '''ASk {<%(target_resource)s> a owl:Thing} '''
+
 class DBPedia:
 	def __init__(self,_method='round-robin',_verbose=False,_db_name = 0):
 
@@ -325,6 +327,11 @@ class DBPedia:
 				return filtered_type_list_1
 			else:
 				return "http://www.w3.org/2002/07/owl#Thing"
+
+	def is_Url(self,url):
+		response = self.shoot_custom_query(CHECK_URL % {'target_resource':url})
+		return response["boolean"]
+
 
 
 if __name__ == '__main__':
