@@ -125,4 +125,4 @@ def update_db(_question_id,data):
 		posts.update_one({u"_id":unicode(_question_id,"utf-8")},{"$set":data})
 	except:
 		print traceback.print_exc()
-run(host=0.0.0.0, port=8080)
+run(host='0.0.0.0', port=8080)
