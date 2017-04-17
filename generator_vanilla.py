@@ -348,6 +348,10 @@ def fill_specific_template(_template_id, _mapping,_debug=False):
             else:
                 template['countable'] = "false"
 
+        #Store the number of answers in the data too. Will help, act as a good filter and everything.
+        template['answer_count'] = {}
+        template['answer_count'][key] =  len(list(set(temp_answer[key])))
+
         if len(temp_answer[key]) > 10:
             temp_new_answer[key] = temp_answer[key][0:9]
         else:

@@ -441,6 +441,55 @@ class Verbalizer_09(verbalizer.Verbalizer):
 
 		return _maps, question_format
 
+class Verbalizer_11(verbalizer.Verbalizer):
+
+	template_id = 11
+	template_type = 'Vanilla'
+	template_id_offset = 0
+	has_x = True
+	has_uri = False
+	question_templates = {
+		'vanilla': 
+			[ "List the other <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.",
+			"What are the other <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>." ],
+
+		'type': 
+			[ "List the other <%(e_in_to_e)s> of the <%(x)s> which are <%(e_in_out)s>.", 
+			"What are the other <%(e_in_to_e)s> of the <%(x)s> which are <%(e_in_out)s>." ]
+		
+	}
+
+	def filter(self, _datum, _maps):
+		#Specific to this template, if the answers to the query are less than or equal to two (or if too many answers), it won't make sense to pose this question.
+		if _datum['answer_count']['uri'] <= 2 or _datum['answer_count']['uri'] > 10:
+			return False
+
+		#Just that hard filter thingy
+		return self.hard_relation_filter(_maps['e_in_to_e'])
+
+	def rules(self, _datum, _maps):
+		'''
+			1. Normal Mode:
+	
+			2. Type Mode:
+				if e_in_to_e_in_out is type, use a type template
+
+			Pseudocode:
+				-> yes?: see if the type rule is activated or not
+						-> yes?: use type's plural template
+						-> no?: use vanilla's plural template
+		'''
+
+		_maps['x'] = pluralize(_maps['x'])
+
+		#Check for the type rule
+		if _maps['e_in_to_e_in_out'] == 'type':
+			question_format = np.random.choice(self.question_templates['type'], p = [0.2,0.8])
+		else:
+			question_format = np.random.choice(self.question_templates['vanilla'], p = [0.2,0.8])
+
+		return _maps, question_format
+
 class Verbalizer_15(verbalizer.Verbalizer):
 	
 	template_id = 15
@@ -534,6 +583,7 @@ if __name__ == "__main__":
 	template7verbalizer = Verbalizer_07()
 	template8verbalizer = Verbalizer_08()
 	template9verbalizer = Verbalizer_09()
+	template11verbalizer = Verbalizer_11()
 	template15verbalizer = Verbalizer_15()
 	template16verbalizer = Verbalizer_16()
 
