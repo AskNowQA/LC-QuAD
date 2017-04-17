@@ -37,12 +37,12 @@ def do_login():
     	response.set_cookie("template_id",template_id)
     	#query for a question from the database. 
     	question = retriveQuestion(template_id)
-    	pprint(question)
     	if not question:
     		return "<p>All questions of template id is completed. Return to login page</p>"
     	#setting the question id as the cookie for state tracking
     	data = {"verbalized_question":question["verbalized_question"],"json_content":str(pformat(question))}
     	response.set_cookie("question_id",question["_id"])
+    	response.set_cookie("verbalized_question",question[u"verbalized_question"])
         return template('question.tpl',data)
     else:
         return "<p>Login failed. Please start from the index url</p>"
@@ -61,9 +61,9 @@ def new_question():
     	if not question:
     		return "<p>All questions of template id is completed. Return to login page</p>"
     	#setting the question id as the cookie for state tracking
-    	pprint(question)
     	data = {"verbalized_question":question[u"verbalized_question"],"json_content":str(pformat(question))}
     	response.set_cookie("question_id",question["_id"])
+    	response.set_cookie("verbalized_question",question[u"verbalized_question"])
         return template('question.tpl',data)		
 
 @post('/submitQuestion')
@@ -75,6 +75,9 @@ def submit_question():
 			username = request.get_cookie('username')
 			template_id = request.get_cookie('template_id')
 			question_id = request.get_cookie('question_id')
+			if corrected_answer == request.get_cookie('verbalized_question'):
+				print "chutiya user"
+				redirect("http://localhost:8080/newquestion")
 			data = {u"username":username,u"corrected":"true",u"corrected_answer":corrected_answer }
 			try:
 				update_db(question_id,data)
@@ -122,4 +125,4 @@ def update_db(_question_id,data):
 		posts.update_one({u"_id":unicode(_question_id,"utf-8")},{"$set":data})
 	except:
 		print traceback.print_exc()
-run(host='localhost', port=8080)
+run(host=0.0.0.0, port=8080)

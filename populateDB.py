@@ -26,11 +26,34 @@ def insert_into_db(data):
 		return False
 
 def insert_into_db_single(data):
-	from datum in data:
-		try:
-			result = posts.insert_one(datum)
-		except:
-			print traceback.print_exc()
+	for datum in data:
+		# print "for"
+		if retriveQuestion(datum['query']):
+			try:
+				result = posts.insert_one(datum)
+			except:
+				print traceback.print_exc()
+				continue
+		else:
+			# print "here"
+			continue	
 		return True
-print insert_into_db(read_from_file("verbalized_json_template_5.txt"))
+
+def retriveQuestion(sparql):
+	'''connects to a database and retrives question based on template type'''
+	question = posts.find_one({u"query":sparql.encode('utf-8')})
+	if question:
+		return False
+	else:
+		return True
+
+
+print insert_into_db_single(read_from_file("verbalized_template5.txt"))
+print insert_into_db_single(read_from_file("verbalized_template3.txt"))
+print insert_into_db_single(read_from_file("verbalized_template6.txt"))
+print insert_into_db_single(read_from_file("verbalized_template7.txt"))
+print insert_into_db_single(read_from_file("verbalized_template8.txt"))
+print insert_into_db_single(read_from_file("verbalized_template9.txt"))
+print insert_into_db_single(read_from_file("verbalized_template15.txt"))
+print insert_into_db_single(read_from_file("verbalized_template16.txt"))
 #For searching:- pprint.pprint(posts.find_one({u"id":"6"}))
