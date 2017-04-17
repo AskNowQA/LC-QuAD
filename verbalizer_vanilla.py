@@ -291,16 +291,35 @@ class Verbalizer_08(verbalizer.Verbalizer):
 	has_uri = True
 	question_templates = {
 
-		'vanilla': 
-			["%(prefix)s is the <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>?"],
+		'vanilla': {
+			'singular':
+				["%(prefix)s is the <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>?"],
+			'plural':
+				["%(prefix)s are the <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>?"]
+		},	
 
 		'type': {
-			'e_to_e_out_1': 
-				[ "%(prefix)s is the <%(uri)s> which is a <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>?" ],
-			'e_to_e_out_2':
-				[ "%(prefix)s is the <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and which is a <%(e_out_2)s>?" ],
-			'both':
-				[ "%(prefix)s is the <%(uri)s> which is a <%(e_out_1)s> and a <%(e_out_2)s>?" ]	
+
+			'e_to_e_out_1': {
+				'singular': 
+					[ "%(prefix)s is the <%(uri)s> which is a <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>?" ],
+				'plural': 
+					[ "%(prefix)s are the <%(uri)s> which are a <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>?" ]
+			},
+
+			'e_to_e_out_2': {
+				'singular': 
+					[ "%(prefix)s is the <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and which is a <%(e_out_2)s>?" ],
+				'plural': 
+					[ "%(prefix)s are the <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and which are a <%(e_out_2)s>?" ]
+			},
+
+			'both': {
+				'singular': 
+					[ "%(prefix)s is the <%(uri)s> which is a <%(e_out_1)s> and a <%(e_out_2)s>?" ],	
+				'plural': 
+					[ "%(prefix)s are the <%(uri)s> which are a <%(e_out_1)s> and a <%(e_out_2)s>?" ]	
+			}
 		}
 	}
 
@@ -312,21 +331,33 @@ class Verbalizer_08(verbalizer.Verbalizer):
 		'''
 			1. Type Rule (if either of the rel is a type, change the template appropriately)
 				1.a R1 is type
+					1.a.a Singular/Plural
 				1.b R2 is type
+					1.b.a Singular/Plural
 				1.c both are type
+					1.c.a Singular/Plural
 			2. Vanilla Rule:
 				if no type, use vanilla template
+				2.a Singular/Plural
 
 			<finally> if type of URI is person, AND the question begins with 'what', change 'what' to 'who'.			
 
 			Pseudocode:
 				-> see if R1 and R2 are type:
-					-> yes? use type's both template
+					-> yes? is uri's answers more than 3?
+						-> yes? use type's both's plural
+						-> no? use type's both's singular
 					-> no? see if R1 is type:
-						-> yes? use type's e_to_e_out_1 template
+						-> yes? is uri's answers more than 3?
+							-> yes? use type's e_to_e_out_1 template's plural version
+							-> yes? use type's e_to_e_out_1 template's singular version
 						-> no? see if R2 is a type:
-							-> yes? use type's e_to_e_out_2 template
-							-> no? use vanilla template
+							-> yes? is uri's answers more than 3?
+								-> yes? use type's e_to_e_out_2 template's plural version
+								-> no? use type's e_to_e_out_2 template's singular version
+							-> no? is uri's answers more than 3?
+								-> yes? use vanilla template's plural version
+								-> no? use vanilla template's singular version
 
 				-> see if uri is person/people
 						-> yes?: set maps's prefix to 'who'
@@ -335,13 +366,37 @@ class Verbalizer_08(verbalizer.Verbalizer):
 
 		#Checking for 'type' in the 'e_to_e_out_1'
 		if _maps['e_to_e_out_1'] == 'type' and _maps['e_to_e_out_2'] == 'type':
-			question_format = np.random.choice(self.question_templates['type']['both'])
+			if len(_datum['answer']['uri']) > 3:
+				#Plural
+				_maps['uri'] = pluralize(_maps['uri'])
+				question_format = np.random.choice(self.question_templates['type']['both']['plural'])
+			else:
+				#Singular
+				question_format = np.random.choice(self.question_templates['type']['both']['singular'])
 		elif _maps['e_to_e_out_1'] == 'type':
-			question_format = np.random.choice(self.question_templates['type']['e_to_e_out_1'])
+			if len(_datum['answer']['uri']) > 3:
+				#Plural
+				_maps['uri'] = pluralize(_maps['uri'])
+				question_format = np.random.choice(self.question_templates['type']['e_to_e_out_1']['plural'])
+			else:
+				#Singular
+				question_format = np.random.choice(self.question_templates['type']['e_to_e_out_1']['singular'])
 		elif _maps['e_to_e_out_2'] == 'type':
-			question_format = np.random.choice(self.question_templates['type']['e_to_e_out_2'])
+			if len(_datum['answer']['uri']) > 3:
+				#Plural
+				_maps['uri'] = pluralize(_maps['uri'])
+				question_format = np.random.choice(self.question_templates['type']['e_to_e_out_2']['plural'])
+			else:
+				#Singular
+				question_format = np.random.choice(self.question_templates['type']['e_to_e_out_2']['singular'])
 		else:
-			question_format = np.random.choice(self.question_templates['vanilla'])
+			if len(_datum['answer']['uri']) > 3:
+				#Plural
+				_maps['uri'] = pluralize(_maps['uri'])
+				question_format = np.random.choice(self.question_templates['vanilla']['plural'])
+			else:
+				#Singular
+				question_format = np.random.choice(self.question_templates['vanilla']['singular'])
 
 		#Person Rule Condition: If the question has a 'What' as it's first word.    
 		if _maps['uri'] in ["person","people"]:

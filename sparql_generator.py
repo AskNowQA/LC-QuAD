@@ -24,7 +24,7 @@ import time
 '''
 
 dbp = None  # DBpedia interface object #To be instantiated when the code is run by main script/unit testing script
-relevant_properties = open('resources/relation_whitelist.txt').read().split('\n')  # Contains the whitelisted props types
+relevant_properties = open('resources/relations.txt').read().split('\n')  # Contains the whitelisted props types
 relevent_entity_classes = open('resources/entity_classes.txt').read().split('\n') #Contains whitelisted entities classes
 list_of_entities = open('resources/entities.txt').read().split('\n')
 '''contains list of entites for which the question would be asked '''

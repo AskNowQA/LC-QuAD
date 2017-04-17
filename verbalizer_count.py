@@ -224,9 +224,85 @@ class Verbalizer_07_Count(verbalizer.Verbalizer):
 
 		return _maps, question_format
 
+class Verbalizer_08_Count(verbalizer.Verbalizer):
+	template_id = 8
+	template_type = 'Count'
+	template_id_offset = 100
+	has_x = False
+	has_uri = True
+	question_templates = {
+
+		'vanilla': {
+			'singular':
+				["%(prefix)s is the <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>?"],
+			'plural':
+				["%(prefix)s are the <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>?"]
+		},	
+
+		'type': {
+
+			'e_to_e_out_1': {
+				'singular': 
+					[ "%(prefix)s is the <%(uri)s> which is a <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>?" ],
+				'plural': 
+					[ "%(prefix)s are the <%(uri)s> which are a <%(e_out_1)s> and <%(e_to_e_out_2)s> is <%(e_out_2)s>?" ]
+			},
+
+			'e_to_e_out_2': {
+				'singular': 
+					[ "%(prefix)s is the <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and which is a <%(e_out_2)s>?" ],
+				'plural': 
+					[ "%(prefix)s are the <%(uri)s> whose <%(e_to_e_out_1)s> is <%(e_out_1)s> and which are a <%(e_out_2)s>?" ]
+			},
+
+			'both': {
+				'singular': 
+					[ "%(prefix)s is the <%(uri)s> which is a <%(e_out_1)s> and a <%(e_out_2)s>?" ],	
+				'plural': 
+					[ "%(prefix)s are the <%(uri)s> which are a <%(e_out_1)s> and a <%(e_out_2)s>?" ]	
+			}
+		}
+
+	}
+
+	def filter(self, _datum, _maps):
+		if _datum['countable'] != 'true':
+			return False
+
+		return self.hard_relation_filter(_maps['e_to_e_out_1'])
+
+	def rules(self, _datum, _maps):
+		'''
+			1. Type Rule (if either of the rel is a type, change the template appropriately)
+				1.a R1 is type
+				1.b R2 is type
+				1.c both are type
+			2. Vanilla Rule:
+				if no type, use vanilla template
+
+			<finally> if type of URI is person, AND the question begins with 'what', change 'what' to 'who'.			
+
+			Pseudocode:
+				-> see if R1 and R2 are type:
+					-> yes? use type's both
+					-> no? see if R1 is type:
+						-> yes? use type's e_to_e_out_1 template
+						-> no? see if R2 is a type:
+							-> yes? use type's e_to_e_out_2 template
+							-> no? use vanilla template
+
+				-> see if uri is person/people
+						-> yes?: set maps's prefix to 'who'
+						-> no?: set maps's preix to 'what'
+		'''
+
+		
+
+		return _maps, 'poop'
 
 if __name__ == "__main__":
 	template3verbalizer = Verbalizer_03_Count()
 	template5verbalizer = Verbalizer_05_Count()
 	template6verbalizer = Verbalizer_06_Count()
 	template7verbalizer = Verbalizer_07_Count()
+	template8verbalizer = Verbalizer_08_Count()
