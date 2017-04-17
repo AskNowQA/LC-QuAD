@@ -56,7 +56,7 @@ class Verbalizer_05(verbalizer.Verbalizer):
 				[ "What is the <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s> ?" ],
 			'plural': 
 				[ "List the <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.",
-				"What is the <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>." ]
+				"What is the <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>?" ]
 		},
 
 		'type': {
@@ -64,7 +64,7 @@ class Verbalizer_05(verbalizer.Verbalizer):
 				[ "What is the <%(e_in_to_e)s> of the <%(x)s> which is a <%(e_in_out)s> ?" ],
 			'plural': 
 				[ "List the <%(e_in_to_e)s> of the <%(x)s> which are <%(e_in_out)s>.", 
-				"What is the <%(e_in_to_e)s> of the <%(x)s> which are <%(e_in_out)s>." ]
+				"What is the <%(e_in_to_e)s> of the <%(x)s> which are <%(e_in_out)s>?" ]
 		}
 	}
 
@@ -451,11 +451,11 @@ class Verbalizer_11(verbalizer.Verbalizer):
 	question_templates = {
 		'vanilla': 
 			[ "List the other <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.",
-			"What are the other <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>." ],
+			"What are the other <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>>" ],
 
 		'type': 
 			[ "List the other <%(e_in_to_e)s> of the <%(x)s> which are <%(e_in_out)s>.", 
-			"What are the other <%(e_in_to_e)s> of the <%(x)s> which are <%(e_in_out)s>." ]
+			"What are the other <%(e_in_to_e)s> of the <%(x)s> which are <%(e_in_out)s>?" ]
 		
 	}
 

@@ -313,7 +313,57 @@ class Verbalizer_08_Count(verbalizer.Verbalizer):
 
 		return _maps, question_format
 
+class Verbalizer_11_Count(verbalizer.Verbalizer):
+	template_id = 11
+	template_type = 'Count'
+	template_id_offset = 100
+	has_x = True
+	has_uri = False
+	question_templates = {
 		
+		'vanilla': 
+			[ "Give me the total number of <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.",
+			"Give me the count of <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.",
+			"Count the other <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.",
+			"Count the number of other <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.",
+			"How many other <%(e_in_to_e)s> are there of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s> ?",
+			"How many other <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s> are there?",
+			"What is the total number of other <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>?" ],
+
+		'type': 
+			[ "Give me the total number of other <%(e_in_to_e)s> are there of the <%(x)s> which are <%(e_in_out)s>.",
+			"Give me the count of other <%(e_in_to_e)s> are there of the <%(x)s> which are <%(e_in_out)s>.",
+			"Count the other <%(e_in_to_e)s> are there of the <%(x)s> which are <%(e_in_out)s>.",
+			"Count the number of other <%(e_in_to_e)s> are there of the <%(x)s> which are <%(e_in_out)s>.",
+			"How many other <%(e_in_to_e)s> are there of the <%(x)s> which are <%(e_in_out)s>?",
+			"How many other <%(e_in_to_e)s> of the <%(x)s> which are <%(e_in_out)s> are there?",
+			"What is the total number of other <%(e_in_to_e)s> of the <%(x)s> which are <%(e_in_out)s>?" ]
+	}
+
+	def filter(self, _datum, _maps):
+		if _datum['countable'] != 'true':
+			return False
+
+		return self.hard_relation_filter(_maps['e_in_to_e'])
+	
+	def rules(self, _datum, _maps):
+		'''
+			No variations
+
+			<finally> if type of URI is person, AND the question begins with 'what', change 'what' to 'who'.			
+
+			Pseudocode:
+				-> pluralize the R, and the uri
+		'''
+		
+		_maps['x'] = pluralize(_maps['x'])
+
+		if _maps['e_in_to_e_in_out'] == 'type':
+			question_format = np.random.choice(self.question_templates['type'], p=[0.05,0.05,0.07,0.08,0.25,0.05,0.45])
+		else:
+			question_format = np.random.choice(self.question_templates['vanilla'], p=[0.05,0.05,0.07,0.08,0.25,0.05,0.45])
+
+		return _maps, question_format
 
 
 if __name__ == "__main__":
@@ -322,3 +372,4 @@ if __name__ == "__main__":
 	template6verbalizer = Verbalizer_06_Count()
 	template7verbalizer = Verbalizer_07_Count()
 	template8verbalizer = Verbalizer_08_Count()
+	template11verbalizer = Verbalizer_11_Count()
