@@ -25,5 +25,12 @@ def insert_into_db(data):
 		print traceback.print_exc()
 		return False
 
+def insert_into_db_single(data):
+	from datum in data:
+		try:
+			result = posts.insert_one(datum)
+		except:
+			print traceback.print_exc()
+		return True
 print insert_into_db(read_from_file("verbalized_json_template_5.txt"))
 #For searching:- pprint.pprint(posts.find_one({u"id":"6"}))
