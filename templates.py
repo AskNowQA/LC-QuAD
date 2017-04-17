@@ -49,14 +49,19 @@
 	"n_entities": 1,
 	"type": "vanilla"
 }, {
-	"template": " SELECT DISTINCT ?uri WHERE { ?x <%(rel_to_a)s> <%(ent_a)s> . ?x <%(rel_to_a)s> ?uri}",
+	"template": " SELECT DISTINCT ?uri, ?x WHERE { ?x <%(e_in_to_e_in_out)s> <%(e_in_out)s> . ?x <%(e_in_to_e)s> ?uri }",
 	"id": 11,
 	"n_entities": 1,
 	"type": "vanilla"
 }, {
-	"template": " SELECT DISTINCT ?uri WHERE { ?x <%(rel_to_a)s> <%(ent_a)s> . ?x <%(rel_to_a)s> ?uri}",
+	"template": " SELECT DISTINCT ?uri WHERE { ?x <%(e_to_e_out)s> <%(e_out_out)s> . ?uri <%(e_to_e_out)s> ?x } ",
 	"id": 12,
 	"n_entities": 1,
+	"type": "vanilla"
+}, {
+	"template": " SELECT DISTINCT ?uri WHERE { ?uri <%(e_to_e_out_1)s> <%(e_out)s> . ?uri <%(e_to_e_out_2)s> <%(e_out)s> } ",
+	"id": 13,
+	"n_entities": 2,
 	"type": "vanilla"
 }, {
 	"template": " SELECT DISTINCT ?uri WHERE { <%(e_in)s> <%(e_in_to_e_1)s> ?uri. <%(e_in)s> <%(e_in_to_e_2)s> ?uri} ",
