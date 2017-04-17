@@ -449,8 +449,10 @@ class Verbalizer_15(verbalizer.Verbalizer):
 	has_x = False
 	has_uri = True
 	question_templates = {
-		'vanilla': 
-			[ "%(prefix)s is the <%(e_in_to_e)s> of the <%(e_in_1)s> and <%(e_in_2)s>" ],
+		'vanilla': {
+			'singular': [ "%(prefix)s is the <%(e_in_to_e)s> of the <%(e_in_1)s> and <%(e_in_2)s>" ],
+			'plural': [ "%(prefix)s are the <%(e_in_to_e)s> of the <%(e_in_1)s> and <%(e_in_2)s>" ],
+		}
 	}
 
 	def filter(self, _datum, _maps):
@@ -465,8 +467,11 @@ class Verbalizer_15(verbalizer.Verbalizer):
 						-> yes?: set maps's prefix to 'who'
 						-> no?: set maps's preix to 'what'
 		'''
-
-		question_format = np.random.choice(self.question_templates['vanilla'])
+		if len(_datum['answer']['uri']) > 3:
+			_maps['uri'] = pluralize(_maps['uri'])
+			question_format = np.random.choice(self.question_templates['vanilla']['plural'])
+		else:
+			question_format = np.random.choice(self.question_templates['vanilla']['singular'])
 
 		if _maps['uri'] == 'person':
 			_maps['prefix'] = 'Who'
@@ -483,8 +488,12 @@ class Verbalizer_16(verbalizer.Verbalizer):
 	has_x = False
 	has_uri = True
 	question_templates = {
-		'vanilla': 
-			[ "%(prefix)s is the <%(e_in_to_e_1)s> of the <%(e_in_1)s> and <%(e_in_to_e_2)s> of the <%(e_in_2)s>" ],
+		'vanilla': {
+			'singular': 
+				[ "%(prefix)s is the <%(e_in_to_e_1)s> of the <%(e_in_1)s> and <%(e_in_to_e_2)s> of the <%(e_in_2)s>" ],
+			'plural': 
+				[ "%(prefix)s are the <%(e_in_to_e_1)s> of the <%(e_in_1)s> and <%(e_in_to_e_2)s> of the <%(e_in_2)s>" ],
+		}
 	}
 
 	def filter(self, _datum, _maps):
@@ -492,17 +501,24 @@ class Verbalizer_16(verbalizer.Verbalizer):
 
 	def rules(self, _datum, _maps):
 		'''
-			if type of URI is person, AND the question begins with 'what', change 'what' to 'who'.			
+			if type of URI is person, AND the question begins with 'what', change 'what' to 'who'.
+			Cardinality check too!			
 
 			Pseudocode:
+				-> see if uri's answer is more than 3,
+					-> yes?: use plural template
+					-> no?: use singular template
 				-> see if uri is person/people
 						-> yes?: set maps's prefix to 'who'
 						-> no?: set maps's preix to 'what'
 		'''
+		if len(_datum['answer']['uri']) > 3:
+			_maps['uri'] = pluralize(_maps['uri'])
+			question_format = np.random.choice(self.question_templates['vanilla']['plural'])
+		else:
+			question_format = np.random.choice(self.question_templates['vanilla']['singular'])
 
-		question_format = np.random.choice(self.question_templates['vanilla'])
-
-		if _maps['uri'] == 'person':
+		if _maps['uri'] in ['person','people']:
 			_maps['prefix'] = 'Who'
 		else:
 			_maps['prefix'] = 'What'

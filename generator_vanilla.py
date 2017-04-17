@@ -327,7 +327,7 @@ def fill_specific_template(_template_id, _mapping,_debug=False):
         template['_id'] = uid.hex
         template['corrected'] = 'false'
     except KeyError:
-        print "fill_specific_template: ERROR. Mapping does not match."
+        print "fill_specific_template: ERROR. Mapping does not match. ID: ", _template_id
         return False
 
     # Include the mapping within the template object
@@ -374,8 +374,8 @@ def fill_specific_template(_template_id, _mapping,_debug=False):
         mapping_type[key] = dbp.get_type_of_resource(template['mapping'][key],_filter_dbpedia = True)
 
     template['mapping_type'] = mapping_type
-    if _debug:
-        pprint(template)
+    # if _debug:
+    #     pprint(template)
     # Push it onto the SPARQL List
     # perodic write in file.
     # @TODO: instead of file use a database.
@@ -877,6 +877,7 @@ def fill_templates(_graph, _uri):
 
                 #Throw it in a functoin which will put it in the list with appropriate bookkeeping
                 try:
+                    print "Filling Template 14"
                     fill_specific_template(_template_id=14, _mapping = mapping)
                     counter_template14 += 1
 
@@ -984,16 +985,16 @@ def fill_templates(_graph, _uri):
 sparqls = {}
 dbp = db_interface.DBPedia(_verbose=True)
 def generate_answer(_uri, dbp):
-    print _uri
+    # print _uri
     try:
         uri = _uri
 
         # Generate the local subgraph
         graph = get_local_subgraph(uri)
-        print "the graph is completed"
+        # print "the graph is completed"
         # Generate SPARQLS based on subgraph
         fill_templates(graph, _uri=uri)
-        print "done with one entity"
+        # print "done with one entity"
     except:
         print traceback.print_exc()
 
