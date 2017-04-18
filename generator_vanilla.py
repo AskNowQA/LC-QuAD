@@ -26,7 +26,7 @@ import time
 dbp = None  # DBpedia interface object #To be instantiated when the code is run by main script/unit testing script
 relevant_properties = open('resources/relations.txt').read().split('\n')  # Contains the whitelisted props types
 relevent_entity_classes = open('resources/entity_classes.txt').read().split('\n') #Contains whitelisted entities classes
-list_of_entities = open('resources/entities.txt').read().split('\n')
+list_of_entities = open('resources/entities_bigasfuck.txt').read().split('\n')
 '''contains list of entites for which the question would be asked '''
 
 templates = json.load(open('templates.py'))  # Contains all the templates existing in templates.py
@@ -66,7 +66,7 @@ one_triple_left = '''
 '''
 
 
-def pruning(_results, _keep_no_results = 100, _filter_properties = True, _filter_literals = True, _filter_entities = True ):
+def pruning(_results, _keep_no_results = 100, _filter_properties = True, _filter_literals = True, _filter_entities = False ):
     '''
     Function: Implements pruing in the results . used to push the results of different queries into the subgraph.
         >First prunes based on properties and entite classes. After this if the result length is still more than
@@ -215,7 +215,7 @@ def get_local_subgraph(_uri):
     # print "inserting into left graph "
     start = time.clock()
     results = pruning(_results=results, _keep_no_results=100, _filter_properties=True, _filter_literals=True,
-                      _filter_entities=True)
+                      _filter_entities=False)
     insert_triple_in_subgraph(G, _results=results,
                               _labels=labels, _direction=False,
                               _origin_node=_uri, _filter_properties=True)
@@ -389,12 +389,18 @@ def fill_specific_template(_template_id, _mapping,_debug=False):
     try:
         sparqls[_template_id].append(template)
         # print len(sparqls[_template_id])
-        if len(sparqls[_template_id]) > 100000:
+        if len(sparqls[_template_id]) > 100:
 
-            with open('output/template%s.txt' % str(_template_id), "a+") as out:
-                pprint(sparqls[_template_id], stream=out)
-            with open('output/template%s.json' % str(_template_id), "a+") as out:
-                json.dump(sparqls[_template_id], out)
+            
+            fo = open('sparqls/template%d.txt' % _template_id, 'a+')
+            for value in sparqls[_template_id]:
+                fo.writelines(json.dumps(value) + "\n")
+            fo.close()
+
+            # with open('output/template%s.txt' % str(_template_id), "a+") as out:
+            #     pprint(sparqls[_template_id], stream=out)
+            # with open('output/template%s.json' % str(_template_id), "a+") as out:
+            #     json.dump(sparqls[_template_id], out)
             sparqls[_template_id] = []
 
     except KeyError:
@@ -1210,7 +1216,7 @@ for entity in list_of_entities:
 
 print "Trying to write to file!"
 for key in sparqls:
-    fo = open('sparqls/template%d.txt' % key, 'w+')
+    fo = open('sparqls/template%d.txt' % key, 'a+')
     for value in sparqls[key]:
         fo.writelines(json.dumps(value) + "\n")
     fo.close()
