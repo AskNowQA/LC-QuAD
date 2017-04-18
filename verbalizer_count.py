@@ -113,7 +113,7 @@ class Verbalizer_05_Count(verbalizer.Verbalizer):
 		_maps['x'] = pluralize(_maps['x'])
 
 		#Check for the type rule
-		if _maps['e_in_to_e_in_out'] == 'type':
+		if _maps['e_in_to_e_in_out'].lower() == 'type':
 			question_format = np.random.choice(self.question_templates['type'], p = [0.10,0.07,0.08,0.30,0.05,0.40])
 		else:
 			question_format = np.random.choice(self.question_templates['vanilla'], p = [0.10,0.07,0.08,0.30,0.05,0.40])
@@ -175,7 +175,7 @@ class Verbalizer_06_Count(verbalizer.Verbalizer):
 		_maps['uri'] = pluralize(_maps['uri'])
 
 		#Check for the type rule
-		if _maps['e_out_to_e_out_out'] == 'type':
+		if _maps['e_out_to_e_out_out'].lower() == 'type':
 			question_format = np.random.choice(self.question_templates['type'], p = [0.05,0.05,0.035,0.035,0.04,0.04,0.15,0.15,0.025,0.025,0.2,0.2])
 		else:
 			question_format = np.random.choice(self.question_templates['vanilla'], p = [0.1,0.07,0.08,0.3,0.05,0.4])
@@ -302,11 +302,11 @@ class Verbalizer_08_Count(verbalizer.Verbalizer):
 
 		_maps['uri'] = pluralize(_maps['uri'])
 
-		if _maps['e_to_e_out_1'] == 'type' and _maps['e_to_e_out_2'] == 'type':
+		if _maps['e_to_e_out_1'].lower() == 'type' and _maps['e_to_e_out_2'].lower() == 'type':
 			question_format = np.random.choice(self.question_templates['type']['both'], p = [ 0.05,0.05,0.07,0.08,0.25,0.05,0.45])
-		elif _maps['e_to_e_out_1'] == 'type':
+		elif _maps['e_to_e_out_1'].lower() == 'type':
 			question_format = np.random.choice(self.question_templates['type']['e_to_e_out_1'],p = [ 0.05,0.05,0.07,0.08,0.25,0.05,0.45])
-		elif _maps['e_to_e_out_2'] == 'type':
+		elif _maps['e_to_e_out_2'].lower() == 'type':
 			question_format = np.random.choice(self.question_templates['type']['e_to_e_out_2'],p = [ 0.05,0.05,0.07,0.08,0.25,0.05,0.45])
 		else:
 			question_format = np.random.choice(self.question_templates['vanilla'], p = [ 0.05,0.05,0.07,0.08,0.25,0.05,0.45])
@@ -358,7 +358,7 @@ class Verbalizer_11_Count(verbalizer.Verbalizer):
 		
 		_maps['x'] = pluralize(_maps['x'])
 
-		if _maps['e_in_to_e_in_out'] == 'type':
+		if _maps['e_in_to_e_in_out'].lower() == 'type':
 			question_format = np.random.choice(self.question_templates['type'], p=[0.05,0.05,0.07,0.08,0.25,0.05,0.45])
 		else:
 			question_format = np.random.choice(self.question_templates['vanilla'], p=[0.05,0.05,0.07,0.08,0.25,0.05,0.45])

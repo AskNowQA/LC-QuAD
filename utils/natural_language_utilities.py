@@ -18,6 +18,27 @@ def has_url(_string):
 		return True
 	return False
 
+def is_clean_url(_string):
+	'''
+		!!!! ATTENTION !!!!!
+		Radical changes about. 
+
+	'''
+	if validators.url(_string):
+		
+		if _string[-3:-1] == '__' and _string[-1] in string.digits:
+			return False
+		if _string[-1] == ',':
+			return False
+		if 'dbpedia' not in _string:
+			return False
+
+		#Lets kick out all the literals too?
+		return True
+	else:
+		return False
+			
+
 def has_shorthand(_string):
 	splitted_string = _string.split(':')
 	

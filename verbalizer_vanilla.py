@@ -47,7 +47,11 @@ class Verbalizer_01(verbalizer.Verbalizer):
 		'''
 		if _datum['answer_count']['uri'] > 3:
 			#Plural rule
-			_maps['uri'] = pluralize(_maps['uri'])
+			try: 
+				_maps['uri'] = pluralize(_maps['uri'])
+			except:
+				print "Cannot pluralize ", _maps['uri']
+
 			question_format = np.random.choice(self.question_templates['plural'], p=[0.8,0.2])
 		else:
 			question_format = np.random.choice(self.question_templates['vanilla'], p=[0.8,0.2])
@@ -148,7 +152,7 @@ class Verbalizer_05(verbalizer.Verbalizer):
 			_maps['x'] = pluralize(_maps['x'])
 
 			#Check for the type rule
-			if _maps['e_in_to_e_in_out'] == 'type':
+			if _maps['e_in_to_e_in_out'].lower() == 'type':
 				question_format = np.random.choice(self.question_templates['type']['plural'], p = [0.2,0.8])
 			else:
 				question_format = np.random.choice(self.question_templates['vanilla']['plural'], p = [0.2,0.8])
@@ -157,7 +161,7 @@ class Verbalizer_05(verbalizer.Verbalizer):
 			#Plural -> NO
 
 			#Check for the type rule
-			if _maps['e_in_to_e_in_out'] == 'type':
+			if _maps['e_in_to_e_in_out'].lower() == 'type':
 				question_format = np.random.choice(self.question_templates['type']['singular'])
 			else:
 				question_format = np.random.choice(self.question_templates['vanilla']['singular'])
@@ -234,7 +238,7 @@ class Verbalizer_06(verbalizer.Verbalizer):
 			_maps['uri'] = pluralize(_maps['uri'])
 
 			#Check for the type rule
-			if _maps['e_out_to_e_out_out'] == 'type':
+			if _maps['e_out_to_e_out_out'].lower() == 'type':
 				question_format = np.random.choice(self.question_templates['type']['plural'], p = [0.4,0.4,0.1,0.1])
 			else:
 				question_format = np.random.choice(self.question_templates['vanilla']['plural'], p = [0.8,0.2])
@@ -243,13 +247,13 @@ class Verbalizer_06(verbalizer.Verbalizer):
 			#Plural -> NO
 
 			#Check for the type rule
-			if _maps['e_out_to_e_out_out'] == 'type':
+			if _maps['e_out_to_e_out_out'].lower() == 'type':
 				question_format = np.random.choice(self.question_templates['type']['singular'])
 			else:
 				question_format = np.random.choice(self.question_templates['vanilla']['singular'])
 
 		#Check for the What/Who rule
-		if _maps['uri'] in ['people','person']:
+		if _maps['uri'].lower() in ['people','person']:
 			_maps['prefix'] = 'Who'
 		else:
 			_maps['prefix'] = 'What'
@@ -306,7 +310,7 @@ class Verbalizer_07(verbalizer.Verbalizer):
 					-> yes?: set maps's prefix to 'who'
 					-> no?: set maps's preix to 'what'
 		'''
-		if _maps['e_to_e_out'].split()[-1] == 'by':
+		if _maps['e_to_e_out'].split()[-1].lower() == 'by':
 
 			question_format = self.question_templates['preposition']
 
@@ -323,7 +327,7 @@ class Verbalizer_07(verbalizer.Verbalizer):
 				question_format = np.random.choice(self.question_templates['vanilla']['singular'], p=[0.25,0.75])
 
 		#Person Rule Condition: If the question has a 'What' as it's first word.    
-		if _maps['uri'] in ["person","people"]:
+		if _maps['uri'].lower() in ["person","people"]:
 			_maps['prefix'] = 'Who'
 		else:
 			_maps['prefix'] = 'What'
@@ -414,7 +418,7 @@ class Verbalizer_08(verbalizer.Verbalizer):
 		'''
 
 		#Checking for 'type' in the 'e_to_e_out_1'
-		if _maps['e_to_e_out_1'] == 'type' and _maps['e_to_e_out_2'] == 'type':
+		if _maps['e_to_e_out_1'].lower() == 'type' and _maps['e_to_e_out_2'].lower() == 'type':
 			if len(_datum['answer']['uri']) > 3:
 				#Plural
 				_maps['uri'] = pluralize(_maps['uri'])
@@ -422,7 +426,7 @@ class Verbalizer_08(verbalizer.Verbalizer):
 			else:
 				#Singular
 				question_format = np.random.choice(self.question_templates['type']['both']['singular'])
-		elif _maps['e_to_e_out_1'] == 'type':
+		elif _maps['e_to_e_out_1'].lower() == 'type':
 			if len(_datum['answer']['uri']) > 3:
 				#Plural
 				_maps['uri'] = pluralize(_maps['uri'])
@@ -430,7 +434,7 @@ class Verbalizer_08(verbalizer.Verbalizer):
 			else:
 				#Singular
 				question_format = np.random.choice(self.question_templates['type']['e_to_e_out_1']['singular'])
-		elif _maps['e_to_e_out_2'] == 'type':
+		elif _maps['e_to_e_out_2'].lower() == 'type':
 			if len(_datum['answer']['uri']) > 3:
 				#Plural
 				_maps['uri'] = pluralize(_maps['uri'])
@@ -448,7 +452,7 @@ class Verbalizer_08(verbalizer.Verbalizer):
 				question_format = np.random.choice(self.question_templates['vanilla']['singular'])
 
 		#Person Rule Condition: If the question has a 'What' as it's first word.    
-		if _maps['uri'] in ["person","people"]:
+		if _maps['uri'].lower() in ["person","people"]:
 			_maps['prefix'] = 'Who'
 		else:
 			_maps['prefix'] = 'What'
@@ -483,7 +487,7 @@ class Verbalizer_09(verbalizer.Verbalizer):
 
 		question_format = np.random.choice(self.question_templates['vanilla'])
 
-		if _maps['uri'] == 'person':
+		if _maps['uri'].lower() == 'person':
 			_maps['prefix'] = 'Who'
 		else:
 			_maps['prefix'] = 'What'
@@ -532,7 +536,7 @@ class Verbalizer_11(verbalizer.Verbalizer):
 		_maps['x'] = pluralize(_maps['x'])
 
 		#Check for the type rule
-		if _maps['e_in_to_e_in_out'] == 'type':
+		if _maps['e_in_to_e_in_out'].lower() == 'type':
 			question_format = np.random.choice(self.question_templates['type'], p = [0.2,0.8])
 		else:
 			question_format = np.random.choice(self.question_templates['vanilla'], p = [0.2,0.8])
@@ -571,7 +575,7 @@ class Verbalizer_15(verbalizer.Verbalizer):
 		else:
 			question_format = np.random.choice(self.question_templates['vanilla']['singular'])
 
-		if _maps['uri'] == 'person':
+		if _maps['uri'].lower() == 'person':
 			_maps['prefix'] = 'Who'
 		else:
 			_maps['prefix'] = 'What'
@@ -616,7 +620,7 @@ class Verbalizer_16(verbalizer.Verbalizer):
 		else:
 			question_format = np.random.choice(self.question_templates['vanilla']['singular'])
 
-		if _maps['uri'] in ['person','people']:
+		if _maps['uri'].lower() in ['person','people']:
 			_maps['prefix'] = 'Who'
 		else:
 			_maps['prefix'] = 'What'

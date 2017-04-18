@@ -15,6 +15,7 @@ from operator import itemgetter
 from pprint import pprint
 import traceback
 import warnings
+import pickle
 import random
 import redis
 import json
@@ -23,9 +24,6 @@ import json
 import natural_language_utilities as nlutils
 
 #GLOBAL MACROS
-# DBPEDIA_ENDPOINTS = ['http://live.dbpedia.org/sparql/']
-# 'http://dbpedia.org/sparql/','http://live.dbpedia.org/sparql/'
-#EIS dbpedia endpoint - 'http://131.220.153.66:8900/sparql'
 DBPEDIA_ENDPOINTS = ['http://dbpedia.org/sparql/','http://live.dbpedia.org/sparql/']
 MAX_WAIT_TIME = 1.0
 
@@ -63,6 +61,13 @@ class DBPedia:
 		self.verbose = _verbose
 		self.sparql_endpoint = DBPEDIA_ENDPOINTS[0]
 		self.r  = redis.StrictRedis(host='localhost', port=6379, db=_db_name)
+		try:
+			self.labels = pickle.load(open('resources/labels.pickle'))
+		except:
+			print "Label Cache not found. Creating a new one"
+			traceback.print_exc()
+			self.labels = {}
+		self.fresh_labels = 0
 
 	#initilizing the redis server.
 
@@ -216,6 +221,8 @@ class DBPedia:
 			Function used to fetch the english label for a given resource.
 			Not thoroughly tested tho.
 
+			Also now it stores the labels in a pickled folder and 
+
 			Always returns one value
 		'''
 
@@ -225,19 +232,42 @@ class DBPedia:
 
 		#Preparing the Query
 		_resource_uri = '<'+_resource_uri+'>'
-
+		
+		#First try finding it in file
 		try:
-			response = self.shoot_custom_query(GET_LABEL_OF_RESOURCE % {'target_resource': _resource_uri})
-		except:
-			traceback.print_exc()
+			label = self.labels[_resource_uri]
+			print "Label for %s found in cache." % _resource_uri
+			return label
 
-		#Parsing the results
-		try:
-			results = [x[u'label'][u'value'].encode('ascii','ignore') for x in response[u'results'][u'bindings'] ]
-		except:
-			traceback.print_exc()
+		except KeyError:
+			#Label not found in file. Throw it as a query to DBpedia
+			try:
+				response = self.shoot_custom_query(GET_LABEL_OF_RESOURCE % {'target_resource': _resource_uri})
+			
+				results = [x[u'label'][u'value'].encode('ascii','ignore') for x in response[u'results'][u'bindings'] ]
 
-		return results[0]
+				self.labels[_resource_uri[1:-1]] = results[0]
+				self.fresh_labels += 1
+
+				if self.fresh_labels >= 100:
+					f = open('resources/labels.pickle','w+')
+					pickle.dump(self.labels, f)
+					f.close()
+					self.fresh_labels = 0
+					print "Labels dumped to file."
+
+				return results[0]
+			except:
+				print "in Exception"
+				# traceback.print_exc()
+				print _resource_uri, results
+				# raw_input()
+				return nlutils.get_label_via_parsing(_resource_uri)
+
+
+		except:
+			return nlutils.get_label_via_parsing(_resource_uri)
+		
 
 	def get_most_specific_class(self, _resource_uri):
 		'''

@@ -16,7 +16,9 @@ import json
 import numpy as np
 from pprint import pprint
 from pattern.en import pluralize
+import utils.dbpedia_interface as db_interface
 import utils.natural_language_utilities as nlutils
+
 
 class Verbalizer:
 
@@ -49,6 +51,7 @@ class Verbalizer:
 		questions = []			#Holds the verbalized data
 
 		self.hard_relation_filter_map = {} 		#Keeps count of relations and limits. (Used in filter class)
+		self.dbp = db_interface.DBPedia(_verbose=True) 	#To be used to fetch labels
 
 		with open('sparqls/template%s.txt' % self.template_id) as data_file:
 			for line in data_file:
@@ -85,7 +88,8 @@ class Verbalizer:
 			#Convert the URIs to their corresponding labels
 			#@TODO: Use dbpedia labels to do this.
 			for element in maps:
-				maps[element] = nlutils.get_label_via_parsing(maps[element], lower = True)  #Get their labels
+				# maps[element] = nlutils.get_label_via_parsing(maps[element], lower = True)  #Get their labels
+				maps[element] = self.dbp.get_label(maps[element])  #Get their labels
 
 			#Select a template for this question
 			maps, question_format = self.rules(_maps = maps,_datum = datum)
