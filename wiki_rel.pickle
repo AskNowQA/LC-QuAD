@@ -1,0 +1,2175 @@
+(dp0
+VendDate
+p1
+(lp2
+S'end date'
+p3
+aS'endtime'
+p4
+aS'enddate'
+p5
+aS'left office'
+p6
+aS'divorced'
+p7
+aS'to time'
+p8
+aS'end time'
+p9
+aS'cease date'
+p10
+aS'to'
+p11
+aS'dissolved'
+p12
+aS'closed'
+p13
+aS'cease time'
+p14
+aS'ending'
+p15
+aS'fall date'
+p16
+aS'until'
+p17
+asVicaoLocationIdentifier
+p18
+(lp19
+S'ICAO airport code'
+p20
+aS'International Civil Aviation Organization airport code'
+p21
+aS'ICAO aerodrome code'
+p22
+aS'ICAO airfield code'
+p23
+asVfounder
+p24
+(lp25
+S'founder'
+p26
+aS'is founded by'
+p27
+aS'founded'
+p28
+aS'founded by'
+p29
+aS'founders'
+p30
+aS'co-founder'
+p31
+asVicaoAirlineCode
+p32
+(lp33
+S'International Civil Aviation Organization airline designator'
+p34
+aS'ICAO airline designator'
+p35
+asVamgid
+p36
+(lp37
+S'AllMovie movie ID'
+p38
+asVheadquarter
+p39
+(lp40
+S'headquarters location'
+p41
+aS'HQ'
+p42
+aS'seat'
+p43
+aS'admin HQ'
+p44
+aS'head office location'
+p45
+aS'principle office'
+p46
+aS'garrison'
+p47
+asVdiscovered
+p48
+(lp49
+S'discovery date'
+p50
+aS'date discovered'
+p51
+aS'date of discovery'
+p52
+aS'time of discovery'
+p53
+asVmanager
+p54
+(lp55
+S'coach'
+p56
+aS'head coach'
+p57
+aS'team manager'
+p58
+aS'manager'
+p59
+aS'senior coach'
+p60
+aS'club manager'
+p61
+asVrkdArtistsId
+p62
+(lp63
+S'RKDartists ID'
+p64
+asVbattle
+p65
+(lp66
+S'in action'
+p67
+aS'participated in conflict'
+p68
+aS'in conflict'
+p69
+aS'theatre'
+p70
+aS'participant in conflict'
+p71
+aS'battle'
+p72
+aS'theater'
+p73
+aS'war'
+p74
+aS'conflict'
+p75
+asVorcidId
+p76
+(lp77
+S'ORCID iD'
+p78
+aS'ORCID'
+p79
+aS'ORC ID'
+p80
+aS'Open Research Contributor ID'
+p81
+asVsettlement
+p82
+(lp83
+S'is in the local government area of'
+p84
+aS'is in the voivodeship of'
+p85
+aS'based in'
+p86
+aS'is in the state of'
+p87
+aS'Indian reservation'
+p88
+aS'is in the principal area of'
+p89
+aS'is in the region of'
+p90
+aS'is in the Indian reservation of'
+p91
+aS'is in the district of'
+p92
+aS'in'
+p93
+aS'is in the shire of'
+p94
+aS'in administrative unit'
+p95
+aS'is in the administrative region of'
+p96
+aS'city'
+p97
+aS'is in the territory of'
+p98
+aS'happens in'
+p99
+aS'locality'
+p100
+aS'is in the Indian reserve of'
+p101
+aS'is in the administrative unit'
+p102
+aS'is in the municipality of'
+p103
+aS'is in the parish of'
+p104
+aS'state'
+p105
+aS'is in the department of'
+p106
+aS'location (administrative territorial entity)'
+p107
+aS'is in the borough of'
+p108
+aS'is in the county of'
+p109
+aS'is in the village of'
+p110
+aS'is in the ward of'
+p111
+aS'is in the commune of'
+p112
+aS'located in the administrative unit'
+p113
+aS'located in administrative unit'
+p114
+aS'located in the administrative territorial entity'
+p115
+aS'is in the rural city of'
+p116
+aS'is in the city of'
+p117
+aS'town'
+p118
+aS'in the administrative unit'
+p119
+aS'administrative territorial entity'
+p120
+aS'is in the settlement of'
+p121
+aS'is in the town of'
+p122
+aS'is in administrative unit'
+p123
+aS'is in the province of'
+p124
+aS'is in the prefecture of'
+p125
+aS'is located in'
+p126
+asVcontinent
+p127
+(lp128
+S'continent'
+p129
+asVoccupation
+p130
+(lp131
+S'career'
+p132
+aS'work'
+p133
+aS'profession'
+p134
+aS'job'
+p135
+aS'craft'
+p136
+aS'employment'
+p137
+aS'occupation'
+p138
+asVdiscipline
+p139
+(lp140
+S'discipline'
+p141
+aS'scientific area'
+p142
+aS'domain'
+p143
+aS'field of study'
+p144
+aS'area'
+p145
+aS'academic subject'
+p146
+aS'field of work'
+p147
+aS'academic area'
+p148
+aS'fields'
+p149
+aS'specialism'
+p150
+aS'academic discipline'
+p151
+aS'scientific discipline'
+p152
+aS'subject'
+p153
+asVdiscoverer
+p154
+(lp155
+S'discoverer or inventor'
+p156
+aS'discoverer'
+p157
+aS'invented by'
+p158
+aS'discovered by'
+p159
+aS'first described by'
+p160
+aS'coined by'
+p161
+aS'inventor'
+p162
+asVreligion
+p163
+(lp164
+S'religion'
+p165
+aS'faith'
+p166
+aS'life stance'
+p167
+aS'religious affiliation'
+p168
+aS'denomination'
+p169
+asVfather
+p170
+(lp171
+S'dad'
+p172
+aS'parent'
+p173
+aS'has father'
+p174
+aS'papa'
+p175
+aS'man, the parent of that person'
+p176
+aS'father'
+p177
+aS'is child of'
+p178
+aS'is daughter of'
+p179
+aS'daddy'
+p180
+aS'is son of'
+p181
+asVemployer
+p182
+(lp183
+S'works at'
+p184
+aS'employed by'
+p185
+aS'working for'
+p186
+aS'workplace'
+p187
+aS'employer'
+p188
+asVinstrument
+p189
+(lp190
+S'instrument'
+p191
+aS'plays'
+p192
+asVulanId
+p193
+(lp194
+S'ULAN'
+p195
+aS'JPG'
+p196
+aS'Getty ULAN'
+p197
+aS'Union List of Artist Names'
+p198
+aS'ULAN identifier'
+p199
+aS'ULAN ID'
+p200
+asVokatoCode
+p201
+(lp202
+S'OKATO identifier'
+p203
+aS'OKATO ID'
+p204
+asVsudocId
+p205
+(lp206
+S'IdRef'
+p207
+aS'SUDOC authorities'
+p208
+asVfuelSystem
+p209
+(lp210
+S'fuel system'
+p211
+asVmeshId
+p212
+(lp213
+S'MeSH ID'
+p214
+aS'MeSH Unique ID'
+p215
+asVceo
+p216
+(lp217
+S'CEO'
+p218
+aS'ceo'
+p219
+aS'chief executive'
+p220
+aS'chief executive officer'
+p221
+asVhighwaySystem
+p222
+(lp223
+S'road type'
+p224
+aS'routes system'
+p225
+aS'transport network'
+p226
+aS'highway system'
+p227
+aS'system of routes'
+p228
+aS'part of network'
+p229
+aS'network of routes'
+p230
+asVndlId
+p231
+(lp232
+S'NDLA ID'
+p233
+aS'NDL Authorities'
+p234
+aS'NDLA identifier'
+p235
+aS'ndl'
+p236
+aS'NDL identifier'
+p237
+aS'NDLAuth ID'
+p238
+aS'NDL ID'
+p239
+asVcoatOfArms
+p240
+(lp241
+S'symbol'
+p242
+aS'heraldic emblem'
+p243
+aS'arms'
+p244
+aS'coat of arms image'
+p245
+aS'CoA image'
+p246
+aS'heraldic representation'
+p247
+asVistat
+p248
+(lp249
+S'ISTAT ID'
+p250
+asVreleaseDate
+p251
+(lp252
+S'year of publication'
+p253
+aS'time of publication'
+p254
+aS'initial release'
+p255
+aS'publication'
+p256
+aS'publication time'
+p257
+aS'released'
+p258
+aS'date of publication'
+p259
+aS'date published'
+p260
+aS'published'
+p261
+aS'date released'
+p262
+aS'dop'
+p263
+aS'date of release'
+p264
+aS'release date'
+p265
+aS'publication date'
+p266
+asVselibrId
+p267
+(lp268
+S'LIBRIS'
+p269
+aS'SELIBR'
+p270
+asVlaunchVehicle
+p271
+(lp272
+S'carrier rocket'
+p273
+aS'space launch vehicle'
+p274
+aS'launch vehicle'
+p275
+asVfollows
+p276
+(lp277
+S'predecessor'
+p278
+aS'prequel is'
+p279
+aS'sequel of'
+p280
+aS'follows'
+p281
+aS'previous is'
+p282
+aS'succeeds to'
+p283
+aS'before was'
+p284
+aS'preceded by'
+p285
+aS'split from'
+p286
+asVnlaId
+p287
+(lp288
+S'AuCNLKIN'
+p289
+aS'AuCNLKIN ID'
+p290
+aS'NLA (Australia) identifier'
+p291
+aS'NLA Kinetica Service identifier'
+p292
+aS'NLA (Australia) ID'
+p293
+aS'Libraries Australia identifier'
+p294
+aS'CNLKIN'
+p295
+aS'CNL Kinetica Service identifier'
+p296
+aS'AuCNLKIN identifier'
+p297
+aS'Australian National Bibliographic Database identifier'
+p298
+aS'CNLKIN identifier'
+p299
+asVhighestPoint
+p300
+(lp301
+S'highest peak'
+p302
+aS'highest point'
+p303
+aS'zenith'
+p304
+asVlaunchDate
+p305
+(lp306
+S'spacecraft launch date'
+p307
+aS'launch time'
+p308
+aS'date of spacecraft launch'
+p309
+aS'launch date'
+p310
+aS'time of spacecraft launch'
+p311
+asVbnfId
+p312
+(lp313
+S'BnF identifier'
+p314
+aS'Biblioth\xc3\xa8que nationale de France ID'
+p315
+aS'BnF ID'
+p316
+asVcreator
+p317
+(lp318
+S'creator'
+p319
+aS'painters'
+p320
+aS'sculptor'
+p321
+aS'created by'
+p322
+aS'sculptors'
+p323
+aS'creators'
+p324
+aS'artist (non-musical)'
+p325
+aS'painter'
+p326
+asViso6392Code
+p327
+(lp328
+S'ISO 639-2 code'
+p329
+aS'ISO639-2'
+p330
+aS'iso639-2'
+p331
+aS'iso 639-2'
+p332
+asVfoundingDate
+p333
+(lp334
+S'construction date'
+p335
+aS'date commenced'
+p336
+aS'written on date'
+p337
+aS'date founded'
+p338
+aS'founded'
+p339
+aS'year created'
+p340
+aS'establishment date'
+p341
+aS'time of inception'
+p342
+aS'formation date'
+p343
+aS'constructed'
+p344
+aS'year founded'
+p345
+aS'established'
+p346
+aS'date created'
+p347
+aS'formed on date'
+p348
+aS'inititated'
+p349
+aS'date constructed'
+p350
+aS'foundation/creation date'
+p351
+aS'date of creation'
+p352
+aS'year commenced'
+p353
+aS'year established'
+p354
+aS'date formed'
+p355
+aS'date of foundation or creation'
+p356
+aS'date of establishment'
+p357
+aS'foundation'
+p358
+aS'date of foundation'
+p359
+aS'year incorporated'
+p360
+aS'created on date'
+p361
+aS'dedication date'
+p362
+aS'formed in'
+p363
+aS'established on date'
+p364
+aS'founding date'
+p365
+aS'commencement date'
+p366
+aS'inception'
+p367
+aS'time of foundation or creation'
+p368
+aS'year written'
+p369
+aS'date incorporated'
+p370
+aS'formed at'
+p371
+aS'date of incorporation'
+p372
+aS'created'
+p373
+aS'creation date'
+p374
+aS'commenced on date'
+p375
+aS'incorporation date'
+p376
+aS'founded on date'
+p377
+aS'date of commencement'
+p378
+aS'foundation date'
+p379
+aS'incorporated'
+p380
+aS'formation'
+p381
+aS'date of founding'
+p382
+aS'incorporated on date'
+p383
+asVmusicBy
+p384
+(lp385
+S'music by'
+p386
+aS'songwriter'
+p387
+aS'composed by'
+p388
+aS'written by'
+p389
+aS'musical score by'
+p390
+aS'composer'
+p391
+asVsex
+p392
+(lp393
+S'woman'
+p394
+aS'gender'
+p395
+aS'intersex'
+p396
+aS'sex'
+p397
+aS'biological sex'
+p398
+aS'gender expression'
+p399
+aS'sex or gender'
+p400
+aS'female'
+p401
+aS'male'
+p402
+aS'gender identity'
+p403
+aS'man'
+p404
+asVapparentMagnitude
+p405
+(lp406
+S'apparent magnitude'
+p407
+asVnamedAfter
+p408
+(lp409
+S'namesake'
+p410
+aS'toponym'
+p411
+aS'etymology'
+p412
+aS'name after'
+p413
+aS'named after'
+p414
+aS'named for'
+p415
+aS'eponym'
+p416
+asVdistributor
+p417
+(lp418
+S'distributor'
+p419
+aS'distributed by'
+p420
+asVconstellation
+p421
+(lp422
+S'constellation'
+p423
+asVofsCode
+p424
+(lp425
+S'BFS number'
+p426
+aS'Swiss municipality code'
+p427
+asVplaceOfBurial
+p428
+(lp429
+S'buried in'
+p430
+aS'burial place'
+p431
+aS'grave at'
+p432
+aS'place of grave'
+p433
+aS'tomb'
+p434
+aS'place of burial'
+p435
+aS'location of burial'
+p436
+aS'resting place'
+p437
+asVanthem
+p438
+(lp439
+S'anthem'
+p440
+aS'official song'
+p441
+aS'march'
+p442
+aS'national anthem'
+p443
+asVunloCode
+p444
+(lp445
+S'United Nations LOCODE'
+p446
+aS'UN/LOCODE'
+p447
+aS'UN location code'
+p448
+aS'LOCCODE'
+p449
+aS'UNECE location code'
+p450
+aS'UNECE LOCODE'
+p451
+aS'LOCODE'
+p452
+aS'United Nations location code'
+p453
+asVcapital
+p454
+(lp455
+S'administrative centre'
+p456
+aS'capital'
+p457
+aS'principal place'
+p458
+aS'capital town'
+p459
+aS'county seat'
+p460
+aS'chef-lieu'
+p461
+aS'administrative headquarters'
+p462
+aS'capital city'
+p463
+asVisPartOf
+p464
+(lp465
+S'part of-property'
+p466
+aS'part of'
+p467
+aS'section of'
+p468
+aS'system of'
+p469
+aS'assembly of'
+p470
+aS'meronym of'
+p471
+aS'within a set'
+p472
+aS'merged with'
+p473
+aS'merged into'
+p474
+aS'subsystem of'
+p475
+aS'subassembly of'
+p476
+aS'contained within'
+p477
+asVbibsysId
+p478
+(lp479
+S'BIBSYS identifier'
+p480
+aS'BIBSYS ID'
+p481
+asVdeveloper
+p482
+(lp483
+S'developed by'
+p484
+aS'developer'
+p485
+asVmovement
+p486
+(lp487
+S'school'
+p488
+aS'movement'
+p489
+asVeinecsNumber
+p490
+(lp491
+S'EINECS No.'
+p492
+aS'EC No.'
+p493
+aS'EC no.'
+p494
+aS'EC#'
+p495
+aS'European Community number'
+p496
+asVfollowedBy
+p497
+(lp498
+S'prequel of'
+p499
+aS'next is'
+p500
+aS'succeded by'
+p501
+aS'sequel is'
+p502
+aS'precedes'
+p503
+aS'followed by'
+p504
+aS'successor'
+p505
+asVgeneralManager
+p506
+(lp507
+S'general manager'
+p508
+asVcoverArtist
+p509
+(lp510
+S'cover artist'
+p511
+asVhomeport
+p512
+(lp513
+S'homeport'
+p514
+aS'home port'
+p515
+asVteam
+p516
+(lp517
+S'team played for'
+p518
+aS'member of sports team'
+p519
+aS'of team'
+p520
+aS'member of team'
+p521
+aS'teams played for'
+p522
+aS'team'
+p523
+aS'plays for'
+p524
+aS'played for'
+p525
+aS'club played for'
+p526
+asVdcc
+p527
+(lp528
+S'DDC'
+p529
+aS'Q48460'
+p530
+aS'Dewey Decimal Classification'
+p531
+asVbirthName
+p532
+(lp533
+S'born as'
+p534
+aS'birth name (monolingual text)'
+p535
+aS'maiden name'
+p536
+aS'bn'
+p537
+aS'nee'
+p538
+aS'birthname'
+p539
+aS'name at birth'
+p540
+aS'bname'
+p541
+aS'n\xc3\xa9e'
+p542
+aS'birth name'
+p543
+aS'full name at birth'
+p544
+asVeyeColor
+p545
+(lp546
+S'eyecolor'
+p547
+aS'eye color'
+p548
+aS'eyecolour'
+p549
+aS'eye colour'
+p550
+asVviafId
+p551
+(lp552
+S'VIAF identifier'
+p553
+aS'Virtual International Authority File'
+p554
+aS'VIAF'
+p555
+aS'VIAF ID'
+p556
+asVarchitecturalStyle
+p557
+(lp558
+S'architecture'
+p559
+aS'style of architecture'
+p560
+aS'architectural style'
+p561
+asVstarring
+p562
+(lp563
+S'starring'
+p564
+aS'cast member'
+p565
+aS'actress'
+p566
+aS'actor'
+p567
+aS'film starring'
+p568
+asVaddress
+p569
+(lp570
+S'street address'
+p571
+aS'located at street address'
+p572
+aS'address'
+p573
+asVgenre
+p574
+(lp575
+S'kind of music'
+p576
+aS'literary genre'
+p577
+aS'music genre'
+p578
+aS'film genre'
+p579
+aS'genre'
+p580
+aS'artistic genre'
+p581
+asVinseeCode
+p582
+(lp583
+S'municipality code (France)'
+p584
+aS'INSEE municipality code'
+p585
+asVelo
+p586
+(lp587
+S'Elo rating'
+p588
+asVleague
+p589
+(lp590
+S'league'
+p591
+aS'sports league'
+p592
+aS'division'
+p593
+asVlicense
+p594
+(lp595
+S'licence'
+p596
+aS'content licence'
+p597
+aS'license'
+p598
+aS'content license'
+p599
+asVresidence
+p600
+(lp601
+S'official residence'
+p602
+asVicd10
+p603
+(lp604
+S'ICD-10'
+p605
+aS'ICD 10'
+p606
+asViso31661Code
+p607
+(lp608
+S'ISO 3166-1 alpha-3 code'
+p609
+aS'country code ISO 3166-1 alpha-3'
+p610
+asVideology
+p611
+(lp612
+S'ideology'
+p613
+aS'political ideology'
+p614
+asVcompressionRatio
+p615
+(lp616
+S'compression ratio'
+p617
+asVorientation
+p618
+(lp619
+S'sexual orientation'
+p620
+asVsignature
+p621
+(lp622
+S'autograph'
+p623
+aS'signature'
+p624
+asVpdb
+p625
+(lp626
+S'PDB ID'
+p627
+asVterytCode
+p628
+(lp629
+S'Polish municipal ID'
+p630
+aS'Poland municipal ID'
+p631
+aS'TERYT municipality code'
+p632
+asVstartDate
+p633
+(lp634
+S'from'
+p635
+aS'introduction'
+p636
+aS'starting'
+p637
+aS'began'
+p638
+aS'since'
+p639
+aS'start time'
+p640
+aS'from date'
+p641
+aS'starttime'
+p642
+aS'building date'
+p643
+aS'from time'
+p644
+aS'introduced'
+p645
+aS'beginning'
+p646
+aS'start date'
+p647
+asVisbn
+p648
+(lp649
+S'International Standard Book Number-10'
+p650
+aS'ISBN-10'
+p651
+aS'isbn-10'
+p652
+asVkilledBy
+p653
+(lp654
+S'executioner'
+p655
+aS'killed by'
+p656
+aS'murderer'
+p657
+aS'assassinated by'
+p658
+aS'murdered by'
+p659
+aS'killer'
+p660
+aS'executed by'
+p661
+aS'mortally wounded by'
+p662
+aS'slaughtered by'
+p663
+aS'slain by'
+p664
+aS'assassin'
+p665
+asVginiCoefficient
+p666
+(lp667
+S'Gini coefficient'
+p668
+asVmanufacturer
+p669
+(lp670
+S'made by'
+p671
+aS'builder'
+p672
+aS'mfr'
+p673
+aS'producer (of product)'
+p674
+aS'built by'
+p675
+aS'manufactured by'
+p676
+aS'maker'
+p677
+aS'manufacturer'
+p678
+asVcolour
+p679
+(lp680
+S'color'
+p681
+aS'colour'
+p682
+asVbirthDate
+p683
+(lp684
+S'year of birth'
+p685
+aS'DOB'
+p686
+aS'date of birth'
+p687
+aS'birthdate'
+p688
+aS'birth year'
+p689
+aS'birthyear'
+p690
+aS'birthday'
+p691
+aS'born on'
+p692
+aS'birth date'
+p693
+asVmusicalArtist
+p694
+(lp695
+S'singer'
+p696
+aS'musician'
+p697
+aS'group'
+p698
+aS'musical artist'
+p699
+aS'music group'
+p700
+aS'band'
+p701
+aS'performer'
+p702
+asVowner
+p703
+(lp704
+S'belongs to'
+p705
+aS'is owned by'
+p706
+aS'owned by'
+p707
+aS'shareholder'
+p708
+aS'stockholder'
+p709
+aS'owner'
+p710
+asVcitizenship
+p711
+(lp712
+S'subject of (country)'
+p713
+aS'citizen of'
+p714
+aS'nationality'
+p715
+aS'country of citizenship'
+p716
+aS'citizenship'
+p717
+asVdeathCause
+p718
+(lp719
+S'death cause'
+p720
+aS'die from'
+p721
+aS'cause of death'
+p722
+asVdeathDate
+p723
+(lp724
+S'death'
+p725
+aS'date of death'
+p726
+aS'year of death'
+p727
+aS'died on'
+p728
+aS'dead'
+p729
+aS'DOD'
+p730
+aS'date of the end'
+p731
+aS'deathdate'
+p732
+aS'death date'
+p733
+asVareaCode
+p734
+(lp735
+S'telephone numbering plan'
+p736
+aS'local dialing code'
+p737
+aS'telephone prefix'
+p738
+aS'telephone code'
+p739
+aS'local calling code'
+p740
+aS'STD code'
+p741
+aS'area code'
+p742
+asVnutsCode
+p743
+(lp744
+S'NUTS code'
+p745
+asVhandedness
+p746
+(lp747
+S'handedness'
+p748
+asVspouse
+p749
+(lp750
+S'wedded to'
+p751
+aS'consort'
+p752
+aS'wed'
+p753
+aS'marry'
+p754
+aS'married'
+p755
+aS'married to'
+p756
+aS'marriage partner'
+p757
+aS'wife'
+p758
+aS'partner'
+p759
+aS'spouse'
+p760
+aS'husband'
+p761
+asVpopulationTotal
+p762
+(lp763
+S'inhabitants'
+p764
+aS'human population'
+p765
+aS'population'
+p766
+asVeditor
+p767
+(lp768
+S'edited by'
+p769
+aS'compiled by'
+p770
+aS'editor'
+p771
+aS'compiler'
+p772
+asVicd9
+p773
+(lp774
+S'ICD-9 code'
+p775
+aS'code ICD-9'
+p776
+aS'ICD-9'
+p777
+asVecNumber
+p778
+(lp779
+S'Enzyme Commission number'
+p780
+aS'EC number'
+p781
+asVinflow
+p782
+(lp783
+S'lake inflows'
+p784
+aS'lake inflow'
+p785
+aS'inflows'
+p786
+aS'inflow'
+p787
+asVdoctoralAdvisor
+p788
+(lp789
+S'PhD advisor'
+p790
+aS'doctoral advisor'
+p791
+aS'doctoral supervisor'
+p792
+aS'supervisor'
+p793
+aS'advisor'
+p794
+asVbirthPlace
+p795
+(lp796
+S'birthplace'
+p797
+aS'birth city'
+p798
+aS'born at'
+p799
+aS'birth place'
+p800
+aS'place of birth'
+p801
+aS'born in'
+p802
+aS'location born'
+p803
+aS'birth location'
+p804
+aS'POB'
+p805
+aS'location of birth'
+p806
+aS'location'
+p807
+asVemblem
+p808
+(lp809
+S'seal image'
+p810
+aS'emblem'
+p811
+asVimdbId
+p812
+(lp813
+S'IMDb ID'
+p814
+aS'imdb'
+p815
+aS'IMDb'
+p816
+aS'IMDb identifier'
+p817
+aS'Internet Movie Database'
+p818
+asVaward
+p819
+(lp820
+S'honorary title'
+p821
+aS'prize awarded'
+p822
+aS'prize received'
+p823
+aS'win'
+p824
+aS'recognition title'
+p825
+aS'awards received'
+p826
+aS'award'
+p827
+aS'awarded'
+p828
+aS'awards'
+p829
+aS'medals'
+p830
+aS'honours'
+p831
+aS'award received'
+p832
+aS'honors'
+p833
+aS'award won'
+p834
+asVatomicNumber
+p835
+(lp836
+S'number of protons'
+p837
+aS'Z'
+p838
+aS'atomic number'
+p839
+aS'atom number'
+p840
+aS'proton number'
+p841
+asVflag
+p842
+(lp843
+S'image flag'
+p844
+aS'flag image'
+p845
+aS'image of flag'
+p846
+asVnisCode
+p847
+(lp848
+S'NIS/INS code'
+p849
+asVchild
+p850
+(lp851
+S'sons'
+p852
+aS'has son'
+p853
+aS'daughter'
+p854
+aS'has kid'
+p855
+aS'has kids'
+p856
+aS'has daughter'
+p857
+aS'kids'
+p858
+aS'has sons'
+p859
+aS'son'
+p860
+aS'has children'
+p861
+aS'has daughters'
+p862
+aS'has child'
+p863
+aS'child'
+p864
+aS'children'
+p865
+aS'daughters'
+p866
+aS'kid'
+p867
+asVediting
+p868
+(lp869
+S'film editor'
+p870
+aS'editor'
+p871
+aS'edited by'
+p872
+asVconstructionMaterial
+p873
+(lp874
+S'crafted from'
+p875
+aS'source material'
+p876
+aS'made of'
+p877
+aS'manufactured out of'
+p878
+aS'feedstock'
+p879
+aS'reactant'
+p880
+aS'material used'
+p881
+aS'media'
+p882
+aS'crafted out of'
+p883
+aS'contains'
+p884
+aS'ingredient'
+p885
+aS'medium'
+p886
+aS'ore'
+p887
+aS'manufactured from'
+p888
+aS'raw material'
+p889
+aS'constructed out of'
+p890
+aS'made from'
+p891
+aS'built from'
+p892
+aS'formed from'
+p893
+aS'formed out of'
+p894
+aS'built out of'
+p895
+aS'constructed from'
+p896
+aS'construction material'
+p897
+asVcrosses
+p898
+(lp899
+S'tunnel under'
+p900
+aS'over'
+p901
+aS'crosses'
+p902
+aS'bridge over'
+p903
+aS'under'
+p904
+asVillustrator
+p905
+(lp906
+S'illustrated by'
+p907
+aS'illustrator'
+p908
+aS'illustration by'
+p909
+asVrecordLabel
+p910
+(lp911
+S'record label'
+p912
+aS'label'
+p913
+asVcrewMember
+p914
+(lp915
+S'crew member'
+p916
+asVbSide
+p917
+(lp918
+S'b-side'
+p919
+asVarchitect
+p920
+(lp921
+S'architect'
+p922
+asVdeathPlace
+p923
+(lp924
+S'died in'
+p925
+aS'death location'
+p926
+aS'deathplace'
+p927
+aS'death place'
+p928
+aS'POD'
+p929
+aS'place of death'
+p930
+aS'location of death'
+p931
+asVcountry
+p932
+(lp933
+S'country'
+p934
+aS'state'
+p935
+aS'land'
+p936
+aS'sovereign state'
+p937
+aS'nation'
+p938
+asVindividualisedGnd
+p939
+(lp940
+S'DNB authorities'
+p941
+aS'GND'
+p942
+aS'Universal Authority File'
+p943
+aS'dbpedia:IndividualisedGnd'
+p944
+aS'GND identifier'
+p945
+aS'PND'
+p946
+aS'GND ID'
+p947
+aS'Integrated Authority File'
+p948
+asVisil
+p949
+(lp950
+S'ISIL ID'
+p951
+aS'International Standard Identifier for Libraries and Related Organizations'
+p952
+aS'ISIL'
+p953
+asVindustry
+p954
+(lp955
+S'sector'
+p956
+aS'branch'
+p957
+aS'field of action'
+p958
+aS'industry'
+p959
+aS'field of exercise'
+p960
+aS'economic branch'
+p961
+asViso6393Code
+p962
+(lp963
+S'iso 639-3'
+p964
+aS'ISO 639-3 code'
+p965
+asVdiseasesDb
+p966
+(lp967
+S'DiseasesDB'
+p968
+asVlccnId
+p969
+(lp970
+S'LCAuth ID'
+p971
+aS'LCAuth'
+p972
+aS'LoC Authorities'
+p973
+aS'Library of Congress Control Number'
+p974
+aS'LCAuth identifier'
+p975
+aS'Library of Congress Name Authority File'
+p976
+aS'LCCN identifier'
+p977
+aS'Library of Congress Subject Headings'
+p978
+aS'LCNAF'
+p979
+aS'LCSH'
+p980
+asVtaoiseach
+p981
+(lp982
+S'head of government'
+p983
+aS'executive power heading by'
+p984
+aS'president'
+p985
+aS'premier'
+p986
+aS'chancellor'
+p987
+aS'government heading by'
+p988
+aS'prime minister'
+p989
+aS'head of national government'
+p990
+aS'first minister'
+p991
+aS'mayor'
+p992
+asVcurrency
+p993
+(lp994
+S'currency'
+p995
+aS'used money'
+p996
+aS'base currency'
+p997
+asVabsoluteMagnitude
+p998
+(lp999
+S'absolute magnitude'
+p1000
+asVcosparId
+p1001
+(lp1002
+S'COSPAR designation'
+p1003
+aS'International Designator'
+p1004
+aS'COSPAR ID'
+p1005
+aS'NSSDC ID'
+p1006
+asVisniId
+p1007
+(lp1008
+S'International Standard Name Identifier'
+p1009
+aS'ISO 27729'
+p1010
+aS'ISNI'
+p1011
+asVeducation
+p1012
+(lp1013
+S'school attended'
+p1014
+aS'studied at'
+p1015
+aS'graduated from'
+p1016
+aS'alma mater'
+p1017
+aS'alumnus of'
+p1018
+aS'alumni of'
+p1019
+aS'university attended'
+p1020
+aS'edu'
+p1021
+aS'alumna of'
+p1022
+aS'educated at'
+p1023
+aS'education'
+p1024
+aS'graduate of'
+p1025
+aS'college attended'
+p1026
+asVethnicity
+p1027
+(lp1028
+S'race'
+p1029
+aS'ethnic group'
+p1030
+aS'ethnicity'
+p1031
+asVauthor
+p1032
+(lp1033
+S'writer'
+p1034
+aS'authors'
+p1035
+aS'writers'
+p1036
+aS'written by'
+p1037
+aS'author'
+p1038
+asVcurrencyCode
+p1039
+(lp1040
+S'ISO 4217 code'
+p1041
+asViso6391Code
+p1042
+(lp1043
+S'ISO 639-1 code'
+p1044
+aS'ISO639-1'
+p1045
+aS'iso 639-1'
+p1046
+aS'iso639-1'
+p1047
+asVbasedOn
+p1048
+(lp1049
+S'fork of'
+p1050
+aS'extended from'
+p1051
+aS'derived from'
+p1052
+aS'based upon'
+p1053
+aS'based on'
+p1054
+aS'copy of'
+p1055
+aS'adapted from'
+p1056
+asVlandingDate
+p1057
+(lp1058
+S'spacecraft landing date'
+p1059
+aS'time of spacecraft landing'
+p1060
+aS'spacecraft landing time'
+p1061
+asVcinematography
+p1062
+(lp1063
+S'director of photography'
+p1064
+aS'cinematographer'
+p1065
+asVchromosome
+p1066
+(lp1067
+S'on chromosome'
+p1068
+aS'chromosome'
+p1069
+asViataLocationIdentifier
+p1070
+(lp1071
+S'IATA airport code'
+p1072
+aS'uio'
+p1073
+aS'International Air Transport Association airport code'
+p1074
+asVparty
+p1075
+(lp1076
+S'member of political party'
+p1077
+aS'political party'
+p1078
+aS'party'
+p1079
+asVoriginalLanguage
+p1080
+(lp1081
+S'original language'
+p1082
+aS'language of the original work'
+p1083
+aS'original language of work'
+p1084
+aS'created on language'
+p1085
+asVcoden
+p1086
+(lp1087
+S'CODEN'
+p1088
+asVdesigner
+p1089
+(lp1090
+S'has designer'
+p1091
+aS'designer'
+p1092
+aS'designed by'
+p1093
+asVdoctoralStudent
+p1094
+(lp1095
+S'doctoral student'
+p1096
+asVdirector
+p1097
+(lp1098
+S'director'
+p1099
+aS'movie director'
+p1100
+aS'film director'
+p1101
+aS'directed by'
+p1102
+asVdiocese
+p1103
+(lp1104
+S'eparchia'
+p1105
+aS'eparchy'
+p1106
+aS'diocese'
+p1107
+asVdate
+p1108
+(lp1109
+S'"'
+p1110
+aS"'"
+p1111
+aS'year'
+p1112
+aS'when'
+p1113
+aS'at time'
+p1114
+aS'point in time'
+p1115
+aS'time'
+p1116
+aS'date'
+p1117
+aS'as of'
+p1118
+aS'time of event'
+p1119
+asViataAirlineCode
+p1120
+(lp1121
+S'IATA reservation code'
+p1122
+aS'International Air Transport Association airline designator'
+p1123
+aS'IATA airline designator'
+p1124
+asVgameEngine
+p1125
+(lp1126
+S'engine of software'
+p1127
+aS'software engine'
+p1128
+aS'powered by'
+p1129
+aS'game engine'
+p1130
+asVcomputingPlatform
+p1131
+(lp1132
+S'platform'
+p1133
+aS'game platform'
+p1134
+aS'computing platform'
+p1135
+aS'platforms'
+p1136
+asVmaintainedBy
+p1137
+(lp1138
+S'administrator'
+p1139
+aS'maintainer'
+p1140
+aS'custodian'
+p1141
+aS'maintenance'
+p1142
+aS'maintained by'
+p1143
+aS'administered by'
+p1144
+asValias
+p1145
+(lp1146
+S'alias'
+p1147
+aS'stage name'
+p1148
+aS'pen name'
+p1149
+aS'nom-de-plume'
+p1150
+aS'pseudonym'
+p1151
+asVmother
+p1152
+(lp1153
+S'has mother'
+p1154
+aS'parent'
+p1155
+aS'is child of'
+p1156
+aS'mom'
+p1157
+aS'mother'
+p1158
+aS'mum'
+p1159
+aS'is daughter of'
+p1160
+aS'mam'
+p1161
+aS'is son of'
+p1162
+asVcpu
+p1163
+(lp1164
+S'CPU'
+p1165
+aS'central processing unit'
+p1166
+as.
