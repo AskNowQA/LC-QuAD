@@ -26,7 +26,7 @@ import time
 dbp = None  # DBpedia interface object #To be instantiated when the code is run by main script/unit testing script
 relevant_properties = open('resources/relations_merged.txt').read().split('\n')  # Contains the whitelisted props types
 relevent_entity_classes = open('resources/entity_classes.txt').read().split('\n') #Contains whitelisted entities classes
-list_of_entities = open('resources/entities.txt').read().split('\n')
+list_of_entities = open('resources/entities_bigasfuck.txt').read().split('\n')
 '''contains list of entites for which the question would be asked '''
 
 templates = json.load(open('templates.py'))  # Contains all the templates existing in templates.py

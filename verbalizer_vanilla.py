@@ -312,7 +312,7 @@ class Verbalizer_07(verbalizer.Verbalizer):
 		'''
 		if _maps['e_to_e_out'].split()[-1].lower() == 'by':
 
-			question_format = self.question_templates['preposition']
+			question_format = np.random.choice(self.question_templates['preposition'])
 
 		else:
 
