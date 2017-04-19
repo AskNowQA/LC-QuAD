@@ -254,13 +254,13 @@ class DBPedia:
 					pickle.dump(self.labels, f)
 					f.close()
 					self.fresh_labels = 0
-					print "Labels dumped to file."
+					# print "Labels dumped to file."
 
 				return results[0]
 			except:
-				print "in Exception"
+				# print "in Exception"
 				# traceback.print_exc()
-				print _resource_uri, results
+				# print _resource_uri, results
 				# raw_input()
 				return nlutils.get_label_via_parsing(_resource_uri)
 

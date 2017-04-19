@@ -1196,7 +1196,8 @@ http://dbpedia.org/resource/Nero
 http://dbpedia.org/resource/Joakim_Noah
 http://dbpedia.org/resource/Joe_Satriani
 http://dbpedia.org/resource/Sean_Lennon
-http://dbpedia.org/resource/Major_League_Baseball             dia.org/resource/Emily_Murphy
+http://dbpedia.org/resource/Major_League_Baseball
+http://dbpedia.org/resource/Emily_Murphy
 http://dbpedia.org/resource/Johannesburg
 http://dbpedia.org/resource/David_Beckham
 http://dbpedia.org/resource/Indiana

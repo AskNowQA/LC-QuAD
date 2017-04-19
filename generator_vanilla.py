@@ -24,9 +24,9 @@ import time
 '''
 
 dbp = None  # DBpedia interface object #To be instantiated when the code is run by main script/unit testing script
-relevant_properties = open('resources/relations.txt').read().split('\n')  # Contains the whitelisted props types
+relevant_properties = open('resources/relations_merged.txt').read().split('\n')  # Contains the whitelisted props types
 relevent_entity_classes = open('resources/entity_classes.txt').read().split('\n') #Contains whitelisted entities classes
-list_of_entities = open('resources/entities_bigasfuck.txt').read().split('\n')
+list_of_entities = open('resources/entities.txt').read().split('\n')
 '''contains list of entites for which the question would be asked '''
 
 templates = json.load(open('templates.py'))  # Contains all the templates existing in templates.py
@@ -615,7 +615,6 @@ def fill_templates(_graph, _uri):
     counter_template5 = 0
     # Create a list of all these (e_in,e_in_to_e)
     one_triple_left_map = {triple[0].getUri(): triple[2]['object'].getUri() for triple in op[0]}
-    pprint(one_triple_left_map)
 
     # Collect all e_out_in and e_in_to_e_in_out
     op = access.return_outnodes('e_in')
@@ -889,7 +888,6 @@ def fill_templates(_graph, _uri):
 
     # Create a list of all these (e_in,e_in_to_e)
     one_triple_left_map = {triple[0].getUri(): triple[2]['object'].getUri() for triple in op[0]}
-    pprint(one_triple_left_map)
 
     # Collect all e_out_in and e_in_to_e_in_out
     op = access.return_outnodes('e_in')
