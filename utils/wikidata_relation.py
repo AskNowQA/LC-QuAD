@@ -1,4 +1,4 @@
-import utils.dbpedia_interface as db_interface
+import dbpedia_interface as db_interface
 from pprint import pprint
 import traceback
 import pickle
