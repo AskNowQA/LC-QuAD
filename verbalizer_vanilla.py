@@ -65,7 +65,52 @@ class Verbalizer_01(verbalizer.Verbalizer):
 
 
 
+class Verbalizer_02(verbalizer.Verbalizer):
 
+	template_id = 2
+	template_type = 'Vanilla'
+	template_id_offset = 0
+	has_x = False
+	has_uri = True
+	question_templates = {
+		
+		'vanilla': 
+			[ "<%(e_in)s is the <%(e_in_to_e)s> of %(prefix)s  <%(type)s> ?" ],
+
+		'plural':
+			[ "<%(e_in)s are the <%(e_in_to_e)s> of %(prefix)s  <%(type)s> ?" ]
+	}
+
+	def filter(self, _datum, _maps):
+		#Just that hard filter thingy
+		return self.hard_relation_filter(_maps['e_to_e_out'])
+
+	def rules(self, _datum, _maps):
+		'''
+			Cardinality rule:
+				If there are more than 3 answers to the URI, then use plural template. Otherwise use the singular template.
+
+			Person rule:
+				If the uri is a person, then change what to who.
+
+		'''
+		if _datum['answer_count']['uri'] > 3:
+			#Plural rule
+			try: 
+				_maps['uri'] = pluralize(_maps['uri'])
+			except:
+				print "Cannot pluralize ", _maps['uri']
+
+			question_format = np.random.choice(self.question_templates['plural'], p=[0.8,0.2])
+		else:
+			question_format = np.random.choice(self.question_templates['vanilla'], p=[0.8,0.2])
+
+		if 'http://dbpedia.org/ontology/Agent' in _datum['mapping_type']['uri'] and "http://dbpedia.org/ontology/Organisation" not in _datum['mapping_type']["uri"]:
+			_maps['prefix'] = 'Who'
+		else:
+			_maps['prefix'] = 'What'
+
+		return _maps, question_format
 
 class Verbalizer_03(verbalizer.Verbalizer):
 

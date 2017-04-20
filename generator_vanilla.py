@@ -26,7 +26,7 @@ import time
 dbp = None  # DBpedia interface object #To be instantiated when the code is run by main script/unit testing script
 relevant_properties = open('resources/relations_merged.txt').read().split('\n')  # Contains the whitelisted props types
 relevent_entity_classes = open('resources/entity_classes.txt').read().split('\n') #Contains whitelisted entities classes
-list_of_entities = open('resources/entities_bigasfuck.txt').read().split('\n')
+list_of_entities = open('resources/single_entity.txt').read().split('\n')
 '''contains list of entites for which the question would be asked '''
 
 templates = json.load(open('templates.py'))  # Contains all the templates existing in templates.py
@@ -449,7 +449,7 @@ def fill_templates(_graph, _uri):
             fill_specific_template(_template_id=1, _mapping=mapping)
             counter_template1 += 1
             if counter_template1 > 500:
-                break
+                pass
         except:
             print "check error stack"
             traceback.print_exc()
@@ -480,7 +480,7 @@ def fill_templates(_graph, _uri):
         try:
             fill_specific_template( _template_id=2, _mapping=mapping)
             if counter_template2 > 500:
-                break
+                pass
         except:
             print "check error stack"
             traceback.print_exc()
@@ -537,7 +537,7 @@ def fill_templates(_graph, _uri):
                 fill_specific_template(_template_id=3, _mapping=mapping)
                 counter_template3 = counter_template3 + 1
                 if counter_template3 > 500:
-                    break
+                    pass
 
             except:
                 print "check error stack"
@@ -600,7 +600,7 @@ def fill_templates(_graph, _uri):
     #             print "check error stack"
     #             continue
     #         if counter_template4 > 100:
-    #             break  #NOTE THE CAP
+    #             pass  #NOTE THE CAP
 
 
     '''
@@ -749,7 +749,7 @@ def fill_templates(_graph, _uri):
                     counter_template7 += 1
 
                     if counter_template7 > 500:
-                        break
+                        pass
                 except:
                     print "check error stack"
                     traceback.print_exc()
@@ -804,7 +804,7 @@ def fill_templates(_graph, _uri):
                     counter_template8 += 1
 
                     if counter_template8 > 500:
-                        break
+                        pass
                 except:
                     print "check error stack"
                     traceback.print_exc()
@@ -866,7 +866,7 @@ def fill_templates(_graph, _uri):
                 fill_specific_template(_template_id=9, _mapping=mapping)
                 counter_template9 = counter_template9 + 1
                 if counter_template9 > 500:
-                    break
+                    pass
 
             except:
                 print "check error stack"
@@ -1081,7 +1081,7 @@ def fill_templates(_graph, _uri):
                     counter_template14 += 1
 
                     if counter_template14 > 500:
-                        break
+                        pass
                 except:
                     print "check error stack"
                     traceback.print_exc()
@@ -1128,7 +1128,7 @@ def fill_templates(_graph, _uri):
                     counter_template15 += 1
 
                     if counter_template15 > 500:
-                        break
+                        pass
                 except:
                     print "check error stack"
                     traceback.print_exc()
@@ -1175,7 +1175,7 @@ def fill_templates(_graph, _uri):
                     counter_template16 += 1
 
                     if counter_template16 > 500:
-                        break
+                        pass
                 except:
                     print "check error stack"
                     traceback.print_exc()
