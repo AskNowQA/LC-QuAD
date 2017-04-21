@@ -23,6 +23,7 @@ import json
 
 #Our scripts
 import natural_language_utilities as nlutils
+import labels_mulitple_form
 
 #GLOBAL MACROS
 DBPEDIA_ENDPOINTS = ['http://dbpedia.org/sparql/','http://live.dbpedia.org/sparql/']
@@ -67,8 +68,8 @@ class DBPedia:
 		except:
 			print "Label Cache not found. Creating a new one"
 			traceback.print_exc()
-			raw_input()
-			self.labels = {}
+			labels_mulitple_form.merge_multiple_forms()			#This should populate the dictionary with multiple form info and already pickle it
+			self.labels = pickle.load(open('resources/labels.pickle'))
 		self.fresh_labels = 0
 
 	#initilizing the redis server.

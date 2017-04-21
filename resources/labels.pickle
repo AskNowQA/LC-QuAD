@@ -4,3499 +4,5649 @@ p1
 (lp2
 S'origin'
 p3
-asVhttp://dbpedia.org/resource/Sacramento,_California
+asVhttp://dbpedia.org/property/architecturalStyle
 p4
 (lp5
-S'Sacramento, California'
+S'architecture'
 p6
-asVhttp://dbpedia.org/resource/Andy_Dean
+aS'style of architecture'
 p7
-(lp8
-S'Andy Dean'
+aS'architectural style'
+p8
+asVhttp://dbpedia.org/resource/Andy_Dean
 p9
-asVhttp://dbpedia.org/resource/Ranjana_Deshmukh
-p10
-(lp11
-S'Ranjana Deshmukh'
+(lp10
+S'Andy Dean'
+p11
+asVhttp://dbpedia.org/ontology/iataLocationIdentifier
 p12
-asVhttp://dbpedia.org/ontology/BeautyQueen
-p13
-(lp14
-S'beauty queen'
+(lp13
+S'IATA airport code'
+p14
+aS'uio'
 p15
-asVhttp://dbpedia.org/resource/Ratnakar_Pai
+aS'International Air Transport Association airport code'
 p16
-(lp17
+asVhttp://dbpedia.org/resource/Ratnakar_Pai
+p17
+(lp18
 S'Ratnakar Pai'
-p18
-asVhttp://dbpedia.org/resource/Gokuldham_High_School
 p19
-(lp20
-S'Gokuldham High School'
-p21
-asVhttp://dbpedia.org/resource/Apple_Inc.
+asVhttp://dbpedia.org/resource/EPR_paradox
+p20
+(lp21
+S'EPR paradox'
 p22
-(lp23
-S'Apple Inc.'
-p24
-asVhttp://dbpedia.org/resource/Ye_Hai_Mohabbatein
+asVhttp://dbpedia.org/resource/Gokuldham_High_School
+p23
+(lp24
+S'Gokuldham High School'
 p25
-(lp26
-S'Ye Hai Mohabbatein'
-p27
-asVhttp://dbpedia.org/ontology/city
+asVhttp://dbpedia.org/resource/Apple_Inc.
+p26
+(lp27
+S'Apple Inc.'
 p28
-(lp29
-S'city'
-p30
-asVhttp://dbpedia.org/resource/Cupertino,_California
+asVhttp://dbpedia.org/ontology/Cricketer
+p29
+(lp30
+S'cricketer'
 p31
-(lp32
-S'Cupertino, California'
-p33
-asVhttp://dbpedia.org/resource/The_Winning_Way
+asVhttp://dbpedia.org/ontology/city
+p32
+(lp33
+S'city'
 p34
-(lp35
-S'The Winning Way'
-p36
-asVhttp://dbpedia.org/ontology/openingTheme
+asVhttp://dbpedia.org/resource/Bob_Harvie
+p35
+(lp36
+S'Bob Harvie'
 p37
-(lp38
-S'opening theme'
-p39
-asVhttp://dbpedia.org/resource/1991_Lokhandwala_Complex_shootout
+asVhttp://dbpedia.org/resource/Cupertino,_California
+p38
+(lp39
+S'Cupertino, California'
 p40
-(lp41
-S'1991 Lokhandwala Complex shootout'
-p42
-asVhttp://dbpedia.org/resource/University_of_Illinois_at_Chicago
+asVhttp://dbpedia.org/resource/Internet_radio
+p41
+(lp42
+S'Internet radio'
 p43
-(lp44
-S'University of Illinois at Chicago'
-p45
-asVhttp://dbpedia.org/resource/Shreeram_Shankar_Abhyankar
+asVhttp://dbpedia.org/resource/The_Winning_Way
+p44
+(lp45
+S'The Winning Way'
 p46
-(lp47
-S'Shreeram Shankar Abhyankar'
-p48
-asVhttp://dbpedia.org/resource/Management_consulting
+asVhttp://dbpedia.org/ontology/gameEngine
+p47
+(lp48
+S'engine of software'
 p49
-(lp50
-S'Management consulting'
+aS'software engine'
+p50
+aS'powered by'
 p51
-asVhttp://dbpedia.org/resource/Prem_Ganapathy
+aS'game engine'
 p52
-(lp53
-S'Prem Ganapathy'
-p54
-asVhttp://dbpedia.org/ontology/isPartOf
+asVhttp://dbpedia.org/property/settlement
+p53
+(lp54
+S'is in the local government area of'
 p55
-(lp56
-S'is part of'
+aS'is in the voivodeship of'
+p56
+aS'based in'
 p57
-asVhttp://dbpedia.org/resource/Tuna
+aS'is in the state of'
 p58
-(lp59
-S'Tuna'
+aS'Indian reservation'
+p59
+aS'is in the principal area of'
 p60
-asVhttp://dbpedia.org/ontology/GolfPlayer
+aS'is in the region of'
 p61
-(lp62
-S'golf player'
+aS'is in the Indian reservation of'
+p62
+aS'is in the district of'
 p63
-asVhttp://dbpedia.org/resource/Pundits_from_Pakistan
+aS'in'
 p64
-(lp65
-S'Pundits from Pakistan'
+aS'is in the shire of'
+p65
+aS'in administrative unit'
 p66
-asVhttp://dbpedia.org/property/services
+aS'is in the administrative region of'
 p67
-(lp68
-S'services'
+aS'city'
+p68
+aS'is in the territory of'
 p69
-asVhttp://dbpedia.org/resource/Nilkamal_Plastics
+aS'happens in'
 p70
-(lp71
-S'Nilkamal Plastics'
+aS'locality'
+p71
+aS'is in the Indian reserve of'
 p72
-asVhttp://dbpedia.org/resource/Interface_Builder
+aS'is in the administrative unit'
 p73
-(lp74
-S'Interface Builder'
+aS'is in the municipality of'
+p74
+aS'is in the parish of'
 p75
-asVhttp://dbpedia.org/resource/Executive_director
+aS'state'
 p76
-(lp77
-S'Executive director'
+aS'is in the department of'
+p77
+aS'location (administrative territorial entity)'
 p78
-asVhttp://dbpedia.org/property/nationality
+aS'is in the borough of'
 p79
-(lp80
-S'nationality'
+aS'is in the county of'
+p80
+aS'is in the village of'
 p81
-asVhttp://dbpedia.org/resource/Trump_Productions
+aS'is in the ward of'
 p82
-(lp83
-S'Trump Productions'
+aS'is in the commune of'
+p83
+aS'located in the administrative unit'
 p84
-asVhttp://dbpedia.org/property/type
+aS'located in administrative unit'
 p85
-(lp86
-S'type'
+aS'located in the administrative territorial entity'
+p86
+aS'is in the rural city of'
 p87
-asVhttp://dbpedia.org/resource/Economics
+aS'is in the city of'
 p88
-(lp89
-S'Economics'
+aS'town'
+p89
+aS'in the administrative unit'
 p90
-asVhttp://dbpedia.org/resource/Japanese_Americans
+aS'administrative territorial entity'
 p91
-(lp92
-S'Japanese Americans'
+aS'is in the settlement of'
+p92
+aS'is in the town of'
 p93
-asVhttp://dbpedia.org/resource/Wade_Nichols
+aS'is in administrative unit'
 p94
-(lp95
-S'Wade Nichols'
+aS'is in the province of'
+p95
+aS'is in the prefecture of'
 p96
-asVhttp://dbpedia.org/resource/Karan_Wahi
+aS'is located in'
 p97
-(lp98
-S'Karan Wahi'
-p99
-asVhttp://dbpedia.org/resource/Nach_Baliye
+asVhttp://dbpedia.org/resource/The_Walt_Disney_Company
+p98
+(lp99
+S'The Walt Disney Company'
 p100
-(lp101
-S'Nach Baliye'
-p102
-asVhttp://dbpedia.org/resource/Quartz_Composer
+asVhttp://dbpedia.org/resource/Willow_Bay
+p101
+(lp102
+S'Willow Bay'
 p103
-(lp104
-S'Quartz Composer'
-p105
-asVhttp://dbpedia.org/property/areaCode
+asVhttp://dbpedia.org/resource/Shreeram_Shankar_Abhyankar
+p104
+(lp105
+S'Shreeram Shankar Abhyankar'
 p106
-(lp107
-S'area code'
-p108
-asVhttp://dbpedia.org/resource/Dustin_Moskovitz
+asVhttp://dbpedia.org/resource/Cyber_City,_Kochi
+p107
+(lp108
+S'Cyber City, Kochi'
 p109
-(lp110
-S'Dustin Moskovitz'
-p111
-asVhttp://dbpedia.org/ontology/TelevisionShow
+asVhttp://dbpedia.org/ontology/birthName
+p110
+(lp111
+S'born as'
 p112
-(lp113
-S'television show'
+aS'birth name (monolingual text)'
+p113
+aS'maiden name'
 p114
-asVhttp://dbpedia.org/ontology/Organisation
+aS'bn'
 p115
-(lp116
-S'organisation'
+aS'nee'
+p116
+aS'birthname'
 p117
-asVhttp://dbpedia.org/resource/Celebrity
+aS'name at birth'
 p118
-(lp119
-S'Celebrity'
+aS'bname'
+p119
+aS'n\xc3\xa9e'
 p120
-asVhttp://dbpedia.org/ontology/University
+aS'birth name'
 p121
-(lp122
-S'university'
+aS'full name at birth'
+p122
+asVhttp://dbpedia.org/ontology/isPartOf
 p123
-asVhttp://dbpedia.org/resource/Mon_Niye_Kachakachi
-p124
-(lp125
-S'Mon Niye Kachakachi'
+(lp124
+S'part of-property'
+p125
+aS'part of'
 p126
-asVhttp://dbpedia.org/ontology/manufacturer
+aS'section of'
 p127
-(lp128
-S'manufacturer'
+aS'system of'
+p128
+aS'assembly of'
 p129
-asVhttp://dbpedia.org/resource/Tiger_Shroff
+aS'meronym of'
 p130
-(lp131
-S'Tiger Shroff'
+aS'within a set'
+p131
+aS'merged with'
 p132
-asVhttp://dbpedia.org/resource/Greg_Stimac
+aS'merged into'
 p133
-(lp134
-S'Greg Stimac'
+aS'subsystem of'
+p134
+aS'subassembly of'
 p135
-asVhttp://dbpedia.org/resource/Ji_Sirji!
+aS'contained within'
 p136
-(lp137
-S'Ji Sirji!'
-p138
-asVhttp://dbpedia.org/resource/Beats_Electronics
+asVhttp://dbpedia.org/ontology/nationality
+p137
+(lp138
+S'nationality'
 p139
-(lp140
-S'Beats Electronics'
-p141
-asVhttp://dbpedia.org/resource/IBM
+asVhttp://dbpedia.org/property/generalManager
+p140
+(lp141
+S'general manager'
 p142
-(lp143
-S'IBM'
-p144
-asVhttp://dbpedia.org/ontology/foundationPlace
+asVhttp://dbpedia.org/resource/Simon_Cowell
+p143
+(lp144
+S'Simon Cowell'
 p145
-(lp146
-S'foundation place'
-p147
-asVhttp://dbpedia.org/ontology/owningCompany
+asVhttp://dbpedia.org/ontology/bnfId
+p146
+(lp147
+S'BnF identifier'
 p148
-(lp149
-S'owning company'
+aS'Biblioth\xc3\xa8que nationale de France ID'
+p149
+aS'BnF ID'
 p150
-asVhttp://dbpedia.org/resource/Vijayta_Films
+asVhttp://dbpedia.org/ontology/landingDate
 p151
 (lp152
-S'Vijayta Films'
+S'spacecraft landing date'
 p153
-asVhttp://dbpedia.org/resource/Imran_Khan
+aS'time of spacecraft landing'
 p154
-(lp155
-S'Imran Khan'
+aS'spacecraft landing time'
+p155
+asVhttp://dbpedia.org/resource/Interface_Builder
 p156
-asVhttp://dbpedia.org/resource/David_Lobell
-p157
-(lp158
-S'David Lobell'
+(lp157
+S'Interface Builder'
+p158
+asVhttp://dbpedia.org/property/battle
 p159
-asVhttp://dbpedia.org/resource/OS_X_Mountain_Lion
-p160
-(lp161
-S'OS X Mountain Lion'
+(lp160
+S'in action'
+p161
+aS'participated in conflict'
 p162
-asVhttp://dbpedia.org/ontology/producer
+aS'in conflict'
 p163
-(lp164
-S'producer'
+aS'theatre'
+p164
+aS'participant in conflict'
 p165
-asVhttp://dbpedia.org/property/sisterNames
+aS'battle'
 p166
-(lp167
-S'sister names'
+aS'theater'
+p167
+aS'war'
 p168
-asVhttp://dbpedia.org/resource/Hodder_&_Stoughton
+aS'conflict'
 p169
-(lp170
-S'Hodder & Stoughton'
-p171
-asVhttp://dbpedia.org/resource/Jackie_Shroff
+asVhttp://dbpedia.org/resource/Executive_director
+p170
+(lp171
+S'Executive director'
 p172
-(lp173
-S'Jackie Shroff'
-p174
-asVhttp://dbpedia.org/resource/Actor
+asVhttp://dbpedia.org/resource/Batch_Monitor
+p173
+(lp174
+S'Batch Monitor'
 p175
-(lp176
-S'Actor'
-p177
-asVhttp://dbpedia.org/resource/Marla_Maples
+asVhttp://dbpedia.org/resource/Trump_Productions
+p176
+(lp177
+S'Trump Productions'
 p178
-(lp179
-S'Marla Maples'
-p180
-asVhttp://dbpedia.org/resource/Daniel_W._Dobberpuhl
+asVhttp://dbpedia.org/property/type
+p179
+(lp180
+S'type'
 p181
-(lp182
-S'Daniel W. Dobberpuhl'
-p183
-asVhttp://dbpedia.org/ontology/subsequentWork
+asVhttp://dbpedia.org/property/chromosome
+p182
+(lp183
+S'on chromosome'
 p184
-(lp185
-S'subsequent work'
+aS'chromosome'
+p185
+asVhttp://dbpedia.org/ontology/launchDate
 p186
-asVhttp://dbpedia.org/property/keyPeople
-p187
-(lp188
-S'key people'
+(lp187
+S'spacecraft launch date'
+p188
+aS'launch time'
 p189
-asVhttp://dbpedia.org/ontology/related
+aS'date of spacecraft launch'
 p190
-(lp191
-S'related'
+aS'launch date'
+p191
+aS'time of spacecraft launch'
 p192
-asVhttp://dbpedia.org/resource/Republican_Party_(United_States)
+asVhttp://dbpedia.org/resource/Romance_film
 p193
 (lp194
-S'Republican Party (United States)'
+S'Romance film'
 p195
-asVhttp://dbpedia.org/property/predecessor
+asVhttp://dbpedia.org/ontology/diocese
 p196
 (lp197
-S'predecessor'
+S'eparchia'
 p198
-asVhttp://dbpedia.org/resource/Ata_Pata_Laapata
+aS'eparchy'
 p199
-(lp200
-S'Ata Pata Laapata'
+aS'diocese'
+p200
+asVhttp://dbpedia.org/resource/Scottish_Americans
 p201
-asVhttp://dbpedia.org/resource/ICloud
-p202
-(lp203
-S'ICloud'
+(lp202
+S'Scottish Americans'
+p203
+asVhttp://dbpedia.org/resource/Geometry_Wars
 p204
-asVhttp://dbpedia.org/resource/University_of_the_Punjab
-p205
-(lp206
-S'University of the Punjab'
+(lp205
+S'Geometry Wars'
+p206
+asVhttp://dbpedia.org/resource/Gil_Amelio
 p207
-asVhttp://dbpedia.org/ontology/Artist
-p208
-(lp209
-S'artist'
+(lp208
+S'Gil Amelio'
+p209
+asVhttp://dbpedia.org/property/ulanId
 p210
-asVhttp://dbpedia.org/ontology/Album
-p211
-(lp212
-S'album'
+(lp211
+S'ULAN'
+p212
+aS'JPG'
 p213
-asVhttp://dbpedia.org/ontology/locationCountry
+aS'Getty ULAN'
 p214
-(lp215
-S'pastwo'
+aS'Union List of Artist Names'
+p215
+aS'ULAN identifier'
 p216
-asVhttp://dbpedia.org/property/publisher
+aS'ULAN ID'
 p217
-(lp218
-S'publisher'
-p219
-asVhttp://dbpedia.org/resource/Thumri
+asVhttp://dbpedia.org/resource/Quartz_Composer
+p218
+(lp219
+S'Quartz Composer'
 p220
-(lp221
-S'Thumri'
-p222
-asVhttp://dbpedia.org/ontology/composer
+asVhttp://dbpedia.org/ontology/predecessor
+p221
+(lp222
+S'predecessor'
 p223
-(lp224
-S'composer'
-p225
-asVhttp://dbpedia.org/resource/IPod_Touch_(6th_generation)
+asVhttp://dbpedia.org/ontology/TelevisionShow
+p224
+(lp225
+S'television show'
 p226
-(lp227
-S'IPod Touch (6th generation)'
-p228
-asVhttp://dbpedia.org/resource/Pensacola,_Florida
+asVhttp://dbpedia.org/property/constituency
+p227
+(lp228
+S'constituency'
 p229
-(lp230
-S'Pensacola, Florida'
-p231
-asVhttp://dbpedia.org/resource/Sony_Reader
+asVhttp://dbpedia.org/resource/Canonical_(company)
+p230
+(lp231
+S'Canonical (company)'
 p232
-(lp233
-S'Sony Reader'
-p234
-asVhttp://dbpedia.org/resource/INS_Kalvari_(S50)
+asVhttp://dbpedia.org/ontology/RugbyPlayer
+p233
+(lp234
+S'rugby player'
 p235
-(lp236
-S'INS Kalvari (S50)'
-p237
-asVhttp://dbpedia.org/resource/Deemed_university
+asVhttp://dbpedia.org/ontology/Presenter
+p236
+(lp237
+S'presenter'
 p238
-(lp239
-S'Deemed university'
-p240
-asVhttp://dbpedia.org/resource/Stanford_Cardinal_football
+asVhttp://dbpedia.org/property/computingPlatform
+p239
+(lp240
+S'platform'
 p241
-(lp242
-S'Stanford Cardinal football'
+aS'game platform'
+p242
+aS'computing platform'
 p243
-asVhttp://dbpedia.org/resource/CSI:_Miami_(video_game)
+aS'platforms'
 p244
-(lp245
-S'CSI: Miami (video game)'
-p246
-asVhttp://dbpedia.org/ontology/stateOfOrigin
+asVhttp://dbpedia.org/ontology/viafId
+p245
+(lp246
+S'VIAF identifier'
 p247
-(lp248
-S'state of origin'
+aS'Virtual International Authority File'
+p248
+aS'VIAF'
 p249
-asVhttp://dbpedia.org/ontology/operatingSystem
+aS'VIAF ID'
 p250
-(lp251
-S'operating system'
-p252
-asVhttp://dbpedia.org/resource/RNS_Institute_of_Technology
+asVhttp://dbpedia.org/resource/Tiger_Shroff
+p251
+(lp252
+S'Tiger Shroff'
 p253
-(lp254
-S'RNS Institute of Technology'
-p255
-asVhttp://dbpedia.org/ontology/deathPlace
+asVhttp://dbpedia.org/ontology/coden
+p254
+(lp255
+S'CODEN'
 p256
-(lp257
-S'death place'
-p258
-asVhttp://dbpedia.org/resource/Visvesvaraya_Technological_University
+asVhttp://dbpedia.org/property/killedBy
+p257
+(lp258
+S'executioner'
 p259
-(lp260
-S'Visvesvaraya Technological University'
+aS'killed by'
+p260
+aS'murderer'
 p261
-asVhttp://dbpedia.org/resource/Show_business
+aS'assassinated by'
 p262
-(lp263
-S'Show business'
+aS'murdered by'
+p263
+aS'killer'
 p264
-asVhttp://dbpedia.org/resource/Thomas_Chisholm_Anstey
+aS'executed by'
 p265
-(lp266
-S'Thomas Chisholm Anstey'
+aS'mortally wounded by'
+p266
+aS'slaughtered by'
 p267
-asVhttp://dbpedia.org/resource/Ashes_Cricket_2009
+aS'slain by'
 p268
-(lp269
-S'Ashes Cricket 2009'
+aS'assassin'
+p269
+asVhttp://dbpedia.org/ontology/namedAfter
 p270
-asVhttp://dbpedia.org/resource/University_of_the_Punjab,_Gujranwala
-p271
-(lp272
-S'University of the Punjab, Gujranwala'
+(lp271
+S'namesake'
+p272
+aS'toponym'
 p273
-asVhttp://dbpedia.org/resource/Joshua_Garnett
+aS'etymology'
 p274
-(lp275
-S'Joshua Garnett'
+aS'name after'
+p275
+aS'named after'
 p276
-asVhttp://dbpedia.org/resource/Dennis_Oppenheim
+aS'named for'
 p277
-(lp278
-S'Dennis Oppenheim'
+aS'eponym'
+p278
+asVhttp://dbpedia.org/property/birthDate
 p279
-asVhttp://dbpedia.org/ontology/Person
-p280
-(lp281
-S'person'
+(lp280
+S'year of birth'
+p281
+aS'DOB'
 p282
-asVhttp://dbpedia.org/resource/Isleworth
+aS'date of birth'
 p283
-(lp284
-S'Isleworth'
+aS'birthdate'
+p284
+aS'birth year'
 p285
-asVhttp://dbpedia.org/resource/End-user_license_agreement
+aS'birthyear'
 p286
-(lp287
-S'End-user license agreement'
+aS'birthday'
+p287
+aS'born on'
 p288
-asVhttp://dbpedia.org/property/guests
+aS'birth date'
 p289
-(lp290
-S'Guests'
-p291
-asVhttp://dbpedia.org/resource/HarperCollins
+asVhttp://dbpedia.org/ontology/individualisedGnd
+p290
+(lp291
+S'DNB authorities'
 p292
-(lp293
-S'HarperCollins'
+aS'GND'
+p293
+aS'Universal Authority File'
 p294
-asVhttp://dbpedia.org/ontology/VideoGame
+aS'dbpedia:IndividualisedGnd'
 p295
-(lp296
-S'video game'
+aS'GND identifier'
+p296
+aS'PND'
 p297
-asVhttp://dbpedia.org/resource/Rigged_(book)
+aS'GND ID'
 p298
-(lp299
-S'Rigged (book)'
+aS'Integrated Authority File'
+p299
+asVhttp://dbpedia.org/resource/Cardiff
 p300
-asVhttp://dbpedia.org/resource/Dance_Dance_Revolution_S
-p301
-(lp302
-S'Dance Dance Revolution S'
+(lp301
+S'Cardiff'
+p302
+asVhttp://dbpedia.org/resource/Beats_Electronics
 p303
-asVhttp://dbpedia.org/resource/Duke_University
-p304
-(lp305
-S'Duke University'
+(lp304
+S'Beats Electronics'
+p305
+asVhttp://dbpedia.org/resource/IBM
 p306
-asVhttp://dbpedia.org/ontology/relative
-p307
-(lp308
-S'relative'
+(lp307
+S'IBM'
+p308
+asVhttp://dbpedia.org/ontology/foundationPlace
 p309
-asVhttp://dbpedia.org/resource/Tata_Institute_of_Fundamental_Research
-p310
-(lp311
-S'Tata Institute of Fundamental Research'
+(lp310
+S'foundation place'
+p311
+asVhttp://dbpedia.org/resource/Sony_ESPN
 p312
-asVhttp://dbpedia.org/resource/Xcode
-p313
-(lp314
-S'Xcode'
+(lp313
+S'Sony ESPN'
+p314
+asVhttp://dbpedia.org/resource/Vijayta_Films
 p315
-asVhttp://dbpedia.org/ontology/MilitaryConflict
-p316
-(lp317
-S'military conflict'
+(lp316
+S'Vijayta Films'
+p317
+asVhttp://dbpedia.org/resource/Imran_Khan
 p318
-asVhttp://dbpedia.org/resource/Geometry_Wars:_Touch
-p319
-(lp320
-S'Geometry Wars: Touch'
+(lp319
+S'Imran Khan'
+p320
+asVhttp://dbpedia.org/property/follows
 p321
-asVhttp://dbpedia.org/ontology/Website
-p322
-(lp323
-S'website'
+(lp322
+S'predecessor'
+p323
+aS'prequel is'
 p324
-asVhttp://dbpedia.org/resource/The_Celebrity_Apprentice
+aS'sequel of'
 p325
-(lp326
-S'The Celebrity Apprentice'
+aS'follows'
+p326
+aS'previous is'
 p327
-asVhttp://dbpedia.org/resource/Loyola_High_School_(Goa)
+aS'succeeds to'
 p328
-(lp329
-S'Loyola High School (Goa)'
+aS'before was'
+p329
+aS'preceded by'
 p330
-asVhttp://dbpedia.org/resource/Charles_Kushner
+aS'split from'
 p331
-(lp332
-S'Charles Kushner'
-p333
-asVhttp://dbpedia.org/resource/Satyadev_Dubey
+asVhttp://dbpedia.org/ontology/producer
+p332
+(lp333
+S'producer'
 p334
-(lp335
-S'Satyadev Dubey'
-p336
-asVhttp://dbpedia.org/resource/Sony_Kix
+asVhttp://dbpedia.org/property/sisterNames
+p335
+(lp336
+S'sister names'
 p337
-(lp338
-S'Sony Kix'
-p339
-asVhttp://dbpedia.org/resource/Carnegie_Mellon_University
+asVhttp://dbpedia.org/resource/Hodder_&_Stoughton
+p338
+(lp339
+S'Hodder & Stoughton'
 p340
-(lp341
-S'Carnegie Mellon University'
-p342
-asVhttp://dbpedia.org/resource/Mihir_Joshi
+asVhttp://dbpedia.org/resource/Philadelphia
+p341
+(lp342
+S'Philadelphia'
 p343
-(lp344
-S'Mihir Joshi'
-p345
-asVhttp://dbpedia.org/resource/Pageant_Place
+asVhttp://dbpedia.org/property/designer
+p344
+(lp345
+S'has designer'
 p346
-(lp347
-S'Pageant Place'
+aS'designer'
+p347
+aS'designed by'
 p348
-asVhttp://dbpedia.org/resource/BrowserStack
+asVhttp://dbpedia.org/resource/Maurice_A._Deane_School_of_Law
 p349
 (lp350
-S'BrowserStack'
+S'Maurice A. Deane School of Law'
 p351
-asVhttp://dbpedia.org/resource/St._Patrick's_High_School,_Secunderabad
+asVhttp://dbpedia.org/ontology/crosses
 p352
 (lp353
-S"St. Patrick's High School, Secunderabad"
+S'tunnel under'
 p354
-asVhttp://dbpedia.org/property/training
+aS'over'
 p355
-(lp356
-S'training'
+aS'crosses'
+p356
+aS'bridge over'
 p357
-asVhttp://dbpedia.org/resource/Aditya_Chaudhary
+aS'under'
 p358
-(lp359
-S'Aditya Chaudhary'
-p360
-asVhttp://dbpedia.org/resource/Philadelphia
+asVhttp://dbpedia.org/resource/IOS_6
+p359
+(lp360
+S'IOS 6'
 p361
-(lp362
-S'Philadelphia'
-p363
-asVhttp://dbpedia.org/resource/Kaash_(album)
+asVhttp://dbpedia.org/resource/Vadapalani
+p362
+(lp363
+S'Vadapalani'
 p364
-(lp365
-S'Kaash (album)'
-p366
-asVhttp://dbpedia.org/resource/Sweet_Dreams_(Are_Made_of_This)
+asVhttp://dbpedia.org/ontology/coverArtist
+p365
+(lp366
+S'cover artist'
 p367
-(lp368
-S'Sweet Dreams (Are Made of This)'
-p369
-asVhttp://dbpedia.org/resource/Roosevelt_family
+asVhttp://dbpedia.org/property/terytCode
+p368
+(lp369
+S'Polish municipal ID'
 p370
-(lp371
-S'Roosevelt family'
+aS'Poland municipal ID'
+p371
+aS'TERYT municipality code'
 p372
-asVhttp://dbpedia.org/resource/Chembur
+asVhttp://dbpedia.org/ontology/highestPoint
 p373
 (lp374
-S'Chembur'
+S'highest peak'
 p375
-asVhttp://dbpedia.org/resource/Karnal
+aS'highest point'
 p376
-(lp377
-S'Karnal'
+aS'zenith'
+p377
+asVhttp://dbpedia.org/property/keyPeople
 p378
-asVhttp://dbpedia.org/property/knownFor
-p379
-(lp380
-S'known for'
+(lp379
+S'key people'
+p380
+asVhttp://dbpedia.org/ontology/related
 p381
-asVhttp://dbpedia.org/ontology/Country
-p382
-(lp383
-S'country'
+(lp382
+S'related'
+p383
+asVhttp://dbpedia.org/ontology/subsidiary
 p384
-asVhttp://dbpedia.org/resource/New_York_City
-p385
-(lp386
-S'New York City'
+(lp385
+S'subsidiary'
+p386
+asVhttp://dbpedia.org/property/predecessor
 p387
-asVhttp://dbpedia.org/property/almaMater
-p388
-(lp389
-S'alma mater'
+(lp388
+S'predecessor'
+p389
+asVhttp://dbpedia.org/resource/Ata_Pata_Laapata
 p390
-asVhttp://dbpedia.org/ontology/team
-p391
-(lp392
-S'team'
+(lp391
+S'Ata Pata Laapata'
+p392
+asVhttp://dbpedia.org/resource/Sony_Pictures_Networks
 p393
-asVhttp://dbpedia.org/resource/Limited_liability_company
-p394
-(lp395
-S'Limited liability company'
+(lp394
+S'Sony Pictures Networks'
+p395
+asVhttp://dbpedia.org/property/atomicNumber
 p396
-asVhttp://dbpedia.org/resource/Strategy_game
-p397
-(lp398
-S'Strategy game'
+(lp397
+S'number of protons'
+p398
+aS'Z'
 p399
-asVhttp://dbpedia.org/resource/MicroProse
+aS'atomic number'
 p400
-(lp401
-S'MicroProse'
+aS'atom number'
+p401
+aS'proton number'
 p402
-asVhttp://dbpedia.org/property/occupation
+asVhttp://dbpedia.org/ontology/movement
 p403
 (lp404
-S'occupation'
+S'school'
 p405
-asVhttp://dbpedia.org/resource/CricketArchive
+aS'movement'
 p406
-(lp407
-S'CricketArchive'
-p408
-asVhttp://dbpedia.org/property/spouse
+asVhttp://dbpedia.org/resource/Roosevelt_family
+p407
+(lp408
+S'Roosevelt family'
 p409
-(lp410
-S'spouse'
-p411
-asVhttp://dbpedia.org/resource/Tim_Cook
+asVhttp://dbpedia.org/ontology/Hospital
+p410
+(lp411
+S'hospital'
 p412
-(lp413
-S'Tim Cook'
-p414
-asVhttp://dbpedia.org/resource/Basketball
+asVhttp://dbpedia.org/ontology/locationCountry
+p413
+(lp414
+S'pastwo'
 p415
-(lp416
-S'Basketball'
-p417
-asVhttp://dbpedia.org/resource/Mike_Judge
+asVhttp://dbpedia.org/ontology/openingTheme
+p416
+(lp417
+S'opening theme'
 p418
-(lp419
-S'Mike Judge'
-p420
-asVhttp://dbpedia.org/resource/Film_director
+asVhttp://dbpedia.org/ontology/President
+p419
+(lp420
+S'president'
 p421
-(lp422
-S'Film director'
-p423
-asVhttp://dbpedia.org/resource/Regional_organization
+asVhttp://dbpedia.org/property/publisher
+p422
+(lp423
+S'publisher'
 p424
-(lp425
-S'Regional organization'
-p426
-asVhttp://dbpedia.org/resource/Genius_Bar
+asVhttp://dbpedia.org/ontology/populationTotal
+p425
+(lp426
+S'inhabitants'
 p427
-(lp428
-S'Genius Bar'
+aS'human population'
+p428
+aS'population'
 p429
-asVhttp://dbpedia.org/resource/Jared_Kushner
+asVhttp://dbpedia.org/resource/Rehana_Sultan
 p430
 (lp431
-S'Jared Kushner'
+S'Rehana Sultan'
 p432
-asVhttp://dbpedia.org/resource/Disk_Utility
+asVhttp://dbpedia.org/resource/Thumri
 p433
 (lp434
-S'Disk Utility'
+S'Thumri'
 p435
-asVhttp://dbpedia.org/property/combatant
+asVhttp://dbpedia.org/property/ndlId
 p436
 (lp437
-S'combatant'
+S'NDLA ID'
 p438
-asVhttp://dbpedia.org/property/employer
+aS'NDL Authorities'
 p439
-(lp440
-S'employer'
+aS'NDLA identifier'
+p440
+aS'ndl'
 p441
-asVhttp://dbpedia.org/resource/Macintosh
+aS'NDL identifier'
 p442
-(lp443
-S'Macintosh'
+aS'NDLAuth ID'
+p443
+aS'NDL ID'
 p444
-asVhttp://dbpedia.org/resource/Grand_Central_Publishing
+asVhttp://dbpedia.org/resource/IPod_Touch_(6th_generation)
 p445
 (lp446
-S'Grand Central Publishing'
+S'IPod Touch (6th generation)'
 p447
-asVhttp://dbpedia.org/resource/HBO
+asVhttp://dbpedia.org/property/launchVehicle
 p448
 (lp449
-S'HBO'
+S'carrier rocket'
 p450
-asVhttp://dbpedia.org/resource/Stanford,_California
+aS'space launch vehicle'
 p451
-(lp452
-S'Stanford, California'
+aS'launch vehicle'
+p452
+asVhttp://dbpedia.org/ontology/inseeCode
 p453
-asVhttp://dbpedia.org/ontology/service
-p454
-(lp455
-S'service'
+(lp454
+S'municipality code (France)'
+p455
+aS'INSEE municipality code'
 p456
-asVhttp://dbpedia.org/resource/Los_Angeles
+asVhttp://dbpedia.org/property/lccnId
 p457
 (lp458
-S'Los Angeles'
+S'LCAuth ID'
 p459
-asVhttp://dbpedia.org/resource/Nuclear_Power_Corporation_of_India
+aS'LCAuth'
 p460
-(lp461
-S'Nuclear Power Corporation of India'
+aS'LoC Authorities'
+p461
+aS'Library of Congress Control Number'
 p462
-asVhttp://dbpedia.org/resource/IOS_SDK
+aS'LCAuth identifier'
 p463
-(lp464
-S'IOS SDK'
+aS'Library of Congress Name Authority File'
+p464
+aS'LCCN identifier'
 p465
-asVhttp://dbpedia.org/resource/Nabih's_Inc.
+aS'Library of Congress Subject Headings'
 p466
-(lp467
-S"Nabih's Inc."
+aS'LCNAF'
+p467
+aS'LCSH'
 p468
-asVhttp://dbpedia.org/property/title
+asVhttp://dbpedia.org/property/manager
 p469
 (lp470
-S'title'
+S'coach'
 p471
-asVhttp://dbpedia.org/resource/Woodhaven,_Queens
+aS'head coach'
 p472
-(lp473
-S'Woodhaven, Queens'
+aS'team manager'
+p473
+aS'manager'
 p474
-asVhttp://dbpedia.org/resource/Anti_Terrorist_Squad_(India)
+aS'senior coach'
 p475
-(lp476
-S'Anti Terrorist Squad (India)'
+aS'club manager'
+p476
+asVhttp://dbpedia.org/resource/CSI:_Miami_(video_game)
 p477
-asVhttp://dbpedia.org/resource/Kaisi_Yeh_Yaariyan
-p478
-(lp479
-S'Kaisi Yeh Yaariyan'
+(lp478
+S'CSI: Miami (video game)'
+p479
+asVhttp://dbpedia.org/ontology/stateOfOrigin
 p480
-asVhttp://dbpedia.org/ontology/sport
-p481
-(lp482
-S'sport'
+(lp481
+S'state of origin'
+p482
+asVhttp://dbpedia.org/resource/Film_director
 p483
-asVhttp://dbpedia.org/resource/Bill_Kincaid
-p484
-(lp485
-S'Bill Kincaid'
+(lp484
+S'Film director'
+p485
+asVhttp://dbpedia.org/ontology/operatingSystem
 p486
-asVhttp://dbpedia.org/ontology/locationCity
-p487
-(lp488
-S'location city'
+(lp487
+S'operating system'
+p488
+asVhttp://dbpedia.org/resource/RNS_Institute_of_Technology
 p489
-asVhttp://dbpedia.org/ontology/occupation
-p490
-(lp491
-S'occupation'
+(lp490
+S'RNS Institute of Technology'
+p491
+asVhttp://dbpedia.org/ontology/date
 p492
-asVhttp://dbpedia.org/property/placeOfDeath
-p493
-(lp494
-S'PLACE OF DEATH'
+(lp493
+S'"'
+p494
+aS"'"
 p495
-asVhttp://dbpedia.org/resource/Sony_Entertainment_Television_(India)
+aS'year'
 p496
-(lp497
-S'Sony Entertainment Television (India)'
+aS'when'
+p497
+aS'at time'
 p498
-asVhttp://dbpedia.org/resource/Politician
+aS'point in time'
 p499
-(lp500
-S'Politician'
+aS'time'
+p500
+aS'date'
 p501
-asVhttp://dbpedia.org/resource/Bitfrost
+aS'as of'
 p502
-(lp503
-S'Bitfrost'
+aS'time of event'
+p503
+asVhttp://dbpedia.org/property/series
 p504
-asVhttp://dbpedia.org/resource/Tata_Interactive_Systems
-p505
-(lp506
-S'Tata Interactive Systems'
+(lp505
+S'series'
+p506
+asVhttp://dbpedia.org/resource/Visvesvaraya_Technological_University
 p507
-asVhttp://dbpedia.org/resource/Indian_Princess
-p508
-(lp509
-S'Indian Princess'
+(lp508
+S'Visvesvaraya Technological University'
+p509
+asVhttp://dbpedia.org/resource/Thomas_Chisholm_Anstey
 p510
-asVhttp://dbpedia.org/ontology/Bank
-p511
-(lp512
-S'bank'
+(lp511
+S'Thomas Chisholm Anstey'
+p512
+asVhttp://dbpedia.org/resource/Warner_Bros.
 p513
-asVhttp://dbpedia.org/resource/Grasim_Industries
-p514
-(lp515
-S'Grasim Industries'
+(lp514
+S'Warner Bros.'
+p515
+asVhttp://dbpedia.org/ontology/MusicalArtist
 p516
-asVhttp://dbpedia.org/resource/Mac_OS_X_Panther
-p517
-(lp518
-S'Mac OS X Panther'
+(lp517
+S'musical artist'
+p518
+asVhttp://dbpedia.org/resource/Haathi_Ke_Daant
 p519
-asVhttp://dbpedia.org/resource/Trump_Tower_(New_York_City)
-p520
-(lp521
-S'Trump Tower (New York City)'
+(lp520
+S'Haathi Ke Daant'
+p521
+asVhttp://dbpedia.org/ontology/Person
 p522
-asVhttp://dbpedia.org/resource/Sushil_Kumar_Modi
-p523
-(lp524
-S'Sushil Kumar Modi'
+(lp523
+S'person'
+p524
+asVhttp://dbpedia.org/resource/Peterson_Hill
 p525
-asVhttp://dbpedia.org/resource/Samsung_Galaxy_Apps
-p526
-(lp527
-S'Samsung Galaxy Apps'
+(lp526
+S'Peterson Hill'
+p527
+asVhttp://dbpedia.org/resource/555_California_Street
 p528
-asVhttp://dbpedia.org/resource/Rashtriya_Chemicals_&_Fertilizers
-p529
-(lp530
-S'Rashtriya Chemicals & Fertilizers'
+(lp529
+S'555 California Street'
+p530
+asVhttp://dbpedia.org/resource/Personal_computer
 p531
-asVhttp://dbpedia.org/resource/Sir_J._J._College_of_Architecture
-p532
-(lp533
-S'Sir J. J. College of Architecture'
+(lp532
+S'Personal computer'
+p533
+asVhttp://dbpedia.org/property/iso6393Code
 p534
-asVhttp://dbpedia.org/resource/Augmented_reality
-p535
-(lp536
-S'Augmented reality'
+(lp535
+S'iso 639-3'
+p536
+aS'ISO 639-3 code'
 p537
-asVhttp://dbpedia.org/resource/Vijay_Krishna_Acharya
+asVhttp://dbpedia.org/resource/Michael_Eisner
 p538
 (lp539
-S'Vijay Krishna Acharya'
+S'Michael Eisner'
 p540
-asVhttp://dbpedia.org/resource/India
+asVhttp://dbpedia.org/resource/Isleworth
 p541
 (lp542
-S'India'
+S'Isleworth'
 p543
-asVhttp://dbpedia.org/ontology/Politician
+asVhttp://dbpedia.org/resource/End-user_license_agreement
 p544
 (lp545
-S'politician'
+S'End-user license agreement'
 p546
-asVhttp://dbpedia.org/resource/Stony_Brook_University
+asVhttp://dbpedia.org/resource/MGM_Interactive
 p547
 (lp548
-S'Stony Brook University'
+S'MGM Interactive'
 p549
-asVhttp://dbpedia.org/resource/Bob_Iger
+asVhttp://dbpedia.org/ontology/capital
 p550
 (lp551
-S'Bob Iger'
+S'administrative centre'
 p552
-asVhttp://dbpedia.org/resource/Democratic_Party_(United_States)
+aS'capital'
 p553
-(lp554
-S'Democratic Party (United States)'
+aS'principal place'
+p554
+aS'capital town'
 p555
-asVhttp://dbpedia.org/resource/National_Institute_of_Construction_Management_and_Research
+aS'county seat'
 p556
-(lp557
-S'National Institute of Construction Management and Research'
+aS'chef-lieu'
+p557
+aS'administrative headquarters'
 p558
-asVhttp://dbpedia.org/ontology/Wrestler
+aS'capital city'
 p559
-(lp560
-S'wrestler'
-p561
-asVhttp://dbpedia.org/ontology/City
+asVhttp://dbpedia.org/resource/Dharmendra
+p560
+(lp561
+S'Dharmendra'
 p562
-(lp563
-S'city'
-p564
-asVhttp://dbpedia.org/resource/OmniDiskSweeper
+asVhttp://dbpedia.org/resource/Luke_Wood
+p563
+(lp564
+S'Luke Wood'
 p565
-(lp566
-S'OmniDiskSweeper'
+asVhttp://dbpedia.org/property/viafId
+p566
+g246
+sVhttp://dbpedia.org/resource/Physician
 p567
-asVhttp://dbpedia.org/resource/Brad_Krevoy
-p568
-(lp569
-S'Brad Krevoy'
+(lp568
+S'Physician'
+p569
+asVhttp://dbpedia.org/ontology/imdbId
 p570
-asVhttp://dbpedia.org/resource/Apple_Trek
-p571
-(lp572
-S'Apple Trek'
+(lp571
+S'IMDb ID'
+p572
+aS'imdb'
 p573
-asVhttp://dbpedia.org/ontology/TelevisionStation
+aS'IMDb'
 p574
-(lp575
-S'television station'
+aS'IMDb identifier'
+p575
+aS'Internet Movie Database'
 p576
-asVhttp://dbpedia.org/resource/Rohini_Heliport
+asVhttp://dbpedia.org/ontology/owningCompany
 p577
 (lp578
-S'Rohini Heliport'
+S'owning company'
 p579
-asVhttp://dbpedia.org/resource/Snehal_Ambekar
+asVhttp://dbpedia.org/resource/Priya_Dutt
 p580
 (lp581
-S'Snehal Ambekar'
+S'Priya Dutt'
 p582
-asVhttp://dbpedia.org/ontology/residence
+asVhttp://dbpedia.org/resource/Xcode
 p583
 (lp584
-S'residence'
+S'Xcode'
 p585
-asVhttp://dbpedia.org/property/leaderName
+asVhttp://dbpedia.org/resource/Call_of_Duty:_Zombies
 p586
 (lp587
-S'leader name'
+S'Call of Duty: Zombies'
 p588
-asVhttp://dbpedia.org/resource/Dillagi_(1999_film)
+asVhttp://dbpedia.org/ontology/Website
 p589
 (lp590
-S'Dillagi (1999 film)'
+S'website'
 p591
-asVhttp://dbpedia.org/resource/Businessperson
+asVhttp://dbpedia.org/property/headquarter
 p592
 (lp593
-S'Businessperson'
+S'headquarters location'
 p594
-asVhttp://dbpedia.org/resource/John_Fletcher_(Queensland_politician)
+aS'HQ'
 p595
-(lp596
-S'John Fletcher (Queensland politician)'
+aS'seat'
+p596
+aS'admin HQ'
 p597
-asVhttp://dbpedia.org/ontology/board
+aS'head office location'
 p598
-(lp599
-S'board'
+aS'principle office'
+p599
+aS'garrison'
 p600
-asVhttp://dbpedia.org/resource/Google
+asVhttp://dbpedia.org/resource/The_Celebrity_Apprentice
 p601
 (lp602
-S'Google'
+S'The Celebrity Apprentice'
 p603
-asVhttp://dbpedia.org/resource/MacPorts
+asVhttp://dbpedia.org/resource/Charles_Kushner
 p604
 (lp605
-S'MacPorts'
+S'Charles Kushner'
 p606
-asVhttp://dbpedia.org/resource/Aathwan_Sur_\u2013_The_Other_Side_of_Naushad
+asVhttp://dbpedia.org/resource/Satyadev_Dubey
 p607
 (lp608
-S'Aathwan Sur  The Other Side of Naushad'
+S'Satyadev Dubey'
 p609
-asVhttp://dbpedia.org/resource/Sudesh_Berry
+asVhttp://dbpedia.org/resource/Sony_Kix
 p610
 (lp611
-S'Sudesh Berry'
+S'Sony Kix'
 p612
-asVhttp://dbpedia.org/resource/Darwin_(operating_system)
+asVhttp://dbpedia.org/resource/Objective-C
 p613
 (lp614
-S'Darwin (operating system)'
+S'Objective-C'
 p615
-asVhttp://dbpedia.org/resource/Edmonton
+asVhttp://dbpedia.org/ontology/ProgrammingLanguage
 p616
 (lp617
-S'Edmonton'
+S'programming language'
 p618
-asVhttp://dbpedia.org/ontology/college
+asVhttp://dbpedia.org/property/amgid
 p619
 (lp620
-S'college'
+S'AllMovie movie ID'
 p621
-asVhttp://dbpedia.org/property/league
+asVhttp://dbpedia.org/resource/Pageant_Place
 p622
 (lp623
-S'league'
+S'Pageant Place'
 p624
-asVhttp://dbpedia.org/resource/Bangladesh
+asVhttp://dbpedia.org/resource/Zombie_Highway
 p625
 (lp626
-S'Bangladesh'
+S'Zombie Highway'
 p627
-asVhttp://dbpedia.org/resource/IOS
+asVhttp://dbpedia.org/resource/Radio_Ceylon
 p628
 (lp629
-S'IOS'
+S'Radio Ceylon'
 p630
-asVhttp://dbpedia.org/resource/Suchitra_Singh
+asVhttp://dbpedia.org/resource/Aditya_Chaudhary
 p631
 (lp632
-S'Suchitra Singh'
+S'Aditya Chaudhary'
 p633
-asVhttp://dbpedia.org/resource/Cricket
+asVhttp://dbpedia.org/property/einecsNumber
 p634
 (lp635
-S'Cricket'
+S'EINECS No.'
 p636
-asVhttp://dbpedia.org/resource/Bhayanak_Maut
+aS'EC No.'
 p637
-(lp638
-S'Bhayanak Maut'
+aS'EC no.'
+p638
+aS'EC#'
 p639
-asVhttp://dbpedia.org/resource/Sagar_Ballary
+aS'European Community number'
 p640
-(lp641
-S'Sagar Ballary'
-p642
-asVhttp://dbpedia.org/resource/Stanford_Graduate_School_of_Business
+asVhttp://dbpedia.org/resource/Actor
+p641
+(lp642
+S'Actor'
 p643
-(lp644
-S'Stanford Graduate School of Business'
-p645
-asVhttp://dbpedia.org/resource/Aasif_Mandvi
+asVhttp://dbpedia.org/property/editing
+p644
+(lp645
+S'film editor'
 p646
-(lp647
-S'Aasif Mandvi'
+aS'editor'
+p647
+aS'edited by'
 p648
-asVhttp://dbpedia.org/ontology/successor
+asVhttp://dbpedia.org/resource/Sweet_Dreams_(Are_Made_of_This)
 p649
 (lp650
-S'successor'
+S'Sweet Dreams (Are Made of This)'
 p651
-asVhttp://dbpedia.org/resource/Association_football
+asVhttp://dbpedia.org/resource/Mike_Markkula
 p652
 (lp653
-S'Association football'
+S'Mike Markkula'
 p654
-asVhttp://dbpedia.org/property/constituency
+asVhttp://dbpedia.org/property/movement
 p655
-(lp656
-S'constituency'
-p657
-asVhttp://dbpedia.org/ontology/Software
+g404
+sVhttp://dbpedia.org/property/illustrator
+p656
+(lp657
+S'illustrated by'
 p658
-(lp659
-S'software'
+aS'illustrator'
+p659
+aS'illustration by'
 p660
-asVhttp://dbpedia.org/property/series
+asVhttp://dbpedia.org/ontology/birthPlace
 p661
 (lp662
-S'series'
+S'birthplace'
 p663
-asVhttp://dbpedia.org/resource/Sunny_Deol
+aS'birth city'
 p664
-(lp665
-S'Sunny Deol'
+aS'born at'
+p665
+aS'birth place'
 p666
-asVhttp://dbpedia.org/resource/Star_Vijay
+aS'place of birth'
 p667
-(lp668
-S'Star Vijay'
+aS'born in'
+p668
+aS'location born'
 p669
-asVhttp://dbpedia.org/resource/Bomberman_Touch:_The_Legend_of_Mystic_Bomb
+aS'birth location'
 p670
-(lp671
-S'Bomberman Touch: The Legend of Mystic Bomb'
+aS'POB'
+p671
+aS'location of birth'
 p672
-asVhttp://dbpedia.org/resource/Warrior_High
+aS'location'
 p673
-(lp674
-S'Warrior High'
-p675
-asVhttp://dbpedia.org/resource/Excel_Entertainment
+asVhttp://dbpedia.org/property/knownFor
+p674
+(lp675
+S'known for'
 p676
-(lp677
-S'Excel Entertainment'
-p678
-asVhttp://dbpedia.org/resource/AOL
+asVhttp://dbpedia.org/ontology/Country
+p677
+(lp678
+S'country'
 p679
-(lp680
-S'AOL'
-p681
-asVhttp://dbpedia.org/resource/Ashwin_Mushran
+asVhttp://dbpedia.org/property/flag
+p680
+(lp681
+S'image flag'
 p682
-(lp683
-S'Ashwin Mushran'
+aS'flag image'
+p683
+aS'image of flag'
 p684
-asVhttp://dbpedia.org/property/genre
+asVhttp://dbpedia.org/resource/New_York_City
 p685
 (lp686
-S'genre'
+S'New York City'
 p687
-asVhttp://dbpedia.org/resource/D'decor
+asVhttp://dbpedia.org/property/almaMater
 p688
 (lp689
-S"D'decor"
+S'alma mater'
 p690
-asVhttp://dbpedia.org/resource/Indore
+asVhttp://dbpedia.org/resource/Arnold_Schwarzenegger
 p691
 (lp692
-S'Indore'
+S'Arnold Schwarzenegger'
 p693
-asVhttp://dbpedia.org/ontology/publisher
+asVhttp://dbpedia.org/resource/HBO
 p694
 (lp695
-S'publisher'
+S'HBO'
 p696
-asVhttp://dbpedia.org/resource/The_Beatles_Collection
+asVhttp://dbpedia.org/resource/Jamshedpur
 p697
 (lp698
-S'The Beatles Collection'
+S'Jamshedpur'
 p699
-asVhttp://dbpedia.org/resource/Sushilfinance
+asVhttp://dbpedia.org/ontology/maintainedBy
 p700
 (lp701
-S'Sushilfinance'
+S'administrator'
 p702
-asVhttp://dbpedia.org/ontology/athletics
+aS'maintainer'
 p703
-(lp704
-S'athletics'
+aS'custodian'
+p704
+aS'maintenance'
 p705
-asVhttp://dbpedia.org/resource/José_Gerson_da_Cunha
+aS'maintained by'
 p706
-(lp707
-S'Jos Gerson da Cunha'
+aS'administered by'
+p707
+asVhttp://dbpedia.org/resource/Limited_liability_company
 p708
-asVhttp://dbpedia.org/property/distributor
-p709
-(lp710
-S'distributor'
+(lp709
+S'Limited liability company'
+p710
+asVhttp://dbpedia.org/ontology/citizenship
 p711
-asVhttp://dbpedia.org/resource/Bank
-p712
-(lp713
-S'Bank'
+(lp712
+S'subject of (country)'
+p713
+aS'citizen of'
 p714
-asVhttp://dbpedia.org/resource/Indian_Princess_International
+aS'nationality'
 p715
-(lp716
-S'Indian Princess International'
+aS'country of citizenship'
+p716
+aS'citizenship'
 p717
-asVhttp://dbpedia.org/ontology/Village
+asVhttp://dbpedia.org/property/isniId
 p718
 (lp719
-S'village'
+S'International Standard Name Identifier'
 p720
-asVhttp://dbpedia.org/resource/Nazneen_Ghaani
+aS'ISO 27729'
 p721
-(lp722
-S'Nazneen Ghaani'
+aS'ISNI'
+p722
+asVhttp://dbpedia.org/resource/Pramod_Mahajan
 p723
-asVhttp://dbpedia.org/resource/Belgaum_division
-p724
-(lp725
-S'Belgaum division'
+(lp724
+S'Pramod Mahajan'
+p725
+asVhttp://dbpedia.org/resource/Monica_Sharma
 p726
-asVhttp://dbpedia.org/resource/Jinal_Pandya
-p727
-(lp728
-S'Jinal Pandya'
+(lp727
+S'Monica Sharma'
+p728
+asVhttp://dbpedia.org/ontology/team
 p729
-asVhttp://dbpedia.org/resource/Mehtab_(actress)
-p730
-(lp731
-S'Mehtab (actress)'
+(lp730
+S'team played for'
+p731
+aS'member of sports team'
 p732
-asVhttp://dbpedia.org/resource/Preview_(Mac_OS)
+aS'of team'
 p733
-(lp734
-S'Preview (Mac OS)'
+aS'member of team'
+p734
+aS'teams played for'
 p735
-asVhttp://dbpedia.org/resource/Kamrup_Metropolitan_district
+aS'team'
 p736
-(lp737
-S'Kamrup Metropolitan district'
+aS'plays for'
+p737
+aS'played for'
 p738
-asVhttp://dbpedia.org/ontology/Sport
+aS'club played for'
 p739
-(lp740
-S'sport'
-p741
-asVhttp://dbpedia.org/resource/Strategy_video_game
+asVhttp://dbpedia.org/property/releaseDate
+p740
+(lp741
+S'year of publication'
 p742
-(lp743
-S'Strategy video game'
+aS'time of publication'
+p743
+aS'initial release'
 p744
-asVhttp://dbpedia.org/resource/Personal_computer
+aS'publication'
 p745
-(lp746
-S'Personal computer'
+aS'publication time'
+p746
+aS'released'
 p747
-asVhttp://dbpedia.org/resource/Metaio
+aS'date of publication'
 p748
-(lp749
-S'Metaio'
+aS'date published'
+p749
+aS'published'
 p750
-asVhttp://dbpedia.org/property/headquarters
+aS'date released'
 p751
-(lp752
-S'headquarters'
+aS'dop'
+p752
+aS'date of release'
 p753
-asVhttp://dbpedia.org/resource/Mike_Markkula
+aS'release date'
 p754
-(lp755
-S'Mike Markkula'
+aS'publication date'
+p755
+asVhttp://dbpedia.org/resource/CricketArchive
 p756
-asVhttp://dbpedia.org/ontology/nonFictionSubject
-p757
-(lp758
-S'non-fiction subject'
+(lp757
+S'CricketArchive'
+p758
+asVhttp://dbpedia.org/resource/Sadiyaan
 p759
-asVhttp://dbpedia.org/property/company
-p760
-(lp761
-S'company'
+(lp760
+S'Sadiyaan'
+p761
+asVhttp://dbpedia.org/resource/Beverly_Hills,_California
 p762
-asVhttp://dbpedia.org/resource/VueScan
-p763
-(lp764
-S'VueScan'
+(lp763
+S'Beverly Hills, California'
+p764
+asVhttp://dbpedia.org/resource/Mike_Judge
 p765
-asVhttp://dbpedia.org/resource/You've_Been_Trumped
-p766
-(lp767
-S"You've Been Trumped"
+(lp766
+S'Mike Judge'
+p767
+asVhttp://dbpedia.org/property/spouse
 p768
-asVhttp://dbpedia.org/resource/Apple_ProDOS
-p769
-(lp770
-S'Apple ProDOS'
+(lp769
+S'wedded to'
+p770
+aS'consort'
 p771
-asVhttp://dbpedia.org/resource/Ivanka_Trump
+aS'wed'
 p772
-(lp773
-S'Ivanka Trump'
+aS'marry'
+p773
+aS'married'
 p774
-asVhttp://dbpedia.org/resource/N.O.V.A._3
+aS'married to'
 p775
-(lp776
-S'N.O.V.A. 3'
+aS'marriage partner'
+p776
+aS'wife'
 p777
-asVhttp://dbpedia.org/ontology/school
+aS'partner'
 p778
-(lp779
-S'school'
+aS'spouse'
+p779
+aS'husband'
 p780
-asVhttp://dbpedia.org/resource/Game_Center
+asVhttp://dbpedia.org/resource/Regional_organization
 p781
 (lp782
-S'Game Center'
+S'Regional organization'
 p783
-asVhttp://dbpedia.org/resource/Mid_Day
+asVhttp://dbpedia.org/property/landingDate
 p784
-(lp785
-S'Mid Day'
-p786
-asVhttp://dbpedia.org/resource/University_of_the_Punjab,_Jhelum
+g152
+sVhttp://dbpedia.org/resource/Manoj_Chandila
+p785
+(lp786
+S'Manoj Chandila'
 p787
-(lp788
-S'University of the Punjab, Jhelum'
-p789
-asVhttp://dbpedia.org/resource/Hariharan_(singer)
+asVhttp://dbpedia.org/property/cinematography
+p788
+(lp789
+S'director of photography'
 p790
-(lp791
-S'Hariharan (singer)'
+aS'cinematographer'
+p791
+asVhttp://dbpedia.org/resource/Jared_Kushner
 p792
-asVhttp://dbpedia.org/resource/Richard_Couch
-p793
-(lp794
-S'Richard Couch'
+(lp793
+S'Jared Kushner'
+p794
+asVhttp://dbpedia.org/resource/Disk_Utility
 p795
-asVhttp://dbpedia.org/property/children
-p796
-(lp797
-S'children'
+(lp796
+S'Disk Utility'
+p797
+asVhttp://dbpedia.org/ontology/followedBy
 p798
-asVhttp://dbpedia.org/resource/Australian_rules_football
-p799
-(lp800
-S'Australian rules football'
+(lp799
+S'prequel of'
+p800
+aS'next is'
 p801
-asVhttp://dbpedia.org/resource/Mayor_of_Mumbai
+aS'succeded by'
 p802
-(lp803
-S'Mayor of Mumbai'
+aS'sequel is'
+p803
+aS'precedes'
 p804
-asVhttp://dbpedia.org/resource/University_of_the_Punjab,_Khanspur
+aS'followed by'
 p805
-(lp806
-S'University of the Punjab, Khanspur'
+aS'successor'
+p806
+asVhttp://dbpedia.org/resource/Kondura
 p807
-asVhttp://dbpedia.org/property/affiliations
-p808
-(lp809
-S'affiliations'
+(lp808
+S'Kondura'
+p809
+asVhttp://dbpedia.org/resource/Surandai
 p810
-asVhttp://dbpedia.org/resource/J._P._Dutta
-p811
-(lp812
-S'J. P. Dutta'
+(lp811
+S'Surandai'
+p812
+asVhttp://dbpedia.org/property/employer
 p813
-asVhttp://dbpedia.org/resource/The_Art_of_Cricket
-p814
-(lp815
-S'The Art of Cricket'
+(lp814
+S'works at'
+p815
+aS'employed by'
 p816
-asVhttp://dbpedia.org/resource/Tara_Tiny
+aS'working for'
 p817
-(lp818
-S'Tara Tiny'
+aS'workplace'
+p818
+aS'employer'
 p819
-asVhttp://dbpedia.org/ontology/education
+asVhttp://dbpedia.org/resource/Epic_Games
 p820
 (lp821
-S'education'
+S'Epic Games'
 p822
-asVhttp://dbpedia.org/property/products
+asVhttp://dbpedia.org/resource/Bharwain
 p823
 (lp824
-S'products'
+S'Bharwain'
 p825
-asVhttp://dbpedia.org/property/owner
+asVhttp://dbpedia.org/ontology/ideology
 p826
 (lp827
-S'owner'
+S'ideology'
 p828
-asVhttp://dbpedia.org/resource/Croatia
+aS'political ideology'
 p829
-(lp830
-S'Croatia'
-p831
-asVhttp://dbpedia.org/resource/Through_the_Looking_Glass_(video_game)
+asVhttp://dbpedia.org/ontology/iso31661Code
+p830
+(lp831
+S'ISO 3166-1 alpha-3 code'
 p832
-(lp833
-S'Through the Looking Glass (video game)'
+aS'country code ISO 3166-1 alpha-3'
+p833
+asVhttp://dbpedia.org/resource/Macintosh
 p834
-asVhttp://dbpedia.org/ontology/foundedBy
-p835
-(lp836
-S'founded by'
+(lp835
+S'Macintosh'
+p836
+asVhttp://dbpedia.org/resource/Grand_Central_Publishing
 p837
-asVhttp://dbpedia.org/resource/Beats_Music
-p838
-(lp839
-S'Beats Music'
+(lp838
+S'Grand Central Publishing'
+p839
+asVhttp://dbpedia.org/ontology/crewMember
 p840
-asVhttp://dbpedia.org/resource/HoldingWilley
-p841
-(lp842
-S'HoldingWilley'
+(lp841
+S'crew member'
+p842
+asVhttp://dbpedia.org/resource/Oxford_College_of_Engineering
 p843
-asVhttp://dbpedia.org/resource/Karnataka
-p844
-(lp845
-S'Karnataka'
+(lp844
+S'Oxford College of Engineering'
+p845
+asVhttp://dbpedia.org/ontology/service
 p846
-asVhttp://dbpedia.org/resource/Islam
-p847
-(lp848
-S'Islam'
+(lp847
+S'service'
+p848
+asVhttp://dbpedia.org/resource/Los_Angeles
 p849
-asVhttp://dbpedia.org/resource/Maharaja's_College,_Ernakulam
-p850
-(lp851
-S"Maharaja's College, Ernakulam"
+(lp850
+S'Los Angeles'
+p851
+asVhttp://dbpedia.org/property/company
 p852
-asVhttp://dbpedia.org/resource/Zero-configuration_networking
-p853
-(lp854
-S'Zero-configuration networking'
+(lp853
+S'company'
+p854
+asVhttp://dbpedia.org/ontology/ulanId
 p855
-asVhttp://dbpedia.org/resource/Harvard_College
+g211
+sVhttp://dbpedia.org/ontology/Actor
 p856
 (lp857
-S'Harvard College'
+S'actor'
 p858
-asVhttp://dbpedia.org/resource/Apple_TV
+asVhttp://dbpedia.org/property/mother
 p859
 (lp860
-S'Apple TV'
+S'has mother'
 p861
-asVhttp://dbpedia.org/property/party
+aS'parent'
 p862
-(lp863
-S'party'
+aS'is child of'
+p863
+aS'mom'
 p864
-asVhttp://dbpedia.org/resource/Wharton_School_of_the_University_of_Pennsylvania
+aS'mother'
 p865
-(lp866
-S'Wharton School of the University of Pennsylvania'
+aS'mum'
+p866
+aS'is daughter of'
 p867
-asVhttp://dbpedia.org/resource/Madhav_Mantri
+aS'mam'
 p868
-(lp869
-S'Madhav Mantri'
+aS'is son of'
+p869
+asVhttp://dbpedia.org/resource/IOS_SDK
 p870
-asVhttp://dbpedia.org/resource/Brihanmumbai_Municipal_Corporation
-p871
-(lp872
-S'Brihanmumbai Municipal Corporation'
+(lp871
+S'IOS SDK'
+p872
+asVhttp://dbpedia.org/ontology/channel
 p873
-asVhttp://dbpedia.org/resource/Malang_(song)
-p874
-(lp875
-S'Malang (song)'
+(lp874
+S'channel'
+p875
+asVhttp://dbpedia.org/property/title
 p876
-asVhttp://dbpedia.org/resource/Life_Insurance_Corporation_of_India
-p877
-(lp878
-S'Life Insurance Corporation of India'
+(lp877
+S'title'
+p878
+asVhttp://dbpedia.org/resource/Woodhaven,_Queens
 p879
-asVhttp://dbpedia.org/resource/Girls_on_Top_(2016_TV_series)
-p880
-(lp881
-S'Girls on Top (2016 TV series)'
+(lp880
+S'Woodhaven, Queens'
+p881
+asVhttp://dbpedia.org/resource/Western_Express_Highway
 p882
-asVhttp://dbpedia.org/resource/Kushner_Companies
-p883
-(lp884
-S'Kushner Companies'
+(lp883
+S'Western Express Highway'
+p884
+asVhttp://dbpedia.org/property/award
 p885
-asVhttp://dbpedia.org/resource/The_Accidental_Billionaires
-p886
-(lp887
-S'The Accidental Billionaires'
+(lp886
+S'honorary title'
+p887
+aS'prize awarded'
 p888
-asVhttp://dbpedia.org/resource/Atul_Kasbekar
+aS'prize received'
 p889
-(lp890
-S'Atul Kasbekar'
+aS'win'
+p890
+aS'recognition title'
 p891
-asVhttp://dbpedia.org/resource/Rolando_(video_game)
+aS'awards received'
 p892
-(lp893
-S'Rolando (video game)'
+aS'award'
+p893
+aS'awarded'
 p894
-asVhttp://dbpedia.org/ontology/series
+aS'awards'
 p895
-(lp896
-S'series'
+aS'medals'
+p896
+aS'honours'
 p897
-asVhttp://dbpedia.org/property/locationCity
+aS'award received'
 p898
-(lp899
-S'location city'
+aS'honors'
+p899
+aS'award won'
 p900
-asVhttp://dbpedia.org/resource/The_Apprentice_Asia
+asVhttp://dbpedia.org/property/address
 p901
 (lp902
-S'The Apprentice Asia'
+S'street address'
 p903
-asVhttp://dbpedia.org/property/director
+aS'located at street address'
 p904
-(lp905
-S'director'
+aS'address'
+p905
+asVhttp://dbpedia.org/ontology/Device
 p906
-asVhttp://dbpedia.org/resource/Ole_Andreas_Halvorsen
-p907
-(lp908
-S'Ole Andreas Halvorsen'
+(lp907
+S'device'
+p908
+asVhttp://dbpedia.org/resource/Alex_Ferguson
 p909
-asVhttp://dbpedia.org/resource/Jatin_Kanakia
-p910
-(lp911
-S'Jatin Kanakia'
+(lp910
+S'Alex Ferguson'
+p911
+asVhttp://dbpedia.org/ontology/mother
 p912
-asVhttp://dbpedia.org/resource/Mangalsutra_(TV_series)
+g860
+sVhttp://dbpedia.org/resource/Tredegar
 p913
 (lp914
-S'Mangalsutra (TV series)'
+S'Tredegar'
 p915
-asVhttp://dbpedia.org/resource/Puyallup_High_School
+asVhttp://dbpedia.org/resource/Kaisi_Yeh_Yaariyan
 p916
 (lp917
-S'Puyallup High School'
+S'Kaisi Yeh Yaariyan'
 p918
-asVhttp://dbpedia.org/resource/Steam_(software)
+asVhttp://dbpedia.org/ontology/sport
 p919
 (lp920
-S'Steam (software)'
+S'sport'
 p921
-asVhttp://dbpedia.org/ontology/PoliticalParty
+asVhttp://dbpedia.org/property/musicBy
 p922
 (lp923
-S'political party'
+S'music by'
 p924
-asVhttp://dbpedia.org/ontology/School
+aS'songwriter'
 p925
-(lp926
-S'school'
+aS'composed by'
+p926
+aS'written by'
 p927
-asVhttp://dbpedia.org/resource/English_language
+aS'musical score by'
 p928
-(lp929
-S'English language'
+aS'composer'
+p929
+asVhttp://dbpedia.org/ontology/ofsCode
 p930
-asVhttp://dbpedia.org/resource/Anuradha_Pal
-p931
-(lp932
-S'Anuradha Pal'
+(lp931
+S'BFS number'
+p932
+aS'Swiss municipality code'
 p933
-asVhttp://dbpedia.org/resource/Angel_Broking
+asVhttp://dbpedia.org/resource/Spain
 p934
 (lp935
-S'Angel Broking'
+S'Spain'
 p936
-asVhttp://dbpedia.org/resource/Oscar_Health
+asVhttp://dbpedia.org/resource/Mobile_phone
 p937
 (lp938
-S'Oscar Health'
+S'Mobile phone'
 p939
-asVhttp://dbpedia.org/resource/Mumbai_City_district
+asVhttp://dbpedia.org/property/child
 p940
 (lp941
-S'Mumbai City district'
+S'sons'
 p942
-asVhttp://dbpedia.org/resource/Pac-12_Conference
+aS'has son'
 p943
-(lp944
-S'Pac-12 Conference'
+aS'daughter'
+p944
+aS'has kid'
 p945
-asVhttp://dbpedia.org/resource/Orange,_California
+aS'has kids'
 p946
-(lp947
-S'Orange, California'
+aS'has daughter'
+p947
+aS'kids'
 p948
-asVhttp://dbpedia.org/resource/Public_company
+aS'has sons'
 p949
-(lp950
-S'Public company'
+aS'son'
+p950
+aS'has children'
 p951
-asVhttp://dbpedia.org/resource/Alibaba_Group
+aS'has daughters'
 p952
-(lp953
-S'Alibaba Group'
+aS'has child'
+p953
+aS'child'
 p954
-asVhttp://dbpedia.org/property/subject
+aS'children'
 p955
-(lp956
-S'subject'
+aS'daughters'
+p956
+aS'kid'
 p957
-asVhttp://dbpedia.org/resource/Island_Cricket
+asVhttp://dbpedia.org/ontology/locationCity
 p958
 (lp959
-S'Island Cricket'
+S'location city'
 p960
-asVhttp://dbpedia.org/resource/Sudha_Productions
+asVhttp://dbpedia.org/ontology/elo
 p961
 (lp962
-S'Sudha Productions'
+S'Elo rating'
 p963
-asVhttp://dbpedia.org/ontology/product
+asVhttp://dbpedia.org/ontology/occupation
 p964
 (lp965
-S'product'
+S'career'
 p966
-asVhttp://dbpedia.org/ontology/Scientist
+aS'work'
 p967
-(lp968
-S'scientist'
+aS'profession'
+p968
+aS'job'
 p969
-asVhttp://dbpedia.org/resource/Quikr
+aS'craft'
 p970
-(lp971
-S'Quikr'
+aS'employment'
+p971
+aS'occupation'
 p972
-asVhttp://dbpedia.org/resource/Hyderabad
+asVhttp://dbpedia.org/property/placeOfDeath
 p973
 (lp974
-S'Hyderabad'
+S'PLACE OF DEATH'
 p975
-asVhttp://dbpedia.org/ontology/place
+asVhttp://dbpedia.org/resource/Sony_Entertainment_Television_(India)
 p976
 (lp977
-S'place of military conflict'
+S'Sony Entertainment Television (India)'
 p978
-asVhttp://dbpedia.org/resource/Lakshya_(film)
+asVhttp://dbpedia.org/resource/Politician
 p979
 (lp980
-S'Lakshya (film)'
+S'Politician'
 p981
-asVhttp://dbpedia.org/resource/Joshua_Kushner
+asVhttp://dbpedia.org/ontology/compressionRatio
 p982
 (lp983
-S'Joshua Kushner'
+S'compression ratio'
 p984
-asVhttp://dbpedia.org/resource/Neal_E._Miller
+asVhttp://dbpedia.org/resource/East_of_England_(European_Parliament_constituency)
 p985
 (lp986
-S'Neal E. Miller'
+S'East of England (European Parliament constituency)'
 p987
-asVhttp://dbpedia.org/ontology/programmingLanguage
+asVhttp://dbpedia.org/resource/Indian_Princess
 p988
 (lp989
-S'programming language'
+S'Indian Princess'
 p990
-asVhttp://dbpedia.org/resource/Minigame
+asVhttp://dbpedia.org/ontology/Bank
 p991
 (lp992
-S'Minigame'
+S'bank'
 p993
-asVhttp://dbpedia.org/resource/Maharashtra
+asVhttp://dbpedia.org/ontology/bibsysId
 p994
 (lp995
-S'Maharashtra'
+S'BIBSYS identifier'
 p996
-asVhttp://dbpedia.org/resource/Trump_Entrepreneur_Initiative
+aS'BIBSYS ID'
 p997
-(lp998
-S'Trump Entrepreneur Initiative'
-p999
-asVhttp://dbpedia.org/resource/Varanasi
+asVhttp://dbpedia.org/resource/Mac_OS_X_Panther
+p998
+(lp999
+S'Mac OS X Panther'
 p1000
-(lp1001
-S'Varanasi'
-p1002
-asVhttp://dbpedia.org/resource/Washington,_D.C.
+asVhttp://dbpedia.org/resource/Trump_Tower_(New_York_City)
+p1001
+(lp1002
+S'Trump Tower (New York City)'
 p1003
-(lp1004
-S'Washington, D.C.'
-p1005
-asVhttp://dbpedia.org/ontology/subsidiary
+asVhttp://dbpedia.org/resource/Sushil_Kumar_Modi
+p1004
+(lp1005
+S'Sushil Kumar Modi'
 p1006
-(lp1007
-S'subsidiary'
-p1008
-asVhttp://dbpedia.org/resource/Sony
+asVhttp://dbpedia.org/resource/Computer_science
+p1007
+(lp1008
+S'Computer science'
 p1009
-(lp1010
-S'Sony'
-p1011
-asVhttp://dbpedia.org/resource/Research
+asVhttp://dbpedia.org/resource/Karnal
+p1010
+(lp1011
+S'Karnal'
 p1012
-(lp1013
-S'Research'
-p1014
-asVhttp://dbpedia.org/resource/Bo_Derek
+asVhttp://dbpedia.org/resource/Ableton
+p1013
+(lp1014
+S'Ableton'
 p1015
-(lp1016
-S'Bo Derek'
-p1017
-asVhttp://dbpedia.org/resource/Cambridge,_Massachusetts
+asVhttp://dbpedia.org/property/religion
+p1016
+(lp1017
+S'religion'
 p1018
-(lp1019
-S'Cambridge, Massachusetts'
+aS'faith'
+p1019
+aS'life stance'
 p1020
-asVhttp://dbpedia.org/resource/D23_(Disney)
+aS'religious affiliation'
 p1021
-(lp1022
-S'D23 (Disney)'
+aS'denomination'
+p1022
+asVhttp://dbpedia.org/resource/Sir_J._J._College_of_Architecture
 p1023
-asVhttp://dbpedia.org/resource/National_Centre_for_Radio_Astrophysics
-p1024
-(lp1025
-S'National Centre for Radio Astrophysics'
+(lp1024
+S'Sir J. J. College of Architecture'
+p1025
+asVhttp://dbpedia.org/resource/Andheri
 p1026
-asVhttp://dbpedia.org/resource/National_Film_Award_for_Best_Screenplay
-p1027
-(lp1028
-S'National Film Award for Best Screenplay'
+(lp1027
+S'Andheri'
+p1028
+asVhttp://dbpedia.org/ontology/ndlId
 p1029
-asVhttp://dbpedia.org/resource/Angela_Ahrendts
+g437
+sVhttp://dbpedia.org/resource/Vijay_Krishna_Acharya
 p1030
 (lp1031
-S'Angela Ahrendts'
+S'Vijay Krishna Acharya'
 p1032
-asVhttp://dbpedia.org/ontology/religion
+asVhttp://dbpedia.org/ontology/sex
 p1033
 (lp1034
-S'religion'
+S'woman'
 p1035
-asVhttp://dbpedia.org/resource/Dosa_plaza
+aS'gender'
 p1036
-(lp1037
-S'Dosa plaza'
+aS'intersex'
+p1037
+aS'sex'
 p1038
-asVhttp://dbpedia.org/resource/Lenny_Kravitz
+aS'biological sex'
 p1039
-(lp1040
-S'Lenny Kravitz'
+aS'gender expression'
+p1040
+aS'sex or gender'
 p1041
-asVhttp://dbpedia.org/resource/Anand_Singh
+aS'female'
 p1042
-(lp1043
-S'Anand Singh'
+aS'male'
+p1043
+aS'gender identity'
 p1044
-asVhttp://dbpedia.org/resource/Mayank_Anand
+aS'man'
 p1045
-(lp1046
-S'Mayank Anand'
-p1047
-asVhttp://dbpedia.org/resource/President
+asVhttp://dbpedia.org/ontology/Politician
+p1046
+(lp1047
+S'politician'
 p1048
-(lp1049
-S'President'
-p1050
-asVhttp://dbpedia.org/resource/Bob_Harvie
+asVhttp://dbpedia.org/resource/North_India
+p1049
+(lp1050
+S'North India'
 p1051
-(lp1052
-S'Bob Harvie'
-p1053
-asVhttp://dbpedia.org/property/presenter
+asVhttp://dbpedia.org/resource/Mumbai
+p1052
+(lp1053
+S'Mumbai'
 p1054
-(lp1055
-S'presenter'
+asVhttp://dbpedia.org/property/maintainedBy
+p1055
+g701
+sVhttp://dbpedia.org/ontology/City
 p1056
-asVhttp://dbpedia.org/resource/Junaio
-p1057
-(lp1058
-S'Junaio'
+(lp1057
+S'city'
+p1058
+asVhttp://dbpedia.org/property/highestPoint
 p1059
-asVhttp://dbpedia.org/property/city
+g374
+sVhttp://dbpedia.org/property/themeMusicComposer
 p1060
 (lp1061
-S'city '
+S'theme music composer'
 p1062
-asVhttp://dbpedia.org/resource/Proprietary_software
+asVhttp://dbpedia.org/resource/Bangalore
 p1063
 (lp1064
-S'Proprietary software'
+S'Bangalore'
 p1065
-asVhttp://dbpedia.org/resource/Indian_people
+asVhttp://dbpedia.org/ontology/releaseDate
 p1066
-(lp1067
-S'Indian people'
-p1068
-asVhttp://dbpedia.org/ontology/Hospital
+g741
+sVhttp://dbpedia.org/property/areaCode
+p1067
+(lp1068
+S'telephone numbering plan'
 p1069
-(lp1070
-S'hospital'
+aS'local dialing code'
+p1070
+aS'telephone prefix'
 p1071
-asVhttp://dbpedia.org/resource/Gita_Sahgal
+aS'telephone code'
 p1072
-(lp1073
-S'Gita Sahgal'
+aS'local calling code'
+p1073
+aS'STD code'
 p1074
-asVhttp://dbpedia.org/property/birthPlace
+aS'area code'
 p1075
-(lp1076
-S'birth place'
-p1077
-asVhttp://dbpedia.org/ontology/MusicalArtist
+asVhttp://dbpedia.org/property/industry
+p1076
+(lp1077
+S'sector'
 p1078
-(lp1079
-S'musical artist'
+aS'branch'
+p1079
+aS'field of action'
 p1080
-asVhttp://dbpedia.org/resource/William_Randolph_Hearst
+aS'industry'
 p1081
-(lp1082
-S'William Randolph Hearst'
+aS'field of exercise'
+p1082
+aS'economic branch'
 p1083
-asVhttp://dbpedia.org/resource/Mutual_fund
+asVhttp://dbpedia.org/ontology/TelevisionStation
 p1084
 (lp1085
-S'Mutual fund'
+S'television station'
 p1086
-asVhttp://dbpedia.org/ontology/ethnicity
+asVhttp://dbpedia.org/ontology/residence
 p1087
 (lp1088
-S'ethnicity'
+S'official residence'
 p1089
-asVhttp://dbpedia.org/resource/Dattaram_Hindlekar
+asVhttp://dbpedia.org/property/birthName
 p1090
-(lp1091
-S'Dattaram Hindlekar'
-p1092
-asVhttp://dbpedia.org/resource/Ashok_Mankad
+g111
+sVhttp://dbpedia.org/property/leaderName
+p1091
+(lp1092
+S'leader name'
 p1093
-(lp1094
-S'Ashok Mankad'
-p1095
-asVhttp://dbpedia.org/property/artist
+asVhttp://dbpedia.org/resource/Dillagi_(1999_film)
+p1094
+(lp1095
+S'Dillagi (1999 film)'
 p1096
-(lp1097
-S'Artist'
-p1098
-asVhttp://dbpedia.org/resource/Bertrand_Meyer
+asVhttp://dbpedia.org/ontology/board
+p1097
+(lp1098
+S'board'
 p1099
-(lp1100
-S'Bertrand Meyer'
-p1101
-asVhttp://dbpedia.org/property/developer
+asVhttp://dbpedia.org/resource/HDIL
+p1100
+(lp1101
+S'HDIL'
 p1102
-(lp1103
-S'developer'
+asVhttp://dbpedia.org/property/launchDate
+p1103
+g187
+sVhttp://dbpedia.org/resource/Ken_Mok
 p1104
-asVhttp://dbpedia.org/resource/Mustansir_Barma
-p1105
-(lp1106
-S'Mustansir Barma'
+(lp1105
+S'Ken Mok'
+p1106
+asVhttp://dbpedia.org/property/ofsCode
 p1107
-asVhttp://dbpedia.org/resource/AD_Singh
+g931
+sVhttp://dbpedia.org/resource/For_the_Love_of_Money
 p1108
 (lp1109
-S'AD Singh'
+S'For the Love of Money'
 p1110
-asVhttp://dbpedia.org/resource/Whittier_College
+asVhttp://dbpedia.org/resource/Sudesh_Berry
 p1111
 (lp1112
-S'Whittier College'
+S'Sudesh Berry'
 p1113
-asVhttp://dbpedia.org/resource/App_Store_(iOS)
+asVhttp://dbpedia.org/resource/Manhattan
 p1114
 (lp1115
-S'App Store (iOS)'
+S'Manhattan'
 p1116
-asVhttp://dbpedia.org/resource/Ngmoco
+asVhttp://dbpedia.org/property/compressionRatio
 p1117
-(lp1118
-S'Ngmoco'
-p1119
-asVhttp://dbpedia.org/ontology/location
+g983
+sVhttp://dbpedia.org/resource/InstallAnywhere
+p1118
+(lp1119
+S'InstallAnywhere'
 p1120
-(lp1121
-S'location'
+asVhttp://dbpedia.org/property/residence
+p1121
+g1088
+sVhttp://dbpedia.org/ontology/terytCode
 p1122
-asVhttp://dbpedia.org/resource/The_Ultimate_Merger
+g369
+sVhttp://dbpedia.org/ontology/apparentMagnitude
 p1123
 (lp1124
-S'The Ultimate Merger'
+S'apparent magnitude'
 p1125
-asVhttp://dbpedia.org/resource/Shankaboot
+asVhttp://dbpedia.org/property/coach
 p1126
 (lp1127
-S'Shankaboot'
+S'coach'
 p1128
-asVhttp://dbpedia.org/resource/Tilak_Nagar_(Mumbai)
+asVhttp://dbpedia.org/resource/Suchitra_Singh
 p1129
 (lp1130
-S'Tilak Nagar (Mumbai)'
+S'Suchitra Singh'
 p1131
-asVhttp://dbpedia.org/ontology/hometown
+asVhttp://dbpedia.org/resource/Cricket
 p1132
 (lp1133
-S'home town'
+S'Cricket'
 p1134
-asVhttp://dbpedia.org/resource/Macintosh_Portable
+asVhttp://dbpedia.org/property/coatOfArms
 p1135
 (lp1136
-S'Macintosh Portable'
+S'symbol'
 p1137
-asVhttp://dbpedia.org/resource/Wycombe_House_Sports_and_Social_Club
+aS'heraldic emblem'
 p1138
-(lp1139
-S'Wycombe House Sports and Social Club'
+aS'arms'
+p1139
+aS'coat of arms image'
 p1140
-asVhttp://dbpedia.org/resource/Katie_Blair
+aS'CoA image'
 p1141
-(lp1142
-S'Katie Blair'
+aS'heraldic representation'
+p1142
+asVhttp://dbpedia.org/resource/Border_(1997_film)
 p1143
-asVhttp://dbpedia.org/resource/Ghosts_Can't_Do_It
-p1144
-(lp1145
-S"Ghosts Can't Do It"
+(lp1144
+S'Border (1997 film)'
+p1145
+asVhttp://dbpedia.org/property/anthem
 p1146
-asVhttp://dbpedia.org/resource/SOAS,_University_of_London
-p1147
-(lp1148
-S'SOAS, University of London'
+(lp1147
+S'anthem'
+p1148
+aS'official song'
 p1149
-asVhttp://dbpedia.org/resource/Madhya_Pradesh
+aS'march'
 p1150
-(lp1151
-S'Madhya Pradesh'
+aS'national anthem'
+p1151
+asVhttp://dbpedia.org/property/individualisedGnd
 p1152
-asVhttp://dbpedia.org/resource/Dilip_Chalil
+g291
+sVhttp://dbpedia.org/ontology/restingPlace
 p1153
 (lp1154
-S'Dilip Chalil'
+S'resting place'
 p1155
-asVhttp://dbpedia.org/resource/Martial_arts
+asVhttp://dbpedia.org/ontology/successor
 p1156
 (lp1157
-S'Martial arts'
+S'successor'
 p1158
-asVhttp://dbpedia.org/resource/The_Company_(production_company)
+asVhttp://dbpedia.org/resource/Apache_License
 p1159
 (lp1160
-S'The Company (production company)'
+S'Apache License'
 p1161
-asVhttp://dbpedia.org/resource/Echelon_Corporation
+asVhttp://dbpedia.org/resource/Association_football
 p1162
 (lp1163
-S'Echelon Corporation'
+S'Association football'
 p1164
-asVhttp://dbpedia.org/ontology/Airline
+asVhttp://dbpedia.org/ontology/Organisation
 p1165
 (lp1166
-S'airline'
+S'organisation'
 p1167
-asVhttp://dbpedia.org/resource/Russia
+asVhttp://dbpedia.org/ontology/signature
 p1168
 (lp1169
-S'Russia'
+S'autograph'
 p1170
-asVhttp://dbpedia.org/ontology/country
+aS'signature'
 p1171
-(lp1172
-S'country'
-p1173
-asVhttp://dbpedia.org/property/region
+asVhttp://dbpedia.org/property/currency
+p1172
+(lp1173
+S'currency'
 p1174
-(lp1175
-S'region'
+aS'used money'
+p1175
+aS'base currency'
 p1176
-asVhttp://dbpedia.org/resource/Puzzle_video_game
+asVhttp://dbpedia.org/resource/Seed_Eight
 p1177
 (lp1178
-S'Puzzle video game'
+S'Seed Eight'
 p1179
-asVhttp://dbpedia.org/resource/5th_Cell
+asVhttp://dbpedia.org/ontology/fuelSystem
 p1180
 (lp1181
-S'5th Cell'
+S'fuel system'
 p1182
-asVhttp://dbpedia.org/resource/South_Korea
+asVhttp://dbpedia.org/ontology/icaoAirlineCode
 p1183
 (lp1184
-S'South Korea'
+S'International Civil Aviation Organization airline designator'
 p1185
-asVhttp://dbpedia.org/resource/Michael_Arrington
+aS'ICAO airline designator'
 p1186
-(lp1187
-S'Michael Arrington'
-p1188
-asVhttp://dbpedia.org/resource/Sachin:_A_Hundred_Hundreds_Now
+asVhttp://dbpedia.org/property/deathDate
+p1187
+(lp1188
+S'death'
 p1189
-(lp1190
-S'Sachin: A Hundred Hundreds Now'
+aS'date of death'
+p1190
+aS'year of death'
 p1191
-asVhttp://dbpedia.org/resource/Mittal_Champions_Trust
+aS'died on'
 p1192
-(lp1193
-S'Mittal Champions Trust'
+aS'dead'
+p1193
+aS'DOD'
 p1194
-asVhttp://dbpedia.org/resource/Bombay_State
+aS'date of the end'
 p1195
-(lp1196
-S'Bombay State'
+aS'deathdate'
+p1196
+aS'death date'
 p1197
-asVhttp://dbpedia.org/property/governingBody
+asVhttp://dbpedia.org/resource/Warrior_High
 p1198
 (lp1199
-S'governing body'
+S'Warrior High'
 p1200
-asVhttp://dbpedia.org/ontology/writer
+asVhttp://dbpedia.org/resource/Chamku
 p1201
 (lp1202
-S'writer'
+S'Chamku'
 p1203
-asVhttp://dbpedia.org/ontology/parentOrganisation
+asVhttp://dbpedia.org/resource/Ashwin_Mushran
 p1204
 (lp1205
-S'parent organisation'
+S'Ashwin Mushran'
 p1206
-asVhttp://dbpedia.org/ontology/format
+asVhttp://dbpedia.org/ontology/isbn
 p1207
 (lp1208
-S'format (object)'
+S'International Standard Book Number-10'
 p1209
-asVhttp://dbpedia.org/resource/Mahesh_Bhupathi
+aS'ISBN-10'
 p1210
-(lp1211
-S'Mahesh Bhupathi'
+aS'isbn-10'
+p1211
+asVhttp://dbpedia.org/ontology/okatoCode
 p1212
-asVhttp://dbpedia.org/resource/Alex_Ferguson
-p1213
-(lp1214
-S'Alex Ferguson'
+(lp1213
+S'OKATO identifier'
+p1214
+aS'OKATO ID'
 p1215
-asVhttp://dbpedia.org/resource/Larry_J._Franco
+asVhttp://dbpedia.org/property/genre
 p1216
 (lp1217
-S'Larry J. Franco'
+S'kind of music'
 p1218
-asVhttp://dbpedia.org/resource/Wiki_Server
+aS'literary genre'
 p1219
-(lp1220
-S'Wiki Server'
+aS'music genre'
+p1220
+aS'film genre'
 p1221
-asVhttp://dbpedia.org/resource/Bangur_Nagar
+aS'genre'
 p1222
-(lp1223
-S'Bangur Nagar'
+aS'artistic genre'
+p1223
+asVhttp://dbpedia.org/resource/Mohit_Malhotra
 p1224
-asVhttp://dbpedia.org/ontology/party
-p1225
-(lp1226
-S'party'
+(lp1225
+S'Mohit Malhotra'
+p1226
+asVhttp://dbpedia.org/resource/Neerja
 p1227
-asVhttp://dbpedia.org/ontology/highschool
-p1228
-(lp1229
-S'highschool'
+(lp1228
+S'Neerja'
+p1229
+asVhttp://dbpedia.org/ontology/originalLanguage
 p1230
-asVhttp://dbpedia.org/resource/Garner_Tullis
-p1231
-(lp1232
-S'Garner Tullis'
+(lp1231
+S'original language'
+p1232
+aS'language of the original work'
 p1233
-asVhttp://dbpedia.org/resource/Shivaji_Park
+aS'original language of work'
 p1234
-(lp1235
-S'Shivaji Park'
+aS'created on language'
+p1235
+asVhttp://dbpedia.org/property/cpu
 p1236
-asVhttp://dbpedia.org/ontology/Film
-p1237
-(lp1238
-S'movie'
+(lp1237
+S'CPU'
+p1238
+aS'central processing unit'
 p1239
-asVhttp://dbpedia.org/property/profession
+asVhttp://dbpedia.org/property/label
 p1240
 (lp1241
-S'profession'
+S'label'
 p1242
-asVhttp://dbpedia.org/ontology/champion
+asVhttp://dbpedia.org/ontology/publisher
 p1243
 (lp1244
-S'champion'
+S'publisher'
 p1245
-asVhttp://dbpedia.org/resource/British_rule_in_Burma
+asVhttp://dbpedia.org/property/inflow
 p1246
 (lp1247
-S'British rule in Burma'
+S'lake inflows'
 p1248
-asVhttp://dbpedia.org/resource/Supriya_Sule
+aS'lake inflow'
 p1249
-(lp1250
-S'Supriya Sule'
+aS'inflows'
+p1250
+aS'inflow'
 p1251
-asVhttp://dbpedia.org/resource/PlayStation_Home
+asVhttp://dbpedia.org/ontology/region
 p1252
 (lp1253
-S'PlayStation Home'
+S'region'
 p1254
-asVhttp://dbpedia.org/resource/Vox_Populi_(Jericho_episode)
+asVhttp://dbpedia.org/ontology/University
 p1255
 (lp1256
-S'Vox Populi (Jericho episode)'
+S'university'
 p1257
-asVhttp://dbpedia.org/resource/AuthenTec
+asVhttp://dbpedia.org/resource/Apple_Mighty_Mouse
 p1258
 (lp1259
-S'AuthenTec'
+S'Apple Mighty Mouse'
 p1260
-asVhttp://dbpedia.org/resource/Kalvari-class_submarine
+asVhttp://dbpedia.org/ontology/ecNumber
 p1261
 (lp1262
-S'Kalvari-class submarine'
+S'Enzyme Commission number'
 p1263
-asVhttp://dbpedia.org/resource/Goregaon
+aS'EC number'
 p1264
-(lp1265
-S'Goregaon'
-p1266
-asVhttp://dbpedia.org/resource/Run_Roo_Run
+asVhttp://dbpedia.org/property/distributor
+p1265
+(lp1266
+S'distributor'
 p1267
-(lp1268
-S'Run Roo Run'
+aS'distributed by'
+p1268
+asVhttp://dbpedia.org/ontology/isil
 p1269
-asVhttp://dbpedia.org/resource/Badminton
-p1270
-(lp1271
-S'Badminton'
+(lp1270
+S'ISIL ID'
+p1271
+aS'International Standard Identifier for Libraries and Related Organizations'
 p1272
-asVhttp://dbpedia.org/resource/Master_of_Business_Administration
+aS'ISIL'
 p1273
-(lp1274
-S'Master of Business Administration'
-p1275
-asVhttp://dbpedia.org/resource/Fordham_University
+asVhttp://dbpedia.org/resource/Hindi
+p1274
+(lp1275
+S'Hindi'
 p1276
-(lp1277
-S'Fordham University'
-p1278
-asVhttp://dbpedia.org/resource/Ivan_Krsti\u0107
+asVhttp://dbpedia.org/resource/Jalandhar
+p1277
+(lp1278
+S'Jalandhar'
 p1279
-(lp1280
-S'Ivan Krsti'
+asVhttp://dbpedia.org/ontology/chromosome
+p1280
+g183
+sVhttp://dbpedia.org/property/homeport
 p1281
-asVhttp://dbpedia.org/resource/Ball_State_University
-p1282
-(lp1283
-S'Ball State University'
+(lp1282
+S'homeport'
+p1283
+aS'home port'
 p1284
-asVhttp://dbpedia.org/resource/V_(operating_system)
+asVhttp://dbpedia.org/resource/Dil_Vil_Pyar_Vyar
 p1285
 (lp1286
-S'V (operating system)'
+S'Dil Vil Pyar Vyar'
 p1287
-asVhttp://dbpedia.org/property/recorded
+asVhttp://dbpedia.org/resource/Bank
 p1288
 (lp1289
-S'Recorded'
+S'Bank'
 p1290
-asVhttp://dbpedia.org/resource/Evanston,_Illinois
+asVhttp://dbpedia.org/resource/Cooperage_Ground
 p1291
 (lp1292
-S'Evanston, Illinois'
+S'Cooperage Ground'
 p1293
-asVhttp://dbpedia.org/property/producer
+asVhttp://dbpedia.org/resource/Indian_Princess_International
 p1294
 (lp1295
-S'producer'
+S'Indian Princess International'
 p1296
-asVhttp://dbpedia.org/resource/Isaac_Butt
+asVhttp://dbpedia.org/ontology/manufacturer
 p1297
 (lp1298
-S'Isaac Butt'
+S'made by'
 p1299
-asVhttp://dbpedia.org/resource/Jews
+aS'builder'
 p1300
-(lp1301
-S'Jews'
+aS'mfr'
+p1301
+aS'producer (of product)'
 p1302
-asVhttp://dbpedia.org/ontology/parentCompany
+aS'built by'
 p1303
-(lp1304
-S'parent company'
+aS'manufactured by'
+p1304
+aS'maker'
 p1305
-asVhttp://dbpedia.org/resource/The_Institute_of_Science,_Mumbai
+aS'manufacturer'
 p1306
-(lp1307
-S'The Institute of Science, Mumbai'
+asVhttp://dbpedia.org/property/iataLocationIdentifier
+p1307
+g13
+sVhttp://dbpedia.org/resource/Nazneen_Ghaani
 p1308
-asVhttp://dbpedia.org/resource/Commercial_Bank_of_India
-p1309
-(lp1310
-S'Commercial Bank of India'
+(lp1309
+S'Nazneen Ghaani'
+p1310
+asVhttp://dbpedia.org/ontology/lccnId
 p1311
-asVhttp://dbpedia.org/resource/Lahore
+g458
+sVhttp://dbpedia.org/resource/Belgaum_division
 p1312
 (lp1313
-S'Lahore'
+S'Belgaum division'
 p1314
-asVhttp://dbpedia.org/resource/Apple_Campus
+asVhttp://dbpedia.org/resource/Phir_Bhi_Apna_Hai
 p1315
 (lp1316
-S'Apple Campus'
+S'Phir Bhi Apna Hai'
 p1317
-asVhttp://dbpedia.org/ontology/distributor
+asVhttp://dbpedia.org/resource/Mehtab_(actress)
 p1318
 (lp1319
-S'distributor'
+S'Mehtab (actress)'
 p1320
-asVhttp://dbpedia.org/resource/P.A._Semi
+asVhttp://dbpedia.org/property/doctoralStudent
 p1321
 (lp1322
-S'P.A. Semi'
+S'doctoral student'
 p1323
-asVhttp://dbpedia.org/resource/Donald_Trump,_Jr.
+asVhttp://dbpedia.org/ontology/Sport
 p1324
 (lp1325
-S'Donald Trump, Jr.'
+S'sport'
 p1326
-asVhttp://dbpedia.org/resource/Ashwini_Kumar_Chopra
+asVhttp://dbpedia.org/resource/Real_Time_Streaming_Protocol
 p1327
 (lp1328
-S'Ashwini Kumar Chopra'
+S'Real Time Streaming Protocol'
 p1329
-asVhttp://dbpedia.org/resource/Simulation_video_game
+asVhttp://dbpedia.org/resource/Voltas
 p1330
 (lp1331
-S'Simulation video game'
+S'Voltas'
 p1332
-asVhttp://dbpedia.org/resource/Robert_McCool
+asVhttp://dbpedia.org/resource/Bizarre_Creations
 p1333
 (lp1334
-S'Robert McCool'
+S'Bizarre Creations'
 p1335
-asVhttp://dbpedia.org/ontology/sisterStation
+asVhttp://dbpedia.org/ontology/birthDate
 p1336
-(lp1337
-S'sister station'
-p1338
-asVhttp://dbpedia.org/property/capital
+g280
+sVhttp://dbpedia.org/ontology/GovernmentAgency
+p1337
+(lp1338
+S'government agency'
 p1339
-(lp1340
-S'Capital'
+asVhttp://dbpedia.org/ontology/cinematography
+p1340
+g789
+sVhttp://dbpedia.org/ontology/placeOfBurial
 p1341
-asVhttp://dbpedia.org/resource/M.E._Pavri
-p1342
-(lp1343
-S'M.E. Pavri'
+(lp1342
+S'buried in'
+p1343
+aS'burial place'
 p1344
-asVhttp://dbpedia.org/resource/Shrimaan_Shrimati_(TV_series)
+aS'grave at'
 p1345
-(lp1346
-S'Shrimaan Shrimati (TV series)'
+aS'place of grave'
+p1346
+aS'tomb'
 p1347
-asVhttp://dbpedia.org/resource/Baaghi:_Rebels_in_Love
+aS'place of burial'
 p1348
-(lp1349
-S'Baaghi: Rebels in Love'
+aS'location of burial'
+p1349
+aS'resting place'
 p1350
-asVhttp://dbpedia.org/resource/Aandhali_Koshimbir
+asVhttp://dbpedia.org/property/headquarters
 p1351
 (lp1352
-S'Aandhali Koshimbir'
+S'headquarters'
 p1353
-asVhttp://dbpedia.org/ontology/network
+asVhttp://dbpedia.org/ontology/cosparId
 p1354
 (lp1355
-S'network'
+S'COSPAR designation'
 p1356
-asVhttp://dbpedia.org/resource/King's_College,_Cambridge
+aS'International Designator'
 p1357
-(lp1358
-S"King's College, Cambridge"
+aS'COSPAR ID'
+p1358
+aS'NSSDC ID'
 p1359
-asVhttp://dbpedia.org/resource/American_Broadcasting_Company
+asVhttp://dbpedia.org/ontology/nonFictionSubject
 p1360
 (lp1361
-S'American Broadcasting Company'
+S'non-fiction subject'
 p1362
-asVhttp://dbpedia.org/property/president
+asVhttp://dbpedia.org/resource/Brooks_Institute
 p1363
 (lp1364
-S'President'
+S'Brooks Institute'
 p1365
-asVhttp://dbpedia.org/resource/Picador_(imprint)
+asVhttp://dbpedia.org/resource/VueScan
 p1366
 (lp1367
-S'Picador (imprint)'
+S'VueScan'
 p1368
-asVhttp://dbpedia.org/resource/Zibika.com
+asVhttp://dbpedia.org/property/instrument
 p1369
 (lp1370
-S'Zibika.com'
+S'instrument'
 p1371
-asVhttp://dbpedia.org/resource/Prince_Markie_Dee
+aS'plays'
 p1372
-(lp1373
-S'Prince Markie Dee'
-p1374
-asVhttp://dbpedia.org/resource/IWork
+asVhttp://dbpedia.org/resource/You've_Been_Trumped
+p1373
+(lp1374
+S"You've Been Trumped"
 p1375
-(lp1376
-S'IWork'
+asVhttp://dbpedia.org/ontology/deathDate
+p1376
+g1188
+sVhttp://dbpedia.org/resource/Ivanka_Trump
 p1377
-asVhttp://dbpedia.org/property/athletics
-p1378
-(lp1379
-S'athletics'
+(lp1378
+S'Ivanka Trump'
+p1379
+asVhttp://dbpedia.org/ontology/colour
 p1380
-asVhttp://dbpedia.org/resource/Verve_(magazine)
-p1381
-(lp1382
-S'Verve (magazine)'
+(lp1381
+S'color'
+p1382
+aS'colour'
 p1383
-asVhttp://dbpedia.org/resource/Nicole_Amy_Madell
+asVhttp://dbpedia.org/resource/N.O.V.A._3
 p1384
 (lp1385
-S'Nicole Amy Madell'
+S'N.O.V.A. 3'
 p1386
-asVhttp://dbpedia.org/resource/Mickey_Wright
+asVhttp://dbpedia.org/resource/J._P._Dutta
 p1387
 (lp1388
-S'Mickey Wright'
+S'J. P. Dutta'
 p1389
-asVhttp://dbpedia.org/resource/Anand_Lal_Shimpi
+asVhttp://dbpedia.org/resource/Samsung
 p1390
 (lp1391
-S'Anand Lal Shimpi'
+S'Samsung'
 p1392
-asVhttp://dbpedia.org/resource/New_York_Military_Academy
+asVhttp://dbpedia.org/resource/Bombay_Presidency
 p1393
 (lp1394
-S'New York Military Academy'
+S'Bombay Presidency'
 p1395
-asVhttp://dbpedia.org/resource/Steven_W._Bailey
+asVhttp://dbpedia.org/ontology/cpu
 p1396
-(lp1397
-S'Steven W. Bailey'
-p1398
-asVhttp://dbpedia.org/resource/Batch_Monitor
+g1237
+sVhttp://dbpedia.org/property/deathCause
+p1397
+(lp1398
+S'death cause'
 p1399
-(lp1400
-S'Batch Monitor'
+aS'die from'
+p1400
+aS'cause of death'
 p1401
-asVhttp://dbpedia.org/resource/Bhabha_Hospital
+asVhttp://dbpedia.org/property/ceo
 p1402
 (lp1403
-S'Bhabha Hospital'
+S'CEO'
 p1404
-asVhttp://dbpedia.org/resource/Geometry_Wars
+aS'ceo'
 p1405
-(lp1406
-S'Geometry Wars'
+aS'chief executive'
+p1406
+aS'chief executive officer'
 p1407
-asVhttp://dbpedia.org/ontology/starring
+asVhttp://dbpedia.org/resource/Soundtrack
 p1408
 (lp1409
-S'starring'
+S'Soundtrack'
 p1410
-asVhttp://dbpedia.org/resource/Annapolis_Group
+asVhttp://dbpedia.org/resource/Mid_Day
 p1411
 (lp1412
-S'Annapolis Group'
+S'Mid Day'
 p1413
-asVhttp://dbpedia.org/property/founder
+asVhttp://dbpedia.org/resource/Katie_Blair
 p1414
 (lp1415
-S'founder'
+S'Katie Blair'
 p1416
-asVhttp://dbpedia.org/resource/Bangalore
+asVhttp://dbpedia.org/resource/Presidencies_and_provinces_of_British_India
 p1417
 (lp1418
-S'Bangalore'
+S'Presidencies and provinces of British India'
 p1419
-asVhttp://dbpedia.org/ontology/governmentType
+asVhttp://dbpedia.org/resource/Financial_services
 p1420
 (lp1421
-S'government type'
+S'Financial services'
 p1422
-asVhttp://dbpedia.org/resource/Barbara_Bestor
+asVhttp://dbpedia.org/resource/The_Art_of_Cricket
 p1423
 (lp1424
-S'Barbara Bestor'
+S'The Art of Cricket'
 p1425
-asVhttp://dbpedia.org/ontology/President
+asVhttp://dbpedia.org/resource/Shah_Mehmood_Qureshi
 p1426
 (lp1427
-S'president'
+S'Shah Mehmood Qureshi'
 p1428
-asVhttp://dbpedia.org/ontology/governingBody
+asVhttp://dbpedia.org/property/icd9
 p1429
 (lp1430
-S'governing body'
+S'ICD-9 code'
 p1431
-asVhttp://dbpedia.org/ontology/award
+aS'code ICD-9'
 p1432
-(lp1433
-S'award'
+aS'ICD-9'
+p1433
+asVhttp://dbpedia.org/resource/Panchathan_Record_Inn_and_AM_Studios
 p1434
-asVhttp://dbpedia.org/resource/Herbert_Hoover
-p1435
-(lp1436
-S'Herbert Hoover'
+(lp1435
+S'Panchathan Record Inn and AM Studios'
+p1436
+asVhttp://dbpedia.org/resource/Frederic_Farrar
 p1437
-asVhttp://dbpedia.org/resource/Amruta_Khanvilkar
-p1438
-(lp1439
-S'Amruta Khanvilkar'
+(lp1438
+S'Frederic Farrar'
+p1439
+asVhttp://dbpedia.org/resource/Richard_Couch
 p1440
-asVhttp://dbpedia.org/resource/California
-p1441
-(lp1442
-S'California'
+(lp1441
+S'Richard Couch'
+p1442
+asVhttp://dbpedia.org/property/children
 p1443
-asVhttp://dbpedia.org/resource/Bonjour_(software)
-p1444
-(lp1445
-S'Bonjour (software)'
+(lp1444
+S'children'
+p1445
+asVhttp://dbpedia.org/property/affiliations
 p1446
-asVhttp://dbpedia.org/resource/Multilingualism
-p1447
-(lp1448
-S'Multilingualism'
+(lp1447
+S'affiliations'
+p1448
+asVhttp://dbpedia.org/ontology/manager
 p1449
-asVhttp://dbpedia.org/resource/List_of_programs_broadcast_by_Hungama_TV
+g470
+sVhttp://dbpedia.org/property/education
 p1450
 (lp1451
-S'List of programs broadcast by Hungama TV'
+S'school attended'
 p1452
-asVhttp://dbpedia.org/resource/PowerBook_Duo
+aS'studied at'
 p1453
-(lp1454
-S'PowerBook Duo'
+aS'graduated from'
+p1454
+aS'alma mater'
 p1455
-asVhttp://dbpedia.org/property/industry
+aS'alumnus of'
 p1456
-(lp1457
-S'industry'
+aS'alumni of'
+p1457
+aS'university attended'
 p1458
-asVhttp://dbpedia.org/resource/Microsoft
+aS'edu'
 p1459
-(lp1460
-S'Microsoft'
+aS'alumna of'
+p1460
+aS'educated at'
 p1461
-asVhttp://dbpedia.org/resource/Zombie_Highway
+aS'education'
 p1462
-(lp1463
-S'Zombie Highway'
+aS'graduate of'
+p1463
+aS'college attended'
 p1464
-asVhttp://dbpedia.org/ontology/Settlement
+asVhttp://dbpedia.org/property/isbn
 p1465
-(lp1466
-S'settlement'
+g1208
+sVhttp://dbpedia.org/ontology/launchVehicle
+p1466
+g449
+sVhttp://dbpedia.org/property/sex
 p1467
-asVhttp://dbpedia.org/resource/Eiffel_(programming_language)
+g1034
+sVhttp://dbpedia.org/resource/Tara_Tiny
 p1468
 (lp1469
-S'Eiffel (programming language)'
+S'Tara Tiny'
 p1470
-asVhttp://dbpedia.org/resource/Fulbright_Program
+asVhttp://dbpedia.org/ontology/education
 p1471
-(lp1472
-S'Fulbright Program'
-p1473
-asVhttp://dbpedia.org/ontology/keyPerson
+g1451
+sVhttp://dbpedia.org/property/products
+p1472
+(lp1473
+S'products'
 p1474
-(lp1475
-S'key person'
-p1476
-asVhttp://dbpedia.org/property/leader
+asVhttp://dbpedia.org/ontology/continent
+p1475
+(lp1476
+S'continent'
 p1477
-(lp1478
-S'leader'
-p1479
-asVhttp://dbpedia.org/resource/Trump_Entertainment_Resorts
+asVhttp://dbpedia.org/ontology/absoluteMagnitude
+p1478
+(lp1479
+S'absolute magnitude'
 p1480
-(lp1481
-S'Trump Entertainment Resorts'
-p1482
-asVhttp://dbpedia.org/resource/David_Cheriton
+asVhttp://dbpedia.org/property/owner
+p1481
+(lp1482
+S'belongs to'
 p1483
-(lp1484
-S'David Cheriton'
+aS'is owned by'
+p1484
+aS'owned by'
 p1485
-asVhttp://dbpedia.org/ontology/child
+aS'shareholder'
 p1486
-(lp1487
-S'child'
+aS'stockholder'
+p1487
+aS'owner'
 p1488
-asVhttp://dbpedia.org/resource/Bandra
+asVhttp://dbpedia.org/resource/Privately_held_company
 p1489
 (lp1490
-S'Bandra'
+S'Privately held company'
 p1491
-asVhttp://dbpedia.org/resource/Survival_game
+asVhttp://dbpedia.org/property/icaoLocationIdentifier
 p1492
 (lp1493
-S'Survival game'
+S'ICAO airport code'
 p1494
-asVhttp://dbpedia.org/ontology/director
+aS'International Civil Aviation Organization airport code'
 p1495
-(lp1496
-S'film director'
+aS'ICAO aerodrome code'
+p1496
+aS'ICAO airfield code'
 p1497
-asVhttp://dbpedia.org/resource/Table_tennis
+asVhttp://dbpedia.org/resource/Through_the_Looking_Glass_(video_game)
 p1498
 (lp1499
-S'Table tennis'
+S'Through the Looking Glass (video game)'
 p1500
-asVhttp://dbpedia.org/resource/Ivana_Trump
+asVhttp://dbpedia.org/property/ideology
 p1501
-(lp1502
-S'Ivana Trump'
-p1503
-asVhttp://dbpedia.org/resource/Kshatriya_(film)
+g827
+sVhttp://dbpedia.org/property/diseasesDb
+p1502
+(lp1503
+S'DiseasesDB'
 p1504
-(lp1505
-S'Kshatriya (film)'
-p1506
-asVhttp://dbpedia.org/property/channel
+asVhttp://dbpedia.org/ontology/foundedBy
+p1505
+(lp1506
+S'founded by'
 p1507
-(lp1508
-S'channel'
-p1509
-asVhttp://dbpedia.org/property/manufacturer
+asVhttp://dbpedia.org/resource/Beats_Music
+p1508
+(lp1509
+S'Beats Music'
 p1510
-(lp1511
-S'manufacturer'
-p1512
-asVhttp://dbpedia.org/property/state
+asVhttp://dbpedia.org/resource/Karnataka
+p1511
+(lp1512
+S'Karnataka'
 p1513
-(lp1514
-S'state'
-p1515
-asVhttp://dbpedia.org/property/deathPlace
+asVhttp://dbpedia.org/resource/Islam
+p1514
+(lp1515
+S'Islam'
 p1516
-(lp1517
-S'death place'
-p1518
-asVhttp://dbpedia.org/resource/MediaCityUK
+asVhttp://dbpedia.org/resource/Moothedath_Panjan_Ramachandran
+p1517
+(lp1518
+S'Moothedath Panjan Ramachandran'
 p1519
-(lp1520
-S'MediaCityUK'
-p1521
-asVhttp://dbpedia.org/property/album
+asVhttp://dbpedia.org/property/recordLabel
+p1520
+(lp1521
+S'record label'
 p1522
-(lp1523
-S'Album'
+aS'label'
+p1523
+asVhttp://dbpedia.org/ontology/ethnicity
 p1524
-asVhttp://dbpedia.org/property/foundation
-p1525
-(lp1526
-S'foundation'
+(lp1525
+S'race'
+p1526
+aS'ethnic group'
 p1527
-asVhttp://dbpedia.org/ontology/region
+aS'ethnicity'
 p1528
-(lp1529
-S'region'
-p1530
-asVhttp://dbpedia.org/resource/C_(programming_language)
+asVhttp://dbpedia.org/resource/Ashok_Mankad
+p1529
+(lp1530
+S'Ashok Mankad'
 p1531
-(lp1532
-S'C (programming language)'
-p1533
-asVhttp://dbpedia.org/resource/Archery
+asVhttp://dbpedia.org/property/party
+p1532
+(lp1533
+S'member of political party'
 p1534
-(lp1535
-S'Archery'
+aS'political party'
+p1535
+aS'party'
 p1536
-asVhttp://dbpedia.org/property/influenced
+asVhttp://dbpedia.org/resource/Brihanmumbai_Municipal_Corporation
 p1537
 (lp1538
-S'influenced'
+S'Brihanmumbai Municipal Corporation'
 p1539
-asVhttp://dbpedia.org/resource/Harvard_University
+asVhttp://dbpedia.org/resource/Malang_(song)
 p1540
 (lp1541
-S'Harvard University'
+S'Malang (song)'
 p1542
-asVhttp://dbpedia.org/ontology/almaMater
+asVhttp://dbpedia.org/ontology/iso6391Code
 p1543
 (lp1544
-S'alma mater'
+S'ISO 639-1 code'
 p1545
-asVhttp://dbpedia.org/resource/Melania_Trump
+aS'ISO639-1'
 p1546
-(lp1547
-S'Melania Trump'
+aS'iso 639-1'
+p1547
+aS'iso639-1'
 p1548
-asVhttp://dbpedia.org/resource/Technology_journalism
+asVhttp://dbpedia.org/resource/Girls_on_Top_(2016_TV_series)
 p1549
 (lp1550
-S'Technology journalism'
+S'Girls on Top (2016 TV series)'
 p1551
-asVhttp://dbpedia.org/resource/George_Atkinson_(cricketer)
+asVhttp://dbpedia.org/resource/Kushner_Companies
 p1552
 (lp1553
-S'George Atkinson (cricketer)'
+S'Kushner Companies'
 p1554
-asVhttp://dbpedia.org/resource/Amchi_Shala,_Chembur
+asVhttp://dbpedia.org/resource/Atul_Kasbekar
 p1555
 (lp1556
-S'Amchi Shala, Chembur'
+S'Atul Kasbekar'
 p1557
-asVhttp://dbpedia.org/ontology/employer
+asVhttp://dbpedia.org/resource/German_Empire
 p1558
 (lp1559
-S'employer'
+S'German Empire'
 p1560
-asVhttp://dbpedia.org/resource/Mass_media
+asVhttp://dbpedia.org/property/locationCity
 p1561
 (lp1562
-S'Mass media'
+S'location city'
 p1563
-asVhttp://dbpedia.org/resource/Jai_Hind_College
+asVhttp://dbpedia.org/resource/The_Apprentice_Asia
 p1564
 (lp1565
-S'Jai Hind College'
+S'The Apprentice Asia'
 p1566
-asVhttp://dbpedia.org/ontology/type
+asVhttp://dbpedia.org/property/iso6392Code
 p1567
 (lp1568
-S'type'
+S'ISO 639-2 code'
 p1569
-asVhttp://dbpedia.org/resource/Apple_Store
+aS'ISO639-2'
 p1570
-(lp1571
-S'Apple Store'
+aS'iso639-2'
+p1571
+aS'iso 639-2'
 p1572
-asVhttp://dbpedia.org/resource/Red_Hat
+asVhttp://dbpedia.org/property/director
 p1573
 (lp1574
-S'Red Hat'
+S'director'
 p1575
-asVhttp://dbpedia.org/resource/Charles_G._Dawes
+aS'movie director'
 p1576
-(lp1577
-S'Charles G. Dawes'
+aS'film director'
+p1577
+aS'directed by'
 p1578
-asVhttp://dbpedia.org/resource/Ram_Bilas_Sharma_(politician)
+asVhttp://dbpedia.org/resource/Jatin_Kanakia
 p1579
 (lp1580
-S'Ram Bilas Sharma (politician)'
+S'Jatin Kanakia'
 p1581
-asVhttp://dbpedia.org/ontology/Writer
+asVhttp://dbpedia.org/resource/Datang_Telecom
 p1582
 (lp1583
-S'writer'
+S'Datang Telecom'
 p1584
-asVhttp://dbpedia.org/resource/University_of_Minnesota
+asVhttp://dbpedia.org/resource/Steam_(software)
 p1585
 (lp1586
-S'University of Minnesota'
+S'Steam (software)'
 p1587
-asVhttp://dbpedia.org/ontology/knownFor
+asVhttp://dbpedia.org/property/ground
 p1588
 (lp1589
-S'known for'
+S'ground'
 p1590
-asVhttp://dbpedia.org/property/creator
+asVhttp://dbpedia.org/resource/Gujarat
 p1591
 (lp1592
-S'creator'
+S'Gujarat'
 p1593
-asVhttp://dbpedia.org/resource/My_Big_Fat_Obnoxious_Boss
+asVhttp://dbpedia.org/ontology/bSide
 p1594
 (lp1595
-S'My Big Fat Obnoxious Boss'
+S'b-side'
 p1596
-asVhttp://dbpedia.org/resource/Gardening_Mama
+asVhttp://dbpedia.org/resource/Echelon_Corporation
 p1597
 (lp1598
-S'Gardening Mama'
+S'Echelon Corporation'
 p1599
-asVhttp://dbpedia.org/property/author
+asVhttp://dbpedia.org/resource/English_language
 p1600
 (lp1601
-S'author'
+S'English language'
 p1602
-asVhttp://dbpedia.org/property/purpose
+asVhttp://dbpedia.org/resource/Anuradha_Pal
 p1603
 (lp1604
-S'purpose'
+S'Anuradha Pal'
 p1605
-asVhttp://dbpedia.org/resource/Tejashwi_Yadav
+asVhttp://dbpedia.org/resource/APF_Club
 p1606
 (lp1607
-S'Tejashwi Yadav'
+S'APF Club'
 p1608
-asVhttp://dbpedia.org/resource/Fred_Trump
+asVhttp://dbpedia.org/resource/Oscar_Health
 p1609
 (lp1610
-S'Fred Trump'
+S'Oscar Health'
 p1611
-asVhttp://dbpedia.org/resource/Pune
+asVhttp://dbpedia.org/resource/Rani_Chatterjee
 p1612
 (lp1613
-S'Pune'
+S'Rani Chatterjee'
 p1614
-asVhttp://dbpedia.org/property/placeOfBirth
+asVhttp://dbpedia.org/resource/ThunderCats
 p1615
 (lp1616
-S'place of birth'
+S'ThunderCats'
 p1617
-asVhttp://dbpedia.org/resource/New_Delhi
+asVhttp://dbpedia.org/property/team
 p1618
-(lp1619
-S'New Delhi'
+g730
+sVhttp://dbpedia.org/ontology/director
+p1619
+g1574
+sVhttp://dbpedia.org/resource/Sudha_Productions
 p1620
-asVhttp://dbpedia.org/resource/Second_Show
-p1621
-(lp1622
-S'Second Show'
+(lp1621
+S'Sudha Productions'
+p1622
+asVhttp://dbpedia.org/resource/Software_development_kit
 p1623
-asVhttp://dbpedia.org/resource/IBooks_Author
-p1624
-(lp1625
-S'IBooks Author'
+(lp1624
+S'Software development kit'
+p1625
+asVhttp://dbpedia.org/resource/Investing_online
 p1626
-asVhttp://dbpedia.org/resource/Margo_Humphrey
-p1627
-(lp1628
-S'Margo Humphrey'
+(lp1627
+S'Investing online'
+p1628
+asVhttp://dbpedia.org/ontology/product
 p1629
-asVhttp://dbpedia.org/resource/Tara_International
-p1630
-(lp1631
-S'Tara International'
+(lp1630
+S'product'
+p1631
+asVhttp://dbpedia.org/ontology/Scientist
 p1632
-asVhttp://dbpedia.org/property/language
-p1633
-(lp1634
-S'language'
+(lp1633
+S'scientist'
+p1634
+asVhttp://dbpedia.org/resource/Software_synthesizer
 p1635
-asVhttp://dbpedia.org/resource/Lawyer
-p1636
-(lp1637
-S'Lawyer'
+(lp1636
+S'Software synthesizer'
+p1637
+asVhttp://dbpedia.org/resource/City_Engineering_College
 p1638
-asVhttp://dbpedia.org/ontology/recordedIn
-p1639
-(lp1640
-S'recorded in'
+(lp1639
+S'City Engineering College'
+p1640
+asVhttp://dbpedia.org/ontology/league
 p1641
-asVhttp://dbpedia.org/resource/Manhattan
-p1642
-(lp1643
-S'Manhattan'
+(lp1642
+S'league'
+p1643
+aS'sports league'
 p1644
-asVhttp://dbpedia.org/resource/Muneesh_Sappel
+aS'division'
 p1645
-(lp1646
-S'Muneesh Sappel'
-p1647
-asVhttp://dbpedia.org/resource/Radiant_Fountains
+asVhttp://dbpedia.org/resource/Joshua_Kushner
+p1646
+(lp1647
+S'Joshua Kushner'
 p1648
-(lp1649
-S'Radiant Fountains'
+asVhttp://dbpedia.org/ontology/computingPlatform
+p1649
+g240
+sVhttp://dbpedia.org/resource/J._R._D._Tata
 p1650
-asVhttp://dbpedia.org/resource/DDB_Mudra
-p1651
-(lp1652
-S'DDB Mudra'
+(lp1651
+S'J. R. D. Tata'
+p1652
+asVhttp://dbpedia.org/ontology/programmingLanguage
 p1653
-asVhttp://dbpedia.org/resource/1080i
-p1654
-(lp1655
-S'1080i'
+(lp1654
+S'programming language'
+p1655
+asVhttp://dbpedia.org/resource/IPod_Touch
 p1656
-asVhttp://dbpedia.org/ontology/state
-p1657
-(lp1658
-S'state'
+(lp1657
+S'IPod Touch'
+p1658
+asVhttp://dbpedia.org/resource/Maharashtra
 p1659
-asVhttp://dbpedia.org/property/shipBuilder
-p1660
-(lp1661
-S'Ship builder'
+(lp1660
+S'Maharashtra'
+p1661
+asVhttp://dbpedia.org/resource/Ralph_Sam_Haeems
 p1662
-asVhttp://dbpedia.org/resource/Western_Railway_zone
-p1663
-(lp1664
-S'Western Railway zone'
+(lp1663
+S'Ralph Sam Haeems'
+p1664
+asVhttp://dbpedia.org/ontology/constructionMaterial
 p1665
-asVhttp://dbpedia.org/resource/Mark_Burnett
-p1666
-(lp1667
-S'Mark Burnett'
+(lp1666
+S'crafted from'
+p1667
+aS'source material'
 p1668
-asVhttp://dbpedia.org/resource/Internet_suite
+aS'made of'
 p1669
-(lp1670
-S'Internet suite'
+aS'manufactured out of'
+p1670
+aS'feedstock'
 p1671
-asVhttp://dbpedia.org/resource/Ron_Slenzak
+aS'reactant'
 p1672
-(lp1673
-S'Ron Slenzak'
+aS'material used'
+p1673
+aS'media'
 p1674
-asVhttp://dbpedia.org/resource/Turing_Award
+aS'crafted out of'
 p1675
-(lp1676
-S'Turing Award'
+aS'contains'
+p1676
+aS'ingredient'
 p1677
-asVhttp://dbpedia.org/resource/Phiroze_Jeejeebhoy_Towers
+aS'medium'
 p1678
-(lp1679
-S'Phiroze Jeejeebhoy Towers'
+aS'ore'
+p1679
+aS'manufactured from'
 p1680
-asVhttp://dbpedia.org/property/leaderTitle
+aS'raw material'
 p1681
-(lp1682
-S'leader title'
+aS'constructed out of'
+p1682
+aS'made from'
 p1683
-asVhttp://dbpedia.org/resource/Hip_hop
+aS'built from'
 p1684
-(lp1685
-S'Hip hop'
+aS'formed from'
+p1685
+aS'formed out of'
 p1686
-asVhttp://dbpedia.org/resource/Frederick_Trump
+aS'built out of'
 p1687
-(lp1688
-S'Frederick Trump'
+aS'constructed from'
+p1688
+aS'construction material'
 p1689
-asVhttp://dbpedia.org/resource/Court_(film)
+asVhttp://dbpedia.org/property/location
 p1690
 (lp1691
-S'Court (film)'
+S'Location'
 p1692
-asVhttp://dbpedia.org/resource/Strategy_First
+asVhttp://dbpedia.org/resource/Varanasi
 p1693
 (lp1694
-S'Strategy First'
+S'Varanasi'
 p1695
-asVhttp://dbpedia.org/resource/Glendale_Secondary_School
+asVhttp://dbpedia.org/resource/Washington,_D.C.
 p1696
 (lp1697
-S'Glendale Secondary School'
+S'Washington, D.C.'
 p1698
-asVhttp://dbpedia.org/resource/John_L._Hennessy
+asVhttp://dbpedia.org/resource/Sony
 p1699
 (lp1700
-S'John L. Hennessy'
+S'Sony'
 p1701
-asVhttp://dbpedia.org/resource/XHP
+asVhttp://dbpedia.org/resource/Research
 p1702
 (lp1703
-S'XHP'
+S'Research'
 p1704
-asVhttp://dbpedia.org/resource/Darwin_Streaming_Server
+asVhttp://dbpedia.org/resource/Bo_Derek
 p1705
 (lp1706
-S'Darwin Streaming Server'
+S'Bo Derek'
 p1707
-asVhttp://dbpedia.org/resource/Life_OK
+asVhttp://dbpedia.org/resource/Cambridge,_Massachusetts
 p1708
 (lp1709
-S'Life OK'
+S'Cambridge, Massachusetts'
 p1710
-asVhttp://dbpedia.org/resource/Lala_(website)
+asVhttp://dbpedia.org/resource/D23_(Disney)
 p1711
 (lp1712
-S'Lala (website)'
+S'D23 (Disney)'
 p1713
-asVhttp://dbpedia.org/resource/Idaho_Centennial_Ladies'_Open
+asVhttp://dbpedia.org/resource/B._R._Ishara
 p1714
 (lp1715
-S"Idaho Centennial Ladies' Open"
+S'B. R. Ishara'
 p1716
-asVhttp://dbpedia.org/ontology/president
+asVhttp://dbpedia.org/resource/Apple_GS/OS
 p1717
 (lp1718
-S'president'
+S'Apple GS/OS'
 p1719
-asVhttp://dbpedia.org/resource/Zenonia
+asVhttp://dbpedia.org/property/currencyCode
 p1720
 (lp1721
-S'Zenonia'
+S'ISO 4217 code'
 p1722
-asVhttp://dbpedia.org/resource/Gil_Amelio
+asVhttp://dbpedia.org/resource/National_Film_Award_for_Best_Screenplay
 p1723
 (lp1724
-S'Gil Amelio'
+S'National Film Award for Best Screenplay'
 p1725
-asVhttp://dbpedia.org/resource/National_League_Cricket_(Nepal)
+asVhttp://dbpedia.org/property/basedOn
 p1726
 (lp1727
-S'National League Cricket (Nepal)'
+S'fork of'
 p1728
-asVhttp://dbpedia.org/resource/Mumbai
+aS'extended from'
 p1729
-(lp1730
-S'Mumbai'
+aS'derived from'
+p1730
+aS'based upon'
 p1731
-asVhttp://dbpedia.org/resource/BBC
+aS'based on'
 p1732
-(lp1733
-S'BBC'
+aS'copy of'
+p1733
+aS'adapted from'
 p1734
-asVhttp://dbpedia.org/resource/Software
+asVhttp://dbpedia.org/ontology/timeZone
 p1735
 (lp1736
-S'Software'
+S'time zone'
 p1737
-asVhttp://dbpedia.org/resource/Bombay_South_Indian_Adi-Dravida_Sangh_School
+asVhttp://dbpedia.org/ontology/editing
 p1738
-(lp1739
-S'Bombay South Indian Adi-Dravida Sangh School'
+g645
+sVhttp://dbpedia.org/property/originalLanguage
+p1739
+g1231
+sVhttp://dbpedia.org/resource/Tuna
 p1740
-asVhttp://dbpedia.org/ontology/Building
-p1741
-(lp1742
-S'building'
+(lp1741
+S'Tuna'
+p1742
+asVhttp://dbpedia.org/ontology/inflow
 p1743
-asVhttp://dbpedia.org/ontology/affiliation
+g1247
+sVhttp://dbpedia.org/property/date
 p1744
-(lp1745
-S'affiliation'
-p1746
-asVhttp://dbpedia.org/resource/Stanford_University
+g493
+sVhttp://dbpedia.org/resource/Donald_Trump
+p1745
+(lp1746
+S'Donald Trump'
 p1747
-(lp1748
-S'Stanford University'
-p1749
-asVhttp://dbpedia.org/resource/Codemasters
+asVhttp://dbpedia.org/resource/Anand_Singh
+p1748
+(lp1749
+S'Anand Singh'
 p1750
-(lp1751
-S'Codemasters'
-p1752
-asVhttp://dbpedia.org/resource/Remote_Install_Mac_OS_X
+asVhttp://dbpedia.org/property/meshId
+p1751
+(lp1752
+S'MeSH ID'
 p1753
-(lp1754
-S'Remote Install Mac OS X'
+aS'MeSH Unique ID'
+p1754
+asVhttp://dbpedia.org/resource/Apple_Pro_Mouse
 p1755
-asVhttp://dbpedia.org/resource/Associated_Press_Athlete_of_the_Year
-p1756
-(lp1757
-S'Associated Press Athlete of the Year'
+(lp1756
+S'Apple Pro Mouse'
+p1757
+asVhttp://dbpedia.org/property/doctoralAdvisor
 p1758
-asVhttp://dbpedia.org/resource/The_Trump_Organization
-p1759
-(lp1760
-S'The Trump Organization'
+(lp1759
+S'PhD advisor'
+p1760
+aS'doctoral advisor'
 p1761
-asVhttp://dbpedia.org/resource/The_Apprentice:_Martha_Stewart
+aS'doctoral supervisor'
 p1762
-(lp1763
-S'The Apprentice: Martha Stewart'
+aS'supervisor'
+p1763
+aS'advisor'
 p1764
-asVhttp://dbpedia.org/resource/Stardock
+asVhttp://dbpedia.org/resource/President
 p1765
 (lp1766
-S'Stardock'
+S'President'
 p1767
-asVhttp://dbpedia.org/property/location
+asVhttp://dbpedia.org/ontology/recordLabel
 p1768
-(lp1769
-S'Location'
-p1770
-asVhttp://dbpedia.org/resource/Agricultural_science
+g1521
+sVhttp://dbpedia.org/resource/Patty_Shwartz
+p1769
+(lp1770
+S'Patty Shwartz'
 p1771
-(lp1772
-S'Agricultural science'
-p1773
-asVhttp://dbpedia.org/resource/1985_in_music
+asVhttp://dbpedia.org/resource/First-person_shooter
+p1772
+(lp1773
+S'First-person shooter'
 p1774
-(lp1775
-S'1985 in music'
-p1776
-asVhttp://dbpedia.org/resource/WiiWare
+asVhttp://dbpedia.org/property/presenter
+p1775
+(lp1776
+S'presenter'
 p1777
-(lp1778
-S'WiiWare'
-p1779
-asVhttp://dbpedia.org/resource/Himmanshoo_A._Malhotra
+asVhttp://dbpedia.org/ontology/icd10
+p1778
+(lp1779
+S'ICD-10'
 p1780
-(lp1781
-S'Himmanshoo A. Malhotra'
+aS'ICD 10'
+p1781
+asVhttp://dbpedia.org/resource/Omarosa
 p1782
-asVhttp://dbpedia.org/resource/Apple_Public_Source_License
-p1783
-(lp1784
-S'Apple Public Source License'
+(lp1783
+S'Omarosa'
+p1784
+asVhttp://dbpedia.org/property/continent
 p1785
-asVhttp://dbpedia.org/ontology/hubAirport
+g1476
+sVhttp://dbpedia.org/resource/AXN_(Asia)
 p1786
 (lp1787
-S'hub airport'
+S'AXN (Asia)'
 p1788
-asVhttp://dbpedia.org/ontology/genre
+asVhttp://dbpedia.org/resource/Crippled_America
 p1789
 (lp1790
-S'genre'
+S'Crippled America'
 p1791
-asVhttp://dbpedia.org/property/operatingSystem
+asVhttp://dbpedia.org/property/city
 p1792
 (lp1793
-S'operating system'
+S'city '
 p1794
-asVhttp://dbpedia.org/resource/Way2SMS.com
+asVhttp://dbpedia.org/resource/Macworld
 p1795
 (lp1796
-S'Way2SMS.com'
+S'Macworld'
 p1797
-asVhttp://dbpedia.org/ontology/birthPlace
+asVhttp://dbpedia.org/property/editor
 p1798
 (lp1799
-S'birth place'
+S'edited by'
 p1800
-asVhttp://dbpedia.org/ontology/OfficeHolder
+aS'compiled by'
 p1801
-(lp1802
-S'office holder'
+aS'editor'
+p1802
+aS'compiler'
 p1803
-asVhttp://dbpedia.org/property/successor
+asVhttp://dbpedia.org/resource/Indian_people
 p1804
 (lp1805
-S'successor'
+S'Indian people'
 p1806
-asVhttp://dbpedia.org/resource/Independent_politician
+asVhttp://dbpedia.org/resource/Jay_Van_Andel
 p1807
 (lp1808
-S'Independent politician'
+S'Jay Van Andel'
 p1809
-asVhttp://dbpedia.org/ontology/training
+asVhttp://dbpedia.org/resource/C_(programming_language)
 p1810
 (lp1811
-S'training'
+S'C (programming language)'
 p1812
-asVhttp://dbpedia.org/resource/Sergio_Marchionne
+asVhttp://dbpedia.org/resource/Lifestreaming
 p1813
 (lp1814
-S'Sergio Marchionne'
+S'Lifestreaming'
 p1815
-asVhttp://dbpedia.org/resource/IPod_Touch_(5th_generation)
+asVhttp://dbpedia.org/ontology/ceo
 p1816
-(lp1817
-S'IPod Touch (5th generation)'
-p1818
-asVhttp://dbpedia.org/resource/Penny_Johnson_Jerald
+g1403
+sVhttp://dbpedia.org/resource/Daniel_W._Dobberpuhl
+p1817
+(lp1818
+S'Daniel W. Dobberpuhl'
 p1819
-(lp1820
-S'Penny Johnson Jerald'
-p1821
-asVhttp://dbpedia.org/property/executiveProducer
+asVhttp://dbpedia.org/property/taoiseach
+p1820
+(lp1821
+S'head of government'
 p1822
-(lp1823
-S'executive producer'
+aS'executive power heading by'
+p1823
+aS'president'
 p1824
-asVhttp://dbpedia.org/property/license
+aS'premier'
 p1825
-(lp1826
-S'license'
+aS'chancellor'
+p1826
+aS'government heading by'
 p1827
-asVhttp://dbpedia.org/ontology/headquarter
+aS'prime minister'
 p1828
-(lp1829
-S'headquarter'
+aS'head of national government'
+p1829
+aS'first minister'
 p1830
-asVhttp://dbpedia.org/resource/Gorakhpur_Nuclear_Power_Plant
+aS'mayor'
 p1831
-(lp1832
-S'Gorakhpur Nuclear Power Plant'
-p1833
-asVhttp://dbpedia.org/resource/Commodore_International
+asVhttp://dbpedia.org/ontology/unloCode
+p1832
+(lp1833
+S'United Nations LOCODE'
 p1834
-(lp1835
-S'Commodore International'
+aS'UN/LOCODE'
+p1835
+aS'UN location code'
 p1836
-asVhttp://dbpedia.org/ontology/parent
+aS'LOCCODE'
 p1837
-(lp1838
-S'parent'
+aS'UNECE location code'
+p1838
+aS'UNECE LOCODE'
 p1839
-asVhttp://dbpedia.org/resource/Tamil_Nadu
+aS'LOCODE'
 p1840
-(lp1841
-S'Tamil Nadu'
+aS'United Nations location code'
+p1841
+asVhttp://dbpedia.org/resource/Gita_Sahgal
 p1842
-asVhttp://dbpedia.org/resource/IPad_Mini
-p1843
-(lp1844
-S'IPad Mini'
+(lp1843
+S'Gita Sahgal'
+p1844
+asVhttp://dbpedia.org/ontology/designer
 p1845
-asVhttp://dbpedia.org/resource/MTV
+g345
+sVhttp://dbpedia.org/property/birthPlace
 p1846
-(lp1847
-S'MTV'
+g662
+sVhttp://dbpedia.org/property/imdbId
+p1847
+g571
+sVhttp://dbpedia.org/resource/Le_Cirque:_A_Table_in_Heaven
 p1848
-asVhttp://dbpedia.org/resource/Parkwood_School_International
-p1849
-(lp1850
-S'Parkwood School International'
+(lp1849
+S'Le Cirque: A Table in Heaven'
+p1850
+asVhttp://dbpedia.org/resource/William_Randolph_Hearst
 p1851
-asVhttp://dbpedia.org/resource/PlayStation_Store
-p1852
-(lp1853
-S'PlayStation Store'
+(lp1852
+S'William Randolph Hearst'
+p1853
+asVhttp://dbpedia.org/ontology/alias
 p1854
-asVhttp://dbpedia.org/property/residence
-p1855
-(lp1856
-S'residence'
+(lp1855
+S'alias'
+p1856
+aS'stage name'
 p1857
-asVhttp://dbpedia.org/ontology/spouse
+aS'pen name'
 p1858
-(lp1859
-S'spouse'
+aS'nom-de-plume'
+p1859
+aS'pseudonym'
 p1860
-asVhttp://dbpedia.org/ontology/class
+asVhttp://dbpedia.org/ontology/VideoGame
 p1861
 (lp1862
-S'class'
+S'video game'
 p1863
-asVhttp://dbpedia.org/property/relatives
+asVhttp://dbpedia.org/property/handedness
 p1864
 (lp1865
-S'relatives'
+S'handedness'
 p1866
-asVhttp://dbpedia.org/resource/Monica_Márquez
+asVhttp://dbpedia.org/ontology/pdb
 p1867
 (lp1868
-S'Monica Mrquez'
+S'PDB ID'
 p1869
-asVhttp://dbpedia.org/resource/Premal_Shah
+asVhttp://dbpedia.org/ontology/nlaId
 p1870
 (lp1871
-S'Premal Shah'
+S'AuCNLKIN'
 p1872
-asVhttp://dbpedia.org/resource/The_Apprentice_(U.S._TV_series)
+aS'AuCNLKIN ID'
 p1873
-(lp1874
-S'The Apprentice (U.S. TV series)'
+aS'NLA (Australia) identifier'
+p1874
+aS'NLA Kinetica Service identifier'
 p1875
-asVhttp://dbpedia.org/resource/Disney_Junior_(India)
+aS'NLA (Australia) ID'
 p1876
-(lp1877
-S'Disney Junior (India)'
+aS'Libraries Australia identifier'
+p1877
+aS'CNLKIN'
 p1878
-asVhttp://dbpedia.org/resource/Rise_of_the_Zombie
+aS'CNL Kinetica Service identifier'
 p1879
-(lp1880
-S'Rise of the Zombie'
+aS'AuCNLKIN identifier'
+p1880
+aS'Australian National Bibliographic Database identifier'
 p1881
-asVhttp://dbpedia.org/resource/Ismail_Merchant
+aS'CNLKIN identifier'
 p1882
-(lp1883
-S'Ismail Merchant'
-p1884
-asVhttp://dbpedia.org/property/locationCountry
+asVhttp://dbpedia.org/resource/Dattaram_Hindlekar
+p1883
+(lp1884
+S'Dattaram Hindlekar'
 p1885
-(lp1886
-S'location country'
-p1887
-asVhttp://dbpedia.org/resource/Trump:_The_Art_of_the_Deal
+asVhttp://dbpedia.org/resource/Spencer_Kimball_(computer_programmer)
+p1886
+(lp1887
+S'Spencer Kimball (computer programmer)'
 p1888
-(lp1889
-S'Trump: The Art of the Deal'
-p1890
-asVhttp://dbpedia.org/ontology/InformationAppliance
+asVhttp://dbpedia.org/resource/Bandhan_(Indian_TV_series)
+p1889
+(lp1890
+S'Bandhan (Indian TV series)'
 p1891
-(lp1892
-S'information appliance'
-p1893
-asVhttp://dbpedia.org/resource/Rock_Band_Reloaded
+asVhttp://dbpedia.org/ontology/Stadium
+p1892
+(lp1893
+S'stadium'
 p1894
-(lp1895
-S'Rock Band Reloaded'
-p1896
-asVhttp://dbpedia.org/resource/Hong_Kong
+asVhttp://dbpedia.org/resource/Television_program
+p1895
+(lp1896
+S'Television program'
 p1897
-(lp1898
-S'Hong Kong'
-p1899
-asVhttp://dbpedia.org/resource/Perl
+asVhttp://dbpedia.org/resource/Adobe_Systems
+p1898
+(lp1899
+S'Adobe Systems'
 p1900
-(lp1901
-S'Perl'
-p1902
-asVhttp://dbpedia.org/resource/The_Suite_Life_of_Karan_&_Kabir
+asVhttp://dbpedia.org/ontology/School
+p1901
+(lp1902
+S'school'
 p1903
-(lp1904
-S'The Suite Life of Karan & Kabir'
-p1905
-asVhttp://dbpedia.org/resource/Morton_E._Handel
+asVhttp://dbpedia.org/property/developer
+p1904
+(lp1905
+S'developed by'
 p1906
-(lp1907
-S'Morton E. Handel'
+aS'developer'
+p1907
+asVhttp://dbpedia.org/resource/OS_X
 p1908
-asVhttp://dbpedia.org/property/starring
-p1909
-(lp1910
-S'starring'
+(lp1909
+S'OS X'
+p1910
+asVhttp://dbpedia.org/ontology/orientation
 p1911
-asVhttp://dbpedia.org/resource/Khadi_and_Village_Industries_Commission
-p1912
-(lp1913
-S'Khadi and Village Industries Commission'
+(lp1912
+S'sexual orientation'
+p1913
+asVhttp://dbpedia.org/property/diocese
 p1914
-asVhttp://dbpedia.org/resource/Truemors
+g197
+sVhttp://dbpedia.org/property/cosparId
 p1915
-(lp1916
-S'Truemors'
+g1355
+sVhttp://dbpedia.org/property/colour
+p1916
+g1381
+sVhttp://dbpedia.org/resource/Harvard_College
 p1917
-asVhttp://dbpedia.org/ontology/license
-p1918
-(lp1919
-S'license'
+(lp1918
+S'Harvard College'
+p1919
+asVhttp://dbpedia.org/ontology/location
 p1920
-asVhttp://dbpedia.org/ontology/computingPlatform
-p1921
-(lp1922
-S'computing platform'
+(lp1921
+S'location'
+p1922
+asVhttp://dbpedia.org/resource/The_Ultimate_Merger
 p1923
-asVhttp://dbpedia.org/resource/Web_series
-p1924
-(lp1925
-S'Web series'
+(lp1924
+S'The Ultimate Merger'
+p1925
+asVhttp://dbpedia.org/resource/Android_(operating_system)
 p1926
-asVhttp://dbpedia.org/resource/Dungeness_(headland)
-p1927
-(lp1928
-S'Dungeness (headland)'
+(lp1927
+S'Android (operating system)'
+p1928
+asVhttp://dbpedia.org/resource/Sunny_Deol
 p1929
-asVhttp://dbpedia.org/property/fields
-p1930
-(lp1931
-S'fields'
+(lp1930
+S'Sunny Deol'
+p1931
+asVhttp://dbpedia.org/ontology/chairman
 p1932
-asVhttp://dbpedia.org/ontology/Book
-p1933
-(lp1934
-S'book'
+(lp1933
+S'chairman'
+p1934
+asVhttp://dbpedia.org/ontology/hometown
 p1935
-asVhttp://dbpedia.org/resource/Donald_Trump
-p1936
-(lp1937
-S'Donald Trump'
+(lp1936
+S'home town'
+p1937
+asVhttp://dbpedia.org/resource/Santa_Clara,_California
 p1938
-asVhttp://dbpedia.org/resource/Yahoo!
-p1939
-(lp1940
-S'Yahoo!'
+(lp1939
+S'Santa Clara, California'
+p1940
+asVhttp://dbpedia.org/resource/AXN
 p1941
-asVhttp://dbpedia.org/resource/Facebook
-p1942
-(lp1943
-S'Facebook'
+(lp1942
+S'AXN'
+p1943
+asVhttp://dbpedia.org/ontology/meshId
 p1944
-asVhttp://dbpedia.org/resource/Indira_Gandhi_International_Airport
+g1752
+sVhttp://dbpedia.org/ontology/isniId
 p1945
-(lp1946
-S'Indira Gandhi International Airport'
-p1947
-asVhttp://dbpedia.org/resource/Le_Cirque:_A_Table_in_Heaven
+g719
+sVhttp://dbpedia.org/resource/Wycombe_House_Sports_and_Social_Club
+p1946
+(lp1947
+S'Wycombe House Sports and Social Club'
 p1948
-(lp1949
-S'Le Cirque: A Table in Heaven'
-p1950
-asVhttp://dbpedia.org/resource/Jack_Ketchum
-p1951
-(lp1952
-S'Jack Ketchum'
-p1953
-asVhttp://dbpedia.org/resource/NCAA_Division_I
-p1954
-(lp1955
-S'NCAA Division I'
-p1956
-asVhttp://dbpedia.org/resource/Launchd
-p1957
-(lp1958
-S'Launchd'
-p1959
-asVhttp://dbpedia.org/resource/Sony_MAX_2
-p1960
-(lp1961
-S'Sony MAX 2'
-p1962
 asVhttp://dbpedia.org/ontology/Company
-p1963
-(lp1964
+p1949
+(lp1950
 S'company'
+p1951
+asVhttp://dbpedia.org/ontology/discovered
+p1952
+(lp1953
+S'discovery date'
+p1954
+aS'date discovered'
+p1955
+aS'date of discovery'
+p1956
+aS'time of discovery'
+p1957
+asVhttp://dbpedia.org/resource/Ghosts_Can't_Do_It
+p1958
+(lp1959
+S"Ghosts Can't Do It"
+p1960
+asVhttp://dbpedia.org/property/selibrId
+p1961
+(lp1962
+S'LIBRIS'
+p1963
+aS'SELIBR'
+p1964
+asVhttp://dbpedia.org/resource/Wade_Nichols
 p1965
-asVhttp://dbpedia.org/resource/H._G._Dattatreya
-p1966
-(lp1967
-S'H. G. Dattatreya'
+(lp1966
+S'Wade Nichols'
+p1967
+asVhttp://dbpedia.org/resource/SOAS,_University_of_London
 p1968
-asVhttp://dbpedia.org/ontology/owner
-p1969
-(lp1970
-S'owner'
+(lp1969
+S'SOAS, University of London'
+p1970
+asVhttp://dbpedia.org/ontology/knownFor
 p1971
-asVhttp://dbpedia.org/resource/Apple_University
-p1972
-(lp1973
-S'Apple University'
+(lp1972
+S'known for'
+p1973
+asVhttp://dbpedia.org/resource/William_Randolph_Hearst_III
 p1974
-asVhttp://dbpedia.org/resource/National_Hockey_League
-p1975
-(lp1976
-S'National Hockey League'
+(lp1975
+S'William Randolph Hearst III'
+p1976
+asVhttp://dbpedia.org/resource/Madhya_Pradesh
 p1977
-asVhttp://dbpedia.org/resource/Notah_Begay_III
-p1978
-(lp1979
-S'Notah Begay III'
+(lp1978
+S'Madhya Pradesh'
+p1979
+asVhttp://dbpedia.org/ontology/taoiseach
 p1980
-asVhttp://dbpedia.org/resource/George_Carter_(Queensland_politician)
+g1821
+sVhttp://dbpedia.org/resource/Sarhad_(film)
 p1981
 (lp1982
-S'George Carter (Queensland politician)'
+S'Sarhad (film)'
 p1983
-asVhttp://dbpedia.org/resource/Telephone_numbers_in_India
+asVhttp://dbpedia.org/resource/Memory
 p1984
 (lp1985
-S'Telephone numbers in India'
+S'Memory'
 p1986
-asVhttp://dbpedia.org/resource/University_Visvesvaraya_College_of_Engineering
+asVhttp://dbpedia.org/ontology/discoverer
 p1987
 (lp1988
-S'University Visvesvaraya College of Engineering'
+S'discoverer or inventor'
 p1989
-asVhttp://dbpedia.org/resource/LIC_Housing_Finance
+aS'discoverer'
 p1990
-(lp1991
-S'LIC Housing Finance'
+aS'invented by'
+p1991
+aS'discovered by'
 p1992
-asVhttp://dbpedia.org/resource/United_States
+aS'first described by'
 p1993
-(lp1994
-S'United States'
+aS'coined by'
+p1994
+aS'inventor'
 p1995
-asVhttp://dbpedia.org/resource/Bonnie_E._John
+asVhttp://dbpedia.org/property/nlaId
 p1996
-(lp1997
-S'Bonnie E. John'
-p1998
-asVhttp://dbpedia.org/resource/Enterprise_software
+g1871
+sVhttp://dbpedia.org/resource/Ahmednagar
+p1997
+(lp1998
+S'Ahmednagar'
 p1999
-(lp2000
-S'Enterprise software'
+asVhttp://dbpedia.org/property/gameEngine
+p2000
+g48
+sVhttp://dbpedia.org/resource/Blast_Monkeys
 p2001
-asVhttp://dbpedia.org/ontology/executiveProducer
-p2002
-(lp2003
-S'executive producer'
+(lp2002
+S'Blast Monkeys'
+p2003
+asVhttp://dbpedia.org/ontology/musicBy
 p2004
-asVhttp://dbpedia.org/resource/William_P._Clark,_Jr.
+g923
+sVhttp://dbpedia.org/resource/Joel_M._Podolny
 p2005
 (lp2006
-S'William P. Clark, Jr.'
+S'Joel M. Podolny'
 p2007
-asVhttp://dbpedia.org/resource/Dhoom_3
+asVhttp://dbpedia.org/resource/Russia
 p2008
 (lp2009
-S'Dhoom 3'
+S'Russia'
 p2010
-asVhttp://dbpedia.org/resource/Call_of_Duty:_Zombies
+asVhttp://dbpedia.org/ontology/country
 p2011
 (lp2012
-S'Call of Duty: Zombies'
+S'country'
 p2013
-asVhttp://dbpedia.org/resource/APF_Club
+aS'state'
 p2014
-(lp2015
-S'APF Club'
+aS'land'
+p2015
+aS'sovereign state'
 p2016
-asVhttp://dbpedia.org/ontology/developer
+aS'nation'
 p2017
-(lp2018
-S'developer'
-p2019
-asVhttp://dbpedia.org/ontology/AmericanFootballPlayer
+asVhttp://dbpedia.org/property/region
+p2018
+(lp2019
+S'region'
 p2020
-(lp2021
-S'american football player'
-p2022
-asVhttp://dbpedia.org/property/parent
+asVhttp://dbpedia.org/resource/Mainstage_(software)
+p2021
+(lp2022
+S'Mainstage (software)'
 p2023
-(lp2024
-S'parent'
-p2025
-asVhttp://dbpedia.org/resource/Eric_Trump
+asVhttp://dbpedia.org/property/discipline
+p2024
+(lp2025
+S'discipline'
 p2026
-(lp2027
-S'Eric Trump'
+aS'scientific area'
+p2027
+aS'domain'
 p2028
-asVhttp://dbpedia.org/resource/Government_of_Maharashtra
+aS'field of study'
 p2029
-(lp2030
-S'Government of Maharashtra'
+aS'area'
+p2030
+aS'academic subject'
 p2031
-asVhttp://dbpedia.org/resource/Chennai
+aS'field of work'
 p2032
-(lp2033
-S'Chennai'
+aS'academic area'
+p2033
+aS'fields'
 p2034
-asVhttp://dbpedia.org/ontology/Ship
+aS'specialism'
 p2035
-(lp2036
-S'ship'
+aS'academic discipline'
+p2036
+aS'scientific discipline'
 p2037
-asVhttp://dbpedia.org/resource/Christianity
+aS'subject'
 p2038
-(lp2039
-S'Christianity'
-p2040
-asVhttp://dbpedia.org/ontology/creator
+asVhttp://dbpedia.org/resource/5th_Cell
+p2039
+(lp2040
+S'5th Cell'
 p2041
-(lp2042
-S'creator (agent)'
-p2043
-asVhttp://dbpedia.org/resource/Tunnelling_Process_Control
+asVhttp://dbpedia.org/resource/South_Korea
+p2042
+(lp2043
+S'South Korea'
 p2044
-(lp2045
-S'Tunnelling Process Control'
-p2046
-asVhttp://dbpedia.org/ontology/author
+asVhttp://dbpedia.org/resource/Sachin:_A_Hundred_Hundreds_Now
+p2045
+(lp2046
+S'Sachin: A Hundred Hundreds Now'
 p2047
-(lp2048
-S'author'
-p2049
-asVhttp://dbpedia.org/resource/Anthony_Wilkerson
+asVhttp://dbpedia.org/resource/Mittal_Champions_Trust
+p2048
+(lp2049
+S'Mittal Champions Trust'
 p2050
-(lp2051
-S'Anthony Wilkerson'
-p2052
-asVhttp://dbpedia.org/resource/Chaitanya_Tamhane
+asVhttp://dbpedia.org/property/governingBody
+p2051
+(lp2052
+S'governing body'
 p2053
-(lp2054
-S'Chaitanya Tamhane'
-p2055
-asVhttp://dbpedia.org/resource/St._Joseph's_Higher_Secondary_School,_Ooty
+asVhttp://dbpedia.org/ontology/writer
+p2054
+(lp2055
+S'writer'
 p2056
-(lp2057
-S"St. Joseph's Higher Secondary School, Ooty"
-p2058
-asVhttp://dbpedia.org/ontology/Airport
+asVhttp://dbpedia.org/resource/Canada
+p2057
+(lp2058
+S'Canada'
 p2059
-(lp2060
-S'airport'
-p2061
-asVhttp://dbpedia.org/ontology/SportsTeam
+asVhttp://dbpedia.org/ontology/format
+p2060
+(lp2061
+S'format (object)'
 p2062
-(lp2063
-S'sports team'
-p2064
-asVhttp://dbpedia.org/resource/Guy_Kawasaki
+asVhttp://dbpedia.org/resource/Mahesh_Bhupathi
+p2063
+(lp2064
+S'Mahesh Bhupathi'
 p2065
-(lp2066
-S'Guy Kawasaki'
-p2067
-asVhttp://dbpedia.org/ontology/language
+asVhttp://dbpedia.org/resource/National_Hockey_League
+p2066
+(lp2067
+S'National Hockey League'
 p2068
-(lp2069
-S'language'
+asVhttp://dbpedia.org/ontology/discipline
+p2069
+g2025
+sVhttp://dbpedia.org/resource/The_O'Jays
 p2070
-asVhttp://dbpedia.org/resource/Amherst_College
-p2071
-(lp2072
-S'Amherst College'
+(lp2071
+S"The O'Jays"
+p2072
+asVhttp://dbpedia.org/ontology/atomicNumber
 p2073
-asVhttp://dbpedia.org/resource/Shiv_Sena
+g397
+sVhttp://dbpedia.org/ontology/party
 p2074
-(lp2075
-S'Shiv Sena'
-p2076
-asVhttp://dbpedia.org/resource/N.O.V.A._Near_Orbit_Vanguard_Alliance
+g1533
+sVhttp://dbpedia.org/resource/Maryanne_Trump_Barry
+p2075
+(lp2076
+S'Maryanne Trump Barry'
 p2077
-(lp2078
-S'N.O.V.A. Near Orbit Vanguard Alliance'
-p2079
-asVhttp://dbpedia.org/property/sport
+asVhttp://dbpedia.org/resource/John_Hinton_(rugby_player)
+p2078
+(lp2079
+S'John Hinton (rugby player)'
 p2080
-(lp2081
-S'sport'
-p2082
-asVhttp://dbpedia.org/resource/International_Cricket_2010
+asVhttp://dbpedia.org/ontology/Film
+p2081
+(lp2082
+S'movie'
 p2083
-(lp2084
-S'International Cricket 2010'
-p2085
-asVhttp://dbpedia.org/resource/Rural_area
+asVhttp://dbpedia.org/resource/Pakistan
+p2084
+(lp2085
+S'Pakistan'
 p2086
-(lp2087
-S'Rural area'
-p2088
-asVhttp://dbpedia.org/resource/Ambroise_Vollard
+asVhttp://dbpedia.org/resource/Manzilein_Aur_Bhi_Hain
+p2087
+(lp2088
+S'Manzilein Aur Bhi Hain'
 p2089
-(lp2090
-S'Ambroise Vollard'
-p2091
-asVhttp://dbpedia.org/resource/Pawan_Hans
+asVhttp://dbpedia.org/property/profession
+p2090
+(lp2091
+S'profession'
 p2092
-(lp2093
-S'Pawan Hans'
-p2094
-asVhttp://dbpedia.org/ontology/relation
+asVhttp://dbpedia.org/resource/British_rule_in_Burma
+p2093
+(lp2094
+S'British rule in Burma'
 p2095
-(lp2096
-S'relation'
-p2097
-asVhttp://dbpedia.org/resource/Mayor\u2013council_government
+asVhttp://dbpedia.org/ontology/parentCompany
+p2096
+(lp2097
+S'parent company'
 p2098
-(lp2099
-S'Mayorcouncil government'
+asVhttp://dbpedia.org/property/absoluteMagnitude
+p2099
+g1479
+sVhttp://dbpedia.org/property/purpose
 p2100
+(lp2101
+S'purpose'
+p2102
+asVhttp://dbpedia.org/property/isil
+p2103
+g1270
+sVhttp://dbpedia.org/property/architect
+p2104
+(lp2105
+S'architect'
+p2106
+asVhttp://dbpedia.org/ontology/nisCode
+p2107
+(lp2108
+S'NIS/INS code'
+p2109
+asVhttp://dbpedia.org/property/isPartOf
+p2110
+g124
+sVhttp://dbpedia.org/resource/Chitralekha_(1941_film)
+p2111
+(lp2112
+S'Chitralekha (1941 film)'
+p2113
+asVhttp://dbpedia.org/ontology/MemberOfParliament
+p2114
+(lp2115
+S'member of parliament'
+p2116
+asVhttp://dbpedia.org/resource/Goregaon
+p2117
+(lp2118
+S'Goregaon'
+p2119
+asVhttp://dbpedia.org/resource/Trump_Entertainment_Resorts
+p2120
+(lp2121
+S'Trump Entertainment Resorts'
+p2122
+asVhttp://dbpedia.org/resource/Badminton
+p2123
+(lp2124
+S'Badminton'
+p2125
+asVhttp://dbpedia.org/ontology/iso6393Code
+p2126
+g535
+sVhttp://dbpedia.org/property/startDate
+p2127
+(lp2128
+S'from'
+p2129
+aS'introduction'
+p2130
+aS'starting'
+p2131
+aS'began'
+p2132
+aS'since'
+p2133
+aS'start time'
+p2134
+aS'from date'
+p2135
+aS'starttime'
+p2136
+aS'building date'
+p2137
+aS'from time'
+p2138
+aS'introduced'
+p2139
+aS'beginning'
+p2140
+aS'start date'
+p2141
+asVhttp://dbpedia.org/ontology/father
+p2142
+(lp2143
+S'dad'
+p2144
+aS'parent'
+p2145
+aS'has father'
+p2146
+aS'papa'
+p2147
+aS'man, the parent of that person'
+p2148
+aS'father'
+p2149
+aS'is child of'
+p2150
+aS'is daughter of'
+p2151
+aS'daddy'
+p2152
+aS'is son of'
+p2153
+asVhttp://dbpedia.org/ontology/currencyCode
+p2154
+g1721
+sVhttp://dbpedia.org/ontology/istat
+p2155
+(lp2156
+S'ISTAT ID'
+p2157
+asVhttp://dbpedia.org/resource/Nitish_Kumar
+p2158
+(lp2159
+S'Nitish Kumar'
+p2160
+asVhttp://dbpedia.org/resource/My_Big_Fat_Obnoxious_Boss
+p2161
+(lp2162
+S'My Big Fat Obnoxious Boss'
+p2163
+asVhttp://dbpedia.org/property/producer
+p2164
+(lp2165
+S'producer'
+p2166
+asVhttp://dbpedia.org/resource/Sushilfinance
+p2167
+(lp2168
+S'Sushilfinance'
+p2169
+asVhttp://dbpedia.org/resource/Isaac_Butt
+p2170
+(lp2171
+S'Isaac Butt'
+p2172
+asVhttp://dbpedia.org/ontology/currency
+p2173
+g1173
+sVhttp://dbpedia.org/resource/The_Trump_Organization
+p2174
+(lp2175
+S'The Trump Organization'
+p2176
+asVhttp://dbpedia.org/ontology/generalManager
+p2177
+g141
+sVhttp://dbpedia.org/resource/Advanced_Micro_Devices
+p2178
+(lp2179
+S'Advanced Micro Devices'
+p2180
+asVhttp://dbpedia.org/resource/The_Institute_of_Science,_Mumbai
+p2181
+(lp2182
+S'The Institute of Science, Mumbai'
+p2183
+asVhttp://dbpedia.org/resource/Commercial_Bank_of_India
+p2184
+(lp2185
+S'Commercial Bank of India'
+p2186
+asVhttp://dbpedia.org/resource/Lahore
+p2187
+(lp2188
+S'Lahore'
+p2189
+asVhttp://dbpedia.org/ontology/distributor
+p2190
+g1266
+sVhttp://dbpedia.org/resource/P.A._Semi
+p2191
+(lp2192
+S'P.A. Semi'
+p2193
+asVhttp://dbpedia.org/resource/Jackie_Shroff
+p2194
+(lp2195
+S'Jackie Shroff'
+p2196
+asVhttp://dbpedia.org/resource/Ashwini_Kumar_Chopra
+p2197
+(lp2198
+S'Ashwini Kumar Chopra'
+p2199
+asVhttp://dbpedia.org/resource/Robert_McCool
+p2200
+(lp2201
+S'Robert McCool'
+p2202
+asVhttp://dbpedia.org/resource/Pranay_Chulet
+p2203
+(lp2204
+S'Pranay Chulet'
+p2205
+asVhttp://dbpedia.org/ontology/constellation
+p2206
+(lp2207
+S'constellation'
+p2208
+asVhttp://dbpedia.org/resource/Geometry_Wars:_Touch
+p2209
+(lp2210
+S'Geometry Wars: Touch'
+p2211
+asVhttp://dbpedia.org/ontology/sisterStation
+p2212
+(lp2213
+S'sister station'
+p2214
+asVhttp://dbpedia.org/property/capital
+p2215
+g551
+sVhttp://dbpedia.org/resource/M.E._Pavri
+p2216
+(lp2217
+S'M.E. Pavri'
+p2218
+asVhttp://dbpedia.org/ontology/startDate
+p2219
+g2128
+sVhttp://dbpedia.org/resource/Trump:_The_Art_of_the_Deal
+p2220
+(lp2221
+S'Trump: The Art of the Deal'
+p2222
+asVhttp://dbpedia.org/ontology/settlement
+p2223
+g54
+sVhttp://dbpedia.org/property/elo
+p2224
+g962
+sVhttp://dbpedia.org/property/nisCode
+p2225
+g2108
+sVhttp://dbpedia.org/resource/Kathmandu
+p2226
+(lp2227
+S'Kathmandu'
+p2228
+asVhttp://dbpedia.org/ontology/killedBy
+p2229
+g258
+sVhttp://dbpedia.org/property/namedAfter
+p2230
+g271
+sVhttp://dbpedia.org/ontology/routeJunction
+p2231
+(lp2232
+S'route junction'
+p2233
+asVhttp://dbpedia.org/ontology/basedOn
+p2234
+g1727
+sVhttp://dbpedia.org/resource/States_and_union_territories_of_India
+p2235
+(lp2236
+S'States and union territories of India'
+p2237
+asVhttp://dbpedia.org/resource/Handheld_PC
+p2238
+(lp2239
+S'Handheld PC'
+p2240
+asVhttp://dbpedia.org/resource/Harsha_Bhogle
+p2241
+(lp2242
+S'Harsha Bhogle'
+p2243
+asVhttp://dbpedia.org/resource/Vivek_Vaswani
+p2244
+(lp2245
+S'Vivek Vaswani'
+p2246
+asVhttp://dbpedia.org/resource/Computer_mouse
+p2247
+(lp2248
+S'Computer mouse'
+p2249
+asVhttp://dbpedia.org/resource/IWork
+p2250
+(lp2251
+S'IWork'
+p2252
+asVhttp://dbpedia.org/resource/United_States
+p2253
+(lp2254
+S'United States'
+p2255
+asVhttp://dbpedia.org/resource/University_of_Southern_California
+p2256
+(lp2257
+S'University of Southern California'
+p2258
+asVhttp://dbpedia.org/resource/Nicole_Amy_Madell
+p2259
+(lp2260
+S'Nicole Amy Madell'
+p2261
+asVhttp://dbpedia.org/ontology/areaCode
+p2262
+g1068
+sVhttp://dbpedia.org/resource/Anthony_Quinn
+p2263
+(lp2264
+S'Anthony Quinn'
+p2265
+asVhttp://dbpedia.org/ontology/relation
+p2266
+(lp2267
+S'relation'
+p2268
+asVhttp://dbpedia.org/resource/Steven_W._Bailey
+p2269
+(lp2270
+S'Steven W. Bailey'
+p2271
+asVhttp://dbpedia.org/resource/Hindustan_Ki_Kasam_(1999_film)
+p2272
+(lp2273
+S'Hindustan Ki Kasam (1999 film)'
+p2274
+asVhttp://dbpedia.org/ontology/homeport
+p2275
+g1282
+sVhttp://dbpedia.org/ontology/icd9
+p2276
+g1430
+sVhttp://dbpedia.org/resource/Bhabha_Hospital
+p2277
+(lp2278
+S'Bhabha Hospital'
+p2279
+asVhttp://dbpedia.org/resource/Risca
+p2280
+(lp2281
+S'Risca'
+p2282
+asVhttp://dbpedia.org/resource/Turkey
+p2283
+(lp2284
+S'Turkey'
+p2285
+asVhttp://dbpedia.org/ontology/starring
+p2286
+(lp2287
+S'starring'
+p2288
+aS'cast member'
+p2289
+aS'actress'
+p2290
+aS'actor'
+p2291
+aS'film starring'
+p2292
+asVhttp://dbpedia.org/ontology/executiveProducer
+p2293
+(lp2294
+S'executive producer'
+p2295
+asVhttp://dbpedia.org/property/country
+p2296
+g2012
+sVhttp://dbpedia.org/property/campus
+p2297
+(lp2298
+S'campus'
+p2299
+asVhttp://dbpedia.org/property/founder
+p2300
+(lp2301
+S'founder'
+p2302
+aS'is founded by'
+p2303
+aS'founded'
+p2304
+aS'founded by'
+p2305
+aS'founders'
+p2306
+aS'co-founder'
+p2307
+asVhttp://dbpedia.org/resource/OmniDiskSweeper
+p2308
+(lp2309
+S'OmniDiskSweeper'
+p2310
+asVhttp://dbpedia.org/resource/Anjan_Bista
+p2311
+(lp2312
+S'Anjan Bista'
+p2313
+asVhttp://dbpedia.org/resource/Brian_Stelter
+p2314
+(lp2315
+S'Brian Stelter'
+p2316
+asVhttp://dbpedia.org/property/programmingLanguage
+p2317
+(lp2318
+S'programming language'
+p2319
+asVhttp://dbpedia.org/resource/Barbara_Bestor
+p2320
+(lp2321
+S'Barbara Bestor'
+p2322
+asVhttp://dbpedia.org/property/bibsysId
+p2323
+g995
+sVhttp://dbpedia.org/resource/B4U_Movies
+p2324
+(lp2325
+S'B4U Movies'
+p2326
+asVhttp://dbpedia.org/ontology/award
+p2327
+g886
+sVhttp://dbpedia.org/ontology/address
+p2328
+g902
+sVhttp://dbpedia.org/resource/Hindustani_classical_music
+p2329
+(lp2330
+S'Hindustani classical music'
+p2331
+asVhttp://dbpedia.org/resource/Chinese_language
+p2332
+(lp2333
+S'Chinese language'
+p2334
+asVhttp://dbpedia.org/resource/Amruta_Khanvilkar
+p2335
+(lp2336
+S'Amruta Khanvilkar'
+p2337
+asVhttp://dbpedia.org/resource/California
+p2338
+(lp2339
+S'California'
+p2340
+asVhttp://dbpedia.org/resource/PowerBook_Duo
+p2341
+(lp2342
+S'PowerBook Duo'
+p2343
+asVhttp://dbpedia.org/resource/Microsoft
+p2344
+(lp2345
+S'Microsoft'
+p2346
+asVhttp://dbpedia.org/resource/Marine_Lines
+p2347
+(lp2348
+S'Marine Lines'
+p2349
+asVhttp://dbpedia.org/resource/Fred_Trump
+p2350
+(lp2351
+S'Fred Trump'
+p2352
+asVhttp://dbpedia.org/ontology/Settlement
+p2353
+(lp2354
+S'settlement'
+p2355
+asVhttp://dbpedia.org/ontology/battle
+p2356
+g160
+sVhttp://dbpedia.org/ontology/keyPerson
+p2357
+(lp2358
+S'key person'
+p2359
+asVhttp://dbpedia.org/ontology/architect
+p2360
+g2105
+sVhttp://dbpedia.org/ontology/icaoLocationIdentifier
+p2361
+g1493
+sVhttp://dbpedia.org/resource/Run_Roo_Run
+p2362
+(lp2363
+S'Run Roo Run'
+p2364
+asVhttp://dbpedia.org/resource/Shalmalee_Desai
+p2365
+(lp2366
+S'Shalmalee Desai'
+p2367
+asVhttp://dbpedia.org/resource/Microsoft_Studios
+p2368
+(lp2369
+S'Microsoft Studios'
+p2370
+asVhttp://dbpedia.org/ontology/child
+p2371
+g941
+sVhttp://dbpedia.org/resource/Bandra
+p2372
+(lp2373
+S'Bandra'
+p2374
+asVhttp://dbpedia.org/resource/Survival_game
+p2375
+(lp2376
+S'Survival game'
+p2377
+asVhttp://dbpedia.org/property/subject
+p2378
+(lp2379
+S'subject'
+p2380
+asVhttp://dbpedia.org/ontology/editor
+p2381
+g1799
+sVhttp://dbpedia.org/property/eyeColor
+p2382
+(lp2383
+S'eyecolor'
+p2384
+aS'eye color'
+p2385
+aS'eyecolour'
+p2386
+aS'eye colour'
+p2387
+asVhttp://dbpedia.org/ontology/orcidId
+p2388
+(lp2389
+S'ORCID iD'
+p2390
+aS'ORCID'
+p2391
+aS'ORC ID'
+p2392
+aS'Open Research Contributor ID'
+p2393
+asVhttp://dbpedia.org/resource/Ivana_Trump
+p2394
+(lp2395
+S'Ivana Trump'
+p2396
+asVhttp://dbpedia.org/resource/Kshatriya_(film)
+p2397
+(lp2398
+S'Kshatriya (film)'
+p2399
+asVhttp://dbpedia.org/property/manufacturer
+p2400
+g1298
+sVhttp://dbpedia.org/property/state
+p2401
+(lp2402
+S'state'
+p2403
+asVhttp://dbpedia.org/ontology/voice
+p2404
+(lp2405
+S'voice'
+p2406
+asVhttp://dbpedia.org/property/deathPlace
+p2407
+(lp2408
+S'died in'
+p2409
+aS'death location'
+p2410
+aS'deathplace'
+p2411
+aS'death place'
+p2412
+aS'POD'
+p2413
+aS'place of death'
+p2414
+aS'location of death'
+p2415
+asVhttp://dbpedia.org/resource/MediaCityUK
+p2416
+(lp2417
+S'MediaCityUK'
+p2418
+asVhttp://dbpedia.org/resource/David_Campbell_Bannerman
+p2419
+(lp2420
+S'David Campbell Bannerman'
+p2421
+asVhttp://dbpedia.org/resource/John_Derek
+p2422
+(lp2423
+S'John Derek'
+p2424
+asVhttp://dbpedia.org/property/album
+p2425
+(lp2426
+S'Album'
+p2427
+asVhttp://dbpedia.org/property/foundation
+p2428
+(lp2429
+S'foundation'
+p2430
+asVhttp://dbpedia.org/resource/IPod_Touch_(5th_generation)
+p2431
+(lp2432
+S'IPod Touch (5th generation)'
+p2433
+asVhttp://dbpedia.org/resource/Wentworth_North_(provincial_electoral_district)
+p2434
+(lp2435
+S'Wentworth North (provincial electoral district)'
+p2436
+asVhttp://dbpedia.org/resource/OpenLife_Grid
+p2437
+(lp2438
+S'OpenLife Grid'
+p2439
+asVhttp://dbpedia.org/resource/Archery
+p2440
+(lp2441
+S'Archery'
+p2442
+asVhttp://dbpedia.org/property/influenced
+p2443
+(lp2444
+S'influenced'
+p2445
+asVhttp://dbpedia.org/resource/Japanese_Americans
+p2446
+(lp2447
+S'Japanese Americans'
+p2448
+asVhttp://dbpedia.org/ontology/developer
+p2449
+g1905
+sVhttp://dbpedia.org/ontology/almaMater
+p2450
+(lp2451
+S'alma mater'
+p2452
+asVhttp://dbpedia.org/resource/Melania_Trump
+p2453
+(lp2454
+S'Melania Trump'
+p2455
+asVhttp://dbpedia.org/resource/Navsari
+p2456
+(lp2457
+S'Navsari'
+p2458
+asVhttp://dbpedia.org/resource/Martyr's_Memorial_A-Division_League
+p2459
+(lp2460
+S"Martyr's Memorial A-Division League"
+p2461
+asVhttp://dbpedia.org/property/rkdArtistsId
+p2462
+(lp2463
+S'RKDartists ID'
+p2464
+asVhttp://dbpedia.org/resource/Chee_Kong_Cheah_(CheeK)
+p2465
+(lp2466
+S'Chee Kong Cheah (CheeK)'
+p2467
+asVhttp://dbpedia.org/resource/Advanced_Simulation_Library
+p2468
+(lp2469
+S'Advanced Simulation Library'
+p2470
+asVhttp://dbpedia.org/property/followedBy
+p2471
+g799
+sVhttp://dbpedia.org/ontology/iataAirlineCode
+p2472
+(lp2473
+S'IATA reservation code'
+p2474
+aS'International Air Transport Association airline designator'
+p2475
+aS'IATA airline designator'
+p2476
+asVhttp://dbpedia.org/ontology/rkdArtistsId
+p2477
+g2463
+sVhttp://dbpedia.org/ontology/employer
+p2478
+g814
+sVhttp://dbpedia.org/ontology/type
+p2479
+(lp2480
+S'type'
+p2481
+asVhttp://dbpedia.org/property/deputy
+p2482
+(lp2483
+S'deputy'
+p2484
+asVhttp://dbpedia.org/resource/Red_Hat
+p2485
+(lp2486
+S'Red Hat'
+p2487
+asVhttp://dbpedia.org/property/pdb
+p2488
+g1868
+sVhttp://dbpedia.org/ontology/Writer
+p2489
+(lp2490
+S'writer'
+p2491
+asVhttp://dbpedia.org/resource/HarperCollins
+p2492
+(lp2493
+S'HarperCollins'
+p2494
+asVhttp://dbpedia.org/property/ethnicity
+p2495
+g1525
+sVhttp://dbpedia.org/property/creator
+p2496
+(lp2497
+S'creator'
+p2498
+aS'painters'
+p2499
+aS'sculptor'
+p2500
+aS'created by'
+p2501
+aS'sculptors'
+p2502
+aS'creators'
+p2503
+aS'artist (non-musical)'
+p2504
+aS'painter'
+p2505
+asVhttp://dbpedia.org/property/father
+p2506
+g2143
+sVhttp://dbpedia.org/resource/Rahu_Ketu
+p2507
+(lp2508
+S'Rahu Ketu'
+p2509
+asVhttp://dbpedia.org/property/author
+p2510
+(lp2511
+S'writer'
+p2512
+aS'authors'
+p2513
+aS'writers'
+p2514
+aS'written by'
+p2515
+aS'author'
+p2516
+asVhttp://dbpedia.org/ontology/founder
+p2517
+g2301
+sVhttp://dbpedia.org/resource/TV5_Network_Inc.
+p2518
+(lp2519
+S'TV5 Network Inc.'
+p2520
+asVhttp://dbpedia.org/resource/Tejashwi_Yadav
+p2521
+(lp2522
+S'Tejashwi Yadav'
+p2523
+asVhttp://dbpedia.org/property/locationCountry
+p2524
+(lp2525
+S'location country'
+p2526
+asVhttp://dbpedia.org/resource/Strategy_game
+p2527
+(lp2528
+S'Strategy game'
+p2529
+asVhttp://dbpedia.org/resource/Sanjog_(1943_film)
+p2530
+(lp2531
+S'Sanjog (1943 film)'
+p2532
+asVhttp://dbpedia.org/resource/Sandit_Tiwari
+p2533
+(lp2534
+S'Sandit Tiwari'
+p2535
+asVhttp://dbpedia.org/ontology/sudocId
+p2536
+(lp2537
+S'IdRef'
+p2538
+aS'SUDOC authorities'
+p2539
+asVhttp://dbpedia.org/property/highwaySystem
+p2540
+(lp2541
+S'road type'
+p2542
+aS'routes system'
+p2543
+aS'transport network'
+p2544
+aS'highway system'
+p2545
+aS'system of routes'
+p2546
+aS'part of network'
+p2547
+aS'network of routes'
+p2548
+asVhttp://dbpedia.org/resource/The_Macintosh_Way
+p2549
+(lp2550
+S'The Macintosh Way'
+p2551
+asVhttp://dbpedia.org/property/placeOfBirth
+p2552
+(lp2553
+S'place of birth'
+p2554
+asVhttp://dbpedia.org/resource/Engineer
+p2555
+(lp2556
+S'Engineer'
+p2557
+asVhttp://dbpedia.org/resource/New_Delhi
+p2558
+(lp2559
+S'New Delhi'
+p2560
+asVhttp://dbpedia.org/resource/Second_Show
+p2561
+(lp2562
+S'Second Show'
+p2563
+asVhttp://dbpedia.org/ontology/selibrId
+p2564
+g1962
+sVhttp://dbpedia.org/property/bnfId
+p2565
+g147
+sVhttp://dbpedia.org/property/bSide
+p2566
+g1595
+sVhttp://dbpedia.org/resource/Tara_International
+p2567
+(lp2568
+S'Tara International'
+p2569
+asVhttp://dbpedia.org/resource/Tom_McGrath_(media_executive)
+p2570
+(lp2571
+S'Tom McGrath (media executive)'
+p2572
+asVhttp://dbpedia.org/resource/Lawyer
+p2573
+(lp2574
+S'Lawyer'
+p2575
+asVhttp://dbpedia.org/resource/Finder_(software)
+p2576
+(lp2577
+S'Finder (software)'
+p2578
+asVhttp://dbpedia.org/ontology/architecturalStyle
+p2579
+g5
+sVhttp://dbpedia.org/ontology/state
+p2580
+(lp2581
+S'state'
+p2582
+asVhttp://dbpedia.org/resource/Edmonton
+p2583
+(lp2584
+S'Edmonton'
+p2585
+asVhttp://dbpedia.org/ontology/coatOfArms
+p2586
+g1136
+sVhttp://dbpedia.org/ontology/stadium
+p2587
+(lp2588
+S'Stadium'
+p2589
+asVhttp://dbpedia.org/resource/1080i
+p2590
+(lp2591
+S'1080i'
+p2592
+asVhttp://dbpedia.org/resource/Me_Aajji_Aur_Sahib
+p2593
+(lp2594
+S'Me Aajji Aur Sahib'
+p2595
+asVhttp://dbpedia.org/ontology/nutsCode
+p2596
+(lp2597
+S'NUTS code'
+p2598
+asVhttp://dbpedia.org/property/apparentMagnitude
+p2599
+g1124
+sVhttp://dbpedia.org/property/musicalArtist
+p2600
+(lp2601
+S'singer'
+p2602
+aS'musician'
+p2603
+aS'group'
+p2604
+aS'musical artist'
+p2605
+aS'music group'
+p2606
+aS'band'
+p2607
+aS'performer'
+p2608
+asVhttp://dbpedia.org/resource/Suresh_Shetty
+p2609
+(lp2610
+S'Suresh Shetty'
+p2611
+asVhttp://dbpedia.org/resource/Glendale_Secondary_School
+p2612
+(lp2613
+S'Glendale Secondary School'
+p2614
+asVhttp://dbpedia.org/property/dcc
+p2615
+(lp2616
+S'DDC'
+p2617
+aS'Q48460'
+p2618
+aS'Dewey Decimal Classification'
+p2619
+asVhttp://dbpedia.org/resource/Bangladesh
+p2620
+(lp2621
+S'Bangladesh'
+p2622
+asVhttp://dbpedia.org/resource/Ahmedabad
+p2623
+(lp2624
+S'Ahmedabad'
+p2625
+asVhttp://dbpedia.org/ontology/illustrator
+p2626
+g657
+sVhttp://dbpedia.org/resource/Shoot_'em_up
+p2627
+(lp2628
+S"Shoot 'em up"
+p2629
+asVhttp://dbpedia.org/resource/Ron_Slenzak
+p2630
+(lp2631
+S'Ron Slenzak'
+p2632
+asVhttp://dbpedia.org/ontology/religion
+p2633
+g1017
+sVhttp://dbpedia.org/resource/K.L.E_Society's_KLE_College_of_Engineering_and_Technology
+p2634
+(lp2635
+S"K.L.E Society's KLE College of Engineering and Technology"
+p2636
+asVhttp://dbpedia.org/ontology/highwaySystem
+p2637
+g2541
+sVhttp://dbpedia.org/property/iso31661Code
+p2638
+g831
+sVhttp://dbpedia.org/resource/Frederick_Trump
+p2639
+(lp2640
+S'Frederick Trump'
+p2641
+asVhttp://dbpedia.org/resource/Southern_California_Intercollegiate_Athletic_Conference
+p2642
+(lp2643
+S'Southern California Intercollegiate Athletic Conference'
+p2644
+asVhttp://dbpedia.org/resource/David_A._Stewart
+p2645
+(lp2646
+S'David A. Stewart'
+p2647
+asVhttp://dbpedia.org/property/currentclub
+p2648
+(lp2649
+S'currentclub'
+p2650
+asVhttp://dbpedia.org/property/emblem
+p2651
+(lp2652
+S'seal image'
+p2653
+aS'emblem'
+p2654
+asVhttp://dbpedia.org/property/fuelSystem
+p2655
+g1181
+sVhttp://dbpedia.org/property/discoverer
+p2656
+g1988
+sVhttp://dbpedia.org/resource/Life_OK
+p2657
+(lp2658
+S'Life OK'
+p2659
+asVhttp://dbpedia.org/resource/Fabless_manufacturing
+p2660
+(lp2661
+S'Fabless manufacturing'
+p2662
+asVhttp://dbpedia.org/property/coverArtist
+p2663
+g366
+sVhttp://dbpedia.org/resource/Mumbai_Gladiators
+p2664
+(lp2665
+S'Mumbai Gladiators'
+p2666
+asVhttp://dbpedia.org/resource/Bhayanak_Maut
+p2667
+(lp2668
+S'Bhayanak Maut'
+p2669
+asVhttp://dbpedia.org/property/placeOfBurial
+p2670
+g1342
+sVhttp://dbpedia.org/ontology/industry
+p2671
+g1077
+sVhttp://dbpedia.org/resource/B4U_(network)
+p2672
+(lp2673
+S'B4U (network)'
+p2674
+asVhttp://dbpedia.org/resource/Ghayal_Once_Again
+p2675
+(lp2676
+S'Ghayal Once Again'
+p2677
+asVhttp://dbpedia.org/property/crosses
+p2678
+g353
+sVhttp://dbpedia.org/resource/National_League_Cricket_(Nepal)
+p2679
+(lp2680
+S'National League Cricket (Nepal)'
+p2681
+asVhttp://dbpedia.org/property/coden
+p2682
+g255
+sVhttp://dbpedia.org/resource/BBC
+p2683
+(lp2684
+S'BBC'
+p2685
+asVhttp://dbpedia.org/resource/Software
+p2686
+(lp2687
+S'Software'
+p2688
+asVhttp://dbpedia.org/property/iataAirlineCode
+p2689
+g2473
+sVhttp://dbpedia.org/ontology/Building
+p2690
+(lp2691
+S'building'
+p2692
+asVhttp://dbpedia.org/ontology/affiliation
+p2693
+(lp2694
+S'affiliation'
+p2695
+asVhttp://dbpedia.org/resource/Indian_National_Congress
+p2696
+(lp2697
+S'Indian National Congress'
+p2698
+asVhttp://dbpedia.org/resource/New_Hyde_Park,_New_York
+p2699
+(lp2700
+S'New Hyde Park, New York'
+p2701
+asVhttp://dbpedia.org/resource/Don_Bradman
+p2702
+(lp2703
+S'Don Bradman'
+p2704
+asVhttp://dbpedia.org/property/occupation
+p2705
+g965
+sVhttp://dbpedia.org/resource/Remote_Install_Mac_OS_X
+p2706
+(lp2707
+S'Remote Install Mac OS X'
+p2708
+asVhttp://dbpedia.org/resource/Marla_Maples
+p2709
+(lp2710
+S'Marla Maples'
+p2711
+asVhttp://dbpedia.org/ontology/eyeColor
+p2712
+g2383
+sVhttp://dbpedia.org/ontology/giniCoefficient
+p2713
+(lp2714
+S'Gini coefficient'
+p2715
+asVhttp://dbpedia.org/resource/Tara_Conner
+p2716
+(lp2717
+S'Tara Conner'
+p2718
+asVhttp://dbpedia.org/resource/The_Apprentice:_Martha_Stewart
+p2719
+(lp2720
+S'The Apprentice: Martha Stewart'
+p2721
+asVhttp://dbpedia.org/property/endDate
+p2722
+(lp2723
+S'end date'
+p2724
+aS'endtime'
+p2725
+aS'enddate'
+p2726
+aS'left office'
+p2727
+aS'divorced'
+p2728
+aS'to time'
+p2729
+aS'end time'
+p2730
+aS'cease date'
+p2731
+aS'to'
+p2732
+aS'dissolved'
+p2733
+aS'closed'
+p2734
+aS'cease time'
+p2735
+aS'ending'
+p2736
+aS'fall date'
+p2737
+aS'until'
+p2738
+asVhttp://dbpedia.org/resource/Trump_Entrepreneur_Initiative
+p2739
+(lp2740
+S'Trump Entrepreneur Initiative'
+p2741
+asVhttp://dbpedia.org/ontology/deathPlace
+p2742
+g2408
+sVhttp://dbpedia.org/resource/Himmanshoo_A._Malhotra
+p2743
+(lp2744
+S'Himmanshoo A. Malhotra'
+p2745
+asVhttp://dbpedia.org/resource/Apple_Public_Source_License
+p2746
+(lp2747
+S'Apple Public Source License'
+p2748
+asVhttp://dbpedia.org/property/sudocId
+p2749
+g2537
+sVhttp://dbpedia.org/resource/Martha_Stewart
+p2750
+(lp2751
+S'Martha Stewart'
+p2752
+asVhttp://dbpedia.org/resource/Dil_Kya_Kare
+p2753
+(lp2754
+S'Dil Kya Kare'
+p2755
+asVhttp://dbpedia.org/resource/Gary_M._Green
+p2756
+(lp2757
+S'Gary M. Green'
+p2758
+asVhttp://dbpedia.org/resource/Tectoy
+p2759
+(lp2760
+S'Tectoy'
+p2761
+asVhttp://dbpedia.org/ontology/genre
+p2762
+g1217
+sVhttp://dbpedia.org/ontology/diseasesDb
+p2763
+g1503
+sVhttp://dbpedia.org/property/operatingSystem
+p2764
+(lp2765
+S'operating system'
+p2766
+asVhttp://dbpedia.org/resource/Avinash_Sachdev
+p2767
+(lp2768
+S'Avinash Sachdev'
+p2769
+asVhttp://dbpedia.org/ontology/anthem
+p2770
+g1147
+sVhttp://dbpedia.org/resource/Log_Kya_Kahenge
+p2771
+(lp2772
+S'Log Kya Kahenge'
+p2773
+asVhttp://dbpedia.org/resource/Dulha_Mil_Gaya
+p2774
+(lp2775
+S'Dulha Mil Gaya'
+p2776
+asVhttp://dbpedia.org/ontology/OfficeHolder
+p2777
+(lp2778
+S'office holder'
+p2779
+asVhttp://dbpedia.org/property/successor
+p2780
+(lp2781
+S'successor'
+p2782
+asVhttp://dbpedia.org/property/icaoAirlineCode
+p2783
+g1184
+sVhttp://dbpedia.org/resource/Andrew_Rossi
+p2784
+(lp2785
+S'Andrew Rossi'
+p2786
+asVhttp://dbpedia.org/resource/Sergio_Marchionne
+p2787
+(lp2788
+S'Sergio Marchionne'
+p2789
+asVhttp://dbpedia.org/property/citizenship
+p2790
+g712
+sVhttp://dbpedia.org/resource/Penny_Johnson_Jerald
+p2791
+(lp2792
+S'Penny Johnson Jerald'
+p2793
+asVhttp://dbpedia.org/property/executiveProducer
+p2794
+(lp2795
+S'executive producer'
+p2796
+asVhttp://dbpedia.org/ontology/Software
+p2797
+(lp2798
+S'software'
+p2799
+asVhttp://dbpedia.org/property/license
+p2800
+(lp2801
+S'licence'
+p2802
+aS'content licence'
+p2803
+aS'license'
+p2804
+aS'content license'
+p2805
+asVhttp://dbpedia.org/property/crewMember
+p2806
+g841
+sVhttp://dbpedia.org/ontology/emblem
+p2807
+g2652
+sVhttp://dbpedia.org/resource/Commodore_International
+p2808
+(lp2809
+S'Commodore International'
+p2810
+asVhttp://dbpedia.org/ontology/parent
+p2811
+(lp2812
+S'parent'
+p2813
+asVhttp://dbpedia.org/resource/India
+p2814
+(lp2815
+S'India'
+p2816
+asVhttp://dbpedia.org/resource/Bob_Iger
+p2817
+(lp2818
+S'Bob Iger'
+p2819
+asVhttp://dbpedia.org/resource/MTV
+p2820
+(lp2821
+S'MTV'
+p2822
+asVhttp://dbpedia.org/resource/BBC_Worldwide
+p2823
+(lp2824
+S'BBC Worldwide'
+p2825
+asVhttp://dbpedia.org/ontology/iso6392Code
+p2826
+g1568
+sVhttp://dbpedia.org/property/league
+p2827
+g1642
+sVhttp://dbpedia.org/ontology/spouse
+p2828
+g769
+sVhttp://dbpedia.org/ontology/Food
+p2829
+(lp2830
+S'Food'
+p2831
+asVhttp://dbpedia.org/ontology/instrument
+p2832
+g1370
+sVhttp://dbpedia.org/resource/Subhash_Desai
+p2833
+(lp2834
+S'Subhash Desai'
+p2835
+asVhttp://dbpedia.org/resource/The_Apprentice_(U.S._TV_series)
+p2836
+(lp2837
+S'The Apprentice (U.S. TV series)'
+p2838
+asVhttp://dbpedia.org/resource/ONGC_F.C.
+p2839
+(lp2840
+S'ONGC F.C.'
+p2841
+asVhttp://dbpedia.org/ontology/foundingDate
+p2842
+(lp2843
+S'construction date'
+p2844
+aS'date commenced'
+p2845
+aS'written on date'
+p2846
+aS'date founded'
+p2847
+aS'founded'
+p2848
+aS'year created'
+p2849
+aS'establishment date'
+p2850
+aS'time of inception'
+p2851
+aS'formation date'
+p2852
+aS'constructed'
+p2853
+aS'year founded'
+p2854
+aS'established'
+p2855
+aS'date created'
+p2856
+aS'formed on date'
+p2857
+aS'inititated'
+p2858
+aS'date constructed'
+p2859
+aS'foundation/creation date'
+p2860
+aS'date of creation'
+p2861
+aS'year commenced'
+p2862
+aS'year established'
+p2863
+aS'date formed'
+p2864
+aS'date of foundation or creation'
+p2865
+aS'date of establishment'
+p2866
+aS'foundation'
+p2867
+aS'date of foundation'
+p2868
+aS'year incorporated'
+p2869
+aS'created on date'
+p2870
+aS'dedication date'
+p2871
+aS'formed in'
+p2872
+aS'established on date'
+p2873
+aS'founding date'
+p2874
+aS'commencement date'
+p2875
+aS'inception'
+p2876
+aS'time of foundation or creation'
+p2877
+aS'year written'
+p2878
+aS'date incorporated'
+p2879
+aS'formed at'
+p2880
+aS'date of incorporation'
+p2881
+aS'created'
+p2882
+aS'creation date'
+p2883
+aS'commenced on date'
+p2884
+aS'incorporation date'
+p2885
+aS'founded on date'
+p2886
+aS'date of commencement'
+p2887
+aS'foundation date'
+p2888
+aS'incorporated'
+p2889
+aS'formation'
+p2890
+aS'date of founding'
+p2891
+aS'incorporated on date'
+p2892
+asVhttp://dbpedia.org/resource/Rise_of_the_Zombie
+p2893
+(lp2894
+S'Rise of the Zombie'
+p2895
+asVhttp://dbpedia.org/resource/Shrimaan_Shrimati_(TV_series)
+p2896
+(lp2897
+S'Shrimaan Shrimati (TV series)'
+p2898
+asVhttp://dbpedia.org/resource/Chennai
+p2899
+(lp2900
+S'Chennai'
+p2901
+asVhttp://dbpedia.org/resource/Strategy_First
+p2902
+(lp2903
+S'Strategy First'
+p2904
+asVhttp://dbpedia.org/resource/Baaghi:_Rebels_in_Love
+p2905
+(lp2906
+S'Baaghi: Rebels in Love'
+p2907
+asVhttp://dbpedia.org/resource/MicroProse
+p2908
+(lp2909
+S'MicroProse'
+p2910
+asVhttp://dbpedia.org/ontology/InformationAppliance
+p2911
+(lp2912
+S'information appliance'
+p2913
+asVhttp://dbpedia.org/resource/Perl
+p2914
+(lp2915
+S'Perl'
+p2916
+asVhttp://dbpedia.org/resource/Ayesha_Dutt
+p2917
+(lp2918
+S'Ayesha Dutt'
+p2919
+asVhttp://dbpedia.org/resource/Markham,_Ontario
+p2920
+(lp2921
+S'Markham, Ontario'
+p2922
+asVhttp://dbpedia.org/ontology/dcc
+p2923
+g2616
+sVhttp://dbpedia.org/resource/Morton_E._Handel
+p2924
+(lp2925
+S'Morton E. Handel'
+p2926
+asVhttp://dbpedia.org/property/starring
+p2927
+g2287
+sVhttp://dbpedia.org/resource/Constituency_NA-56
+p2928
+(lp2929
+S'Constituency NA-56'
+p2930
+asVhttp://dbpedia.org/property/orcidId
+p2931
+g2389
+sVhttp://dbpedia.org/resource/Truemors
+p2932
+(lp2933
+S'Truemors'
+p2934
+asVhttp://dbpedia.org/ontology/license
+p2935
+g2801
+sVhttp://dbpedia.org/resource/Junoon_(1978_film)
+p2936
+(lp2937
+S'Junoon (1978 film)'
+p2938
+asVhttp://dbpedia.org/resource/B4U_Music
+p2939
+(lp2940
+S'B4U Music'
+p2941
+asVhttp://dbpedia.org/property/relatives
+p2942
+(lp2943
+S'relatives'
+p2944
+asVhttp://dbpedia.org/property/constellation
+p2945
+g2207
+sVhttp://dbpedia.org/resource/Eric,_or,_Little_by_Little
+p2946
+(lp2947
+S'Eric, or, Little by Little'
+p2948
+asVhttp://dbpedia.org/resource/Dungeness_(headland)
+p2949
+(lp2950
+S'Dungeness (headland)'
+p2951
+asVhttp://dbpedia.org/property/unloCode
+p2952
+g1833
+sVhttp://dbpedia.org/ontology/Book
+p2953
+(lp2954
+S'book'
+p2955
+asVhttp://dbpedia.org/ontology/endDate
+p2956
+g2723
+sVhttp://dbpedia.org/ontology/musicalArtist
+p2957
+g2601
+sVhttp://dbpedia.org/ontology/deathCause
+p2958
+g1398
+sVhttp://dbpedia.org/property/alias
+p2959
+g1855
+sVhttp://dbpedia.org/ontology/flag
+p2960
+g681
+sVhttp://dbpedia.org/property/writer
+p2961
+(lp2962
+S'writer'
+p2963
+asVhttp://dbpedia.org/resource/Aandhali_Koshimbir
+p2964
+(lp2965
+S'Aandhali Koshimbir'
+p2966
+asVhttp://dbpedia.org/resource/Jack_Ketchum
+p2967
+(lp2968
+S'Jack Ketchum'
+p2969
+asVhttp://dbpedia.org/resource/Launchd
+p2970
+(lp2971
+S'Launchd'
+p2972
+asVhttp://dbpedia.org/resource/Sony_MAX_2
+p2973
+(lp2974
+S'Sony MAX 2'
+p2975
+asVhttp://dbpedia.org/ontology/einecsNumber
+p2976
+g635
+sVhttp://dbpedia.org/resource/Quikr
+p2977
+(lp2978
+S'Quikr'
+p2979
+asVhttp://dbpedia.org/ontology/network
+p2980
+(lp2981
+S'network'
+p2982
+asVhttp://dbpedia.org/ontology/owner
+p2983
+g1482
+sVhttp://dbpedia.org/property/giniCoefficient
+p2984
+g2714
+sVhttp://dbpedia.org/resource/Apple_University
+p2985
+(lp2986
+S'Apple University'
+p2987
+asVhttp://dbpedia.org/resource/Magic_Mouse
+p2988
+(lp2989
+S'Magic Mouse'
+p2990
+asVhttp://dbpedia.org/property/recorded
+p2991
+(lp2992
+S'Recorded'
+p2993
+asVhttp://dbpedia.org/ontology/doctoralStudent
+p2994
+g1322
+sVhttp://dbpedia.org/ontology/deputy
+p2995
+(lp2996
+S'deputy'
+p2997
+asVhttp://dbpedia.org/resource/Sun_Microsystems
+p2998
+(lp2999
+S'Sun Microsystems'
+p3000
+asVhttp://dbpedia.org/property/orientation
+p3001
+g1912
+sVhttp://dbpedia.org/property/ecNumber
+p3002
+g1262
+sVhttp://dbpedia.org/resource/Mark_Burnett
+p3003
+(lp3004
+S'Mark Burnett'
+p3005
+asVhttp://dbpedia.org/property/foundingDate
+p3006
+g2843
+sVhttp://dbpedia.org/resource/Film
+p3007
+(lp3008
+S'Film'
+p3009
+asVhttp://dbpedia.org/property/iso6391Code
+p3010
+g1544
+sVhttp://dbpedia.org/property/discovered
+p3011
+g1953
+sVhttp://dbpedia.org/resource/Veeru_Devgan
+p3012
+(lp3013
+S'Veeru Devgan'
+p3014
+asVhttp://dbpedia.org/resource/Sony_Earth
+p3015
+(lp3016
+S'Sony Earth'
+p3017
+asVhttp://dbpedia.org/resource/Dhoom_3
+p3018
+(lp3019
+S'Dhoom 3'
+p3020
+asVhttp://dbpedia.org/property/okatoCode
+p3021
+g1213
+sVhttp://dbpedia.org/resource/Steve_Capps
+p3022
+(lp3023
+S'Steve Capps'
+p3024
+asVhttp://dbpedia.org/resource/Darwin_Streaming_Server
+p3025
+(lp3026
+S'Darwin Streaming Server'
+p3027
+asVhttp://dbpedia.org/property/constructionMaterial
+p3028
+g1666
+sVhttp://dbpedia.org/ontology/follows
+p3029
+g322
+sVhttp://dbpedia.org/property/signature
+p3030
+g1169
+sVhttp://dbpedia.org/resource/Entertainment
+p3031
+(lp3032
+S'Entertainment'
+p3033
+asVhttp://dbpedia.org/ontology/handedness
+p3034
+g1865
+sVhttp://dbpedia.org/resource/Sohrab_Modi
+p3035
+(lp3036
+S'Sohrab Modi'
+p3037
+asVhttp://dbpedia.org/property/parent
+p3038
+(lp3039
+S'parent'
+p3040
+asVhttp://dbpedia.org/resource/Eric_Trump
+p3041
+(lp3042
+S'Eric Trump'
+p3043
+asVhttp://dbpedia.org/property/language
+p3044
+(lp3045
+S'language'
+p3046
+asVhttp://dbpedia.org/resource/Indian_Standard_Time
+p3047
+(lp3048
+S'Indian Standard Time'
+p3049
+asVhttp://dbpedia.org/resource/Raju_Basnyat
+p3050
+(lp3051
+S'Raju Basnyat'
+p3052
+asVhttp://dbpedia.org/resource/Christianity
+p3053
+(lp3054
+S'Christianity'
+p3055
+asVhttp://dbpedia.org/ontology/creator
+p3056
+g2497
+sVhttp://dbpedia.org/property/icd10
+p3057
+g1779
+sVhttp://dbpedia.org/resource/Tunnelling_Process_Control
+p3058
+(lp3059
+S'Tunnelling Process Control'
+p3060
+asVhttp://dbpedia.org/ontology/author
+p3061
+g2511
+sVhttp://dbpedia.org/resource/Kolkata
+p3062
+(lp3063
+S'Kolkata'
+p3064
+asVhttp://dbpedia.org/resource/Reality_television
+p3065
+(lp3066
+S'Reality television'
+p3067
+asVhttp://dbpedia.org/resource/England
+p3068
+(lp3069
+S'England'
+p3070
+asVhttp://dbpedia.org/property/inseeCode
+p3071
+g454
+sVhttp://dbpedia.org/ontology/headquarter
+p3072
+g593
+sVhttp://dbpedia.org/property/istat
+p3073
+g2156
+sVhttp://dbpedia.org/ontology/doctoralAdvisor
+p3074
+g1759
+sVhttp://dbpedia.org/ontology/SportsTeam
+p3075
+(lp3076
+S'sports team'
+p3077
+asVhttp://dbpedia.org/resource/Guy_Kawasaki
+p3078
+(lp3079
+S'Guy Kawasaki'
+p3080
+asVhttp://dbpedia.org/ontology/language
+p3081
+(lp3082
+S'language'
+p3083
+asVhttp://dbpedia.org/property/populationTotal
+p3084
+g426
+sVhttp://dbpedia.org/resource/N.O.V.A._Near_Orbit_Vanguard_Alliance
+p3085
+(lp3086
+S'N.O.V.A. Near Orbit Vanguard Alliance'
+p3087
+asVhttp://dbpedia.org/resource/Nalini_Jaywant
+p3088
+(lp3089
+S'Nalini Jaywant'
+p3090
+asVhttp://dbpedia.org/resource/Etess_Arena
+p3091
+(lp3092
+S'Etess Arena'
+p3093
+asVhttp://dbpedia.org/property/sport
+p3094
+(lp3095
+S'sport'
+p3096
+asVhttp://dbpedia.org/resource/Association_of_Southeast_Asian_Institutions_of_Higher_Learning
+p3097
+(lp3098
+S'Association of Southeast Asian Institutions of Higher Learning'
+p3099
+asVhttp://dbpedia.org/resource/Colombo
+p3100
+(lp3101
+S'Colombo'
+p3102
+asVhttp://dbpedia.org/resource/MacVector
+p3103
+(lp3104
+S'MacVector'
+p3105
+asVhttp://dbpedia.org/resource/Suburb
+p3106
+(lp3107
+S'Suburb'
+p3108
+asVhttp://dbpedia.org/resource/Waterlooville
+p3109
+(lp3110
+S'Waterlooville'
+p3111
+asVhttp://dbpedia.org/resource/Wales
+p3112
+(lp3113
+S'Wales'
+p3114
+asVhttp://dbpedia.org/property/nutsCode
+p3115
+g2597
+sVhttp://dbpedia.org/ontology/series
+p3116
+(lp3117
+S'series'
+p3118
+asVhttp://dbpedia.org/ontology/amgid
+p3119
+g620
+sVhttp://dbpedia.org/resource/Poonam_Mahajan
+p3120
+(lp3121
+S'Poonam Mahajan'
+p3122
+asVhttp://dbpedia.org/resource/Apache_Software_Foundation
+p3123
+(lp3124
+S'Apache Software Foundation'
+p3125
 as.
