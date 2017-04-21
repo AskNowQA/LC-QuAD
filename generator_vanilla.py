@@ -26,7 +26,7 @@ import time
 dbp = None  # DBpedia interface object #To be instantiated when the code is run by main script/unit testing script
 relevant_properties = open('resources/relations_merged.txt').read().split('\n')  # Contains the whitelisted props types
 relevent_entity_classes = open('resources/entity_classes.txt').read().split('\n') #Contains whitelisted entities classes
-list_of_entities = open('resources/single_entity.txt').read().split('\n')
+list_of_entities = open('resources/entities.txt').read().split('\n')
 '''contains list of entites for which the question would be asked '''
 
 templates = json.load(open('templates.py'))  # Contains all the templates existing in templates.py
@@ -1128,7 +1128,7 @@ def fill_templates(_graph, _uri):
                     counter_template15 += 1
 
                     if counter_template15 > 500:
-                        pass
+                        break
                 except:
                     print "check error stack"
                     traceback.print_exc()
@@ -1141,7 +1141,7 @@ def fill_templates(_graph, _uri):
             Same as template 14, but different conditions
     '''
 
-    print "Generating Template 16 now"
+    print "Template 16 now"
 
     # Query the graph for innode to e and relevant properties
     op = access.return_innodes('e')
@@ -1175,7 +1175,7 @@ def fill_templates(_graph, _uri):
                     counter_template16 += 1
 
                     if counter_template16 > 500:
-                        pass
+                        break
                 except:
                     print "check error stack"
                     traceback.print_exc()

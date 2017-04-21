@@ -13,6 +13,7 @@
 from SPARQLWrapper import SPARQLWrapper, JSON
 from operator import itemgetter
 from pprint import pprint
+import numpy as np
 import traceback
 import warnings
 import pickle
@@ -66,6 +67,7 @@ class DBPedia:
 		except:
 			print "Label Cache not found. Creating a new one"
 			traceback.print_exc()
+			raw_input()
 			self.labels = {}
 		self.fresh_labels = 0
 
@@ -235,8 +237,8 @@ class DBPedia:
 		
 		#First try finding it in file
 		try:
-			label = self.labels[_resource_uri]
-			print "Label for %s found in cache." % _resource_uri
+			label = np.random.choice(self.labels[_resource_uri[1:-1]])
+			# print "Label for %s found in cache." % _resource_uri
 			return label
 
 		except KeyError:
@@ -245,23 +247,30 @@ class DBPedia:
 				response = self.shoot_custom_query(GET_LABEL_OF_RESOURCE % {'target_resource': _resource_uri})
 			
 				results = [x[u'label'][u'value'].encode('ascii','ignore') for x in response[u'results'][u'bindings'] ]
-
-				self.labels[_resource_uri[1:-1]] = results[0]
+				if len(results) > 0:
+					self.labels[_resource_uri[1:-1]] = results
+				else:
+					p = results[0]	#Should raise exception
 				self.fresh_labels += 1
 
-				if self.fresh_labels >= 100:
+				if self.fresh_labels >= 10:
 					f = open('resources/labels.pickle','w+')
 					pickle.dump(self.labels, f)
 					f.close()
 					self.fresh_labels = 0
-					# print "Labels dumped to file."
+					print "Labels dumped to file."
 
-				return results[0]
-			except:
-				# print "in Exception"
-				# traceback.print_exc()
+				return np.random.choice(self.labels[_resource_uri[1:-1]])
+			except IndexError as e:
+				# print e
 				# print _resource_uri, results
 				# raw_input()
+				return nlutils.get_label_via_parsing(_resource_uri)
+				
+			except:
+				# print "in Exception"
+				traceback.print_exc()
+				raw_input()
 				return nlutils.get_label_via_parsing(_resource_uri)
 
 
