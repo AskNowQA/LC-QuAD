@@ -77,7 +77,7 @@ def submit_question():
 			question_id = request.get_cookie('question_id')
 			if corrected_answer == request.get_cookie('verbalized_question'):
 				print "chutiya user"
-				redirect("http://localhost:8080/newquestion")
+				redirect("/newquestion")
 			data = {u"username":username,u"corrected":"true",u"corrected_answer":corrected_answer }
 			try:
 				update_db(question_id,data)
@@ -86,7 +86,7 @@ def submit_question():
 			except:
 				print traceback.print_exc()
 				return "<p>Database error. Contact the admin.</p>"
-			redirect("http://localhost:8080/newquestion")	
+			redirect("/newquestion")	
 	else:
 		return "<p>Login failed. Please start from the index url</p>"
 
