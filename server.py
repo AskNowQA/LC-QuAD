@@ -49,7 +49,6 @@ def do_login():
 
 @get("/newquestion")
 def new_question():
-	print "here"
 	if request.get_cookie('username') and request.get_cookie('template_id'):
 		template_id = request.get_cookie('template_id')
 		if request.get_cookie('number'):
@@ -58,8 +57,9 @@ def new_question():
 		else:
 			response.set_cookie('number', str(1))
 		question = retriveQuestion(template_id)
-    	if not question:
-    		return "<p>All questions of template id is completed. Return to login page</p>"
+		if not question:
+			print "am I here? where gaurav pooped?"
+			return "<p>All questions of template id is completed. Return to login page</p>"
     	#setting the question id as the cookie for state tracking
     	data = {"verbalized_question":question[u"verbalized_question"],"json_content":str(pformat(question))}
     	response.set_cookie("question_id",question["_id"])
@@ -110,6 +110,7 @@ def delete_question():
 def retriveQuestion(template_id):
 	'''connects to a database and retrives question based on template type'''
 	question = posts.find_one({u"id":int(template_id),u"corrected" : u"false", u"verbalized":True})
+	print "***", question
 	if question:
 		return question
 	else:
