@@ -145,7 +145,7 @@ class Verbalizer:
 		'''
 		pass
 
-	def hard_relation_filter(self, _pred, _limit = 1):
+	def hard_relation_filter(self, _pred1,_pred2 = None, _limit = 1, _limit_rels = 3):
 		'''
 			Keep the track of one of the predicates appearing in the mapping, and then only allow one question per predicate
 			Uses a class variable (like a global var)
@@ -161,14 +161,31 @@ class Verbalizer:
 					True: verbalize
 					False: don't verbalize
 		'''
+		if not _pred2:
+			try:
+				if self.hard_relation_filter_map[_pred1] >= _limit:
+					return False
+				self.hard_relation_filter_map[_pred1] += 1
+			except:
+				self.hard_relation_filter_map[_pred1] = 1
+			return True
 
-		try:
-			if self.hard_relation_filter_map[_pred] >= _limit:
-				return False
-			self.hard_relation_filter_map[_pred] += 1
-		except:
-			self.hard_relation_filter_map[_pred] = 1
+		else:
+			try:
+				if self.hard_relation_filter_map[_pred1][_pred2] >= _limit:
+					return False
+				self.hard_relation_filter_map[_pred1][_pred2] += 1
+			except KeyError:
+				#Either [_pred1][_pred2] does not exist, or [_pred1] does and [_pred2] does not.
+				try:
+					if len(self.hard_relation_filter_map[_pred1].keys()) > _limit_rels:
+						return False
 
-		return True
+					#If here, then pred1 exists in the map. But pred2 does not. Also not more than 3 pred2 exist wrt to pred1. Hence, put pred1 in the list too
+					self.hard_relation_filter_map[_pred1][_pred2] = 1
+				except KeyError:
+					self.hard_relation_filter_map[_pred1] = {_pred2 : 1} 
+			return True
+
 
 

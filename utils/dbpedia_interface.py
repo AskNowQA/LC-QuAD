@@ -253,7 +253,7 @@ class DBPedia:
 					p = results[0]	#Should raise exception
 				self.fresh_labels += 1
 
-				if self.fresh_labels >= 10:
+				if self.fresh_labels >= 100:
 					f = open('resources/labels.pickle','w+')
 					pickle.dump(self.labels, f)
 					f.close()

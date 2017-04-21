@@ -75,15 +75,15 @@ class Verbalizer_02(verbalizer.Verbalizer):
 	question_templates = {
 		
 		'vanilla': 
-			[ "<%(e_in)s is the <%(e_in_to_e)s> of %(prefix)s  <%(type)s> ?" ],
+			[ "<%(e_in)s is the <%(e_in_to_e)s> of %(prefix)s  <%(uri)s> ?" ],
 
 		'plural':
-			[ "<%(e_in)s are the <%(e_in_to_e)s> of %(prefix)s  <%(type)s> ?" ]
+			[ "<%(e_in)s are the <%(e_in_to_e)s> of %(prefix)s  <%(uri)s> ?" ]
 	}
 
 	def filter(self, _datum, _maps):
 		#Just that hard filter thingy
-		return self.hard_relation_filter(_maps['e_to_e_out'])
+		return self.hard_relation_filter(_maps['e_in_to_e'])
 
 	def rules(self, _datum, _maps):
 		'''
@@ -101,9 +101,9 @@ class Verbalizer_02(verbalizer.Verbalizer):
 			except:
 				print "Cannot pluralize ", _maps['uri']
 
-			question_format = np.random.choice(self.question_templates['plural'], p=[0.8,0.2])
+			question_format = np.random.choice(self.question_templates['plural'])
 		else:
-			question_format = np.random.choice(self.question_templates['vanilla'], p=[0.8,0.2])
+			question_format = np.random.choice(self.question_templates['vanilla'])
 
 		if 'http://dbpedia.org/ontology/Agent' in _datum['mapping_type']['uri'] and "http://dbpedia.org/ontology/Organisation" not in _datum['mapping_type']["uri"]:
 			_maps['prefix'] = 'Who'
@@ -126,7 +126,7 @@ class Verbalizer_03(verbalizer.Verbalizer):
 
 	def filter(self, _datum, _maps):
 		#Just that hard filter thingy
-		return self.hard_relation_filter(_maps['e_in_to_e'])
+		return self.hard_relation_filter(_maps['e_in_to_e'],_maps['e_in_in_to_e_in'])
 
 	def rules(self, _datum, _maps):
 		'''
@@ -168,7 +168,7 @@ class Verbalizer_05(verbalizer.Verbalizer):
 
 	def filter(self, _datum, _maps):
 		#Just that hard filter thingy
-		return self.hard_relation_filter(_maps['e_in_to_e'])
+		return self.hard_relation_filter(_maps['e_in_to_e'],_maps['e_in_to_e_in_out'])
 
 	def rules(self, _datum, _maps):
 		'''
@@ -244,7 +244,7 @@ class Verbalizer_06(verbalizer.Verbalizer):
 	}
 
 	def filter(self, _datum, _maps):
-		return self.hard_relation_filter(_maps['e_to_e_out'])
+		return self.hard_relation_filter(_maps['e_to_e_out'],_maps['e_out_to_e_out_out'])
 
 	def rules(self, _datum, _maps):
 		'''
@@ -423,7 +423,7 @@ class Verbalizer_08(verbalizer.Verbalizer):
 
 	def filter(self, _datum, _maps):
 		#@TODO: Discuss this filter
-		return self.hard_relation_filter(_maps['e_to_e_out_1'])
+		return self.hard_relation_filter(_maps['e_to_e_out_1'],_maps['e_to_e_out_2'])
 
 	def rules(self, _datum, _maps):
 		'''
@@ -518,7 +518,7 @@ class Verbalizer_09(verbalizer.Verbalizer):
 	}
 
 	def filter(self, _datum, _maps):
-		return self.hard_relation_filter(_maps['e_in_to_e'])
+		return self.hard_relation_filter(_maps['e_in_to_e'],_maps['e_in_in_to_e_in'])
 
 	def rules(self, _datum, _maps):
 		'''
@@ -563,7 +563,7 @@ class Verbalizer_11(verbalizer.Verbalizer):
 			return False
 
 		#Just that hard filter thingy
-		return self.hard_relation_filter(_maps['e_in_to_e'])
+		return self.hard_relation_filter(_maps['e_in_to_e'],_maps['e_in_to_e_in_out'])
 
 	def rules(self, _datum, _maps):
 		'''
@@ -644,7 +644,7 @@ class Verbalizer_16(verbalizer.Verbalizer):
 	}
 
 	def filter(self, _datum, _maps):
-		return self.hard_relation_filter(_maps['e_in_to_e_1'])
+		return self.hard_relation_filter(_maps['e_in_to_e_1'],_maps['e_in_to_e_2'])
 
 	def rules(self, _datum, _maps):
 		'''
@@ -676,6 +676,7 @@ class Verbalizer_16(verbalizer.Verbalizer):
 if __name__ == "__main__":
 
 	template1verbalizer = Verbalizer_01()
+	template2verbalizer = Verbalizer_02()
 	template3verbalizer = Verbalizer_03()
 	template5verbalizer = Verbalizer_05()
 	template6verbalizer = Verbalizer_06()
