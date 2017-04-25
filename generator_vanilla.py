@@ -31,11 +31,19 @@ list_of_entities = open('resources/entities.txt').read().split('\n')
 
 templates = json.load(open('templates.py'))  # Contains all the templates existing in templates.py
 sparqls = {}  # Dict of the generated SPARQL Queries.
-properties_count = {}
-''' dictionary of properties. with key being the parent entity and value would be a dictionary with key peing name
-    of property and value being number of times it has already occured .
-    {"/agent" : [ {"/birthPlace" : 1 }, {"/deathPlace" : 2}] }
+try:
+    properties_count = pickle.load(open('resources/properties_count.label'))
+except:
+    print "Cannot find pickled properties count."
+    properties_count = {}
+    ''' 
+        dictionary of properties. with key being the parent entity and value would be a dictionary with key peing name
+        of property and value being number of times it has already occured .
+        {"/agent" : [ {"/birthPlace" : 1 }, {"/deathPlace" : 2}] }
+
+        This needs to be pickled.
     '''
+
 '''
     Some SPARQL Queries.
     Since this part of the code requires sending numerous convoluted queries to DBpedia,
@@ -142,8 +150,7 @@ def pruning(_results, _keep_no_results = 100, _filter_properties = True, _filter
     # print len(temp_results)
     return temp_results
 
-def insert_triple_in_subgraph(G, _results, _labels, _direction, _origin_node, _filter_properties=True,
-                              _filter_literals=True,_filter_entities = False):
+def insert_triple_in_subgraph(G, _results, _labels, _direction, _origin_node, _filter_properties=True, _filter_literals=True,_filter_entities = False):
     '''
         Function used to push the results of different queries into the subgraph.
         USAGE: only within the get_local_subgraph function.
@@ -1219,4 +1226,6 @@ for key in sparqls:
         fo.writelines(json.dumps(value) + "\n")
     fo.close()
 
+print "Pickling properties count to file"
+pickle.dump(properties_count, open('resources/properies_count.pickle','w+'))
 print "DONE"

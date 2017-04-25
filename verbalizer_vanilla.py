@@ -125,8 +125,13 @@ class Verbalizer_03(verbalizer.Verbalizer):
 	}
 
 	def filter(self, _datum, _maps):
-		#Just that hard filter thingy
-		return self.hard_relation_filter(_maps['e_in_to_e'],_maps['e_in_in_to_e_in'])
+		#The 'relation' vs 'father,mother...' rule
+		if self.meine_family_filter(_maps['e_in_to_e'],_maps['e_in_in_to_e_in']):
+			#Just that hard filter thingy
+			return self.hard_relation_filter(_maps['e_in_to_e'],_maps['e_in_in_to_e_in'])
+		else:
+			return False
+
 
 	def rules(self, _datum, _maps):
 		'''
@@ -167,8 +172,12 @@ class Verbalizer_05(verbalizer.Verbalizer):
 	}
 
 	def filter(self, _datum, _maps):
-		#Just that hard filter thingy
-		return self.hard_relation_filter(_maps['e_in_to_e'],_maps['e_in_to_e_in_out'])
+		#The 'relation' vs 'father,mother...' rule
+		if self.meine_family_filter(_maps['e_in_to_e'],_maps['e_in_to_e_in_out']):
+			#Just that hard filter thingy
+			return self.hard_relation_filter(_maps['e_in_to_e'],_maps['e_in_to_e_in_out'])
+		else:
+			return False
 
 	def rules(self, _datum, _maps):
 		'''
@@ -244,7 +253,12 @@ class Verbalizer_06(verbalizer.Verbalizer):
 	}
 
 	def filter(self, _datum, _maps):
-		return self.hard_relation_filter(_maps['e_to_e_out'],_maps['e_out_to_e_out_out'])
+		#The 'relation' vs 'father,mother...' rule
+		if self.meine_family_filter(_maps['e_to_e_out'],_maps['e_out_to_e_out_out']):
+			#Just that hard filter thingy
+			return self.hard_relation_filter(_maps['e_to_e_out'],_maps['e_out_to_e_out_out'])
+		else:
+			return False
 
 	def rules(self, _datum, _maps):
 		'''
@@ -422,8 +436,12 @@ class Verbalizer_08(verbalizer.Verbalizer):
 	}
 
 	def filter(self, _datum, _maps):
-		#@TODO: Discuss this filter
-		return self.hard_relation_filter(_maps['e_to_e_out_1'],_maps['e_to_e_out_2'])
+		#The 'relation' vs 'father,mother...' rule
+		if self.meine_family_filter(_maps['e_to_e_out_1'],_maps['e_to_e_out_2']):
+			#Just that hard filter thingy
+			return self.hard_relation_filter(_maps['e_to_e_out_1'],_maps['e_to_e_out_2'])
+		else:
+			return False
 
 	def rules(self, _datum, _maps):
 		'''
@@ -518,7 +536,12 @@ class Verbalizer_09(verbalizer.Verbalizer):
 	}
 
 	def filter(self, _datum, _maps):
-		return self.hard_relation_filter(_maps['e_in_to_e'],_maps['e_in_in_to_e_in'])
+		#The 'relation' vs 'father,mother...' rule
+		if self.meine_family_filter(_maps['e_in_to_e'],_maps['e_in_in_to_e_in']):
+			#Just that hard filter thingy
+			return self.hard_relation_filter(_maps['e_in_to_e'],_maps['e_in_in_to_e_in'])
+		else:
+			return False
 
 	def rules(self, _datum, _maps):
 		'''
@@ -562,8 +585,12 @@ class Verbalizer_11(verbalizer.Verbalizer):
 		if _datum['answer_count']['uri'] <= 2 or _datum['answer_count']['uri'] > 10:
 			return False
 
-		#Just that hard filter thingy
-		return self.hard_relation_filter(_maps['e_in_to_e'],_maps['e_in_to_e_in_out'])
+		#The 'relation' vs 'father,mother...' rule
+		if self.meine_family_filter(_maps['e_in_to_e'],_maps['e_in_to_e_in_out']):
+			#Just that hard filter thingy
+			return self.hard_relation_filter(_maps['e_in_to_e'],_maps['e_in_to_e_in_out'])
+		else:
+			return False
 
 	def rules(self, _datum, _maps):
 		'''
@@ -644,7 +671,12 @@ class Verbalizer_16(verbalizer.Verbalizer):
 	}
 
 	def filter(self, _datum, _maps):
-		return self.hard_relation_filter(_maps['e_in_to_e_1'],_maps['e_in_to_e_2'])
+		#The 'relation' vs 'father,mother...' rule
+		if self.meine_family_filter(_maps['e_in_to_e_1'],_maps['e_in_to_e_2']):
+			#Just that hard filter thingy
+			return self.hard_relation_filter(_maps['e_in_to_e_1'],_maps['e_in_to_e_2'])
+		else:
+			return False
 
 	def rules(self, _datum, _maps):
 		'''

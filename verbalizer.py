@@ -55,7 +55,13 @@ class Verbalizer:
 
 		with open('sparqls/template%s.txt' % self.template_id) as data_file:
 			for line in data_file:
-				sparqls.append(json.loads(line.rstrip('\n')))
+				try:
+					jsn = json.loads(line.replace('\n',""))
+					sparqls.append(jsn)
+				except:
+					print line
+					# raw_input("Waiting for input to continue")
+					traceback.print_exc()
 
 				
 		for counter in range(len(sparqls)):
@@ -187,5 +193,25 @@ class Verbalizer:
 					self.hard_relation_filter_map[_pred1] = {_pred2 : 1} 
 			return True
 
+	def meine_family_filter(self,_pred1,_pred2):
+		'''
+			Implementing a general rule that 
+				if either of the relations down there in 'family_relations' are in one of the predicates,
+				and the other one is 'relation', return false
+
+				else return true
+		'''
+		family_relations = ['spouse','father','mother','child','husband','wife']
+		rel1 = _pred1.split('/')[-1]
+		rel2 = _pred2.split('/')[-1]
+
+		if rel1 == 'relation' or rel2 == 'relation':
+			if rel1 in family_relations or rel2 in family_relations:
+				# print rel1, rel2
+				# raw_input()
+				return False
+			return True
+		else:
+			return True
 
 

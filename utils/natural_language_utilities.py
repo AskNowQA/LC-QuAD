@@ -5,7 +5,8 @@ import os.path
 from urlparse import urlparse
 
 #SOME MACROS
-KNOWN_SHORTHANDS = ['dbo','dbp','rdf','rdfs','dbr']	
+KNOWN_SHORTHANDS = ['dbo','dbp','rdf','rdfs','dbr','foaf','geo']	
+DBP_SHORTHANDS = {'dbo':'http://dbpedia.org/ontology/','dbp':'http://dbpedia.org/property','dbr':'http://dbpedia.org/resource'}
 
 #Few regex to convert camelCase to _ i.e DonaldTrump to donald trump
 first_cap_re = re.compile('(.)([A-Z][a-z]+)')
@@ -53,6 +54,25 @@ def has_shorthand(_string):
 		return True
 
 	return False
+
+def is_dbpedia_shorthand(_string, _convert = True):
+
+	if not has_shorthand(_string):
+		return None
+
+	splitted_string = _string.split(':')
+	
+	if len(splitted_string) == 1:
+		return None
+
+	if splitted_string[0] in DBP_SHORTHANDS.keys():
+		#Validate the right side of the ':'
+		if '/' in splitted_string[1]:
+			return None
+
+		return ''.join([DBP_SHORTHANDS[splitted_string[0]],splitted_string[1]])
+
+	return None
 
 def has_literal(_string):
 	#Very rudementary logic. Make it better sometime later.

@@ -271,7 +271,7 @@ class DBPedia:
 			except:
 				# print "in Exception"
 				traceback.print_exc()
-				raw_input()
+				# raw_input()
 				return nlutils.get_label_via_parsing(_resource_uri)
 
 
