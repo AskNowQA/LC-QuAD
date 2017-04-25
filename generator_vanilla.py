@@ -3,6 +3,7 @@
 # Importing some external libraries
 from pprint import pprint
 import networkx as nx
+import numpy as np
 import pickle
 import json
 import copy
@@ -24,10 +25,13 @@ import time
 '''
 
 dbp = None  # DBpedia interface object #To be instantiated when the code is run by main script/unit testing script
-relevant_properties = open('resources/relations_merged.txt').read().split('\n')  # Contains the whitelisted props types
-relevent_entity_classes = open('resources/entity_classes.txt').read().split('\n') #Contains whitelisted entities classes
-list_of_entities = open('resources/entities.txt').read().split('\n')
-'''contains list of entites for which the question would be asked '''
+relevant_properties = open('resources/relations_merged.txt').read().split('\n')     # Contains the whitelisted props types
+relevent_entity_classes = open('resources/entity_classes.txt').read().split('\n')   # Contains whitelisted entities classes
+list_of_entities = open('resources/entities.txt').read().split('\n')                # Contains list of entites for which the question would be asked
+probability_property = {}                                                           # A list of all the whitelisted properties and their corresponding probabilies (of being selected for the subgraph)
+for line in open('resources/relations-with-probability.txt'):
+    prop,p = line.split()
+    probability_property[prop] = float(p)
 
 templates = json.load(open('templates.py'))  # Contains all the templates existing in templates.py
 sparqls = {}  # Dict of the generated SPARQL Queries.
@@ -127,6 +131,14 @@ def pruning(_results, _keep_no_results = 100, _filter_properties = True, _filter
                 continue
 
             ent_parent = dbp.get_most_specific_class(ent)
+
+            '''Another probabilistic filter being implemented here. Details on doc'''
+            # print prop.split('/')[-1]
+            # print probability_property[prop.split('/')[-1]]
+            # raw_input("probabilistic stop")
+            if np.random.uniform(0,1) < probability_property[prop.split('/')[-1]]:
+                continue
+
             try:
                 if properties_count[ent_parent][prop.split('/')[-1]] > 1:
                     continue
@@ -1219,13 +1231,13 @@ for entity in list_of_entities:
 #     with open('output/template%d.txt' % key, 'a+') as out:
 #         pprint(sparqls[key], stream=out)
 
+print "Pickling properties count to file"
+pickle.dump(properties_count, open('resources/properies_count.pickle','w+'))
+print "DONE"
+
 print "Trying to write to file!"
 for key in sparqls:
     fo = open('sparqls/template%d.txt' % key, 'a+')
     for value in sparqls[key]:
         fo.writelines(json.dumps(value) + "\n")
     fo.close()
-
-print "Pickling properties count to file"
-pickle.dump(properties_count, open('resources/properies_count.pickle','w+'))
-print "DONE"
