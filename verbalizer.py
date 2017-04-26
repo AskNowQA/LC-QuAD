@@ -13,11 +13,12 @@
 
 import csv
 import json
+import random
 import numpy as np
-from pprint import pprint
-from pattern.en import pluralize
 import utils.dbpedia_interface as db_interface
 import utils.natural_language_utilities as nlutils
+from pattern.en import pluralize
+from pprint import pprint
 
 
 class Verbalizer:
@@ -63,7 +64,9 @@ class Verbalizer:
 					# raw_input("Waiting for input to continue")
 					traceback.print_exc()
 
-				
+		#Shuffling the sparqls list to promote diversity
+		random.shuffle(sparqls)
+
 		for counter in range(len(sparqls)):
 
 			#Declate the verbalized flag
