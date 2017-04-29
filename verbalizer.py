@@ -127,9 +127,10 @@ class Verbalizer:
 					continue
 
 		#Count the number of verbalized questions
-		print "Template ID: ", id
-		print "Generated Questions: ", questions
-		print "Total data items: ", len(sparqls), 
+		# print "Template ID: ", id
+		# print "Generated Questions: ", questions
+		# print "Total data items: ", len(sparqls), 
+		print ' '.join([str(id),str(questions),str(len(sparqls))])
 		print "\n"
 
 	def rules(self, _maps, _datum):

@@ -231,7 +231,6 @@ areaTotal
 completionDate
 firstAscentPerson
 birthDate
-influencedBy
 deathDate
 publisher
 genre
@@ -247,7 +246,6 @@ founder
 deathPlace
 Lake
 Beverage
-inflow
 occupation
 Scientist
 abbreviation
@@ -273,7 +271,6 @@ spouse
 office
 populationTotal
 leaderName
-isPartOf
 league
 locatedInArea
 deathCause

@@ -143,7 +143,6 @@ yearsActive
 nationalgoals
 hubAirport
 species
-influenced
 programmeFormat
 servingRailwayLine
 musicalBand
@@ -152,7 +151,6 @@ teamName
 militaryUnit
 winners
 lastSingle
-influences
 owningCompany
 product
 designer
@@ -236,7 +234,6 @@ mouthLocation
 routeJunction
 hostCity
 content
-isPartOf
 homeStadium
 foundation
 musicComposer
@@ -633,7 +630,6 @@ editor
 house
 literaryGenre
 music
-influencedBy
 numberOfTracks
 opponent
 doctoralAdvisor

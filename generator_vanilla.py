@@ -472,7 +472,7 @@ def fill_templates(_graph, _uri):
                 traceback.print_exc()
                 continue
     except:
-        pass
+        print _uri, '1'
     
     ''' 
         Template #2: 
@@ -506,7 +506,7 @@ def fill_templates(_graph, _uri):
                 traceback.print_exc()
                 continue
     except:
-        pass
+        print _uri, '2'
 
 
     '''
@@ -522,14 +522,14 @@ def fill_templates(_graph, _uri):
     #DEBUG print "length of innodes is " , str(len(op))
     counter_template3 = 0
     # Create a list of all these (e_in, e_in_to_e)
-    one_triple_left_map = {triple[0].getUri(): triple[2]['object'].getUri() for triple in op[0]}
-    # pprint(one_triple_left)
-
-    # Collect all e_in_in and e_in_in_to_e_in
-    op = access.return_innodes('e_in')
-    # print "length of innodes is ", str(len(op))
-
     try:
+        one_triple_left_map = {triple[0].getUri(): triple[2]['object'].getUri() for triple in op[0]}
+        # pprint(one_triple_left)
+
+        # Collect all e_in_in and e_in_in_to_e_in
+        op = access.return_innodes('e_in')
+        # print "length of innodes is ", str(len(op))
+
         # This 'op' has the e_in_in and the prop for all e_in's. We now need to map one to the other.
         for list_of_triples in op:
 
@@ -567,7 +567,7 @@ def fill_templates(_graph, _uri):
                     traceback.print_exc()
                     continue
     except:
-        pass
+        print _uri, '3'
 
 
     '''
@@ -631,7 +631,7 @@ def fill_templates(_graph, _uri):
                 if counter_template5 > 10:
                     pass
     except:
-        pass
+        print _uri, '5'
 
     '''
         Template 6
@@ -688,7 +688,7 @@ def fill_templates(_graph, _uri):
                     traceback.print_exc()
                     continue
     except:
-        pass
+        print _uri, '6'
             
 
     '''
@@ -731,7 +731,7 @@ def fill_templates(_graph, _uri):
                         traceback.print_exc()
                         continue
     except:
-        pass
+        print _uri, '7'
 
 
     '''
@@ -789,7 +789,7 @@ def fill_templates(_graph, _uri):
                         traceback.print_exc()
                         continue
     except:
-        pass
+        print _uri, '8'
 
     '''
         Template 9:
@@ -856,7 +856,7 @@ def fill_templates(_graph, _uri):
                     traceback.print_exc()
                     continue
     except:
-        pass
+        print _uri, '9'
 
     '''
         TEMPLATE 11: SELECT DISTINCT ?uri WHERE { ?x ?x <%(e_in_to_e)s> <%(e_in_out)s> . ?x <%(e_in_to_e)s> ?uri }
@@ -924,7 +924,7 @@ def fill_templates(_graph, _uri):
                     pass
 
     except:
-        pass
+        print _uri, '11'
 
     '''
         Template 12
@@ -985,7 +985,7 @@ def fill_templates(_graph, _uri):
                     traceback.print_exc()
                     continue
     except:
-        pass
+        print _uri, '12'
 
     '''
         Template 13: SELECT DISTINCT ?uri WHERE { ?uri <%(e_to_e_out_1)s> <%(e_out)s> . ?uri <%(e_to_e_out_2)s> <%(e_out)s> }
@@ -1033,7 +1033,7 @@ def fill_templates(_graph, _uri):
                         continue
     
     except:
-        pass
+        print _uri, '13'
 
     '''
         TEMPLATE 14: SELECT DISTINCT ?uri WHERE { <%(e_in)s> <%(e_in_to_e_1)s> ?uri. <%(e_in)s> <%(e_in_to_e_2)s> ?uri} 
@@ -1085,7 +1085,7 @@ def fill_templates(_graph, _uri):
                         traceback.print_exc()
                         continue
     except:
-        pass
+        print _uri, '14'
 
 
     '''
@@ -1136,7 +1136,7 @@ def fill_templates(_graph, _uri):
                         traceback.print_exc()
                         continue
     except:
-        pass
+        print _uri, '15'
 
     '''
         Template 16:
@@ -1187,7 +1187,7 @@ def fill_templates(_graph, _uri):
                         traceback.print_exc()
                         continue
     except:
-        pass
+        print _uri, '16'
 
 '''
     Testing the ability to create subgraph given a URI

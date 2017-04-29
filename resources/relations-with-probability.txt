@@ -10,7 +10,6 @@ dateOfBirth 0.2
 country 0.2
 location 0.2
 placeOfBirth 0.2
-isPartOf 0.2
 type 0.2
 length 0.2
 date 0.2
@@ -272,7 +271,6 @@ stateOfOrigin 0.7
 shipName 0.7
 restingPlace 0.7
 numberOfStudents 0.7
-influencedBy 0.7
 affiliations 0.7
 nearestCity 0.7
 chairman 0.7
@@ -305,7 +303,6 @@ gender 0.7
 clubname 0.7
 lyrics 0.7
 governmentType 0.7
-influenced 0.7
 style 0.7
 programmeFormat 0.7
 languageFamily 0.7
@@ -319,7 +316,6 @@ draftTeam 0.8
 ethnicity 0.8
 abbreviation 0.8
 school 0.8
-influences 0.8
 highschool 0.8
 garrison 0.8
 regionServed 0.8
