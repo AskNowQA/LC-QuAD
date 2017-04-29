@@ -707,17 +707,50 @@ class Verbalizer_16(verbalizer.Verbalizer):
 
 if __name__ == "__main__":
 
-	template1verbalizer = Verbalizer_01()
-	template2verbalizer = Verbalizer_02()
-	template3verbalizer = Verbalizer_03()
-	template5verbalizer = Verbalizer_05()
-	template6verbalizer = Verbalizer_06()
-	template7verbalizer = Verbalizer_07()
-	template8verbalizer = Verbalizer_08()
-	template9verbalizer = Verbalizer_09()
-	template11verbalizer = Verbalizer_11()
-	template15verbalizer = Verbalizer_15()
-	template16verbalizer = Verbalizer_16()
+	try:
+		template1verbalizer = Verbalizer_01()
+	except:
+		print "Cannot verbalize Template 1"
+	try:
+		template2verbalizer = Verbalizer_02()
+	except:
+		print "Cannot verbalize Template 2"
+	try:
+		template3verbalizer = Verbalizer_03()
+	except:
+		print "Cannot verbalize Template 3"
+	try:
+		template5verbalizer = Verbalizer_05()
+	except:
+		print "Cannot verbalize Template 5"
+	try:
+		template6verbalizer = Verbalizer_06()
+	except:
+		print "Cannot verbalize Template 6"
+	try:
+		template7verbalizer = Verbalizer_07()
+	except:
+		print "Cannot verbalize Template 7"
+	try:
+		template8verbalizer = Verbalizer_08()
+	except:
+		print "Cannot verbalize Template 8"
+	try:
+		template9verbalizer = Verbalizer_09()
+	except:
+		print "Cannot verbalize Template 9"
+	try:
+		template11verbalizer = Verbalizer_11()
+	except:
+		print "Cannot verbalize Template 11"
+	try:
+		template15verbalizer = Verbalizer_15()
+	except:
+		print "Cannot verbalize Template 15"
+	try:
+		template16verbalizer = Verbalizer_16()
+	except:
+		print "Cannot verbalize Template 16"
 
 
 		

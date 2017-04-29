@@ -36,9 +36,11 @@ for line in open('resources/relations-with-probability.txt'):
 templates = json.load(open('templates.py'))  # Contains all the templates existing in templates.py
 sparqls = {}  # Dict of the generated SPARQL Queries.
 try:
-    properties_count = pickle.load(open('resources/properties_count.label'))
+    properties_count = pickle.load(open('resources/properties_count.pickle'))
 except:
     print "Cannot find pickled properties count."
+    traceback.print_exc()
+    raw_input("Press enter to continue")
     properties_count = {}
     ''' 
         dictionary of properties. with key being the parent entity and value would be a dictionary with key peing name
@@ -110,17 +112,16 @@ def pruning(_results, _keep_no_results = 100, _filter_properties = True, _filter
 
         results_list.append(result)
 
-    #Keep only 500 triples     
-    if len(results_list) > 500:
-        results_list = random.sample(results_list,500)
+    # #Keep only 500 triples     
+    # if len(results_list) > 500:
+    #     results_list = random.sample(results_list,500)
 
 
     for result in results_list:
         # Parse the results into local variables (for readibility)
         prop = result[u'p'][u'value']
         ent = result[u'e'][u'value']
-        # ent_type = result[u'type'][u'value']
-        # print ent_type
+        
         if _filter_literals:
             if nlutils.has_literal(ent):
                 continue
@@ -133,22 +134,19 @@ def pruning(_results, _keep_no_results = 100, _filter_properties = True, _filter
             ent_parent = dbp.get_most_specific_class(ent)
 
             '''Another probabilistic filter being implemented here. Details on doc'''
-            # print prop.split('/')[-1]
-            # print probability_property[prop.split('/')[-1]]
-            # raw_input("probabilistic stop")
-            if np.random.uniform(0,1) < probability_property[prop.split('/')[-1]]:
+            if np.random.uniform(0,1) > probability_property[prop.split('/')[-1]]:
                 continue
 
             try:
                 if properties_count[ent_parent][prop.split('/')[-1]] > 1:
                     continue
                 else:
-                    properties_count[ent_parent][prop.split('/')[-1]] = properties_count[prop.split('/')[-1]] + 1
+                    properties_count[ent_parent][prop.split('/')[-1]] = properties_count[ent_parent][prop.split('/')[-1]] + 1
             except:
                 try:
                     properties_count[ent_parent][prop.split('/')[-1]] = 1
                 except:
-                    properties_count[ent_parent] = {}
+                    properties_count[ent_parent] = {prop.split('/')[-1]: 1}
 
         if _filter_entities:
             # filter entities based on class
@@ -453,26 +451,28 @@ def fill_templates(_graph, _uri):
     #Query the graph for outnodes from e
     op = access.return_outnodes('e')
     counter_template1 = 0
-
-    for triple in op[0]:
+    try:
+        for triple in op[0]:
+            
+            #Making the variables explicit (for the sake of readability)
+            e_out = triple[1].getUri()
+            e_to_e_out = triple[2]['object'].getUri()
         
-        #Making the variables explicit (for the sake of readability)
-        e_out = triple[1].getUri()
-        e_to_e_out = triple[2]['object'].getUri()
-    
-        #Create a mapping (in keeping with the templates' placeholder names)
-        mapping = {'e_out': e_out, 'e_to_e_out': e_to_e_out }
-        
-        #Throw it to a function who will put it in the list with appropriate bookkeeping
-        try:
-            fill_specific_template(_template_id=1, _mapping=mapping)
-            counter_template1 += 1
-            if counter_template1 > 500:
-                pass
-        except:
-            print "check error stack"
-            traceback.print_exc()
-            continue
+            #Create a mapping (in keeping with the templates' placeholder names)
+            mapping = {'e_out': e_out, 'e_to_e_out': e_to_e_out }
+            
+            #Throw it to a function who will put it in the list with appropriate bookkeeping
+            try:
+                fill_specific_template(_template_id=1, _mapping=mapping)
+                counter_template1 += 1
+                if counter_template1 > 500:
+                    pass
+            except:
+                print "check error stack"
+                traceback.print_exc()
+                continue
+    except:
+        pass
     
     ''' 
         Template #2: 
@@ -485,25 +485,28 @@ def fill_templates(_graph, _uri):
     #Query the graph for outnodes from e
     op = access.return_innodes('e')
     counter_template2 = 0
-    
-    for triple in op[0]:
-    
-        #Making the variables explicit (for the sake of readability)
-        e_in = triple[0].getUri()
-        e_in_to_e = triple[2]['object'].getUri()
+
+    try:    
+        for triple in op[0]:
         
-        #Create a mapping (in keeping with the templates' placeholder names)
-        mapping = {'e_in':e_in, 'e_in_to_e': e_in_to_e}
-        
-        #Throw it to a function who will put it in the list with appropriate bookkeeping
-        try:
-            fill_specific_template( _template_id=2, _mapping=mapping)
-            if counter_template2 > 500:
-                pass
-        except:
-            print "check error stack"
-            traceback.print_exc()
-            continue
+            #Making the variables explicit (for the sake of readability)
+            e_in = triple[0].getUri()
+            e_in_to_e = triple[2]['object'].getUri()
+            
+            #Create a mapping (in keeping with the templates' placeholder names)
+            mapping = {'e_in':e_in, 'e_in_to_e': e_in_to_e}
+            
+            #Throw it to a function who will put it in the list with appropriate bookkeeping
+            try:
+                fill_specific_template( _template_id=2, _mapping=mapping)
+                if counter_template2 > 500:
+                    pass
+            except:
+                print "check error stack"
+                traceback.print_exc()
+                continue
+    except:
+        pass
 
 
     '''
@@ -526,100 +529,45 @@ def fill_templates(_graph, _uri):
     op = access.return_innodes('e_in')
     # print "length of innodes is ", str(len(op))
 
-    # This 'op' has the e_in_in and the prop for all e_in's. We now need to map one to the other.
-    for list_of_triples in op:
+    try:
+        # This 'op' has the e_in_in and the prop for all e_in's. We now need to map one to the other.
+        for list_of_triples in op:
 
-        # Some triple are simply empty. Ignore them.
-        if len(list_of_triples) == 0:
-            continue
-
-        ### Mapping e_in_in's to relevant e_in's ###
-
-        # Pick one triple from the list.
-        e_in = list_of_triples[0][1].getUri()
-        e_in_to_e = one_triple_left_map[e_in]
-        # Find the relevant property from the map
-
-        # Given this information, lets create mappings of template three
-        for triple in list_of_triples:
-
-            # Making the variables explicit (for the sake of readability)
-            e_in_in = triple[0].getUri()
-            e_in_in_to_e_in = triple[2]['object'].getUri()
-
-            # Create a mapping (in keeping with the templates' placeholder names)
-            mapping = {'e_in_in': e_in_in, 'e_in_in_to_e_in': e_in_in_to_e_in, 'e_in_to_e': e_in_to_e, 'e_in': e_in}
-            mapping_type = {}
-            
-            # Throw it to a function who will put it in the list with appropriate bookkeeping
-            try:
-                fill_specific_template(_template_id=3, _mapping=mapping)
-                counter_template3 = counter_template3 + 1
-                if counter_template3 > 500:
-                    pass
-
-            except:
-                print "check error stack"
-                traceback.print_exc()
+            # Some triple are simply empty. Ignore them.
+            if len(list_of_triples) == 0:
                 continue
 
+            ### Mapping e_in_in's to relevant e_in's ###
 
-    '''
-    #     !!!! SKIPPING THIS TEMPLATE AS THE QUESTIONS AREN'T DIRECTLY VERBALIZABLE !!!!
+            # Pick one triple from the list.
+            e_in = list_of_triples[0][1].getUri()
+            e_in_to_e = one_triple_left_map[e_in]
+            # Find the relevant property from the map
 
-    #     Template #4:
-    #         SELECT DISTINCT ?uri WHERE { <%(e_out_in)s> <%(e_out_in_to_e_out)s> ?x . ?uri <%(e_to_e_out)s> ?x }
-    #     Find e_in and e_in_to_e.
-    # '''
+            # Given this information, lets create mappings of template three
+            for triple in list_of_triples:
 
-    # print "Generating Template 5 now"
-    # # Query the graph for outnodes from e and relevant properties
-    # op = access.return_outnodes('e')
-    # counter_template4 = 0
-    # # Create a list of all these (e_to_e_out, e_out)
-    # one_triple_right_map = {triple[1].getUri(): triple[2]['object'].getUri() for triple in op[0]}
-    # pprint(one_triple_right_map)
+                # Making the variables explicit (for the sake of readability)
+                e_in_in = triple[0].getUri()
+                e_in_in_to_e_in = triple[2]['object'].getUri()
 
-    # # Collect all e_out_in and e_out_in_to_e_out
-    # op = access.return_innodes('e_out')
+                # Create a mapping (in keeping with the templates' placeholder names)
+                mapping = {'e_in_in': e_in_in, 'e_in_in_to_e_in': e_in_in_to_e_in, 'e_in_to_e': e_in_to_e, 'e_in': e_in}
+                mapping_type = {}
+                
+                # Throw it to a function who will put it in the list with appropriate bookkeeping
+                try:
+                    fill_specific_template(_template_id=3, _mapping=mapping)
+                    counter_template3 = counter_template3 + 1
+                    if counter_template3 > 500:
+                        pass
 
-    # # This 'op' has the e_out_in and the prop for all e_out's. We now need to map one to the other.
-    # for list_of_triples in op:
-
-    #     # Some triple are simply empty. Ignore them.
-    #     if len(list_of_triples) == 0:
-    #         continue
-
-    #     ### Mapping e_out_in's to relevant e_out's ###
-
-    #     # Pick one triple from the list.
-    #     e_out = list_of_triples[0][1].getUri()
-    #     e_to_e_out = one_triple_right_map[e_out]  # Find the relevant property from the map
-
-    #     # Given this information, lets create mappings of template four
-    #     for triple in list_of_triples:
-
-    #         # Making the variables explicit (for the sake of readability)
-    #         e_out_in = triple[0].getUri()
-    #         e_out_in_to_e_out = triple[2]['object'].getUri()
-
-    #         # Create a mapping (in keeping with the templates' placeholder names)
-    #         mapping = {'e_out_in': e_out_in, 'e_out_in_to_e_out': e_out_in_to_e_out, 'e_to_e_out': e_to_e_out,
-    #                    'e_out': e_out}
-
-    #         if  e_out_in_to_e_out.split('/')[-1] == e_to_e_out.split('/')[-1]:
-    #             continue
-
-    #         # Throw it to a function who will put it in the list with appropriate bookkeeping
-    #         try:
-    #             fill_specific_template(_template_id=4, _mapping=mapping, _debug=False)
-    #             counter_template4 = counter_template4 + 1
-    #             print str(counter_template4), "template4"
-    #         except:
-    #             print "check error stack"
-    #             continue
-    #         if counter_template4 > 100:
-    #             pass  #NOTE THE CAP
+                except:
+                    print "check error stack"
+                    traceback.print_exc()
+                    continue
+    except:
+        pass
 
 
     '''
@@ -632,54 +580,58 @@ def fill_templates(_graph, _uri):
     # Query the graph for outnodes from e and relevant properties
     op = access.return_innodes('e')
     counter_template5 = 0
-    # Create a list of all these (e_in,e_in_to_e)
-    one_triple_left_map = {triple[0].getUri(): triple[2]['object'].getUri() for triple in op[0]}
 
-    # Collect all e_out_in and e_in_to_e_in_out
-    op = access.return_outnodes('e_in')
+    try:
+        # Create a list of all these (e_in,e_in_to_e)
+        one_triple_left_map = {triple[0].getUri(): triple[2]['object'].getUri() for triple in op[0]}
 
-    # This 'op' has the e_out_in and the prop for all e_out's. We now need to map one to the other.
-    for list_of_triples in op:
+        # Collect all e_out_in and e_in_to_e_in_out
+        op = access.return_outnodes('e_in')
 
-        # Some triple are simply empty. Ignore them.
-        if len(list_of_triples) == 0:
-            continue
+        # This 'op' has the e_out_in and the prop for all e_out's. We now need to map one to the other.
+        for list_of_triples in op:
 
-        ### Mapping e_out_in's to relevant e_out's ###
-
-        # Pick one triple from the list.
-        e_in = list_of_triples[0][0].getUri()
-        e_in_to_e = one_triple_left_map[e_in]  # Find the relevant property from the map
-
-        # Given this information, lets create mappings of template four
-        for triple in list_of_triples:
-
-            #This ought not happen. :/ 
-            if triple[1].getUri() == _uri:
+            # Some triple are simply empty. Ignore them.
+            if len(list_of_triples) == 0:
                 continue
 
-            # Making the variables explicit (for the sake of readability)
-            e_in_out = triple[1].getUri()
-            e_in_to_e_in_out = triple[2]['object'].getUri()
+            ### Mapping e_out_in's to relevant e_out's ###
 
-            # Create a mapping (in keeping with the templates' placeholder names)
-            mapping = {'e_in_out': e_in_out, 'e_in_to_e_in_out': e_in_to_e_in_out, 'e_in_to_e': e_in_to_e,
-                       'e_in': e_in}
+            # Pick one triple from the list.
+            e_in = list_of_triples[0][0].getUri()
+            e_in_to_e = one_triple_left_map[e_in]  # Find the relevant property from the map
 
-            #Skipping duplicate e_in_to_e_in_out and e_in_to_e
-            if e_in_to_e_in_out.split('/')[-1] == e_in_to_e.split('/')[-1]:
-                continue
+            # Given this information, lets create mappings of template four
+            for triple in list_of_triples:
 
-            # Throw it to a function who will put it in the list with appropriate bookkeeping
-            try:
-                fill_specific_template(_template_id=5, _mapping=mapping, _debug=False)
-                counter_template5 = counter_template5 + 1
-            except:
-                print "check error stack"
-                traceback.print_exc()
-                continue
-            if counter_template5 > 10:
-                pass
+                #This ought not happen. :/ 
+                if triple[1].getUri() == _uri:
+                    continue
+
+                # Making the variables explicit (for the sake of readability)
+                e_in_out = triple[1].getUri()
+                e_in_to_e_in_out = triple[2]['object'].getUri()
+
+                # Create a mapping (in keeping with the templates' placeholder names)
+                mapping = {'e_in_out': e_in_out, 'e_in_to_e_in_out': e_in_to_e_in_out, 'e_in_to_e': e_in_to_e,
+                           'e_in': e_in}
+
+                #Skipping duplicate e_in_to_e_in_out and e_in_to_e
+                if e_in_to_e_in_out.split('/')[-1] == e_in_to_e.split('/')[-1]:
+                    continue
+
+                # Throw it to a function who will put it in the list with appropriate bookkeeping
+                try:
+                    fill_specific_template(_template_id=5, _mapping=mapping, _debug=False)
+                    counter_template5 = counter_template5 + 1
+                except:
+                    print "check error stack"
+                    traceback.print_exc()
+                    continue
+                if counter_template5 > 10:
+                    pass
+    except:
+        pass
 
     '''
         Template 6
@@ -691,48 +643,52 @@ def fill_templates(_graph, _uri):
     # Query the graph for outnodes from e and relevant properties
     op = access.return_outnodes('e')
     counter_template6 = 0
-    # Create a list of all these (e_in,e_in_to_e)
-    one_triple_right_map = {triple[1].getUri(): triple[2]['object'].getUri() for triple in op[0]}
 
-    # Collect all e_out_in and e_in_to_e_in_out
-    op = access.return_outnodes('e_out')
+    try:
+        # Create a list of all these (e_in,e_in_to_e)
+        one_triple_right_map = {triple[1].getUri(): triple[2]['object'].getUri() for triple in op[0]}
 
-    # This 'op' has the e_out_in and the prop for all e_out's. We now need to map one to the other.
-    for list_of_triples in op:
+        # Collect all e_out_in and e_in_to_e_in_out
+        op = access.return_outnodes('e_out')
 
-        # Some triple are simply empty. Ignore them.
-        if len(list_of_triples) == 0:
-            continue
+        # This 'op' has the e_out_in and the prop for all e_out's. We now need to map one to the other.
+        for list_of_triples in op:
 
-        ### Mapping e_out_in's to relevant e_out's ###
-
-        # Pick one triple from the list.
-        e_out = list_of_triples[0][0].getUri()
-        e_to_e_out = one_triple_right_map[e_out]  # Find the relevant property from the map
-
-        # Given this information, lets create mappings of template six
-        for triple in list_of_triples:
-
-            # Making the variables explicit (for the sake of readability)
-            e_out_out = triple[1].getUri()
-            e_out_to_e_out_out = triple[2]['object'].getUri()
-
-            # Create a mapping (in keeping with the templates' placeholder names)
-            mapping = {'e_out_out': e_out_out, 'e_out_to_e_out_out': e_out_to_e_out_out, 'e_to_e_out': e_to_e_out,
-                       'e_out': e_out}
-
-            #Keep the duplicates away
-            if e_out_to_e_out_out.split('/')[-1] == e_to_e_out.split('/')[-1]:
+            # Some triple are simply empty. Ignore them.
+            if len(list_of_triples) == 0:
                 continue
 
-            # Throw it to a function who will put it in the list with appropriate bookkeeping
-            try:
-                fill_specific_template(_template_id=6, _mapping=mapping, _debug=False)
-                counter_template6 = counter_template6 + 1
-            except:
-                print "check error stack"
-                traceback.print_exc()
-                continue
+            ### Mapping e_out_in's to relevant e_out's ###
+
+            # Pick one triple from the list.
+            e_out = list_of_triples[0][0].getUri()
+            e_to_e_out = one_triple_right_map[e_out]  # Find the relevant property from the map
+
+            # Given this information, lets create mappings of template six
+            for triple in list_of_triples:
+
+                # Making the variables explicit (for the sake of readability)
+                e_out_out = triple[1].getUri()
+                e_out_to_e_out_out = triple[2]['object'].getUri()
+
+                # Create a mapping (in keeping with the templates' placeholder names)
+                mapping = {'e_out_out': e_out_out, 'e_out_to_e_out_out': e_out_to_e_out_out, 'e_to_e_out': e_to_e_out,
+                           'e_out': e_out}
+
+                #Keep the duplicates away
+                if e_out_to_e_out_out.split('/')[-1] == e_to_e_out.split('/')[-1]:
+                    continue
+
+                # Throw it to a function who will put it in the list with appropriate bookkeeping
+                try:
+                    fill_specific_template(_template_id=6, _mapping=mapping, _debug=False)
+                    counter_template6 = counter_template6 + 1
+                except:
+                    print "check error stack"
+                    traceback.print_exc()
+                    continue
+    except:
+        pass
             
 
     '''
@@ -745,34 +701,37 @@ def fill_templates(_graph, _uri):
     op = access.return_outnodes('e')
     counter_template7 = 0
 
-    for triple_1 in op[0]:
+    try:
+        for triple_1 in op[0]:
 
-        #Forming the first triple
-        e_out_1 =  triple_1[1].getUri()
-        e_to_e_out = triple_1[2]['object'].getUri()
+            #Forming the first triple
+            e_out_1 =  triple_1[1].getUri()
+            e_to_e_out = triple_1[2]['object'].getUri()
 
-        #Now to find another triple with the same e_to_e_out
-        for triple_2 in op[0]:
+            #Now to find another triple with the same e_to_e_out
+            for triple_2 in op[0]:
 
-            #Check condition
-            if triple_2[2]['object'].getUri() ==  e_to_e_out and not triple_2[1].getUri() == e_out_1:
+                #Check condition
+                if triple_2[2]['object'].getUri() ==  e_to_e_out and not triple_2[1].getUri() == e_out_1:
 
-                e_out_2 = triple_2[1].getUri()
+                    e_out_2 = triple_2[1].getUri()
 
-                #Creating a mapping
-                mapping = {'e_out_1': e_out_1, 'e_out_2':  e_out_2, 'e_to_e_out': e_to_e_out }
+                    #Creating a mapping
+                    mapping = {'e_out_1': e_out_1, 'e_out_2':  e_out_2, 'e_to_e_out': e_to_e_out }
 
-                #Throw it in a functoin which will put it in the list with appropriate bookkeeping
-                try:
-                    fill_specific_template(_template_id= 7, _mapping = mapping)
-                    counter_template7 += 1
+                    #Throw it in a functoin which will put it in the list with appropriate bookkeeping
+                    try:
+                        fill_specific_template(_template_id= 7, _mapping = mapping)
+                        counter_template7 += 1
 
-                    if counter_template7 > 500:
-                        pass
-                except:
-                    print "check error stack"
-                    traceback.print_exc()
-                    continue
+                        if counter_template7 > 500:
+                            pass
+                    except:
+                        print "check error stack"
+                        traceback.print_exc()
+                        continue
+    except:
+        pass
 
 
     '''
@@ -785,49 +744,52 @@ def fill_templates(_graph, _uri):
     op = access.return_outnodes('e')
     counter_template8 = 0
 
-    for triple_1 in op[0]:
+    try:
+        for triple_1 in op[0]:
 
-        #Forming the first triple
-        e_out_1 =  triple_1[1].getUri()
-        e_to_e_out_1 = triple_1[2]['object'].getUri()
+            #Forming the first triple
+            e_out_1 =  triple_1[1].getUri()
+            e_to_e_out_1 = triple_1[2]['object'].getUri()
 
-        #Now to find another triple with the same e_to_e_out
-        for triple_2 in op[0]:
+            #Now to find another triple with the same e_to_e_out
+            for triple_2 in op[0]:
 
-            #Check condition
-            if not triple_2[2]['object'].getUri() ==  e_to_e_out_1:
+                #Check condition
+                if not triple_2[2]['object'].getUri() ==  e_to_e_out_1:
 
-                #Forming the second triple
-                e_out_2 = triple_2[1].getUri()
-                e_to_e_out_2 = triple_2[2]['object'].getUri()
+                    #Forming the second triple
+                    e_out_2 = triple_2[1].getUri()
+                    e_to_e_out_2 = triple_2[2]['object'].getUri()
 
-                '''
-                    @TODO: 
-                    Issue:
-                        say we encounter this triple:
-                         ?uri a b
-                         ?uri c d
+                    '''
+                        @TODO: 
+                        Issue:
+                            say we encounter this triple:
+                             ?uri a b
+                             ?uri c d
 
-                        Later we might encounter
-                         ?uri c d
-                         ?uri a b
+                            Later we might encounter
+                             ?uri c d
+                             ?uri a b
 
-                    Solution: have a set of (ab,cd) triples and select the unique ones only. 
-                '''
-                #Creating a mapping
-                mapping = {'e_out_1': e_out_1, 'e_out_2':  e_out_2, 'e_to_e_out_1': e_to_e_out_1, 'e_to_e_out_2': e_to_e_out_2 }
+                        Solution: have a set of (ab,cd) triples and select the unique ones only. 
+                    '''
+                    #Creating a mapping
+                    mapping = {'e_out_1': e_out_1, 'e_out_2':  e_out_2, 'e_to_e_out_1': e_to_e_out_1, 'e_to_e_out_2': e_to_e_out_2 }
 
-                #Throw it in a functoin which will put it in the list with appropriate bookkeeping
-                try:
-                    fill_specific_template(_template_id= 8, _mapping = mapping)
-                    counter_template8 += 1
+                    #Throw it in a functoin which will put it in the list with appropriate bookkeeping
+                    try:
+                        fill_specific_template(_template_id= 8, _mapping = mapping)
+                        counter_template8 += 1
 
-                    if counter_template8 > 500:
-                        pass
-                except:
-                    print "check error stack"
-                    traceback.print_exc()
-                    continue
+                        if counter_template8 > 500:
+                            pass
+                    except:
+                        print "check error stack"
+                        traceback.print_exc()
+                        continue
+    except:
+        pass
 
     '''
         Template 9:
@@ -843,54 +805,58 @@ def fill_templates(_graph, _uri):
     op = access.return_innodes('e')
     #DEBUG print "length of innodes is " , str(len(op))
     counter_template9 = 0
-    # Create a list of all these (e_in, e_in_to_e)
-    one_triple_left_map = {triple[0].getUri(): triple[2]['object'].getUri() for triple in op[0]}
-    # pprint(one_triple_left)
 
-    # Collect all e_in_in and e_in_in_to_e_in
-    op = access.return_innodes('e_in')
-    # print "length of innodes is ", str(len(op))
+    try:
+        # Create a list of all these (e_in, e_in_to_e)
+        one_triple_left_map = {triple[0].getUri(): triple[2]['object'].getUri() for triple in op[0]}
+        # pprint(one_triple_left)
 
-    # This 'op' has the e_in_in and the prop for all e_in's. We now need to map one to the other.
-    for list_of_triples in op:
+        # Collect all e_in_in and e_in_in_to_e_in
+        op = access.return_innodes('e_in')
+        # print "length of innodes is ", str(len(op))
 
-        # Some triple are simply empty. Ignore them.
-        if len(list_of_triples) == 0:
-            continue
+        # This 'op' has the e_in_in and the prop for all e_in's. We now need to map one to the other.
+        for list_of_triples in op:
 
-        ### Mapping e_in_in's to relevant e_in's ###
-
-        # Pick one triple from the list.
-        e_in = list_of_triples[0][1].getUri()
-        e_in_to_e = one_triple_left_map[e_in]
-        # Find the relevant property from the map
-
-        # Given this information, lets create mappings of template three
-        for triple in list_of_triples:
-
-            # Making the variables explicit (for the sake of readability)
-            e_in_in = triple[0].getUri()
-            e_in_in_to_e_in = triple[2]['object'].getUri()
-
-            #Check constraint
-            if not e_in_in_to_e_in == e_in_to_e:
+            # Some triple are simply empty. Ignore them.
+            if len(list_of_triples) == 0:
                 continue
 
-            # Create a mapping (in keeping with the templates' placeholder names)
-            mapping = {'e_in_in': e_in_in, 'e_in_in_to_e_in': e_in_in_to_e_in, 'e_in_to_e': e_in_to_e, 'e_in': e_in}
-            mapping_type = {}
-            
-            # Throw it to a function who will put it in the list with appropriate bookkeeping
-            try:
-                fill_specific_template(_template_id=9, _mapping=mapping)
-                counter_template9 = counter_template9 + 1
-                if counter_template9 > 500:
-                    pass
+            ### Mapping e_in_in's to relevant e_in's ###
 
-            except:
-                print "check error stack"
-                traceback.print_exc()
-                continue
+            # Pick one triple from the list.
+            e_in = list_of_triples[0][1].getUri()
+            e_in_to_e = one_triple_left_map[e_in]
+            # Find the relevant property from the map
+
+            # Given this information, lets create mappings of template three
+            for triple in list_of_triples:
+
+                # Making the variables explicit (for the sake of readability)
+                e_in_in = triple[0].getUri()
+                e_in_in_to_e_in = triple[2]['object'].getUri()
+
+                #Check constraint
+                if not e_in_in_to_e_in == e_in_to_e:
+                    continue
+
+                # Create a mapping (in keeping with the templates' placeholder names)
+                mapping = {'e_in_in': e_in_in, 'e_in_in_to_e_in': e_in_in_to_e_in, 'e_in_to_e': e_in_to_e, 'e_in': e_in}
+                mapping_type = {}
+                
+                # Throw it to a function who will put it in the list with appropriate bookkeeping
+                try:
+                    fill_specific_template(_template_id=9, _mapping=mapping)
+                    counter_template9 = counter_template9 + 1
+                    if counter_template9 > 500:
+                        pass
+
+                except:
+                    print "check error stack"
+                    traceback.print_exc()
+                    continue
+    except:
+        pass
 
     '''
         TEMPLATE 11: SELECT DISTINCT ?uri WHERE { ?x ?x <%(e_in_to_e)s> <%(e_in_out)s> . ?x <%(e_in_to_e)s> ?uri }
@@ -905,56 +871,60 @@ def fill_templates(_graph, _uri):
     op = access.return_innodes('e')
     counter_template11 = 0
 
-    # Create a list of all these (e_in,e_in_to_e)
-    one_triple_left_map = {triple[0].getUri(): triple[2]['object'].getUri() for triple in op[0]}
+    try:
+        # Create a list of all these (e_in,e_in_to_e)
+        one_triple_left_map = {triple[0].getUri(): triple[2]['object'].getUri() for triple in op[0]}
 
-    # Collect all e_out_in and e_in_to_e_in_out
-    op = access.return_outnodes('e_in')
+        # Collect all e_out_in and e_in_to_e_in_out
+        op = access.return_outnodes('e_in')
 
-    # This 'op' has the e_out_in and the prop for all e_out's. We now need to map one to the other.
-    for list_of_triples in op:
+        # This 'op' has the e_out_in and the prop for all e_out's. We now need to map one to the other.
+        for list_of_triples in op:
 
-        # Some triple are simply empty. Ignore them.
-        if len(list_of_triples) == 0:
-            continue
-
-        ### Mapping e_out_in's to relevant e_out's ###
-
-        # Pick one triple from the list.
-        e_in = list_of_triples[0][0].getUri()
-        e_in_to_e = one_triple_left_map[e_in]  # Find the relevant property from the map
-
-        # Given this information, lets create mappings of template four
-        for triple in list_of_triples:
-
-            #The core challenge is not have e_in_out be same as uri
-            if triple[1].getUri() == _uri:
+            # Some triple are simply empty. Ignore them.
+            if len(list_of_triples) == 0:
                 continue
 
-            # Making the variables explicit (for the sake of readability)
-            e_in_out = triple[1].getUri()
-            e_in_to_e_in_out = triple[2]['object'].getUri()
+            ### Mapping e_out_in's to relevant e_out's ###
 
-            #Checking duplicate e_in_to_e_in_out and e_in_to_e (specific to template 11)
-            if not e_in_to_e_in_out.split('/')[-1] == e_in_to_e.split('/')[-1]:
-                continue
+            # Pick one triple from the list.
+            e_in = list_of_triples[0][0].getUri()
+            e_in_to_e = one_triple_left_map[e_in]  # Find the relevant property from the map
+
+            # Given this information, lets create mappings of template four
+            for triple in list_of_triples:
+
+                #The core challenge is not have e_in_out be same as uri
+                if triple[1].getUri() == _uri:
+                    continue
+
+                # Making the variables explicit (for the sake of readability)
+                e_in_out = triple[1].getUri()
+                e_in_to_e_in_out = triple[2]['object'].getUri()
+
+                #Checking duplicate e_in_to_e_in_out and e_in_to_e (specific to template 11)
+                if not e_in_to_e_in_out.split('/')[-1] == e_in_to_e.split('/')[-1]:
+                    continue
 
 
 
-            # Create a mapping (in keeping with the templates' placeholder names)
-            mapping = {'e_in_out': e_in_out, 'e_in_to_e': e_in_to_e, 'e_in_to_e_in_out': e_in_to_e_in_out}
+                # Create a mapping (in keeping with the templates' placeholder names)
+                mapping = {'e_in_out': e_in_out, 'e_in_to_e': e_in_to_e, 'e_in_to_e_in_out': e_in_to_e_in_out}
 
 
-            # Throw it to a function who will put it in the list with appropriate bookkeeping
-            try:
-                fill_specific_template(_template_id=11, _mapping=mapping, _debug=False)
-                counter_template11 = counter_template11 + 1
-            except:
-                print "check error stack"
-                traceback.print_exc()
-                continue
-            if counter_template5 > 10:
-                pass
+                # Throw it to a function who will put it in the list with appropriate bookkeeping
+                try:
+                    fill_specific_template(_template_id=11, _mapping=mapping, _debug=False)
+                    counter_template11 = counter_template11 + 1
+                except:
+                    print "check error stack"
+                    traceback.print_exc()
+                    continue
+                if counter_template5 > 10:
+                    pass
+
+    except:
+        pass
 
     '''
         Template 12
@@ -966,53 +936,57 @@ def fill_templates(_graph, _uri):
     # Query the graph for outnodes from e and relevant properties
     op = access.return_outnodes('e')
     counter_template12 = 0
-    # Create a list of all these (e_in,e_in_to_e)
-    one_triple_right_map = {triple[1].getUri(): triple[2]['object'].getUri() for triple in op[0]}
 
-    # Collect all e_out_in and e_in_to_e_in_out
-    op = access.return_outnodes('e_out')
+    try:
+        # Create a list of all these (e_in,e_in_to_e)
+        one_triple_right_map = {triple[1].getUri(): triple[2]['object'].getUri() for triple in op[0]}
 
-    # This 'op' has the e_out_in and the prop for all e_out's. We now need to map one to the other.
-    for list_of_triples in op:
+        # Collect all e_out_in and e_in_to_e_in_out
+        op = access.return_outnodes('e_out')
 
-        # Some triple are simply empty. Ignore them.
-        if len(list_of_triples) == 0:
-            continue
+        # This 'op' has the e_out_in and the prop for all e_out's. We now need to map one to the other.
+        for list_of_triples in op:
 
-        ### Mapping e_out_in's to relevant e_out's ###
-
-        # Pick one triple from the list.
-        e_out = list_of_triples[0][0].getUri()
-        e_to_e_out = one_triple_right_map[e_out]  # Find the relevant property from the map
-
-        # Given this information, lets create mappings of template six
-        for triple in list_of_triples:
-
-            #Ensure that e_out_out and uri are not the same
-            if triple[1].getUri() == _uri:
+            # Some triple are simply empty. Ignore them.
+            if len(list_of_triples) == 0:
                 continue
 
-            # Making the variables explicit (for the sake of readability)
-            e_out_out = triple[1].getUri()
-            e_out_to_e_out_out = triple[2]['object'].getUri()
+            ### Mapping e_out_in's to relevant e_out's ###
 
-            # Create a mapping (in keeping with the templates' placeholder names)
-            mapping = {'e_out_out': e_out_out, 'e_out_to_e_out_out': e_out_to_e_out_out, 'e_to_e_out': e_to_e_out,
-                       'e_out': e_out}
+            # Pick one triple from the list.
+            e_out = list_of_triples[0][0].getUri()
+            e_to_e_out = one_triple_right_map[e_out]  # Find the relevant property from the map
 
-            #Keep the duplicates away
-            if not e_out_to_e_out_out.split('/')[-1] == e_to_e_out.split('/')[-1]:
-                continue
+            # Given this information, lets create mappings of template six
+            for triple in list_of_triples:
 
-            # Throw it to a function who will put it in the list with appropriate bookkeeping
-            try:
-                fill_specific_template(_template_id=12, _mapping=mapping, _debug=False)
-                counter_template12 = counter_template12 + 1
-            except:
-                print "check error stack"
-                traceback.print_exc()
-                continue
-            
+                #Ensure that e_out_out and uri are not the same
+                if triple[1].getUri() == _uri:
+                    continue
+
+                # Making the variables explicit (for the sake of readability)
+                e_out_out = triple[1].getUri()
+                e_out_to_e_out_out = triple[2]['object'].getUri()
+
+                # Create a mapping (in keeping with the templates' placeholder names)
+                mapping = {'e_out_out': e_out_out, 'e_out_to_e_out_out': e_out_to_e_out_out, 'e_to_e_out': e_to_e_out,
+                           'e_out': e_out}
+
+                #Keep the duplicates away
+                if not e_out_to_e_out_out.split('/')[-1] == e_to_e_out.split('/')[-1]:
+                    continue
+
+                # Throw it to a function who will put it in the list with appropriate bookkeeping
+                try:
+                    fill_specific_template(_template_id=12, _mapping=mapping, _debug=False)
+                    counter_template12 = counter_template12 + 1
+                except:
+                    print "check error stack"
+                    traceback.print_exc()
+                    continue
+    except:
+        pass
+
     '''
         Template 13: SELECT DISTINCT ?uri WHERE { ?uri <%(e_to_e_out_1)s> <%(e_out)s> . ?uri <%(e_to_e_out_2)s> <%(e_out)s> }
             Two level loops
@@ -1028,35 +1002,39 @@ def fill_templates(_graph, _uri):
 
     # Create a list of all these (e_in, e_in_to_e)
     # one_triple_left_map = {triple[0].getUri(): triple[2]['object'].getUri() for triple in op[0]}
+    try:
 
-    for triple_a in op[0]:
+        for triple_a in op[0]:
 
-        #Collecting the first terminal
-        e_out = triple_a[1].getUri()
-        e_to_e_out_1 = triple_a[2]['object'].getUri()
+            #Collecting the first terminal
+            e_out = triple_a[1].getUri()
+            e_to_e_out_1 = triple_a[2]['object'].getUri()
 
-        #Second Loop
-        for triple_b in op[0]:
+            #Second Loop
+            for triple_b in op[0]:
 
-            #Check Conditions
-            if triple_b[1].getUri() ==  e_out and not triple_b[2]['object'].getUri() == e_to_e_out_1:
+                #Check Conditions
+                if triple_b[1].getUri() ==  e_out and not triple_b[2]['object'].getUri() == e_to_e_out_1:
 
-                #Getting stuff for the second triple
-                e_to_e_out_2 = triple_b[2]['object'].getUri()
+                    #Getting stuff for the second triple
+                    e_to_e_out_2 = triple_b[2]['object'].getUri()
 
-                #Create a mapping
-                mapping = { 'e_out': e_out, 'e_to_e_out_1':e_to_e_out_1, 'e_to_e_out_2':e_to_e_out_2, 'uri': _uri}
+                    #Create a mapping
+                    mapping = { 'e_out': e_out, 'e_to_e_out_1':e_to_e_out_1, 'e_to_e_out_2':e_to_e_out_2, 'uri': _uri}
 
-                #Throw it in a functoin which will put it in the list with appropriate bookkeeping
-                try:
-                    print "Filling Template 13"
-                    fill_specific_template(_template_id=13, _mapping = mapping)
-                    counter_template13 += 1
-                except:
-                    print "check error stack"
-                    traceback.print_exc()
-                    continue
+                    #Throw it in a functoin which will put it in the list with appropriate bookkeeping
+                    try:
+                        print "Filling Template 13"
+                        fill_specific_template(_template_id=13, _mapping = mapping)
+                        counter_template13 += 1
+                    except:
+                        print "check error stack"
+                        traceback.print_exc()
+                        continue
     
+    except:
+        pass
+
     '''
         TEMPLATE 14: SELECT DISTINCT ?uri WHERE { <%(e_in)s> <%(e_in_to_e_1)s> ?uri. <%(e_in)s> <%(e_in_to_e_2)s> ?uri} 
         
@@ -1072,39 +1050,42 @@ def fill_templates(_graph, _uri):
     op = access.return_innodes('e')
     counter_template14 = 0
 
-    # Create a list of all these (e_in, e_in_to_e)
-    # one_triple_left_map = {triple[0].getUri(): triple[2]['object'].getUri() for triple in op[0]}
+    try:
 
-    for triple_a in op[0]:
+        # Create a list of all these (e_in, e_in_to_e)
+        # one_triple_left_map = {triple[0].getUri(): triple[2]['object'].getUri() for triple in op[0]}
+        for triple_a in op[0]:
 
-        #Collecting the first terminal
-        e_in = triple_a[0].getUri()
-        e_in_to_e_1 = triple_a[2]['object'].getUri()
+            #Collecting the first terminal
+            e_in = triple_a[0].getUri()
+            e_in_to_e_1 = triple_a[2]['object'].getUri()
 
-        #Second Loop
-        for triple_b in op[0]:
+            #Second Loop
+            for triple_b in op[0]:
 
-            #Check Conditions
-            if triple_b[0].getUri() ==  e_in and not triple_b[2]['object'].getUri() == e_in_to_e_1:
+                #Check Conditions
+                if triple_b[0].getUri() ==  e_in and not triple_b[2]['object'].getUri() == e_in_to_e_1:
 
-                #Getting stuff for the second triple
-                e_in_to_e_2 = triple_b[2]['object'].getUri()
+                    #Getting stuff for the second triple
+                    e_in_to_e_2 = triple_b[2]['object'].getUri()
 
-                #Create a mapping
-                mapping = { 'e_in': e_in, 'e_in_to_e_1':e_in_to_e_1, 'e_in_to_e_2':e_in_to_e_2, 'uri': _uri}
+                    #Create a mapping
+                    mapping = { 'e_in': e_in, 'e_in_to_e_1':e_in_to_e_1, 'e_in_to_e_2':e_in_to_e_2, 'uri': _uri}
 
-                #Throw it in a functoin which will put it in the list with appropriate bookkeeping
-                try:
-                    print "Filling Template 14"
-                    fill_specific_template(_template_id=14, _mapping = mapping)
-                    counter_template14 += 1
+                    #Throw it in a functoin which will put it in the list with appropriate bookkeeping
+                    try:
+                        print "Filling Template 14"
+                        fill_specific_template(_template_id=14, _mapping = mapping)
+                        counter_template14 += 1
 
-                    if counter_template14 > 500:
-                        pass
-                except:
-                    print "check error stack"
-                    traceback.print_exc()
-                    continue
+                        if counter_template14 > 500:
+                            pass
+                    except:
+                        print "check error stack"
+                        traceback.print_exc()
+                        continue
+    except:
+        pass
 
 
     '''
@@ -1120,38 +1101,42 @@ def fill_templates(_graph, _uri):
     op = access.return_innodes('e')
     counter_template15 = 0
 
-    # Create a list of all these (e_in, e_in_to_e)
-    # one_triple_left_map = {triple[0].getUri(): triple[2]['object'].getUri() for triple in op[0]}
+    try:
 
-    for triple_a in op[0]:
+        # Create a list of all these (e_in, e_in_to_e)
+        # one_triple_left_map = {triple[0].getUri(): triple[2]['object'].getUri() for triple in op[0]}
 
-        #Collecting the first terminal
-        e_in_1 = triple_a[0].getUri()
-        e_in_to_e = triple_a[2]['object'].getUri()
+        for triple_a in op[0]:
 
-        #Second Loop
-        for triple_b in op[0]:
+            #Collecting the first terminal
+            e_in_1 = triple_a[0].getUri()
+            e_in_to_e = triple_a[2]['object'].getUri()
 
-            #Check Conditions
-            if not triple_b[0].getUri() ==  e_in_1 and triple_b[2]['object'].getUri() == e_in_to_e:
+            #Second Loop
+            for triple_b in op[0]:
 
-                #Getting stuff for the second triple
-                e_in_2 = triple_b[0].getUri()
+                #Check Conditions
+                if not triple_b[0].getUri() ==  e_in_1 and triple_b[2]['object'].getUri() == e_in_to_e:
 
-                #Create a mapping
-                mapping = { 'e_in_1': e_in_1, 'e_in_2':e_in_2, 'e_in_to_e':e_in_to_e, 'uri': _uri}
+                    #Getting stuff for the second triple
+                    e_in_2 = triple_b[0].getUri()
 
-                #Throw it in a functoin which will put it in the list with appropriate bookkeeping
-                try:
-                    fill_specific_template(_template_id=15, _mapping = mapping)
-                    counter_template15 += 1
+                    #Create a mapping
+                    mapping = { 'e_in_1': e_in_1, 'e_in_2':e_in_2, 'e_in_to_e':e_in_to_e, 'uri': _uri}
 
-                    if counter_template15 > 500:
-                        break
-                except:
-                    print "check error stack"
-                    traceback.print_exc()
-                    continue
+                    #Throw it in a functoin which will put it in the list with appropriate bookkeeping
+                    try:
+                        fill_specific_template(_template_id=15, _mapping = mapping)
+                        counter_template15 += 1
+
+                        if counter_template15 > 500:
+                            break
+                    except:
+                        print "check error stack"
+                        traceback.print_exc()
+                        continue
+    except:
+        pass
 
     '''
         Template 16:
@@ -1160,45 +1145,49 @@ def fill_templates(_graph, _uri):
             Same as template 14, but different conditions
     '''
 
-    print "Template 16 now"
+    print "Generating Template 16 now"
 
     # Query the graph for innode to e and relevant properties
     op = access.return_innodes('e')
     counter_template16 = 0
 
-    # Create a list of all these (e_in, e_in_to_e)
-    # one_triple_left_map = {triple[0].getUri(): triple[2]['object'].getUri() for triple in op[0]}
+    try:
 
-    for triple_a in op[0]:
+        # Create a list of all these (e_in, e_in_to_e)
+        # one_triple_left_map = {triple[0].getUri(): triple[2]['object'].getUri() for triple in op[0]}
 
-        #Collecting the first terminal
-        e_in_1 = triple_a[0].getUri()
-        e_in_to_e_1 = triple_a[2]['object'].getUri()
+        for triple_a in op[0]:
 
-        #Second Loop
-        for triple_b in op[0]:
+            #Collecting the first terminal
+            e_in_1 = triple_a[0].getUri()
+            e_in_to_e_1 = triple_a[2]['object'].getUri()
 
-            #Check Conditions
-            if not triple_b[0].getUri() ==  e_in_1 and not triple_b[2]['object'].getUri() == e_in_to_e_1:
+            #Second Loop
+            for triple_b in op[0]:
 
-                #Getting stuff for the second triple
-                e_in_2 = triple_b[0].getUri()
-                e_in_to_e_2 = triple_b[2]['object'].getUri()
+                #Check Conditions
+                if not triple_b[0].getUri() ==  e_in_1 and not triple_b[2]['object'].getUri() == e_in_to_e_1:
 
-                #Create a mapping
-                mapping = { 'e_in_1': e_in_1, 'e_in_2':e_in_2, 'e_in_to_e_2':e_in_to_e_2, 'e_in_to_e_1':e_in_to_e_1, 'uri': _uri}
+                    #Getting stuff for the second triple
+                    e_in_2 = triple_b[0].getUri()
+                    e_in_to_e_2 = triple_b[2]['object'].getUri()
 
-                #Throw it in a functoin which will put it in the list with appropriate bookkeeping
-                try:
-                    fill_specific_template(_template_id=16, _mapping = mapping)
-                    counter_template16 += 1
+                    #Create a mapping
+                    mapping = { 'e_in_1': e_in_1, 'e_in_2':e_in_2, 'e_in_to_e_2':e_in_to_e_2, 'e_in_to_e_1':e_in_to_e_1, 'uri': _uri}
 
-                    if counter_template16 > 500:
-                        break
-                except:
-                    print "check error stack"
-                    traceback.print_exc()
-                    continue
+                    #Throw it in a functoin which will put it in the list with appropriate bookkeeping
+                    try:
+                        fill_specific_template(_template_id=16, _mapping = mapping)
+                        counter_template16 += 1
+
+                        if counter_template16 > 500:
+                            break
+                    except:
+                        print "check error stack"
+                        traceback.print_exc()
+                        continue
+    except:
+        pass
 
 '''
     Testing the ability to create subgraph given a URI
@@ -1232,7 +1221,7 @@ for entity in list_of_entities:
 #         pprint(sparqls[key], stream=out)
 
 print "Pickling properties count to file"
-pickle.dump(properties_count, open('resources/properies_count.pickle','w+'))
+pickle.dump(properties_count, open('resources/properties_count.pickle','w+'))
 print "DONE"
 
 print "Trying to write to file!"
