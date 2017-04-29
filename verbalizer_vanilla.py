@@ -674,7 +674,7 @@ class Verbalizer_16(verbalizer.Verbalizer):
 		#The 'relation' vs 'father,mother...' rule
 		if self.meine_family_filter(_maps['e_in_to_e_1'],_maps['e_in_to_e_2']):
 			#Just that hard filter thingy
-			return self.hard_relation_filter(_maps['e_in_to_e_1'],_maps['e_in_to_e_2'])
+			return self.hard_relation_filter(_maps['e_in_to_e_1'])
 		else:
 			return False
 
@@ -704,53 +704,105 @@ class Verbalizer_16(verbalizer.Verbalizer):
 
 		return _maps, question_format
 
-
-if __name__ == "__main__":
-
+def run():
+	nlqs = []
+	spql = []
 	try:
-		template1verbalizer = Verbalizer_01()
+		result = Verbalizer_01()
+		nlqs.append(result.count_sparqls)
+		spql.append(result.count_nlq)
 	except:
 		print "Cannot verbalize Template 1"
+		nlqs.append(0)
+		spql.append(0)
 	try:
-		template2verbalizer = Verbalizer_02()
+		result = Verbalizer_02()
+		nlqs.append(result.count_sparqls)
+		spql.append(result.count_nlq)
 	except:
 		print "Cannot verbalize Template 2"
+		nlqs.append(0)
+		spql.append(0)
 	try:
-		template3verbalizer = Verbalizer_03()
+		result = Verbalizer_03()
+		nlqs.append(result.count_sparqls)
+		spql.append(result.count_nlq)
 	except:
 		print "Cannot verbalize Template 3"
+		nlqs.append(0)
+		spql.append(0)
 	try:
-		template5verbalizer = Verbalizer_05()
+		result = Verbalizer_05()
+		nlqs.append(result.count_sparqls)
+		spql.append(result.count_nlq)
 	except:
 		print "Cannot verbalize Template 5"
+		nlqs.append(0)
+		spql.append(0)
 	try:
-		template6verbalizer = Verbalizer_06()
+		result = Verbalizer_06()
+		nlqs.append(result.count_sparqls)
+		spql.append(result.count_nlq)
 	except:
 		print "Cannot verbalize Template 6"
+		nlqs.append(0)
+		spql.append(0)
 	try:
-		template7verbalizer = Verbalizer_07()
+		result = Verbalizer_07()
+		nlqs.append(result.count_sparqls)
+		spql.append(result.count_nlq)
 	except:
 		print "Cannot verbalize Template 7"
+		nlqs.append(0)
+		spql.append(0)
 	try:
-		template8verbalizer = Verbalizer_08()
+		result = Verbalizer_08()
+		nlqs.append(result.count_sparqls)
+		spql.append(result.count_nlq)
 	except:
 		print "Cannot verbalize Template 8"
+		nlqs.append(0)
+		spql.append(0)
 	try:
-		template9verbalizer = Verbalizer_09()
+		result = Verbalizer_09()
+		nlqs.append(result.count_sparqls)
+		spql.append(result.count_nlq)
 	except:
 		print "Cannot verbalize Template 9"
+		nlqs.append(0)
+		spql.append(0)
 	try:
-		template11verbalizer = Verbalizer_11()
+		result = Verbalizer_11()
+		nlqs.append(result.count_sparqls)
+		spql.append(result.count_nlq)
 	except:
 		print "Cannot verbalize Template 11"
+		nlqs.append(0)
+		spql.append(0)
 	try:
-		template15verbalizer = Verbalizer_15()
+		result = Verbalizer_15()
+		nlqs.append(result.count_sparqls)
+		spql.append(result.count_nlq)
 	except:
 		print "Cannot verbalize Template 15"
+		nlqs.append(0)
+		spql.append(0)
 	try:
-		template16verbalizer = Verbalizer_16()
+		result = Verbalizer_16()
+		print result
+		nlqs.append(result.count_sparqls)
+		spql.append(result.count_nlq)
 	except:
 		print "Cannot verbalize Template 16"
+		nlqs.append(0)
+		spql.append(0)
+
+	return nlqs, spql
 
 
-		
+if __name__ == "__main__":
+	counts = run()
+	print counts
+	f = open('resources.stats','a+')
+	f.write( str(sum(counts[1])) + ' ' + str(sum(counts[0])) + '\n')
+	f.close()

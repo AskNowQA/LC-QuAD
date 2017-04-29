@@ -148,10 +148,10 @@ def pruning(_results, _keep_no_results = 100, _filter_properties = True, _filter
                 except:
                     properties_count[ent_parent] = {prop.split('/')[-1]: 1}
 
-        if _filter_entities:
-            # filter entities based on class
-            if not [i for i in dbp.get_type_of_resource(ent) if i in relevent_entity_classes]:
-                continue
+        # if _filter_entities:
+        #     # filter entities based on class
+        #     if not [i for i in dbp.get_type_of_resource(ent) if i in relevent_entity_classes]:
+        #         pass
         # Finally, insert, in a temporary list for random pruning
         temp_results.append(result)
 

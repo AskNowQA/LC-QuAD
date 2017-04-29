@@ -131,7 +131,9 @@ class Verbalizer:
 		# print "Generated Questions: ", questions
 		# print "Total data items: ", len(sparqls), 
 		print ' '.join([str(id),str(questions),str(len(sparqls))])
-		print "\n"
+		# return questions, len(sparqls)
+		self.count_sparqls = len(sparqls)
+		self.count_nlq = questions
 
 	def rules(self, _maps, _datum):
 		'''
