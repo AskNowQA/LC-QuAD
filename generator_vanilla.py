@@ -32,6 +32,7 @@ probability_property = {}                                                       
 for line in open('resources/relations-with-probability.txt'):
     prop,p = line.split()
     probability_property[prop] = float(p)
+entity_went_bad = []
 
 templates = json.load(open('templates.py'))  # Contains all the templates existing in templates.py
 sparqls = {}  # Dict of the generated SPARQL Queries.
@@ -133,9 +134,9 @@ def pruning(_results, _keep_no_results = 100, _filter_properties = True, _filter
 
             ent_parent = dbp.get_most_specific_class(ent)
 
-            '''Another probabilistic filter being implemented here. Details on doc'''
-            if np.random.uniform(0,1) > probability_property[prop.split('/')[-1]]:
-                continue
+            # '''Another probabilistic filter being implemented here. Details on doc'''
+            # if np.random.uniform(0,1) > probability_property[prop.split('/')[-1]]:
+            #     continue
 
             try:
                 if properties_count[ent_parent][prop.split('/')[-1]] > 1:
@@ -473,6 +474,8 @@ def fill_templates(_graph, _uri):
                 continue
     except:
         print _uri, '1'
+        entity_went_bad.append(_uri)
+        # traceback.print_exc()
     
     ''' 
         Template #2: 
@@ -507,6 +510,7 @@ def fill_templates(_graph, _uri):
                 continue
     except:
         print _uri, '2'
+        entity_went_bad.append(_uri)
 
 
     '''
@@ -568,6 +572,7 @@ def fill_templates(_graph, _uri):
                     continue
     except:
         print _uri, '3'
+        entity_went_bad.append(_uri)
 
 
     '''
@@ -632,6 +637,7 @@ def fill_templates(_graph, _uri):
                     pass
     except:
         print _uri, '5'
+        entity_went_bad.append(_uri)
 
     '''
         Template 6
@@ -689,6 +695,7 @@ def fill_templates(_graph, _uri):
                     continue
     except:
         print _uri, '6'
+        entity_went_bad.append(_uri)
             
 
     '''
@@ -732,6 +739,7 @@ def fill_templates(_graph, _uri):
                         continue
     except:
         print _uri, '7'
+        entity_went_bad.append(_uri)
 
 
     '''
@@ -790,6 +798,7 @@ def fill_templates(_graph, _uri):
                         continue
     except:
         print _uri, '8'
+        entity_went_bad.append(_uri)
 
     '''
         Template 9:
@@ -857,6 +866,7 @@ def fill_templates(_graph, _uri):
                     continue
     except:
         print _uri, '9'
+        entity_went_bad.append(_uri)
 
     '''
         TEMPLATE 11: SELECT DISTINCT ?uri WHERE { ?x ?x <%(e_in_to_e)s> <%(e_in_out)s> . ?x <%(e_in_to_e)s> ?uri }
@@ -925,6 +935,7 @@ def fill_templates(_graph, _uri):
 
     except:
         print _uri, '11'
+        entity_went_bad.append(_uri)
 
     '''
         Template 12
@@ -986,6 +997,7 @@ def fill_templates(_graph, _uri):
                     continue
     except:
         print _uri, '12'
+        entity_went_bad.append(_uri)
 
     '''
         Template 13: SELECT DISTINCT ?uri WHERE { ?uri <%(e_to_e_out_1)s> <%(e_out)s> . ?uri <%(e_to_e_out_2)s> <%(e_out)s> }
@@ -1034,6 +1046,7 @@ def fill_templates(_graph, _uri):
     
     except:
         print _uri, '13'
+        entity_went_bad.append(_uri)
 
     '''
         TEMPLATE 14: SELECT DISTINCT ?uri WHERE { <%(e_in)s> <%(e_in_to_e_1)s> ?uri. <%(e_in)s> <%(e_in_to_e_2)s> ?uri} 
@@ -1086,6 +1099,7 @@ def fill_templates(_graph, _uri):
                         continue
     except:
         print _uri, '14'
+        entity_went_bad.append(_uri)
 
 
     '''
@@ -1137,6 +1151,7 @@ def fill_templates(_graph, _uri):
                         continue
     except:
         print _uri, '15'
+        entity_went_bad.append(_uri)
 
     '''
         Template 16:
@@ -1188,6 +1203,7 @@ def fill_templates(_graph, _uri):
                         continue
     except:
         print _uri, '16'
+        entity_went_bad.append(_uri)
 
 '''
     Testing the ability to create subgraph given a URI
@@ -1230,3 +1246,6 @@ for key in sparqls:
     for value in sparqls[key]:
         fo.writelines(json.dumps(value) + "\n")
     fo.close()
+
+print "These entities did not generating something"
+pprint(list(set(entity_went_bad)))

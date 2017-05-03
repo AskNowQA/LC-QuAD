@@ -342,7 +342,11 @@ class Verbalizer_07(verbalizer.Verbalizer):
 	}
 
 	def filter(self, _datum, _maps):
-		return self.hard_relation_filter(_maps['e_to_e_out'])
+		if self.duplicate_prevention_filter(_maps['e_to_e_out'],_maps['e_out_1'],_maps['e_to_e_out'],_maps['e_out_2']):
+			return self.hard_relation_filter(_maps['e_to_e_out'])
+		else:
+			return False
+
 
 	def rules(self, _datum, _maps):
 		'''
@@ -436,10 +440,14 @@ class Verbalizer_08(verbalizer.Verbalizer):
 	}
 
 	def filter(self, _datum, _maps):
-		#The 'relation' vs 'father,mother...' rule
-		if self.meine_family_filter(_maps['e_to_e_out_1'],_maps['e_to_e_out_2']):
-			#Just that hard filter thingy
-			return self.hard_relation_filter(_maps['e_to_e_out_1'],_maps['e_to_e_out_2'])
+		#The duplication rule
+		if self.duplicate_prevention_filter(_maps['e_to_e_out_1'],_maps['e_out_1'],_maps['e_to_e_out_2'],_maps['e_out_2']):
+			#The 'relation' vs 'father,mother...' rule
+			if self.meine_family_filter(_maps['e_to_e_out_1'],_maps['e_to_e_out_2']):
+				#Just that hard filter thingy
+				return self.hard_relation_filter(_maps['e_to_e_out_1'],_maps['e_to_e_out_2'])
+			else:
+				return False
 		else:
 			return False
 
@@ -630,7 +638,10 @@ class Verbalizer_15(verbalizer.Verbalizer):
 	}
 
 	def filter(self, _datum, _maps):
-		return self.hard_relation_filter(_maps['e_in_to_e'])
+		if self.duplicate_prevention_filter(_maps['e_in_to_e'],_maps['e_in_1'],_maps['e_in_to_e'],_maps['e_in_2']):
+			return self.hard_relation_filter(_maps['e_in_to_e'])
+		else:
+			return False
 
 	def rules(self, _datum, _maps):
 		'''
@@ -671,11 +682,14 @@ class Verbalizer_16(verbalizer.Verbalizer):
 	}
 
 	def filter(self, _datum, _maps):
-		#The 'relation' vs 'father,mother...' rule
-		if self.meine_family_filter(_maps['e_in_to_e_1'],_maps['e_in_to_e_2']):
-			#Just that hard filter thingy
-			return self.hard_relation_filter(_maps['e_in_to_e_1'])
-		else:
+		if self.duplicate_prevention_filter(_maps['e_in_to_e_1'],_maps['e_in_1'],_maps['e_in_to_e_2'],_maps['e_in_2']):
+			#The 'relation' vs 'father,mother...' rule
+			if self.meine_family_filter(_maps['e_in_to_e_1'],_maps['e_in_to_e_2']):
+				#Just that hard filter thingy
+				return self.hard_relation_filter(_maps['e_in_to_e_1'])
+			else:
+				return False
+		else: 
 			return False
 
 	def rules(self, _datum, _maps):

@@ -52,7 +52,14 @@ class Verbalizer:
 		questions = []			#Holds the verbalized data
 
 		self.hard_relation_filter_map = {} 		#Keeps count of relations and limits. (Used in filter class)
+		self.log = []							#Keeps count of e1 r1 e2 r2 in the templates that they occur.
 		self.dbp = db_interface.DBPedia(_verbose=True) 	#To be used to fetch labels
+
+		'''
+			Since we have too few questions, its time to make the hard filter a little softer. Thus, we need a list of relations which are simply way too frequent.
+		'''
+		self.common_relations = open('resources/common_relations.txt').read().split()
+
 
 		with open('sparqls/template%s.txt' % self.template_id) as data_file:
 			for line in data_file:
@@ -172,8 +179,15 @@ class Verbalizer:
 				Semantics:
 					True: verbalize
 					False: don't verbalize
+
+
+			UPDATE: if the relations in question are not very common, then ease the filters for them.
 		'''
 		if not _pred2:
+
+			if not _pred1 in self.common_relations:
+				_limit = 2
+
 			try:
 				if self.hard_relation_filter_map[_pred1] >= _limit:
 					return False
@@ -183,6 +197,11 @@ class Verbalizer:
 			return True
 
 		else:
+
+			if not _pred1 in self.common_relations and not _pred2 in self.common_relations:
+				_limit = 3
+				_limit_rels = 15
+
 			try:
 				if self.hard_relation_filter_map[_pred1][_pred2] >= _limit:
 					return False
@@ -198,6 +217,25 @@ class Verbalizer:
 				except KeyError:
 					self.hard_relation_filter_map[_pred1] = {_pred2 : 1} 
 			return True
+
+	def duplicate_prevention_filter(self, _e1,_p1,_e2,_p2):
+		'''
+			In templates where there can be the duplication issue (explained below), deliberately take care of avoiding it. 
+			eg: 
+				e1 r1 ?u 		&		e2 r2 ?u
+				e2 r2 ?u 		&		e1 r1 ?u
+
+			Keep track of all these four things, and once the combination has occured, see that it doesn't again.
+		'''
+
+		entry = set([_e1,_p1,_e2,_p2])
+		if entry in self.log:
+			return False
+		else:
+			self.log.append(entry)
+			return True
+
+
 
 	def meine_family_filter(self,_pred1,_pred2):
 		'''
