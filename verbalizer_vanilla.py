@@ -75,10 +75,10 @@ class Verbalizer_02(verbalizer.Verbalizer):
 	question_templates = {
 		
 		'vanilla': 
-			[ "<%(e_in)s is the <%(e_in_to_e)s> of %(prefix)s  <%(uri)s> ?" ],
+			[ "%(prefix)s is the <%(e_in_to_e)s> of %(e_in)s ?" ],
 
 		'plural':
-			[ "<%(e_in)s are the <%(e_in_to_e)s> of %(prefix)s  <%(uri)s> ?" ]
+			[ "%(prefix)s are the <%(e_in_to_e)s> of %(e_in)s?" ]
 	}
 
 	def filter(self, _datum, _maps):
