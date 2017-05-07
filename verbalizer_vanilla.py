@@ -172,6 +172,7 @@ class Verbalizer_05(verbalizer.Verbalizer):
 	}
 
 	def filter(self, _datum, _maps):
+		
 		#The 'relation' vs 'father,mother...' rule
 		if self.meine_family_filter(_maps['e_in_to_e'],_maps['e_in_to_e_in_out']):
 			#Just that hard filter thingy
@@ -253,6 +254,7 @@ class Verbalizer_06(verbalizer.Verbalizer):
 	}
 
 	def filter(self, _datum, _maps):
+		
 		#The 'relation' vs 'father,mother...' rule
 		if self.meine_family_filter(_maps['e_to_e_out'],_maps['e_out_to_e_out_out']):
 			#Just that hard filter thingy

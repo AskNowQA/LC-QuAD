@@ -8,13 +8,72 @@
 	Finally, a function will create an object of all of them and run it.
 
 '''
-
+import traceback
 import numpy as np
 from pprint import pprint
 from pattern.en import pluralize
 import utils.natural_language_utilities as nlutils
 
 import verbalizer
+
+class Verbalizer_01_Count(verbalizer.Verbalizer):
+
+	template_id = 1
+	template_type = 'Count'
+	template_id_offset = 100
+	has_x = False
+	has_uri = True
+	question_templates = {
+		'vanilla':
+			[ "How many <%(uri)s> are there whose <%(e_to_e_out)s> is <%(e_out)s>?",
+			  "Give me a count of <%(uri)s> whose <%(e_to_e_out)s> is <%(e_out)s>?"]
+	}
+
+	def filter(self, _datum, _maps):
+		if _datum['countable'] != 'true':
+			return False
+
+		return self.hard_relation_filter(_maps['e_to_e_out'])	
+
+	def rules(self, _datum, _maps):
+		'''
+			Simple, just a simple template to work with.
+		'''
+
+		_maps['uri'] = pluralize(_maps['uri'])
+
+		question_format = np.random.choice(self.question_templates['vanilla'])
+
+		return _maps, question_format
+
+class Verbalizer_02_Count(verbalizer.Verbalizer):
+
+	template_id = 2
+	template_type = 'Count'
+	template_id_offset = 100
+	has_x = False
+	has_uri = False
+	question_templates = {
+		'vanilla':
+			[ "Count the number of <%(e_in_to_e)s> in <%(e_in)s>?",
+			  "Count the <%(e_in_to_e)s> in <%(e_in)s>?",
+			  "How many <%(e_in_to_e)s> are there in <%(e_in)s>?"]
+	}
+
+	def filter(self, _datum, _maps):
+		if _datum['countable'] != 'true':
+			return False
+
+		return self.hard_relation_filter(_maps['e_in_to_e'])	
+
+	def rules(self, _datum, _maps):
+		'''
+			Simple, just a simple template to work with.
+		'''
+
+		question_format = np.random.choice(self.question_templates['vanilla'])
+
+		return _maps, question_format
 
 class Verbalizer_03_Count(verbalizer.Verbalizer):
 
@@ -34,7 +93,12 @@ class Verbalizer_03_Count(verbalizer.Verbalizer):
 		if _datum['countable'] != 'true':
 			return False
 
-		return self.hard_relation_filter(_maps['e_in_to_e'])
+		#The 'relation' vs 'father,mother...' rule
+		if self.meine_family_filter(_maps['e_in_to_e'],_maps['e_in_in_to_e_in']):
+			#Just that hard filter thingy
+			return self.hard_relation_filter(_maps['e_in_to_e'],_maps['e_in_in_to_e_in'])
+		else:
+			return False
 
 	def rules(self, _datum, _maps):
 		'''
@@ -93,7 +157,12 @@ class Verbalizer_05_Count(verbalizer.Verbalizer):
 		if _datum['countable'] != 'true':
 			return False
 
-		return self.hard_relation_filter(_maps['e_in_to_e'])
+		#The 'relation' vs 'father,mother...' rule
+		if self.meine_family_filter(_maps['e_in_to_e'],_maps['e_in_to_e_in_out']):
+			#Just that hard filter thingy
+			return self.hard_relation_filter(_maps['e_in_to_e'],_maps['e_in_to_e_in_out'])
+		else:
+			return False
 
 	def rules(self, _datum, _maps):
 		'''
@@ -155,7 +224,12 @@ class Verbalizer_06_Count(verbalizer.Verbalizer):
 		if _datum['countable'] != 'true':
 			return False
 
-		return self.hard_relation_filter(_maps['e_to_e_out'])
+		#The 'relation' vs 'father,mother...' rule
+		if self.meine_family_filter(_maps['e_to_e_out'],_maps['e_out_to_e_out_out']):
+			#Just that hard filter thingy
+			return self.hard_relation_filter(_maps['e_to_e_out'],_maps['e_out_to_e_out_out'])
+		else:
+			return False
 
 	def rules(self, _datum, _maps):
 		'''
@@ -204,7 +278,10 @@ class Verbalizer_07_Count(verbalizer.Verbalizer):
 		if _datum['countable'] != 'true':
 			return False
 
-		return self.hard_relation_filter(_maps['e_to_e_out'])
+		if self.duplicate_prevention_filter(_maps['e_to_e_out'],_maps['e_out_1'],_maps['e_to_e_out'],_maps['e_out_2']):
+			return self.hard_relation_filter(_maps['e_to_e_out'])
+		else:
+			return False
 	
 	def rules(self, _datum, _maps):
 		'''
@@ -277,7 +354,16 @@ class Verbalizer_08_Count(verbalizer.Verbalizer):
 		if _datum['countable'] != 'true':
 			return False
 
-		return self.hard_relation_filter(_maps['e_to_e_out_1'])
+		#The duplication rule
+		if self.duplicate_prevention_filter(_maps['e_to_e_out_1'],_maps['e_out_1'],_maps['e_to_e_out_2'],_maps['e_out_2']):
+			#The 'relation' vs 'father,mother...' rule
+			if self.meine_family_filter(_maps['e_to_e_out_1'],_maps['e_to_e_out_2']):
+				#Just that hard filter thingy
+				return self.hard_relation_filter(_maps['e_to_e_out_1'],_maps['e_to_e_out_2'])
+			else:
+				return False
+		else:
+			return False
 
 	def rules(self, _datum, _maps):
 		'''
@@ -344,7 +430,12 @@ class Verbalizer_11_Count(verbalizer.Verbalizer):
 		if _datum['countable'] != 'true':
 			return False
 
-		return self.hard_relation_filter(_maps['e_in_to_e'])
+		#The 'relation' vs 'father,mother...' rule
+		if self.meine_family_filter(_maps['e_in_to_e'],_maps['e_in_to_e_in_out']):
+			#Just that hard filter thingy
+			return self.hard_relation_filter(_maps['e_in_to_e'],_maps['e_in_to_e_in_out'])
+		else:
+			return False
 	
 	def rules(self, _datum, _maps):
 		'''
@@ -365,11 +456,89 @@ class Verbalizer_11_Count(verbalizer.Verbalizer):
 
 		return _maps, question_format
 
+def run():
+	nlqs = []
+	spql = []	
+	try:
+		result = Verbalizer_01_Count()
+		nlqs.append(result.count_sparqls)
+		spql.append(result.count_nlq)
+	except:
+		# traceback.print_exc()
+		# raw_input()
+		print "Cannot verbalize template 1"
+		nlqs.append(0)
+		spql.append(0)
+	try:
+		result = Verbalizer_02_Count()
+		nlqs.append(result.count_sparqls)
+		spql.append(result.count_nlq)
+	except:
+		print "Cannot verbalize template 2"
+		nlqs.append(0)
+		spql.append(0)
+	try:
+		result = Verbalizer_03_Count()
+		nlqs.append(result.count_sparqls)
+		spql.append(result.count_nlq)
+	except:
+		print "Cannot verbalize template 3"
+		nlqs.append(0)
+		spql.append(0)
+	try:
+		result = Verbalizer_03_Count()
+		nlqs.append(result.count_sparqls)
+		spql.append(result.count_nlq)
+	except:
+		print "Cannot verbalize template 3"
+		nlqs.append(0)
+		spql.append(0)
+	try:
+		result = Verbalizer_05_Count()
+		nlqs.append(result.count_sparqls)
+		spql.append(result.count_nlq)
+	except:
+		print "Cannot verbalize Template 5"
+		nlqs.append(0)
+		spql.append(0)
+	try:
+		result = Verbalizer_06_Count()
+		nlqs.append(result.count_sparqls)
+		spql.append(result.count_nlq)
+	except:
+		print "Cannot verbalize Template 6"
+		nlqs.append(0)
+		spql.append(0)
+	try:
+		result = Verbalizer_07_Count()
+		nlqs.append(result.count_sparqls)
+		spql.append(result.count_nlq)
+	except:
+		print "Cannot verbalize Template 7"
+		nlqs.append(0)
+		spql.append(0)
+	try:
+		result = Verbalizer_08_Count()
+		nlqs.append(result.count_sparqls)
+		spql.append(result.count_nlq)
+	except:
+		print "Cannot verbalize Template 8"
+		nlqs.append(0)
+		spql.append(0)
+	try:
+		result = Verbalizer_11_Count()
+		nlqs.append(result.count_sparqls)
+		spql.append(result.count_nlq)
+	except:
+		print "Cannot verbalize Template 11"
+		nlqs.append(0)
+		spql.append(0)
+
+	return nlqs, spql
 
 if __name__ == "__main__":
-	template3verbalizer = Verbalizer_03_Count()
-	template5verbalizer = Verbalizer_05_Count()
-	template6verbalizer = Verbalizer_06_Count()
-	template7verbalizer = Verbalizer_07_Count()
-	template8verbalizer = Verbalizer_08_Count()
-	template11verbalizer = Verbalizer_11_Count()
+	counts = run()
+	print counts
+	f = open('resources_count.stats','a+')
+	f.write( str(sum(counts[1])) + ' ' + str(sum(counts[0])) + '\n')
+	f.close()
