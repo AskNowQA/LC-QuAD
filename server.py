@@ -10,6 +10,9 @@ client = MongoClient('localhost', 27017)
 db = client.document_database
 posts = db.posts
 
+# intermediate_dict = {"uri":[1],"e_in_to_e":[3,]}
+
+
 @get('/static/<filename>')
 def server_static(filename):
 	print filename
@@ -40,9 +43,11 @@ def do_login():
     	if not question:
     		return "<p>All questions of template id is completed. Return to login page</p>"
     	#setting the question id as the cookie for state tracking
-    	data = {"verbalized_question":question["verbalized_question"],"json_content":str(pformat(question))}
+    	data = {"verbalized_question":question["verbalized_question"],"json_content":str(pformat(question)),"number":1,"verbalized_question_removed":question[u"verbalized_question"].replace("<","").replace(">","")}
     	response.set_cookie("question_id",question["_id"])
-    	response.set_cookie("verbalized_question",question[u"verbalized_question"])
+    	print question[u"verbalized_question"]
+    	response.set_cookie("verbalized_question",question[u"verbalized_question"].encode('utf-8'))
+    	response.set_cookie('number', str(0))
         return template('question.tpl',data)
     else:
         return "<p>Login failed. Please start from the index url</p>"
@@ -54,16 +59,18 @@ def new_question():
 		if request.get_cookie('number'):
 			number = request.get_cookie('number')
 			response.set_cookie('number', str(int(number) + 1))
+			print number
 		else:
 			response.set_cookie('number', str(1))
+			number = 1
 		question = retriveQuestion(template_id)
 		if not question:
 			print "am I here? where gaurav pooped?"
 			return "<p>All questions of template id is completed. Return to login page</p>"
     	#setting the question id as the cookie for state tracking
-    	data = {"verbalized_question":question[u"verbalized_question"],"json_content":str(pformat(question))}
+    	data = {"verbalized_question":question[u"verbalized_question"],"json_content":str(pformat(question)),"number":number,"verbalized_question_removed":question[u"verbalized_question"].replace("<","").replace(">","")}
     	response.set_cookie("question_id",question["_id"])
-    	response.set_cookie("verbalized_question",question[u"verbalized_question"])
+    	response.set_cookie("verbalized_question",question[u"verbalized_question"].encode('utf-8'))
         return template('question.tpl',data)		
 
 @post('/submitQuestion')
@@ -107,6 +114,37 @@ def delete_question():
 			return "<p>Database error. Contact the admin.</p>"
 		redirect("/newquestion")
 
+# @post('/checkquestion')
+# def check_question():
+# 	#retrive a pecific question from the database
+# 	if request.get_cookie('username') and request.get_cookie('template_id'):
+# 		template_id = request.get_cookie('template_id')
+# 		if request.get_cookie('number'):
+# 			number = request.get_cookie('number')
+# 			response.set_cookie('number', str(int(number) + 1))
+# 			print number
+# 		else:
+# 			response.set_cookie('number', str(1))
+# 			number = 1
+# 		question = retriveCorrectedQuestion(template_id)
+# 		#now do all the formating to return the list of possible additions
+
+# 		if not question:
+# 			checklist = create_checklist(question)
+# 			data = {"verbalized_question":question[u"verbalized_question"],"json_content":str(pformat(question)),"number":number,"verbalized_question_removed":question[u"verbalized_question"].replace("<","").replace(">","")}
+# 			checklist = create_checklist(question)
+# 			if not checklist
+# 				checklist = ["things"]
+				
+# 			print "am I here? where gaurav pooped?"
+# 			return "<p>All questions of template id is completed. Return to login page</p>"
+#     	#setting the question id as the cookie for state tracking
+#     	data = {"verbalized_question":question[u"verbalized_question"],"json_content":str(pformat(question)),"number":number,"verbalized_question_removed":question[u"verbalized_question"].replace("<","").replace(">","")}
+#     	response.set_cookie("question_id",question["_id"])
+#     	response.set_cookie("verbalized_question",question[u"verbalized_question"].encode('utf-8'))
+#         return template('question.tpl',data)
+# 	#Correct its form 
+# 	#and then add it back to the tempalkte 
 def retriveQuestion(template_id):
 	'''connects to a database and retrives question based on template type'''
 	question = posts.find_one({u"id":int(template_id),u"corrected" : u"false", u"verbalized":True})
@@ -120,10 +158,19 @@ def retrive_question_id(_question_id):
 	#retrives the question from database based on id
 	question = posts.find_one({u"_id":int(_question_id)})
 
+# def retriveCorrectedQuestion(template_id):
+
 def update_db(_question_id,data):
 	'''data must be a dictionary/json'''
 	try:
 		posts.update_one({u"_id":unicode(_question_id,"utf-8")},{"$set":data})
 	except:
 		print traceback.print_exc()
-run(host='0.0.0.0', port=8080)
+
+
+def create_checklist(question):
+	tID = question[u"id"]
+	querykeyWord = intermediate_dict[tID]
+	return question["mapping"][querykeyWord]
+
+run(host='0.0.0.0', port=8000)
