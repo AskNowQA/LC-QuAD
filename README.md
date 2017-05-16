@@ -8,7 +8,7 @@ Refer to this document for a list of templates we have or will be focusing on - 
 
 ## Branches
 ### master
-Will have the code for converting SPARQL templates to valid SPARQL Queries which retrieve something from DBPedia, and then to convert them to pseudo-nl query.
+Will have the code for converting SPARQL templates to valid SPARQL Queries which retrieve something from DBpedia, and then to convert them to pseudo-nl query.
 
 ### relation-curation
 Code and files which are collected from varied sources, of good relations in DBPedia, making our job easier. This is mostly taken from other research projects. The commit messages will contain information of the sources, for future crediting. 
