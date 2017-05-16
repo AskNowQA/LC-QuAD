@@ -12,6 +12,7 @@
 '''
 
 import csv
+import uuid
 import json
 import random
 import numpy as np
@@ -59,9 +60,9 @@ class Verbalizer:
 			Since we have too few questions, its time to make the hard filter a little softer. Thus, we need a list of relations which are simply way too frequent.
 		'''
 		self.common_relations = open('resources/common_relations.txt').read().split()
+		template_id = self.template_id + self.template_id_offset
 
-
-		with open('sparqls/template%s.txt' % self.template_id) as data_file:
+		with open('sparqls/template%s.txt' % template_id) as data_file:
 			for line in data_file:
 				try:
 					jsn = json.loads(line.replace('\n',""))
@@ -73,6 +74,8 @@ class Verbalizer:
 
 		#Shuffling the sparqls list to promote diversity
 		random.shuffle(sparqls)
+		# print len(sparqls)
+		# raw_input("Enter to continue")
 
 		for counter in range(len(sparqls)):
 
@@ -106,6 +109,11 @@ class Verbalizer:
 			for element in maps:
 				# maps[element] = nlutils.get_label_via_parsing(maps[element], lower = True)  #Get their labels
 				maps[element] = self.dbp.get_label(maps[element])  #Get their labels
+
+			if self.template_type == 'Count':
+				uid = uuid.uuid4()
+				sparqls[counter]['_id'] = uid.hex
+				sparqls[counter]['query'] = self.sparql_editing_count(_maps = maps,_datum = datum)
 
 			#Select a template for this question
 			maps, question_format = self.rules(_maps = maps,_datum = datum)
@@ -147,7 +155,6 @@ class Verbalizer:
 			Define the rules to select a question template here
 
 			Also pluralize what needs pluralizing.
-
 			Return the selected template. Return updated maps
 		'''
 
@@ -163,6 +170,17 @@ class Verbalizer:
 					False: don't verbalize
 		'''
 		pass
+
+	def sparql_editing_count(self, _datum, _maps):
+		'''
+			The header of SPARQL query has to be changed in the case of count templates.
+			Should be called within init itself.
+		'''
+
+		sparql = _datum['query']
+		sparql = sparql.replace('SELECT DISTINCT ?uri, ?x', 'SELECT DISTINCT COUNT(?uri)')
+		sparql = sparql.replace('SELECT DISTINCT ?uri','SELECT DISTINCT COUNT(?uri)')
+		return sparql
 
 	def hard_relation_filter(self, _pred1,_pred2 = None, _limit = 1, _limit_rels = 3):
 		'''
@@ -200,7 +218,7 @@ class Verbalizer:
 
 			if not _pred1 in self.common_relations and not _pred2 in self.common_relations:
 				_limit = 3
-				_limit_rels = 15
+				_limit_rels = 10
 
 			try:
 				if self.hard_relation_filter_map[_pred1][_pred2] >= _limit:

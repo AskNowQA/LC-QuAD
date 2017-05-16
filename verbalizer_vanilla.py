@@ -7,6 +7,7 @@
 
 	Finally, a function will create an object of all of them and run it.
 '''
+import traceback
 import numpy as np
 from pprint import pprint
 from pattern.en import pluralize
@@ -736,7 +737,9 @@ def run():
 		nlqs.append(result.count_sparqls)
 		spql.append(result.count_nlq)
 	except:
+		traceback.print_exc()
 		print "Cannot verbalize Template 2"
+		raw_input("Waiting for input...")
 		nlqs.append(0)
 		spql.append(0)
 	try:
