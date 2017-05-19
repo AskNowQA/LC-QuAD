@@ -1,10 +1,31 @@
-# Generating Natural Language Questions from valid SPARQL Queries
+# Question Answer generation framework
 ## Introduction
-This code aims to convert a valid SPARQL query into a (or many) natural language questions. The incentive is to create a good dataset for QA system training, and achieve a scale which helps Neural Network based QA Systems too. We do this mostly by converting the query into a pseudo natural language question based on some rules we basically derive by hand, and come up with some sort of an algorithm which does this. Thereafter we will use some heurestic based features to figure out appropriate prepositions and Wh-types (What, when, who, which, where...). 
 
-Refer to this document for a list of templates we have or will be focusing on - https://docs.google.com/document/d/1N4KRy_xMD7B5cAnQWMiytRrPkZ-HwIEiZj4PbI-xROM/edit
+
+This framework aims to  create a large QA pairs, with their equivalent logical form. The primary objective while designing the framework for question generation was to generate a high quality large dataset with low domain expert intervention. In most of the datset, which has a logical form of the Question were generated manually. This process of writing formal expressions needs domain experts with a deep understanding of the underlying KB schema, and syntaxes of the logical form. 
+
+The dataset generated from the framework using DBpedia as the knowledge base is available at <https://figshare.com/projects/LC-QuAD/21812>.  
+
+Refer to this document for a list of templates we have or will be focusing on - <https://docs.google.com/document/d/1N4KRy_xMD7B5cAnQWMiytRrPkZ-HwIEiZj4PbI-xROM/edit?usp=sharing>
 
 `Note: If you don't have access to the doc, please drop me a mail at pc.priyansh@gmail.com`
+
+
+The dataset generated has the following JSON structure. 
+
+```
+{
+ 	u'_id': u'32 charachter long alpha-numeric ID',
+  	u'corrected_answer': u'Verbalized form by the First reviewer',
+	u'id': "template id in integer",
+	u'query': u' The actual SPARQL queries',
+	u'template': u'The tempalte of the SPARQL Query ',
+	u'verbalized_question': u'Semi verbalized query'
+}
+
+```
+
+
 
 ## Branches
 ### master
