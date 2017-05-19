@@ -41,7 +41,7 @@
         </div>
         <div class="field">
           <label>Correct Question</label>
-          <input name="corrected_answer" value = "{{verbalized_question}}" type="text" autofocus>
+          <input name="corrected_answer" value = "{{verbalized_question_removed}}" type="text" autofocus>
         </div>
         <button class="ui button" type="submit" formaction="/submitQuestion">Submit</button>
         <button class="ui button" type="submit" formaction="/deleteQuestion" >Delete</button>
@@ -52,7 +52,8 @@
         <break>
         <span id="json_opener">Click to show JSON</span>
     </div>
-    </div>   
+    </div> 
+    <div class="column"><p>{{number}}</p></div>
   </div>
     <script type="text/javascript" >
     $("#clickme").click(function() {
