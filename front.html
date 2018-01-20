@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+
+<!--    <script src="static/prettyprint.js"></script>-->
+    <script src="static/semanticui/semantic.js"></script>
+
+    <!-- Scripts for carousel -->
+    <link rel="stylesheet" type="text/css" href="static/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="static/slick/slick-theme.css"/>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Scope+One|Roboto+Condensed:300,400,700|Inconsolata" rel="stylesheet">
+
+    <!-- Site Properties -->
+    <title>LC-QuAD | Smart Data Analytics</title>
+    <link rel="stylesheet" type="text/css" href="static/semanticui/semantic.min.css">
+    <style type="text/css">
+      body {
+        background-color: #DADADA;
+      }
+
+      body{
+        height: 100vh;
+        width: 100vw;
+      }
+
+      #header {
+        padding-top: 4em;
+        background-color: #1565c0;
+        padding-bottom: 0.5em;
+      }
+
+      #header .text.container h1 {
+        font-size: 4em;
+        font-weight: 100;
+        font-family: 'Scope One';
+      }
+
+      #secheader  {
+        padding-top: 1em;
+        padding-bottom: 2em;
+        background-color: #1565c0;
+      }
+
+      #secheader .secondary.container h3 {
+        font-family: 'Roboto Condensed';
+        font-size: 1.5em;
+        font-weight: 300;
+
+      }
+
+      .ui.modal {
+        padding:1em;  
+      }
+
+      .ui.modal p {
+        font-size: 2em;
+        text-align: center;
+      }
+
+      .ui.top.large.menu {
+        margin: auto;
+        background-color: #003c8f;
+      }
+
+      #body {
+        margin-top: 1em;  
+        margin-bottom: 1em;
+      }
+
+      #body #sidebar #download {
+        padding-left: 1em;
+        padding-right: 1em;
+      }
+
+      #body #sidebar #download #description {
+
+        font-size: 1em;
+      }
+
+      #body #sidebar #download #downloadbutton {
+        background-color: #1565c0;
+      }
+
+      #body #sidebar #download #explorebutton {
+        box-shadow: 0 0 0 1px #1565c0 inset!important;
+        color: #1565c0!important;
+      }
+
+      #body #sidebar #resources {
+        text-rendering: optimizeLegibility;
+      }
+
+      #body #tabletitle {
+        text-align: center;
+      }
+
+      /*
+      #body #content #abstract {
+      padding: 1.4em;
+      }
+      */
+
+      #body #content #abstract #description {
+        text-align: justify;
+        text-rendering: optimizeLegibility;
+        font-size: 1.2em;
+        line-height: 1.4em;
+        padding: 0.7em;
+      }
+
+      #body #carousel #row2 {
+        padding-top: 0;
+        margin-top: 0;
+      }
+
+      #body #carousel h2 {
+        padding-left:21px;
+      }
+
+      #body #carousel .buttoncontainercolumn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #body #carousel .text.shape {
+        width: 100%;
+      }
+
+      #body #carousel .side {
+        padding-left: 1em;
+        padding-right: 1em;
+      }
+
+      #body #carousel .question {
+        font-size: 1.5em;
+        margin-bottom: 1.2em;
+        margin-top: 1.2em;
+        text-align: center;
+        text-rendering: optimizeLegibility;
+
+        font-family: 'Inconsolata', monospace;
+      }
+
+      #body #carousel .question .q {
+        font-weight: 700;  
+      }
+
+      #body #carousel .sparql {
+        font-style: normal;
+        font-size: 1.5em;
+        text-rendering: optimizeLegibility;
+        font-family: 'Inconsolata', monospace;
+        margin-bottom: 1em;
+      }
+
+      #body #content #guide pre .json_field {
+        color: #1565c0;
+        font-weight: 700;
+        font-family: 'Inconsolata', monospace;
+      }
+
+      #body #content #guide pre .json_value {
+        font-family: 'Lato';
+        text-rendering: optimizeLegibility;
+      }
+
+
+      #body #content #guide [data-tab="first"].segment {
+        height: 10em;
+        font-size: 1.3em;
+        text-align: center;
+      }
+
+      #body #content #guide [data-tab="first"].segment #apology {
+        font-weight: 400;
+        font-size: 2em;
+        line-height: 1.2em;
+        text-align: center;
+        margin-bottom: 0.4em;
+      }
+
+      /*
+      #body #content #guide [data-tab="third"].segment {
+      height: 10em;
+      font-size: 1.3em;
+      text-align: center;
+      }
+
+      #body #content #guide [data-tab="third"].segment #apology {
+      font-weight: 400;
+      font-size: 2em;
+      line-height: 1.2em;
+      text-align: center;
+      margin-bottom: 0.4em;
+      }
+      */
+
+
+      a.predicate {
+        color: #00600f
+      }
+
+      a#nochange {
+        color: white;
+      }
+
+      #footer {
+        background-color: #003c8f;
+        padding: 2em;
+      }
+
+      #footer #license_links #licenses {
+        margin-bottom: 1em;
+      }
+
+      #footer #license_links #licenses a {
+        color: white;
+        font-weight: 700;
+      }
+
+      #footer #license_links #licenses a:hover {
+        text-decoration: underline;
+
+      }
+
+      #footer #license_links #licenses #cc .six {
+        padding-right: 0;
+      }
+
+      #footer #license_links #licenses #cc .six img {
+        /*        height: 100%;*/
+        width: 100%;
+      }
+
+      #footer #license_links #licenses #cc .ten {
+        text-align: left;
+      }
+
+      #footer #license_links #licenses #gpl {
+        text-align: left;
+      }
+
+      #footer #license_links #orgs {
+        text-align: left;
+      }
+
+      #footer #ack {
+        font-size: 1.2em;
+        line-height: 1.4em;
+        text-align: justify;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <!--
+<div class="ui segment" id="header">
+poop
+</div>
+-->
+    <div class="ui top inverted large menu">
+
+      <div class="ui container">
+
+        <div class="item"><a href="http://sda.cs.uni-bonn.de/">
+          <i class="big angle left icon"></i>
+          SDA Lab</a>
+        </div>
+
+        <div class="right menu">
+          <a class="item" href="https://github.com/SmartDataAnalytics/LC-QuAD">
+            <i class="big github icon"></i>
+            GitHub
+          </a>
+          <a class="item" href="https://figshare.com/projects/LC-QuAD/21812">
+            <i class="big database icon"></i>
+            Dataset
+          </a>
+          <a class="active item">Home</a>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id="header" class="ui inverted vertical masthead center aligned segment">
+      <div class="ui text container">
+        <h1 class="ui inverted header">
+          LC-QuAD
+        </h1>
+      </div>
+    </div>
+
+    <div id="secheader" class="ui inverted vertical masthead center aligned raised segment">
+      <div class="ui text secondary container">
+        <h3 class="ui inverted header">
+          Largescale Complex Question Answering Dataset
+        </h3>
+      </div>
+    </div>
+
+    <div id="body" class="ui grid container">
+
+      <div class="four wide column" id="sidebar">
+
+        <div class="ui center aligned segment" id="download">
+          <!--
+<h3 class="ui header">
+Explore
+</h3>
+-->
+          <!--          <span id="description">poop poop poopie poop poopie pooper poopity poopsie pum!</span>-->
+
+          <!--          <div class="ui divider"></div>-->
+
+          <a href="https://figshare.com/projects/LC-QuAD/21812" class="ui fluid animated large fade primary button" id="downloadbutton">
+          
+            <div class="visible content">Download</div>
+
+            <div class="hidden content">
+              <i class="download icon"></i> (3.6MB) 
+            </div>
+
+          </a>
+
+          <div class="ui horizontal divider">
+            Or
+          </div>
+
+          <div class="ui fluid large basic animated fade primary button" id="explorebutton">
+            <div class="visible content">See Examples</div>
+            <div class="hidden content">25 Nitpicked Examples <i class="arrow right icon"></i></div>
+          </div>
+        </div>
+
+        <div class="ui modal">
+          <!--          <div class="header">Under Construction</div>-->
+          <div class="content">
+            <p>
+              This view is currently being constructed. Sorry!
+            </p>
+            <img class="ui small right floated image" src="resources/peep.png">
+
+          </div>
+        </div>
+
+        <div class="ui segment" id="stats">
+
+          <h3 class="ui header" id="tabletitle">Data Characteristics</h3>
+          <table class="ui celled table">
+
+            <tbody>
+
+              <tr>
+                <td class="collapsing">
+                  Current Version
+                </td>
+                <td class="right aligned">1.0</td>
+              </tr>
+
+              <tr>
+                <td class="collapsing">
+                  <a href="https://figshare.com/articles/Question_Answering_Data/5006084">Total Questions</a>
+                </td>
+                <td class="right aligned">5000</td>
+              </tr>
+
+              <tr>
+                <td class="collapsing">
+                  <a href="https://github.com/SmartDataAnalytics/LC-QuAD/blob/develop/templates.py">Unique Templates</a>
+                </td>
+                <td class="right aligned">38</td>
+              </tr>
+
+              <tr>
+                <td class="collapsing">
+                  <a href="https://github.com/SmartDataAnalytics/LC-QuAD/blob/develop/resources/entities.txt">Entities Covered</a>
+                </td>
+                <td class="right aligned">5042</td>
+              </tr>              
+
+              <tr>
+                <td class="collapsing">
+                  <a href="https://github.com/SmartDataAnalytics/LC-QuAD/blob/develop/resources/relations.txt">Predicates Covered</a>
+                </td>
+                <td class="right aligned">615</td>
+              </tr>                            
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+        <div class="ui segment" id="resources">
+          <h3 class="ui header" id="tabletitle">Contact Us</h3>
+
+          <p id="intro">
+            In case you find any bug in our framework, or any issue with our dataset, please inform us on <a href="https://github.com/SmartDataAnalytics/LC-QuAD/issues">Issues Page.</a>
+          </p>
+
+          Contact <a href="mailto:priyansh.trivedi@uni-bonn.de?Subject=LC-QuAD" target="_top">priyansh.trivedi@uni-bonn.de</a> for anything regarding the dataset.
+
+        </div>
+
+
+      </div>
+
+      <div class="twelve wide column" id="content">
+
+        <div class="ui padded segment" id="abstract">
+
+          <h2 class="ui header">What is LC-QuAD?</h2>
+          <div id="description">
+
+<!--            This project aims to create a QA data set with the pair of Natural Language question to their corresponding SPARQL query. The incentive is to create a good dataset for QA system training and achieve a scale which helps Neural Network based QA Systems too. We frame our question generation problem as a transduction problem, in which the subgraph generated by the seed entity is fitted into a set of SPARQL templates which are then converted into a normalized natural question structure (NNQS). This acts as a generic structure which is then transformed easily into NL question having lexical and syntactic variations, by English speakers. These NL questions were then reviewed by domain experts, ensuring the quality of the dataset.-->
+            The aim of LC-QuAD is to make a large dataset for Question Answering (QA) over structured data (in <a href="https://www.w3.org/RDF/">RDF</a> format) available. It consists of 5000 pairs of natural language question and the corresponding <a href="https://www.w3.org/TR/rdf-sparql-query/">SPARQL</a> query. In order to create the dataset, we used a set of typical query templates and then converted seed entities in the RDF graph to a normalised natural natural question structure (NNQS). This was then transformed to natural language questions with different lexical and syntactical variations by English native speakers. Please see our <a href="resources/ISWC2017_paper_152.pdf" target="_blank">paper</a>  for more details.
+
+          </div>
+
+        </div>
+
+        <!-- Carousel -->
+        <div class="ui grid segment" id="carousel">
+          <div class="row">
+            <h2>Examples</h2>
+          </div>
+
+          <div class="row" id="row2">
+
+
+            <div class="left two wide column buttoncontainercolumn" >
+              <button class="ui icon circular button" id="carouselbkwd"><i class="arrow left icon"></i></button>
+            </div>
+
+            <div class="twelve wide column" >
+
+              <div class="ui text shape">
+                <div class="sides">
+
+                  <div class="active side">
+                    <div class="question">
+                      <span class="q">Q: </span>What are the mascots of the teams participating in the turkish handball super league?
+                    </div>
+                    <div class="sparql"> 
+
+
+
+                      SELECT DISTINCT ?uri WHERE { <br>
+                      &emsp; ?x <a href="http://dbpedia.org/ontology/league" class="predicate">dbp:league</a> <a href="http://dbpedia.org/resource/Turkish_Handball_Super_League">dbr:Turkish_Handball_Super_League</a> . <br>  &emsp; ?x <a href="http://dbpedia.org/ontology/mascot" class="predicate">dbp:mascot</a> ?uri <br> }
+
+                    </div>
+                  </div>
+                  <div class="side">
+
+                    <div class="question">
+                      <span class="q">Q: </span>Which band has Joe Hahn and Chester Bennington?
+                    </div>
+                    <div class="sparql"> 
+
+                      SELECT DISTINCT ?uri WHERE { <br> 
+                      &emsp; ?uri <a href="http://dbpedia.org/property/currentMembers" class="predicate">dbp:currentMembers</a> <a href="http://dbpedia.org/resource/Joe_Hahn">dbr:Joe_Hahn</a> . <br>  &emsp; ?uri <a href="http://dbpedia.org/property/currentMembers" class="predicate">dbp:currentMembers</a> <a href="http://dbpedia.org/resource/Chester_Bennington">dbr:Chester_Bennington</a> <br> }
+
+                    </div>
+
+                  </div>
+                  <div class="side">
+
+                    <div class="question">
+                      <span class="q">Q: </span>List down the movies whose music composers have won the BAFTA Award for Best Film Music ?
+                    </div>
+                    <div class="sparql"> 
+
+                      SELECT DISTINCT ?uri WHERE { <br> 
+                      &emsp; ?x <a href="http://dbpedia.org/ontology/award" class="predicate">dbp:award</a> <a href="http://dbpedia.org/resource/:BAFTA_Award_for_Best_Film_Music">dbr:BAFTA_Award_for_Best_Film_Music</a> . <br>  &emsp; ?uri <a href="http://dbpedia.org/ontology/musicComposer" class="predicate">dbp:musicComposer</a> ?x <br> }
+
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+            <div class="right two wide column buttoncontainercolumn   ">
+              <button class="ui icon circular button" id="carouselfwd"><i class="arrow right icon"></i></button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Guides -->
+        <div class="ui padded segment" id="guide">
+          <h2 class="ui header">Documentation & Usage Guides</h2>
+
+          <div class="ui top attached tabular menu">
+            <a class="active item" data-tab="first">Documentation</a>
+            <a class="item" data-tab="second">Data Schema</a>
+            <!--                        <a class="item" data-tab="third">Getting Started</a>-->
+          </div>
+
+          <div class="ui bottom attached active padded tab segment" data-tab="first">
+
+            <div id="apology">
+              The documentation of the project will soon be made available on <a href="https://github.com/SmartDataAnalytics/LC-QuAD/wiki"> our repository's wiki</a>. <br>
+            </div>
+            We're working round the clock to get it up!
+
+          </div>
+
+          <div class="ui bottom attached tab segment" data-tab="second">
+            Every data item in the dataset consists of the following fields:<br>
+
+            <!--
+<div class="ui bulleted list">
+<div class="item">
+
+<div class="content">
+<a class="header">Template ID</a>
+<div class="description">Every Unique SPARQL Template has a different ID, so as to easily distinguish between them. </div>
+</div>
+
+</div>
+<div class="item">
+
+<div class="content">
+<a class="header">SPARQL Template</a>
+<div class="description">A SPARQL Tempalte is a query where resources in the triple pattern are replaced with placeholders.</div>
+</div>
+
+</div>
+<div class="item">
+
+<div class="content">
+<a class="header">SPARQL Query</a>
+<div class="description">These valid SPARQL queries are generated by using the triples in subgraphs to fill the placeholder resources in SPARQL Templates.
+</div>
+</div>
+
+</div>
+<div class="item">
+
+<div class="content">
+<a class="header">Verbalized Question</a>
+<div class="description">The automatically verbalized equivalent of the SPARQL Query.</div>
+</div>
+
+</div>
+<div class="item">
+
+<div class="content">
+<a class="header">Corrected Question</a>
+<div class="description">Human corrected version of the verbalized question.</div>
+</div>
+
+</div>
+
+</div>
+-->
+            <pre>
+
+    {
+      <span class="json_field">template_id</span>: "<span class="json_value">Every unique SPARQL template has a different ID.</span>",
+      <span class="json_field">sparql_template</span>: "<span class="json_value">A query where resources in the triple pattern  are replaced with placeholders.</span>",
+      <span class="json_field">sparql_query</span>: "<span class="json_value">Valid SPARQL query generated by using the triples in subgraphs to fill the placeholder <br>                                                         resources in SPARQL Templates.</span>",
+      <span class="json_field">verbalized_question</span>: "<span class="json_value">The automatically verbalized equivalent of the SPARQL Query.</span>",
+      <span class="json_field">corrected_question</span>: "<span class="json_value">Human corrected version of the verbalized question.</span>",
+      <span class="json_field">_id</span>: "<span class="json_value">Unique ID generated for every data node.</span>"
+    }
+ </pre>
+          </div>
+
+
+
+          <!--
+<div class="ui bottom attached tab padded segment" data-tab="third">
+<div id="apology">
+The documentation of the project will soon be made available on <a href="https://github.com/SmartDataAnalytics/LC-QuAD/wiki"> our repository's wiki</a>. <br>
+</div>
+We're working round the clock to get it up!
+
+</div>
+-->
+
+        </div>
+
+
+        <div class="ui padded segment" id="people">
+
+          <h2 class="ui header">People</h2>
+          <div class="ui four link cards">
+
+            <div class="card">
+              <a class="image" href="http://sda.cs.uni-bonn.de/people/prof-dr-jens-lehmann/">
+                <img src="resources/lehmann.jpg">
+                </a>
+              <div class="content">
+                <a class="header" href="http://sda.cs.uni-bonn.de/people/prof-dr-jens-lehmann/">Prof. Dr. Jens Lehmann</a>
+                <div class="meta">
+                  <span class="date">Professor, Uni Bonn</span>
+                </div>
+                <!--
+<div class="description">
+Molly is a personal assistant living in Paris.
+</div>
+-->
+              </div>
+            </div>
+
+            <div class="card">
+              <a class="image" href="http://sda.cs.uni-bonn.de/people/mohnish-dubey/">
+                <img src="resources/dubey.jpg">
+              </a>
+              <div class="content">
+                <a class="header" href="http://sda.cs.uni-bonn.de/people/mohnish-dubey/">Mohnish Dubey</a>
+                <div class="meta">
+                  <a>Ph.D. Student, Uni Bonn</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <a class="image" href="http://sda.cs.uni-bonn.de/people/gaurav-maheshwari/">
+                <img src="resources/maheshwari.jpg">
+              </a>
+              <div class="content">
+                <a class="header" href="http://sda.cs.uni-bonn.de/people/gaurav-maheshwari/">Gaurav Maheshwari</a>
+                <div class="meta">
+                  <a>M.S. Student, Uni Bonn</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <a class="image" href="http://sda.cs.uni-bonn.de/people/priyansh-trivedi/">
+                <img src="resources/trivedi.jpg">
+              </a>
+              <div class="content">
+                <a class="header" href="http://sda.cs.uni-bonn.de/people/priyansh-trivedi/">Priyansh Trivedi</a>
+                <div class="meta">
+                  <a>M.S. Student, Uni Bonn</a>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="image">
+                <img src="resources/coffee.jpg">
+              </div>
+              <div class="content">
+                <div class="header">The Coffee Machine</div>
+                <div class="meta">
+                  <span class="date">Lives in the room next to ours, and outputs the necter of Gods, and unending inspiration.</span>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id="footer" class="ui inverted vertical paddded footer segment">
+      <div class="ui center aligned container">
+        <div class="ui grid">
+
+
+
+
+          <div class="six wide column" id="ack">
+
+            This work was partly supported by the grant from the European
+            Union’s Horizon 2020 research Europe flag and innovation programme for the projects
+            Big Data Europe (GA no. 644564) and HOBBIT (GA no. 688227).
+            <!-- TODO: ASK JENS TO PUT LINKS HERE-->
+          </div>
+
+          <div class="four wide column" id="footer_links">
+
+          </div>
+
+          <div class="six wide column" id="license_links">
+
+            <div class="ui grid" id="licenses">
+
+              <div class="row" id="cc">
+                <div class="six wide column">
+                  <img class="ui fluid image" src="resources/by.png">
+                </div>
+                <div class="ten wide column">
+                  LC-QuAD is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>.</div>
+              </div>
+
+
+            </div>
+
+
+            <div class="row" id="orgs">
+              <b>Hosted By</b>
+              <div class="ui small images">
+
+                <a href="https://www.uni-bonn.de/" class="ui image">
+                  <img src="resources/unibonn.png">
+                </a>
+
+                <a href="https://www.iais.fraunhofer.de/" class="ui image">
+                  <img src="resources/iais.png">
+                </a>
+
+              </div>
+              <a href="http://sda.cs.uni-bonn.de/" class="ui medium image">
+                <img src="resources/sda.png">
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+    <!--    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-migrate-3.0.0.js"></script>
+    <script type="text/javascript" src="static/slick/slick.min.js"></script>
+
+    <script type="text/javascript">
+      //
+      //      $(document).ready(function(){
+      //        $('#carousel').slick({
+      //          setting-name: setting-value;
+      //        });
+      //      });
+
+      $('.shape').shape();
+      $('#carouselfwd').click( function() {
+        console.log('poopright');
+        $('.shape').shape('flip right');
+
+      });
+      $('#carouselbkwd').click( function() {
+        console.log('poopleft');
+        $('.shape').shape('flip left');
+      });
+
+      $('.ui.modal').modal({
+        blurring: true
+      });
+
+      $('#guide .menu .item').tab();
+
+      $('#explorebutton').click(function() {
+        $('.ui.modal').modal('show');
+      });
+
+    </script>
+
+  </body>
+</html>
+
