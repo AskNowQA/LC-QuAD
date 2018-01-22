@@ -113,7 +113,7 @@
 
       .ui.modal .modalsparqls .item {
         padding-bottom: 1em;
-/*        border-bottom: 2px dashed #E0E0E0;*/
+        /*        border-bottom: 2px dashed #E0E0E0;*/
       }
 
       .ui.modal .modalsparqls .item .content .header {
@@ -143,6 +143,11 @@
       .ui.modal .sparql.sparql-triple a {
         color: #424242;
         border-bottom: 1px dashed #424242;
+      }
+
+      .ui.modal .actions #downloadbutton {
+        background-color: #424242;
+
       }
 
       /*Side bar*/
@@ -855,14 +860,14 @@ Download Samples
           <div class="actions">
             <a href="https://figshare.com/projects/LC-QuAD/21812" class="ui animated fade primary button" id="downloadbutton">
 
-            <div class="visible content"><span id="subtext"></span> Download Samples</div>
+              <div class="visible content"><span id="subtext"></span> Download Samples</div>
 
-            <div class="hidden content">
-              <i class="external icon"></i> 
-              <!--            (Figshare)-->
-            </div>
+              <div class="hidden content">
+                <i class="external icon"></i> 
+                <!--            (Figshare)-->
+              </div>
 
-          </a>
+            </a>
           </div>
         </div>
 
@@ -947,74 +952,83 @@ Download Samples
 
         </div>
 
-        <!--        <div class="ui divider"></div>-->
+        <!--
+<div class="ui padded basic segment" id="examples">
+<div class="massive ui basic animated fade button" id="explorebutton">
+<div class="visible content">See Examples</div>
+<div class="hidden content">23 Nitpicked Examples <i class="arrow right icon"></i></div>
+</div>
+</div>
+-->
 
         <!-- Carousel -->
-        <div class="ui grid raised segment" id="carousel">
-          <div class="row">
-            <h2 id="badheader">For Instance?</h2>
-          </div>
+        <!--
+<div class="ui grid raised segment" id="carousel">
+<div class="row">
+<h2 id="badheader">For Instance?</h2>
+</div>
 
-          <div class="row" id="row2">
-
-
-            <div class="left two wide column buttoncontainercolumn">
-              <button class="ui icon circular button" id="carouselbkwd"><i class="arrow left icon"></i></button>
-            </div>
-
-            <div class="twelve wide column">
-
-              <div class="ui text shape">
-                <div class="sides">
-
-                  <div class="active side">
-                    <div class="question">
-                      <span class="q">Q: </span>What are the mascots of the teams participating in the turkish handball super league?
-                    </div>
-                    <div class="sparql">
+<div class="row" id="row2">
 
 
+<div class="left two wide column buttoncontainercolumn">
+<button class="ui icon circular button" id="carouselbkwd"><i class="arrow left icon"></i></button>
+</div>
 
-                      SELECT DISTINCT ?uri WHERE { <br> &emsp; ?x <a href="http://dbpedia.org/ontology/league" class="predicate">dbp:league</a> <a href="http://dbpedia.org/resource/Turkish_Handball_Super_League">dbr:Turkish_Handball_Super_League</a> . <br> &emsp; ?x <a href="http://dbpedia.org/ontology/mascot" class="predicate">dbp:mascot</a> ?uri <br> }
+<div class="twelve wide column">
 
-                    </div>
-                  </div>
-                  <div class="side">
+<div class="ui text shape">
+<div class="sides">
 
-                    <div class="question">
-                      <span class="q">Q: </span>Which band has Joe Hahn and Chester Bennington?
-                    </div>
-                    <div class="sparql">
+<div class="active side">
+<div class="question">
+<span class="q">Q: </span>What are the mascots of the teams participating in the turkish handball super league?
+</div>
+<div class="sparql">
 
-                      SELECT DISTINCT ?uri WHERE { <br> &emsp; ?uri <a href="http://dbpedia.org/property/currentMembers" class="predicate">dbp:currentMembers</a> <a href="http://dbpedia.org/resource/Joe_Hahn">dbr:Joe_Hahn</a> . <br> &emsp; ?uri <a href="http://dbpedia.org/property/currentMembers" class="predicate">dbp:currentMembers</a> <a href="http://dbpedia.org/resource/Chester_Bennington">dbr:Chester_Bennington</a> <br> }
 
-                    </div>
 
-                  </div>
-                  <div class="side">
+SELECT DISTINCT ?uri WHERE { <br> &emsp; ?x <a href="http://dbpedia.org/ontology/league" class="predicate">dbp:league</a> <a href="http://dbpedia.org/resource/Turkish_Handball_Super_League">dbr:Turkish_Handball_Super_League</a> . <br> &emsp; ?x <a href="http://dbpedia.org/ontology/mascot" class="predicate">dbp:mascot</a> ?uri <br> }
 
-                    <div class="question">
-                      <span class="q">Q: </span>List down the movies whose music composers have won the BAFTA Award for Best Film Music ?
-                    </div>
-                    <div class="sparql">
+</div>
+</div>
+<div class="side">
 
-                      SELECT DISTINCT ?uri WHERE { <br> &emsp; ?x <a href="http://dbpedia.org/ontology/award" class="predicate">dbp:award</a> <a href="http://dbpedia.org/resource/:BAFTA_Award_for_Best_Film_Music">dbr:BAFTA_Award_for_Best_Film_Music</a> . <br> &emsp; ?uri <a href="http://dbpedia.org/ontology/musicComposer" class="predicate">dbp:musicComposer</a> ?x <br> }
+<div class="question">
+<span class="q">Q: </span>Which band has Joe Hahn and Chester Bennington?
+</div>
+<div class="sparql">
 
-                    </div>
+SELECT DISTINCT ?uri WHERE { <br> &emsp; ?uri <a href="http://dbpedia.org/property/currentMembers" class="predicate">dbp:currentMembers</a> <a href="http://dbpedia.org/resource/Joe_Hahn">dbr:Joe_Hahn</a> . <br> &emsp; ?uri <a href="http://dbpedia.org/property/currentMembers" class="predicate">dbp:currentMembers</a> <a href="http://dbpedia.org/resource/Chester_Bennington">dbr:Chester_Bennington</a> <br> }
 
-                  </div>
+</div>
 
-                </div>
-              </div>
+</div>
+<div class="side">
 
-            </div>
+<div class="question">
+<span class="q">Q: </span>List down the movies whose music composers have won the BAFTA Award for Best Film Music ?
+</div>
+<div class="sparql">
 
-            <div class="right two wide column buttoncontainercolumn   ">
-              <button class="ui icon circular button" id="carouselfwd"><i class="arrow right icon"></i></button>
-            </div>
-          </div>
+SELECT DISTINCT ?uri WHERE { <br> &emsp; ?x <a href="http://dbpedia.org/ontology/award" class="predicate">dbp:award</a> <a href="http://dbpedia.org/resource/:BAFTA_Award_for_Best_Film_Music">dbr:BAFTA_Award_for_Best_Film_Music</a> . <br> &emsp; ?uri <a href="http://dbpedia.org/ontology/musicComposer" class="predicate">dbp:musicComposer</a> ?x <br> }
 
-        </div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+<div class="right two wide column buttoncontainercolumn   ">
+<button class="ui icon circular button" id="carouselfwd"><i class="arrow right icon"></i></button>
+</div>
+</div>
+
+</div>
+-->
 
         <!-- Guides -->
         <div class="ui padded basic segment" id="guide">
