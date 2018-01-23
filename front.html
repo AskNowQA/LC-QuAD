@@ -275,6 +275,23 @@
         font-size: 1.4rem;
       }
 
+
+      #footer #footer-container #grant #grant-text {
+        padding: 1em;
+        text-align: justify;
+      }
+
+      #footer #asknow #asknow-text { 
+        text-align: center;
+
+      }
+      #footer #asknow #asknow-text {
+        border-bottom: 1px dashed white;
+        font-weight: 500;
+        font-size: 2rem;
+        color: white;
+      }
+
     </style>
   </head>
 
@@ -351,14 +368,7 @@ LC-QuAD  <span id="funny">༼ つ ◕_◕ ༽つ</span>
         </div>
 
         <div class="ui longer modal">
-          <!--
-<div class="header">
-<div class="ui primary button">
-<i class="download icon"></i> 
-Download Samples
-</div>
-</div>
--->
+
           <div class="scrolling content">
             <div class="ui items modalsparqls">
               <div class="item">
@@ -915,17 +925,19 @@ Download Samples
 
       <div class="twelve wide column" id="content">
 
+        <!-- Abstract -->
         <div class="ui padded basic segment" id="abstract">
 
           <h2 class="ui header">What?</h2>
           <div id="description">
 
-            LC-QuAD a Question Answering dataset with 5000 pairs of questions and their corresponding <a class="underline" href="https://www.w3.org/TR/rdf-sparql-query/" target="_blank">SPARQL</a> query. The target knowledge base is <a class="underline" href="https://dbpedia.org/" target="_blank">DBpedia</a>, specifically, the <a class="underline" href="http://wiki.dbpedia.org/dbpedia-version-2016-04" target="_blank">April, 2016</a> version. Please see our <a class="underline" href="resources/ISWC2017_paper_152.pdf" target="_blank">paper</a> for details about the dataset creation process and framework.
+            LC-QuAD a Question Answering dataset with 5000 pairs of questions and their corresponding <a class="underline" href="https://www.w3.org/TR/rdf-sparql-query/" target="_blank">SPARQL</a> query. The target knowledge base is <a class="underline" href="https://dbpedia.org/" target="_blank">DBpedia</a>, specifically, the <a class="underline" href="http://wiki.dbpedia.org/dbpedia-version-2016-04" target="_blank">April, 2016</a> version. Please see our <a class="underline" href="static/ISWC2017_paper_152.pdf" target="_blank">paper</a> for details about the dataset creation process and framework.
 
           </div>
 
         </div>
 
+        <!-- Leaderboard -->
         <div class="ui basic padded segment" id="leaderboard">
 
           <h2 class="ui header">Leaderboard</h2>
@@ -963,10 +975,6 @@ Download Samples
             </tbody>
           </table>
         </div>
-
-
-        <!--      </div>-->
-
 
         <!-- Guides -->
         <div class="ui basic padded segment" id="guide">
@@ -1031,7 +1039,7 @@ Download Samples
               </div>
               <div class="title">
                 <i class="dropdown icon"></i>
-                <span class="accordion-title-version">v0.1.1</span> <span class="accordion-title-date">- 24-10-2017</span>
+                <span class="accordion-title-version">v0.1.1</span> <span class="accordion-title-date">- 27-10-2017</span>
               </div>
               <div class="content">
                 <ul class="transition visible" style="display: block !important;">
@@ -1062,7 +1070,7 @@ Download Samples
 
             <div class="card">
               <a class="image" href="http://sda.cs.uni-bonn.de/people/prof-dr-jens-lehmann/">
-                <img src="resources/lehmann.jpg">
+                <img src="static/imgs/lehmann.jpg">
               </a>
               <div class="content">
                 <a class="header" href="http://sda.tech/people/prof-dr-jens-lehmann/">Prof. Dr. Jens Lehmann</a>
@@ -1079,7 +1087,7 @@ Molly is a personal assistant living in Paris.
 
             <div class="card">
               <a class="image" href="http://sda.tech/people/mohnish-dubey/">
-                <img src="resources/dubey.jpg">
+                <img src="static/imgs/dubey.jpg">
               </a>
               <div class="content">
                 <a class="header" href="http://sda.tech/people/mohnish-dubey/">Mohnish Dubey</a>
@@ -1091,7 +1099,7 @@ Molly is a personal assistant living in Paris.
 
             <div class="card">
               <a class="image" href="http://sda.tech/people/gaurav-maheshwari/">
-                <img src="resources/maheshwari.jpg">
+                <img src="static/imgs/maheshwari.jpg">
               </a>
               <div class="content">
                 <a class="header" href="http://sda.tech/people/gaurav-maheshwari/">Gaurav Maheshwari</a>
@@ -1103,7 +1111,7 @@ Molly is a personal assistant living in Paris.
 
             <div class="card">
               <a class="image" href="http://sda.tech/people/priyansh-trivedi/">
-                <img src="resources/trivedi.jpg">
+                <img src="static/imgs/trivedi.jpg">
               </a>
               <div class="content">
                 <a class="header" href="http://sda.tech/people/priyansh-trivedi/">Priyansh Trivedi</a>
@@ -1115,7 +1123,7 @@ Molly is a personal assistant living in Paris.
 
             <div class="card">
               <div class="image">
-                <img src="resources/coffee.jpg">
+                <img src="static/imgs/coffee.jpg">
               </div>
               <div class="content">
                 <div class="header">The Coffee Machine</div>
@@ -1133,67 +1141,100 @@ Molly is a personal assistant living in Paris.
 
     </div>
 
-    <div class="ui vertical paddded footer segment" id="ack">
-      poop
-    </div>
+    <div class="ui divider"></div>
 
-    <div id="footer" class="ui inverted vertical paddded footer segment">
-      <div class="ui center aligned container">
-        <div class="ui grid">
+    <div class="ui vertical center aligned inverted padded footer segment" id="footer">
 
+      <div class="ui stackable divided grid container" id="footer-container">
 
+        <div class="row">
 
+          <div class="eight wide column" id="grant">
 
-          <div class="six wide column" id="ack">
-
-            This work was partly supported by the grant from the European Union’s Horizon 2020 research Europe flag and innovation programme for the projects Big Data Europe (GA no. 644564) and HOBBIT (GA no. 688227).
-            <!-- TODO: ASK JENS TO PUT LINKS HERE-->
-          </div>
-
-          <div class="four wide column" id="footer_links">
-
-          </div>
-
-          <div class="six wide column" id="license_links">
-
-            <div class="ui grid" id="licenses">
-
-              <div class="row" id="cc">
-                <div class="six wide column">
-                  <img class="ui fluid image" src="resources/by.png">
-                </div>
-                <div class="ten wide column">
-                  LC-QuAD is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>.</div>
-              </div>
-
-
+            <div id="grant-text">
+              This work was partly supported by the grant from the European Union’s Horizon 2020 research Europe flag and innovation programme for the projects Big Data Europe (GA no. 644564) and HOBBIT (GA no. 688227).
             </div>
 
 
-            <div class="row" id="orgs">
-              <b>Hosted By</b>
-              <div class="ui small images">
-
-                <a href="https://www.uni-bonn.de/" class="ui image">
-                  <img src="resources/unibonn.png">
-                </a>
-
-                <a href="https://www.iais.fraunhofer.de/" class="ui image">
-                  <img src="resources/iais.png">
-                </a>
-
-              </div>
-              <a href="http://sda.cs.uni-bonn.de/" class="ui medium image">
-                <img src="resources/sda.png">
-              </a>
-
-            </div>
-
           </div>
 
+          <div class="eight wide column" id="asknow">
+            <span id="asknow-intro">
+              For other projects in this research area, visit: 
+            </span> <br>
+
+            <a href="http://sda.tech/research-topic/semantic-question-answering/">
+              <img class="ui middle aligned tiny image" src="static/imgs/asknowlogo.png">
+              <span id="asknow-text">AskNow</span>
+            </a>    
+
+          </div>
         </div>
+
       </div>
     </div>
+
+
+
+    <!--
+<div id="footer" class="ui vertical paddded footer segment">
+<div class="ui center aligned container">
+<div class="ui grid">
+
+
+
+
+<div class="six wide column" id="ack">
+
+This work was partly supported by the grant from the European Union’s Horizon 2020 research Europe flag and innovation programme for the projects Big Data Europe (GA no. 644564) and HOBBIT (GA no. 688227).
+TODO: ASK JENS TO PUT LINKS HERE
+</div>
+
+<div class="four wide column" id="footer_links">
+
+</div>
+
+<div class="six wide column" id="license_links">
+
+<div class="ui grid" id="licenses">
+
+<div class="row" id="cc">
+<div class="six wide column">
+<img class="ui fluid image" src="resources/by.png">
+</div>
+<div class="ten wide column">
+LC-QuAD is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>.</div>
+</div>
+
+
+</div>
+
+
+<div class="row" id="orgs">
+<b>Hosted By</b>
+<div class="ui small images">
+
+<a href="https://www.uni-bonn.de/" class="ui image">
+<img src="resources/unibonn.png">
+</a>
+
+<a href="https://www.iais.fraunhofer.de/" class="ui image">
+<img src="resources/iais.png">
+</a>
+
+</div>
+<a href="http://sda.cs.uni-bonn.de/" class="ui medium image">
+<img src="resources/sda.png">
+</a>
+
+</div>
+
+</div>
+
+</div>
+</div>
+</div>
+-->
 
     <script src="https://code.jquery.com/jquery-migrate-3.0.0.js"></script>
     <script type="text/javascript" src="static/slick/slick.min.js"></script>
