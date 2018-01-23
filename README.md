@@ -1,5 +1,7 @@
-# Question Answer generation framework
-## Introduction
+# LC-QuAD
+## Largescale Complex Question Answering Dataset
+
+### Introduction
 
 
 This framework aims to  create a large QA pairs, with their equivalent logical form. The primary objective while designing the framework for question generation was to generate a high quality large dataset with low domain expert intervention. In most of the datset, which has a logical form of the Question were generated manually. This process of writing formal expressions needs domain experts with a deep understanding of the underlying KB schema, and syntaxes of the logical form. 
@@ -27,12 +29,26 @@ The dataset generated has the following JSON structure.
 
 
 
-## Branches
-### master
-Will have the code for converting SPARQL templates to valid SPARQL Queries which retrieve something from DBpedia, and then to convert them to pseudo-nl query.
+### Branches
+#### develop
+Current default branch. Latest version of framework would be here.
 
-### relation-curation
+#### relation-curation
 Code and files which are collected from varied sources, of good relations in DBPedia, making our job easier. This is mostly taken from other research projects. The commit messages will contain information of the sources, for future crediting. 
 
-##Deployment
-@todo
+
+### Changelog
+
+#### 0.1.2 - 24-01-2018
+- Updated public website
+- Published train, test splits
+- Leaderboard underway
+
+#### 0.1.1 -  27-10-2017
+- Fixed a bug with rdf:type filter in SPARQL
+- data_set.json updated
+- updated templates.py
+
+#### 0.1.0 - 01-05-2017
+- First version released
+- [lc-quad.sda.tech](http://lc-quad.sda.tech) published
