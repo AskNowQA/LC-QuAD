@@ -22,15 +22,9 @@
       /*System Wide */
 
       body {
-        /*        background-color: #DADADA;*/
         font-family: 'Fira Sans'
       }
 
-      /*
-      a .underline {
-
-      }
-      */
 
       #header #header-menu #left-menu a {
         font-size: 1.5em;
@@ -55,17 +49,11 @@
       /* For the titles */
 
       #body #names #maintitle {
-        /*      color: #4183c4;*/
-        /*        font-family: 'Permanent Marker', cursive;*/
-        /*                font-family: 'gothamblack';*/
-        /*      font-family: "Intro";*/
         color: #424242;
         font-size: 6rem;
         font-weight: 800;
         line-height: 1.3em;
         letter-spacing: 0em;
-        /*        padding-left: 0.8em;*/
-        /*        padding-right: 0.8em;*/
       }
 
       #body #names #maintitle #funny {
@@ -73,9 +61,6 @@
       }
 
       #body #names #subtitle {
-        /*      color: #4183c4;*/
-        /*      font-family: 'Roboto Condensed';*/
-        /*      font-family: 'gothambook';*/
         font-family: 'Fira Sans Condensed', sans-serif;
         color: #424242;
         font-size: 2em;
@@ -275,21 +260,57 @@
         font-size: 1.4rem;
       }
 
-
-      #footer #footer-container #grant #grant-text {
-        padding: 1em;
-        text-align: justify;
+      #footer {
+        background-color: #eeeeee !important;
+        font-family: "Fira Sans";
+        padding-top: 4em;
       }
 
-      #footer #asknow #asknow-text { 
-        text-align: center;
-
+      #footer #contact .horizontal.divider {
+        font-family: "Fira Sans";
+        color: #9E9E9E;
       }
-      #footer #asknow #asknow-text {
-        border-bottom: 1px dashed white;
-        font-weight: 500;
-        font-size: 2rem;
-        color: white;
+
+      #footer #contact a {
+        /*        border-bottom: 1px dashed #424242;*/
+        font-family: "Fira Sans";
+        /*        color: #424242;*/
+      }
+
+      #footer #contact a:hover {
+        font-family: "Fira Sans";
+      }
+
+      #footer #contact .social.notlast {
+        padding-bottom: 0.6em;
+      }
+
+      #footer #contact .social.notfirst {
+        padding-top: 0.6em;
+      }
+
+      #footer #contact #license {
+        /*        display: flex;*/
+        /*        flex-direction: row;*/
+        text-align: left;
+      }
+
+      #footer #contact #license div {
+        padding-left: 1em;
+      }
+
+      #footer #organization .grid {
+        padding-top: 2em;
+      }
+
+      @media screen and (max-device-width: 801px) {
+        #body #people .cards .card .content .header {
+          font-size: 1em;
+        }
+
+        #body #people .cards .card .content .meta {
+          font-size: 0.8em;
+        }
       }
 
     </style>
@@ -1033,8 +1054,9 @@ LC-QuAD  <span id="funny">༼ つ ◕_◕ ༽つ</span>
               <div class="content active">
                 <ul class="transition visible" style="display: block !important;">
                   <li>Updated public website</li>
+                  <li>Dataset now available in QALD format</li>
                   <li>Published train, test splits</li>
-                  <li> Leaderboard underway!</li>
+                  <li>Leaderboard underway!</li>
                 </ul>
               </div>
               <div class="title">
@@ -1066,7 +1088,7 @@ LC-QuAD  <span id="funny">༼ つ ◕_◕ ༽つ</span>
         <div class="ui padded segment" id="people">
 
           <h2 class="ui header">People</h2>
-          <div class="ui four stackable link cards">
+          <div class="ui four doubling link cards">
 
             <div class="card">
               <a class="image" href="http://sda.cs.uni-bonn.de/people/prof-dr-jens-lehmann/">
@@ -1141,38 +1163,128 @@ Molly is a personal assistant living in Paris.
 
     </div>
 
-    <div class="ui divider"></div>
 
-    <div class="ui vertical center aligned inverted padded footer segment" id="footer">
+    <div class="ui padded footer vertical segment" id="footer">
+      <div class="ui stackable middle aligned divided grid container">
 
-      <div class="ui stackable divided grid container" id="footer-container">
+        <div class="center aligned eight wide column" id="contact">
+          <div class="footer-header">
 
-        <div class="row">
+            <div class="ui social notlast doubling grid" id="license">
 
-          <div class="eight wide column" id="grant">
+              <div class="four wide column">
+                <a href="http://google.com" class="ui image">
+                  <img  src="static/imgs/by.png"> 
+                </a>
+              </div>
 
-            <div id="grant-text">
+              <div class="twelve wide column">
+
+                LC-QuAD is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>.
+              </div>
+            </div>
+
+            <div class="ui divider">
+
+            </div>
+
+            <div class="social notfirst" id="email">
               This work was partly supported by the grant from the European Union’s Horizon 2020 research Europe flag and innovation programme for the projects Big Data Europe (GA no. 644564) and HOBBIT (GA no. 688227).
             </div>
 
+          </div>
+        </div>
+        <div class="center aligned eight wide column" id="organization">
+
+          <a href="http://sda.tech" class="ui centered medium image">
+            <img src="static/imgs/sdafull.png">
+          </a>
+
+          <div class="ui centered three column wide grid">
+
+            <div class="center aligned column">
+              <a href="http://sda.tech" class="ui centered small image">
+                <img src="static/imgs/wdaqua.png">
+              </a>
+            </div>
+
+            <div class="center aligned column">
+              <a href="http://wdaqua.eu/" class="ui centered small image">
+                <img src="static/imgs/iais.gif">
+              </a>
+            </div>
+
+            <div class="left aligned column">
+              <a href="http://wdaqua.eu/" class="ui small image">
+                <img src="static/imgs/unibonn.png">
+              </a>
+            </div>
 
           </div>
 
-          <div class="eight wide column" id="asknow">
-            <span id="asknow-intro">
-              For other projects in this research area, visit: 
-            </span> <br>
-
-            <a href="http://sda.tech/research-topic/semantic-question-answering/">
-              <img class="ui middle aligned tiny image" src="static/imgs/asknowlogo.png">
-              <span id="asknow-text">AskNow</span>
-            </a>    
-
-          </div>
         </div>
 
       </div>
+
     </div>
+
+    <!--
+<div class="ui vertical center aligned inverted padded footer segment" id="footer">
+
+<div class="ui stackable divided grid container" id="footer-container">
+
+<div class="row">
+
+<div class="eight wide column" id="grant">
+
+<div id="grant-text">
+This work was partly supported by the grant from the European Union’s Horizon 2020 research Europe flag and innovation programme for the projects Big Data Europe (GA no. 644564) and HOBBIT (GA no. 688227).
+</div>
+
+
+</div>
+
+<div class="eight wide column" id="license">
+
+<img class="ui small middle aligned image" src="static/imgs/by.png"> 
+<span>
+LC-QuAD is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>.
+</span>
+
+
+
+</div>
+</div>
+
+<div class="row">
+
+<div class="eight wide column" id="asknow">
+<span id="asknow-intro">
+For other projects in this research area, visit: 
+</span> <br>
+
+<a href="http://sda.tech/research-topic/semantic-question-answering/">
+<img class="ui middle aligned tiny image" src="static/imgs/asknowlogo.png">
+<span id="asknow-text">AskNow</span>
+</a>
+
+</div>
+<div class="eight wide column" id="asknow">
+<span id="asknow-intro">
+For other projects in this research area, visit: 
+</span> <br>
+
+<a href="http://sda.tech/research-topic/semantic-question-answering/">
+<img class="ui middle aligned tiny image" src="static/imgs/asknowlogo.png">
+<span id="asknow-text">AskNow</span>
+</a>
+
+</div>
+</div>
+
+</div>
+</div>
+-->
 
 
 
