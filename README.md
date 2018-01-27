@@ -39,8 +39,9 @@ Code and files which are collected from varied sources, of good relations in DBP
 
 ### Changelog
 
-#### 0.1.2 - 24-01-2018
+#### 0.1.2 - 28-01-2018
 - Updated public website
+- Dataset now available in QALD format
 - Published train, test splits
 - Leaderboard underway
 
