@@ -261,7 +261,7 @@
       }
 
       #footer {
-        background-color: #eeeeee !important;
+        background-color: #eeeeee;
         font-family: "Fira Sans";
         padding-top: 4em;
       }
@@ -281,14 +281,6 @@
         font-family: "Fira Sans";
       }
 
-      #footer #contact .social.notlast {
-        padding-bottom: 0.6em;
-      }
-
-      #footer #contact .social.notfirst {
-        padding-top: 0.6em;
-      }
-
       #footer #contact #license {
         /*        display: flex;*/
         /*        flex-direction: row;*/
@@ -296,13 +288,24 @@
       }
 
       #footer #contact #license div {
-        padding-left: 1em;
+        /*        padding-left: 1em;*/
       }
 
       #footer #organization .grid {
         padding-top: 2em;
       }
 
+      #footer #organization #asknow #asknowtext {
+        font-size: 1.5em;
+        font-family: "Fira Sans Condensed";
+        color: inherit;
+        border-bottom: 1px dashed #424242;
+      }
+
+      #footer #organization #asknow #asknowtext:hover {
+        font-weight: 700;
+      }
+      
       @media screen and (max-device-width: 801px) {
         #body #people .cards .card .content .header {
           font-size: 1em;
@@ -311,6 +314,18 @@
         #body #people .cards .card .content .meta {
           font-size: 0.8em;
         }
+        
+        #footer #organization #asknow #asknowtext {
+          font-size: 1.1em;
+        }
+        
+        #footer .grid {
+          margin-bottom: -1em !important;
+        }
+      }
+      
+      #footer #credits {
+        font-size: 0.9em;
       }
 
     </style>
@@ -1170,12 +1185,12 @@ Molly is a personal assistant living in Paris.
         <div class="center aligned eight wide column" id="contact">
           <div class="footer-header">
 
-            <div class="ui social notlast doubling grid" id="license">
+            <div class="ui social notlast padded doubling grid" id="license">
 
               <div class="four wide column">
                 <a href="http://google.com" class="ui image">
                   <img  src="static/imgs/by.png"> 
-                </a>
+                  </a>
               </div>
 
               <div class="twelve wide column">
@@ -1202,20 +1217,23 @@ Molly is a personal assistant living in Paris.
 
           <div class="ui centered three column wide grid">
 
-            <div class="center aligned column">
-              <a href="http://sda.tech" class="ui centered small image">
-                <img src="static/imgs/wdaqua.png">
+            <div class="center aligned column" id="asknow">
+              <a href="http://sda.tech/research-topic/semantic-question-answering/" class="ui centered inline tiny image">
+                <img src="static/imgs/asknowlogo.png"> 
+              </a>
+              <a href="http://sda.tech/research-topic/semantic-question-answering/" id="asknowtext">
+                AskNow 
               </a>
             </div>
 
             <div class="center aligned column">
-              <a href="http://wdaqua.eu/" class="ui centered small image">
+              <a href="https://www.iais.fraunhofer.de/" class="ui centered small image">
                 <img src="static/imgs/iais.gif">
               </a>
             </div>
 
             <div class="left aligned column">
-              <a href="http://wdaqua.eu/" class="ui small image">
+              <a href="https://www.uni-bonn.de/" class="ui small image">
                 <img src="static/imgs/unibonn.png">
               </a>
             </div>
@@ -1225,128 +1243,12 @@ Molly is a personal assistant living in Paris.
         </div>
 
       </div>
+      
+      <div class="ui basic center aligned segment" id="credits">
+        Some icons on this page are by <a href="https://icons8.com/">Icons8</a>
+      </div>
 
     </div>
-
-    <!--
-<div class="ui vertical center aligned inverted padded footer segment" id="footer">
-
-<div class="ui stackable divided grid container" id="footer-container">
-
-<div class="row">
-
-<div class="eight wide column" id="grant">
-
-<div id="grant-text">
-This work was partly supported by the grant from the European Union’s Horizon 2020 research Europe flag and innovation programme for the projects Big Data Europe (GA no. 644564) and HOBBIT (GA no. 688227).
-</div>
-
-
-</div>
-
-<div class="eight wide column" id="license">
-
-<img class="ui small middle aligned image" src="static/imgs/by.png"> 
-<span>
-LC-QuAD is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>.
-</span>
-
-
-
-</div>
-</div>
-
-<div class="row">
-
-<div class="eight wide column" id="asknow">
-<span id="asknow-intro">
-For other projects in this research area, visit: 
-</span> <br>
-
-<a href="http://sda.tech/research-topic/semantic-question-answering/">
-<img class="ui middle aligned tiny image" src="static/imgs/asknowlogo.png">
-<span id="asknow-text">AskNow</span>
-</a>
-
-</div>
-<div class="eight wide column" id="asknow">
-<span id="asknow-intro">
-For other projects in this research area, visit: 
-</span> <br>
-
-<a href="http://sda.tech/research-topic/semantic-question-answering/">
-<img class="ui middle aligned tiny image" src="static/imgs/asknowlogo.png">
-<span id="asknow-text">AskNow</span>
-</a>
-
-</div>
-</div>
-
-</div>
-</div>
--->
-
-
-
-    <!--
-<div id="footer" class="ui vertical paddded footer segment">
-<div class="ui center aligned container">
-<div class="ui grid">
-
-
-
-
-<div class="six wide column" id="ack">
-
-This work was partly supported by the grant from the European Union’s Horizon 2020 research Europe flag and innovation programme for the projects Big Data Europe (GA no. 644564) and HOBBIT (GA no. 688227).
-TODO: ASK JENS TO PUT LINKS HERE
-</div>
-
-<div class="four wide column" id="footer_links">
-
-</div>
-
-<div class="six wide column" id="license_links">
-
-<div class="ui grid" id="licenses">
-
-<div class="row" id="cc">
-<div class="six wide column">
-<img class="ui fluid image" src="resources/by.png">
-</div>
-<div class="ten wide column">
-LC-QuAD is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>.</div>
-</div>
-
-
-</div>
-
-
-<div class="row" id="orgs">
-<b>Hosted By</b>
-<div class="ui small images">
-
-<a href="https://www.uni-bonn.de/" class="ui image">
-<img src="resources/unibonn.png">
-</a>
-
-<a href="https://www.iais.fraunhofer.de/" class="ui image">
-<img src="resources/iais.png">
-</a>
-
-</div>
-<a href="http://sda.cs.uni-bonn.de/" class="ui medium image">
-<img src="resources/sda.png">
-</a>
-
-</div>
-
-</div>
-
-</div>
-</div>
-</div>
--->
 
     <script src="https://code.jquery.com/jquery-migrate-3.0.0.js"></script>
     <script type="text/javascript" src="static/slick/slick.min.js"></script>
