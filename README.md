@@ -21,13 +21,13 @@ We _strongly_ recommend hosting this version locally. To do so, see [this guide]
 If your system doesn't require validation data, we encourage using validation data for training as well.
 
 **Format**: The dataset is released in JSON dumps, where the key 
-`corrected_answer` contains the question, and `query` contains the corresponding SPARQL query. 
+`corrected_question` contains the question, and `query` contains the corresponding SPARQL query. 
 
 The dataset generated has the following JSON structure, kept intact for . 
 ```
 {
  	'_id': 'UUID of the datapoint',
-  	'corrected_answer': 'Corrected, Final Question',
+  	'corrected_question': 'Corrected, Final Question',
 	'id': 'Template ID',
 	'query': ' SPARQL Query',
 	'template': 'Template used to create SPARQL Query',
