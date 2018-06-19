@@ -37,9 +37,14 @@ The dataset generated has the following JSON structure, kept intact for .
 
 ### Cite
 ```
-Trivedi, Priyansh, et al. 
-"LC-QuAD: A corpus for complex question answering over knowledge graphs." 
-International Semantic Web Conference. Springer, Cham, 2017.
+@inproceedings{trivedi2017lc,
+  title={Lc-quad: A corpus for complex question answering over knowledge graphs},
+  author={Trivedi, Priyansh and Maheshwari, Gaurav and Dubey, Mohnish and Lehmann, Jens},
+  booktitle={International Semantic Web Conference},
+  pages={210--218},
+  year={2017},
+  organization={Springer}
+}
 ```
 
 ### Benchmarking/Leaderboard
