@@ -17,8 +17,7 @@ LC-QuAD uses [DBpedia v04.16](https://wiki.dbpedia.org/dbpedia-version-2016-04) 
 **Versioning**: We use [DBpedia version 04-2016](https://wiki.dbpedia.org/dbpedia-version-2016-04) as our target KB. The public DBpedia endpoint (http://dbpedia.org/sparql) no longer uses this version, which might cause many SPARQL queries to not retrieve any answer.
 We _strongly_ recommend hosting this version locally. To do so, see [this guide](https://github.com/harsh9t/Dockerised-DBpedia-Virtuoso-Endpoint-Setup-Guide)
 
-**Splits**: We release the dataset split into _training_, _validation_, and _test_ in a 70:10:20 fashion.
-If your system doesn't require validation data, we encourage using validation data for training as well.
+**Splits**: We release the dataset split into _training_, and _test_ in a 80:20 fashion.
 
 **Format**: The dataset is released in JSON dumps, where the key 
 `corrected_question` contains the question, and `query` contains the corresponding SPARQL query. 
@@ -26,12 +25,12 @@ If your system doesn't require validation data, we encourage using validation da
 The dataset generated has the following JSON structure, kept intact for . 
 ```
 {
- 	'_id': 'UUID of the datapoint',
+ 	'_id': 'Unique ID of this datapoint',
   	'corrected_question': 'Corrected, Final Question',
 	'id': 'Template ID',
-	'query': ' SPARQL Query',
+	'query': 'SPARQL Query',
 	'template': 'Template used to create SPARQL Query',
-	'verbalized_question': 'Automatically generated, grammatically incorrect question'
+	'incorrect_question': 'Automatically generated, grammatically incorrect question'
 }
 ```
 
@@ -50,7 +49,7 @@ The dataset generated has the following JSON structure, kept intact for .
 ### Benchmarking/Leaderboard
 
 We're in the process of automating the benchmarking process (and updating results on our [webpage](http://lc-quad.sda.tech)).
-In the meantime, please get in touch with us at pc.priyansh@gmail.com, and we'll do it manually.
+In the meantime, please get in touch with us at priyansh.trivedi@uni-bonn.de, and we'll do it manually.
 Apologies for this inconvinience.
 
 ### Methodology 
