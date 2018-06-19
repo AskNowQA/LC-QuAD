@@ -3,46 +3,72 @@
 
 ### Introduction
 
+We release, and maintain a _gold standard_ KBQA (Question Answering over Knowledge Base) dataset 
+containing 5000 Question and SPARQL queries.
+LC-QuAD uses [DBpedia v04.16](https://wiki.dbpedia.org/dbpedia-version-2016-04) as the target KB.
 
-This framework aims to  create a large QA pairs, with their equivalent logical form. The primary objective while designing the framework for question generation was to generate a high quality large dataset with low domain expert intervention. In most of the datset, which has a logical form of the Question were generated manually. This process of writing formal expressions needs domain experts with a deep understanding of the underlying KB schema, and syntaxes of the logical form. 
+### Usage
 
-The dataset generated from the framework using DBpedia as the knowledge base is available at <https://figshare.com/projects/LC-QuAD/21812>.  
+**License**: You can download the dataset (released with a [GPL 3.0 License](LICENSE.txt)), or read below to know more.
 
-Refer to this document for a list of templates we have or will be focusing on - <https://docs.google.com/document/d/1N4KRy_xMD7B5cAnQWMiytRrPkZ-HwIEiZj4PbI-xROM/edit?usp=sharing>
+**Versioning**: We use [DBpedia version 04-2016](https://wiki.dbpedia.org/dbpedia-version-2016-04) as our target KB. The public DBpedia endpoint (http://dbpedia.org/sparql) no longer uses this version, which might cause many SPARQL queries to not retrieve any answer.
+We _strongly_ recommend hosting this version locally. To do so, see [this guide](https://github.com/harsh9t/Dockerised-DBpedia-Virtuoso-Endpoint-Setup-Guide)
 
-`Note: If you don't have access to the doc, please drop me a mail at pc.priyansh@gmail.com`
+**Splits**: We release the dataset split into _training_, _validation_, and _test_ in a 70:10:20 fashion.
+If your system doesn't require validation data, we encourage using validation data for training as well.
 
+**Format**: The dataset is released in JSON dumps, where the key 
+`corrected_answer` contains the question, and `query` contains the corresponding SPARQL query. 
 
-The dataset generated has the following JSON structure. 
-
+The dataset generated has the following JSON structure, kept intact for . 
 ```
 {
- 	u'_id': u'32 charachter long alpha-numeric ID',
-  	u'corrected_answer': u'Verbalized form by the First reviewer',
-	u'id': "template id in integer",
-	u'query': u' The actual SPARQL queries',
-	u'template': u'The tempalte of the SPARQL Query ',
-	u'verbalized_question': u'Semi verbalized query'
+ 	'_id': 'UUID of the datapoint',
+  	'corrected_answer': 'Corrected, Final Question',
+	'id': 'Template ID',
+	'query': ' SPARQL Query',
+	'template': 'Template used to create SPARQL Query',
+	'verbalized_question': 'Automatically generated, grammatically incorrect question'
 }
-
 ```
 
+### Cite
+```
+Trivedi, Priyansh, et al. 
+"LC-QuAD: A corpus for complex question answering over knowledge graphs." 
+International Semantic Web Conference. Springer, Cham, 2017.
+```
 
+### Benchmarking/Leaderboard
 
-### Branches
-#### develop
-Current default branch. Latest version of framework would be here.
+We're in the process of automating the benchmarking process (and updating results on our [webpage](lc-quad.sda.tech)).
+In the meantime, please get in touch with us at pc.priyansh@gmail.com, and we'll do it manually.
+Apologies for this inconvinience.
 
-#### relation-curation
-Code and files which are collected from varied sources, of good relations in DBPedia, making our job easier. This is mostly taken from other research projects. The commit messages will contain information of the sources, for future crediting. 
+### Methodology 
 
+**Overview**
+- Automatically create **SPARQL** queries.
+- Convert SPARQL queries to _intermediary NLQs._
+- Manually correct intermediary NLQs to create **Questions**
+
+We start with a set of [Seed Entities](@TODO), and [Predicate Whitelist](@TODO).
+Using the whitelist, we generate 2-hop subgraphs around seed entities.
+With a seed entity as _supposed_ answer, we juxtapose [SPARQL Templates](@TODO) onto the subgraph, and generate SPARQL queries.
+
+Corresponding to SPARQL template, and based on certain conditions, we assign hand-made [NL question templates]() to the SPARQLs.
+
+Finally, we follow a two-step (Correct, Review) system to generate a grammatically correct question for every template-generated one.
 
 ### Changelog
+
+#### 0.1.3 - 19-06-2018
+- Published train-test splits
+- Website Updated
 
 #### 0.1.2 - 28-01-2018
 - Updated public website
 - Dataset now available in QALD format
-- Published train, test splits
 - Leaderboard underway
 
 #### 0.1.1 -  27-10-2017
