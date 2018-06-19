@@ -30,7 +30,7 @@ The dataset generated has the following JSON structure, kept intact for .
 	'id': 'Template ID',
 	'query': 'SPARQL Query',
 	'template': 'Template used to create SPARQL Query',
-	'incorrect_question': 'Automatically generated, grammatically incorrect question'
+	'intermediary_question': 'Automatically generated, grammatically incorrect question'
 }
 ```
 
