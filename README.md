@@ -1,4 +1,4 @@
-# LC-QuAD
+ # LC-QuAD
 ## Largescale Complex Question Answering Dataset
 
 ### Introduction
@@ -6,6 +6,8 @@
 We release, and maintain a _gold standard_ KBQA (Question Answering over Knowledge Base) dataset 
 containing 5000 Question and SPARQL queries.
 LC-QuAD uses [DBpedia v04.16](https://wiki.dbpedia.org/dbpedia-version-2016-04) as the target KB.
+
+Data: [Train](train-data.json), [Test](test-data.json) | [Webpage](http://lc-quad.sda.tech/) | [Paper](http://lc-quad.sda.tech/resources/iswc2017.pdf)
 
 ### Usage
 
@@ -41,7 +43,7 @@ International Semantic Web Conference. Springer, Cham, 2017.
 
 ### Benchmarking/Leaderboard
 
-We're in the process of automating the benchmarking process (and updating results on our [webpage](lc-quad.sda.tech)).
+We're in the process of automating the benchmarking process (and updating results on our [webpage](http://lc-quad.sda.tech)).
 In the meantime, please get in touch with us at pc.priyansh@gmail.com, and we'll do it manually.
 Apologies for this inconvinience.
 
