@@ -52,11 +52,12 @@ Apologies for this inconvinience.
 - Convert SPARQL queries to _intermediary NLQs._
 - Manually correct intermediary NLQs to create **Questions**
 
-We start with a set of [Seed Entities](@TODO), and [Predicate Whitelist](@TODO).
+We start with a set of [Seed Entities](resources/entities.txt), and [Predicate Whitelist](resources/predicates.txt).
 Using the whitelist, we generate 2-hop subgraphs around seed entities.
-With a seed entity as _supposed_ answer, we juxtapose [SPARQL Templates](@TODO) onto the subgraph, and generate SPARQL queries.
+With a seed entity as _supposed_ answer, we juxtapose [SPARQL Templates](resources/templates.json) onto the subgraph, and generate SPARQL queries.
 
-Corresponding to SPARQL template, and based on certain conditions, we assign hand-made [NL question templates]() to the SPARQLs.
+Corresponding to SPARQL template, and based on certain conditions, we assign hand-made NL question templates to the SPARQLs.
+_Refer to [this diagram](resources/nomenclature.png) to understand the nomenclature used in templates._
 
 Finally, we follow a two-step (Correct, Review) system to generate a grammatically correct question for every template-generated one.
 

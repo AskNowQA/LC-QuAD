@@ -1,2 +1,0 @@
-http://dbpedia.org/ontology/Agent
-http://dbpedia.org/ontology/Place
