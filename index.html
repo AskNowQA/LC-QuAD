@@ -209,6 +209,11 @@
         text-decoration: line-through;
       }
 
+      #body #leaderboard #sidenote {
+        text-align: right;
+        color: #757575;
+      }
+      
       /* Usage Guide */
 
       #body #content #guide pre .json_field {
@@ -249,18 +254,18 @@
         font-weight: 400;
       }
 
-      #body #content #guide [data-tab="third"].segment .accordion .accordion-title-version {
+      #body #content #guide [data-tab="fourth"].segment .accordion .accordion-title-version {
         font-family: "Fira Sans", sans-serif;
         font-size: 1.4rem;
         font-weight: 600;
         color: #424242;
       }
 
-      #body #content #guide [data-tab="third"].segment .accordion .accordion-title-date {
+      #body #content #guide [data-tab="fourth"].segment .accordion .accordion-title-date {
         font-size: 1.4rem;
       }
 
-      #body #content #guide [data-tab="fourth"].segment .mono {
+      #body #content #guide [data-tab="third"].segment .mono {
         font-family: "Fira Mono", monospace;
         text-rendering: optimizeLegibility;
         line-height: 1.4em;
@@ -268,7 +273,7 @@
         color: #424242;
         }
       
-      #body #content #guide [data-tab="fourth"].segment .mono span#indent{
+      #body #content #guide [data-tab="third"].segment .mono span#indent{
        padding-left: 2em;
         font-size: 0.9rem;
       }
@@ -382,11 +387,11 @@
           </div>
           <!--
 <div id="maintitle">
-LC-QuAD  <span id="funny">༼ つ ◕_◕ ༽つ</span>
+LC-QuAD  
 </div>
 -->
           <div id="subtitle">
-            <span class="sp">L</span>argescale <span class="sp">C</span>omplex - <span class="sp">Qu</span>estion <span class="sp">A</span>nswering <span class="sp">D</span>ataset
+            <span class="sp">L</span>argescale <span class="sp">C</span>omplex <span class="sp">Qu</span>estion <span class="sp">A</span>nswering <span class="sp">D</span>ataset
           </div>
         </div>
       </div>
@@ -978,7 +983,8 @@ LC-QuAD  <span id="funny">༼ つ ◕_◕ ༽つ</span>
 
         <!-- Abstract -->
         <div class="ui padded basic segment" id="abstract">
-
+            
+<!--          <h2 class="ui header"><span id="funny">༼ つ ◕_◕ ༽つ</span></h2>-->
           <h2 class="ui header">What?</h2>
           <div id="description">
 
@@ -1026,6 +1032,11 @@ LC-QuAD  <span id="funny">༼ つ ◕_◕ ༽つ</span>
 
             </tbody>
           </table>
+          
+          <div id="sidenote">
+            <span id="asterix">*</span> 
+            We're in the process of automating the benchmarking process. In the meantime, please get in touch with us at <a class="underline" href="mailto:priyansh.trivedi@uni-bonn.de?Subject=LC-QuAD Benchmarking" target="_top">priyansh.trivedi@uni-bonn.de</a>, and we'll do it manually. Apologies for this inconvinience.
+          </div>
         </div>
 
         <!-- Guides -->
@@ -1035,8 +1046,8 @@ LC-QuAD  <span id="funny">༼ つ ◕_◕ ༽つ</span>
           <div class="ui top attached tabular menu">
             <a class="active item" data-tab="first">Docs</a>
             <a class="item" data-tab="second">Schema</a>
-            <a class="item" data-tab="third">Changelog</a>
-            <a class="item" data-tab="fourth">Cite</a>
+            <a class="item" data-tab="third">Cite</a>
+            <a class="item" data-tab="fourth">Changelog</a>
           </div>
 
           <div class="ui bottom attached active padded tab segment" data-tab="first">
@@ -1064,7 +1075,7 @@ LC-QuAD  <span id="funny">༼ つ ◕_◕ ༽つ</span>
 
           </div>
 
-          <div class="ui bottom attached tab segment" data-tab="third">
+          <div class="ui bottom attached tab segment" data-tab="fourth">
             <!--
 <ul class="ui bulleted list">
 <li >
@@ -1080,12 +1091,12 @@ LC-QuAD  <span id="funny">༼ つ ◕_◕ ༽つ</span>
             <div class="ui accordion">
               <div class="title active">
                 <i class="dropdown icon"></i>
-                <span class="accordion-title-version">v0.1.3</span> <span class="accordion-title-date">- 24-01-2018</span>
+                <span class="accordion-title-version">v0.1.3</span> <span class="accordion-title-date">- 21-06-2018</span>
               </div>
               <div class="content active">
                 <ul class="transition visible" style="display: block !important;">
                   <li>Published train, test splits</li>
-                  <li>Updated Website</li>
+                  <li>Updated Webpage</li>
                   <li>Dataset now hosted on <a href="https://github.com/AskNowQA/LC-QuAD">Github</a> as opposed to the <a href="https://figshare.com/projects/LC-QuAD/21812">Fighsare Project</a></li>
                 </ul>
               </div>
@@ -1093,10 +1104,9 @@ LC-QuAD  <span id="funny">༼ つ ◕_◕ ༽つ</span>
                 <i class="dropdown icon"></i>
                 <span class="accordion-title-version">v0.1.2</span> <span class="accordion-title-date">- 24-01-2018</span>
               </div>
-              <div class="content active">
+              <div class="content">
                 <ul class="transition visible" style="display: block !important;">
                   <li>Dataset now available in QALD format</li>
-                  <li>Published train, test splits</li>
                   <li>Leaderboard underway!</li>
                 </ul>
               </div>
@@ -1124,13 +1134,13 @@ LC-QuAD  <span id="funny">༼ つ ◕_◕ ༽つ</span>
             </div>
           </div>
                 
-          <div class="ui bottom attached padded tab segment" data-tab="fourth">
+          <div class="ui bottom attached padded tab segment" data-tab="third">
             
             <div id="cite" class="mono">
               @inproceedings{trivedi2017lc,<br>
                 <span id="indent">title={Lc-quad: A corpus for complex question answering over knowledge graphs},</span><br>
                 <span id="indent">author={Trivedi, Priyansh and Maheshwari, Gaurav and Dubey, Mohnish and Lehmann, Jens},</span><br>
-                <span id="indent">booktitle={International Semantic Web Conference},</span><br>
+                <span id="indent">booktitle={Proceedings of the 16th International Semantic Web Conference (ISWC)},</span><br>
                 <span id="indent">pages={210--218},</span><br>
                 <span id="indent">year={2017},</span><br>
                 <span id="indent">organization={Springer}</span><br>
@@ -1144,7 +1154,7 @@ LC-QuAD  <span id="funny">༼ つ ◕_◕ ༽つ</span>
         <div class="ui padded segment" id="people">
 
           <h2 class="ui header">People</h2>
-          <div class="ui four doubling link cards">
+          <div class="ui five doubling link cards">
 
             <div class="card">
               <a class="image" href="http://sda.cs.uni-bonn.de/people/prof-dr-jens-lehmann/">
@@ -1206,7 +1216,9 @@ Molly is a personal assistant living in Paris.
               <div class="content">
                 <div class="header">The Coffee Machine</div>
                 <div class="meta">
-                  <span class="date">Lives in the room next to ours, and outputs the necter of Gods, and unending inspiration.</span>
+                  <span class="date">
+                    Giver of God's nectar.
+                  </span>
                 </div>
 
               </div>
