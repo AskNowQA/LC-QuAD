@@ -1,8 +1,11 @@
  # LC-QuAD
 ## Largescale Complex Question Answering Dataset
 
-### Links 
- :hatching_chick: [Train](train-data.json), [Test](test-data.json) Data | :earth_africa: [Webpage](http://lc-quad.sda.tech/) | :page_facing_up: [Paper](http://lc-quad.sda.tech/resources/iswc2017.pdf) 
+### Download 
+ :hatching_chick: [Train](train-data.json), [Test](test-data.json) Data 
+ 
+### Links
+:earth_africa: [Webpage](http://lc-quad.sda.tech/) | :page_facing_up: [Paper](http://lc-quad.sda.tech/resources/iswc2017.pdf) | :office: [Lab](http://sda.cs.uni-bonn.de/)
 
 ### Introduction
 
