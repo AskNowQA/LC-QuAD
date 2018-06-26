@@ -5,7 +5,7 @@
  :hatching_chick: [Train](train-data.json), [Test](test-data.json) Data 
  
 ### Links
-:earth_africa: [Webpage](http://lc-quad.sda.tech/) | :page_facing_up: [Paper](http://lc-quad.sda.tech/resources/iswc2017.pdf) | :office: [Lab](http://sda.cs.uni-bonn.de/)
+:earth_africa: [Webpage](http://lc-quad.sda.tech/) | :page_facing_up: [Paper](http://lc-quad.sda.tech/static/ISWC2017_paper_152.pdf) | :office: [Lab](http://sda.cs.uni-bonn.de/)
 
 ### Introduction
 
