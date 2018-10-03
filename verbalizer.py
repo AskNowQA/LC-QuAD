@@ -26,7 +26,7 @@ class Verbalizer:
 
 	'''
 		Class variables. 
-			template_id: the template ID (corresponds to the file from where we pick sparqls. Corresponds to ID in templates.py)
+			template_id: the template ID (corresponds to the file from where we pick sparqls. Corresponds to ID in templates.json)
 			has_x: if the x (or x's type) has been generated and expected to be in the mapping. 
 			has_uri: same for URI
 			template type: vanilla (for not count/filter/ask), count, filter_a, filter_b, ask (@TODO: Add a reference of this on the Doc)

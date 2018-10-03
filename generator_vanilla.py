@@ -1,191 +1,185 @@
-'''This file specifically generates data set for template 3 with a given set of entites.'''
+'''
+    This file generates subgraphs and SPARQL for a given set of entites.
+
+    Changelog:
+        -> Removed probabilistic filtering (for easier deployment)
+'''
 
 # Importing some external libraries
 from pprint import pprint
 import networkx as nx
 import numpy as np
+import traceback
+import warnings
 import pickle
+import random
 import json
 import copy
-import traceback
-import random
 import uuid
+import time
+
 
 # Importing internal classes/libraries
+from utils.exceptions import *
 import utils.dbpedia_interface as db_interface
 import utils.natural_language_utilities as nlutils
 import utils.subgraph as subgraph
-import time
 
-# @TODO: put this class there
+random.seed(42)
 
-'''
-    Initializing some stuff. Namely: DBpedia interface class.
-    Reading the list of 'relevant' properties.
-'''
+# DBpedia interface object #To be instantiated when the code is run by main script/unit testing script
+dbp = None
 
-dbp = None  # DBpedia interface object #To be instantiated when the code is run by main script/unit testing script
-relevant_properties = open('resources/relations_merged.txt').read().split('\n')     # Contains the whitelisted props types
-relevent_entity_classes = open('resources/entity_classes.txt').read().split('\n')   # Contains whitelisted entities classes
-list_of_entities = open('resources/entities.txt').read().split('\n')                # Contains list of entites for which the question would be asked
-probability_property = {}                                                           # A list of all the whitelisted properties and their corresponding probabilies (of being selected for the subgraph)
-for line in open('resources/relations-with-probability.txt'):
-    prop,p = line.split()
-    probability_property[prop] = float(p)
+# Contains the whitelisted props types
+predicates = open('resources/relations.txt', 'r').read().split('\n')
+
+# Contains whitelisted entities classes
+entity_classes = open('resources/entity_classes.txt', 'r').read().split('\n')
+
+# Contains list of entites for which the question would be asked
+entities = open('resources/entities.txt', 'r').read().split('\n')
+
+# Contains all the SPARQL templates existing in templates.py
+templates = json.load(open('templates.json'))
+
 entity_went_bad = []
-
-templates = json.load(open('templates.py'))  # Contains all the templates existing in templates.py
 sparqls = {}  # Dict of the generated SPARQL Queries.
-try:
-    properties_count = pickle.load(open('resources/properties_count.pickle'))
-except:
-    print "Cannot find pickled properties count."
-    traceback.print_exc()
-    raw_input("Press enter to continue")
-    properties_count = {}
-    ''' 
-        dictionary of properties. with key being the parent entity and value would be a dictionary with key peing name
-        of property and value being number of times it has already occured .
-        {"/agent" : [ {"/birthPlace" : 1 }, {"/deathPlace" : 2}] }
 
-        This needs to be pickled.
-    '''
+# Some macros because hardcoding kills puppies
+DEBUG = True
+NUM_ANSWER_COUNTABLE = 7
+NUM_ANSWER_MAX = 10
+FLUSH_THRESHOLD = 100
+
+
+''' 
+    A dictionary of properties. 
+    **key** parent entity 
+    **value** a dictionary {'predicate':count}
+        **key** of property and **value** being number of times it has already occured .
+    {"/agent" : [ {"/birthPlace" : 1 }, {"/deathPlace" : 2}] }
+
+    This needs to be pickled. @TODO: When?
+'''
+try:
+    predicates_count = pickle.load(open('resources/properties_count.pickle', 'rb'))
+except:
+    warnings.warn("Cannot find pickled properties count.")
+    traceback.print_exc()
+    predicates_count = {}
+
 
 '''
     Some SPARQL Queries.
     Since this part of the code requires sending numerous convoluted queries to DBpedia,
         we best not clutter the DBpedia interface class and rather simply declare them here.
 
-    Note: The names here can be confusing. Refer to the diagram above to know what each SPARQL query tries to do.
+    Note: The names here can be confusing. Refer to the diagram (resources/nomenclature.png) 
+        to know what each SPARQL query tries to do.
 '''
-
 one_triple_right = '''
-            SELECT DISTINCT ?p ?e
+            SELECT DISTINCT ?p ?e ?type
             WHERE {
-                <%(e)s> ?p ?e.
-
+                <%(e)s> ?p ?e .
+                ?e <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?type .
             }'''
 
 one_triple_left = '''
             SELECT DISTINCT ?e ?p ?type
             WHERE {
-                ?e ?p <%(e)s>.
-
+                ?e ?p <%(e)s> .
+                ?e <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?type .
             }'''
 
-'''
-    ?e <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?type
-    This cell houses the script which will build a subgraph as shown in picture above for each a given URI.
-    @TODO: do something in cases where certain nodes of the local subgraph are not found.
-            Will the code throw errors? How to you take care of them?
-'''
 
-
-def pruning(_results, _keep_no_results = 100, _filter_properties = True, _filter_literals = True, _filter_entities = False ):
+def filter(_results,
+           _keep_no_results=None,
+           _filter_predicates=True,
+           _filter_literals=True,
+           _filter_entities=False,
+           _filter_count=False,
+           _k=5
+           ):
     '''
-    Function: Implements pruing in the results . used to push the results of different queries into the subgraph.
-        >First prunes based on properties and entite classes. After this if the result length is still more than
-        _keep_no_result , randomly selects _keep_no_results from the result list. The output can then be sent for insertion in the graph
+    Implements pruing in the results.
+    Used to push the results of different queries into the subgraph.
+
+    Logic:
+        It First prunes based on properties and entite classes.
+        After this if the result length is still more than _keep_no_result,
+            randomly selects _keep_no_results from the result list.
+        The output can then be sent to be put in the graph.
+
+    @TODO: implement _filter_entities filter
+
+    :param _results: list: a result list which contains the sparql variables '?e', '?p', '?type'.
+                They can be of either left or right queries as the defined above.
+    :param _keep_no_results: int: a hard limit to the length of list. Leave if want unbounded.
+    :param _filter_predicates: bool: if True, only properties existing in properties whitelist will be returned.
+    :param _filter_literals: bool: if True, no literals will be returned.
+    :param _filter_entities: bool: if True, only entities belonging to `entity_classes` will be returned.
+    :param _filter_count: bool: if True, we ensure that only _k instances of a property alongwith entity type are returned
+    :param _k: int: limit on _filter_count
 
     :return: A list of results which can directly be used for inserting into a graph
-    _results: a result list which contains the sparql variables 'e' and 'p'.
-                They can be of either left or right queries as the cell above
-        _labels: a tuple with three strings, which depict the nomenclature of the resources to be pushed
-        _direction: True -> one triple right; False -> one triple left
-        _origin_node: the results variable only gives us one p and one e.
-                Depending on the direction, this node will act as the other e to complete the triple
-        _filter_properties: if True, only properties existing in properties whitelist will be pushed in.
-        _filter_entities: if True, only entites belonging to a particular classes present in the whitelist will be pushed in.
-
     '''
-    temp_results = []
-    # properties_count = {}
+    global predicates_count
 
     results_list = []
+
     for result in _results[u'results'][u'bindings']:
-        prop = result[u'p'][u'value']
-        if _filter_properties:
+        pred = result[u'p'][u'value']
+        ent = result[u'e'][u'value']
+        cls = dbp.get_most_specific_class(ent) if not nlutils.is_literal(ent) else None
 
-            #If the property is not in the whitelist, remove that triple
-            if not prop.split('/')[-1] in relevant_properties:
-                continue
+        # Put in filters
+        if _filter_predicates and not pred in predicates: continue
+        if _filter_literals and nlutils.is_literal(ent): continue
+        if _filter_entities and not cls in entity_classes: continue
 
+        # Log this in property count
+        predicate_count_obj = predicates_count.setdefault(cls, {})
+        count = predicate_count_obj.setdefault(pred, 0)
+        if _filter_count and count > _k:
+            continue
+        else:
+            predicates_count[cls][count] += 1
 
         results_list.append(result)
 
-    # #Keep only 500 triples     
-    # if len(results_list) > 500:
-    #     results_list = random.sample(results_list,500)
+    if _keep_no_results and (len(results_list) > _keep_no_results):
+        return random.sample(results_list, _keep_no_results)
+
+    return results_list
 
 
-    for result in results_list:
-        # Parse the results into local variables (for readibility)
-        prop = result[u'p'][u'value']
-        ent = result[u'e'][u'value']
-        
-        if _filter_literals:
-            if nlutils.has_literal(ent):
-                continue
-
-        if _filter_properties:
-            # Filter results based on important properties
-            if not prop.split('/')[-1] in relevant_properties:
-                continue
-
-            ent_parent = dbp.get_most_specific_class(ent)
-
-            # '''Another probabilistic filter being implemented here. Details on doc'''
-            # if np.random.uniform(0,1) > probability_property[prop.split('/')[-1]]:
-            #     continue
-
-            try:
-                if properties_count[ent_parent][prop.split('/')[-1]] > 1:
-                    continue
-                else:
-                    properties_count[ent_parent][prop.split('/')[-1]] = properties_count[ent_parent][prop.split('/')[-1]] + 1
-            except:
-                try:
-                    properties_count[ent_parent][prop.split('/')[-1]] = 1
-                except:
-                    properties_count[ent_parent] = {prop.split('/')[-1]: 1}
-
-        # if _filter_entities:
-        #     # filter entities based on class
-        #     if not [i for i in dbp.get_type_of_resource(ent) if i in relevent_entity_classes]:
-        #         pass
-        # Finally, insert, in a temporary list for random pruning
-        temp_results.append(result)
-
-    if (len(temp_results) > _keep_no_results):
-        return random.sample(temp_results,_keep_no_results)
-    # print len(temp_results)
-    return temp_results
-
-def insert_triple_in_subgraph(G, _results, _labels, _direction, _origin_node, _filter_properties=True, _filter_literals=True,_filter_entities = False):
-    '''
+def insert_triple_in_subgraph(G,
+                              _results,
+                              _labels,
+                              _direction,
+                              _origin_node):
+    """
         Function used to push the results of different queries into the subgraph.
         USAGE: only within the get_local_subgraph function.
 
-        INPUTS:
-        _subgraph: the subgraph object within which the triples are to be pushed
-        _results: a result list which contains the sparql variables 'e' and 'p'.
-                They can be of either left or right queries as the cell above
-        _labels: a tuple with three strings, which depict the nomenclature of the resources to be pushed
-        _direction: True -> one triple right; False -> one triple left
-        _origin_node: the results variable only gives us one p and one e.
+    :param G: the subgraph object within which the triples are to be pushed
+    :param _results: a result list which contains the sparql variables 'e' and 'p'.
+                They can be of either left or right queries as the cell above.
+    :param _labels: a tuple with three strings, which depict the nomenclature of the resources to be pushed
+    :param _direction: True -> one triple right; False -> one triple left
+    :param _origin_node: the results variable only gives us one p and one e.
                 Depending on the direction, this node will act as the other e to complete the triple
-        _filter_properties: if True, only properties existing in properties whitelist will be pushed in.
-        _filter_entities: if True, only entites belonging to a particular classes present in the whitelist will be pushed in.
-    '''
+    :return: Nothing
+    """
 
     for result in _results:
         # Parse the results into local variables (for readibility)
 
-        #A bit of cleaning here might help
+        # A bit of cleaning here might help
 
         prop = result[u'p'][u'value']
         ent = result[u'e'][u'value']
-        
+
         if not nlutils.is_clean_url(ent):
             continue
 
@@ -201,124 +195,7 @@ def insert_triple_in_subgraph(G, _results, _labels, _direction, _origin_node, _f
             subgraph.insert(G=G, data=[(_labels[0], ent), (_labels[1], prop), (_labels[2], _origin_node)])
 
 
-def get_local_subgraph(_uri):
-    # Collecting required variables: DBpedia interface, and a new subgraph
-    global dbp
-
-    # Create a new graph
-    G = nx.DiGraph()
-    access = subgraph.accessGraph(G)
-
-    ########### e ?p ?e (e_to_e_out and e_out) ###########
-    start = time.clock()
-    results = dbp.shoot_custom_query(one_triple_right % {'e': _uri})
-    # print "shooting custom query to get one triple right from the central entity e" , str(time.clock() - start)
-    # print "total number of entities in right of the central entity is e ", str(len(results))
-    labels = ('e', 'e_to_e_out', 'e_out')
-
-    # Insert results in subgraph
-    # print "inserting triples in right graph "
-    start = time.clock()
-    results = pruning(_results=results, _keep_no_results=10, _filter_properties=True, _filter_literals=True, _filter_entities=False)
-    insert_triple_in_subgraph(G, _results=results,
-                              _labels=labels, _direction=True,
-                              _origin_node=_uri, _filter_properties=True)
-    # print "inserting the right triple took " , str(time.clock() - start)
-    ########### ?e ?p e (e_in and e_in_to_e) ###########
-    # raw_input("check for right")
-    results = dbp.shoot_custom_query(one_triple_left % {'e': _uri})
-    labels = ('e_in', 'e_in_to_e', 'e')
-    # print "total number of entity left of the central entity e is " , str(len(results))
-    # Insert results in subgraph
-    # print "inserting into left graph "
-    start = time.clock()
-    results = pruning(_results=results, _keep_no_results=100, _filter_properties=True, _filter_literals=True,
-                      _filter_entities=False)
-    insert_triple_in_subgraph(G, _results=results,
-                              _labels=labels, _direction=False,
-                              _origin_node=_uri, _filter_properties=True)
-    # print "inserting triples for left of the central entity  took ", str(time.clock() - start)
-    ########### e p eout . eout ?p ?e (e_out_to_e_out_out and e_out_out) ###########
-
-    # Get all the eout nodes back from the subgraph.
-    start = time.clock()
-    e_outs = []
-    op = access.return_outnodes('e')
-    for x in op:
-        for tup in x:
-            e_outs.append(tup[1].getUri())
-
-    labels = ('e_out', 'e_out_to_e_out_out', 'e_out_out')
-
-    # print "insert into e_out_to_e_out_out", str(len(e_outs))
-    # raw_input("check !!")
-    for e_out in e_outs:
-        start = time.clock()
-        results = dbp.shoot_custom_query(one_triple_right % {'e': e_out})
-        # Insert results in subgraph
-        results = pruning(_results=results, _keep_no_results=100, _filter_properties=True, _filter_literals=True,
-                          _filter_entities=False)
-        insert_triple_in_subgraph(G, _results=results,
-                                  _labels=labels, _direction=True,
-                                  _origin_node=e_out, _filter_properties=True)
-
-    ########### e p eout . ?e ?p eout  (e_out_in and e_out_in_to_e_out) ###########
-
-    # Use the old e_outs variable
-    labels = ('e_out_in', 'e_out_in_to_e_out', 'e_out')
-    # print "insert into e_out_in_to_e_out_out", str(len(e_outs))
-    for e_out in e_outs:
-        results = dbp.shoot_custom_query(one_triple_left % {'e': e_out})
-
-        # Insert results in subgraph
-        results = pruning(_results=results, _keep_no_results=20, _filter_properties=True, _filter_literals=True,
-                          _filter_entities=False)
-        insert_triple_in_subgraph(G, _results=results,
-                                  _labels=labels, _direction=False,
-                                  _origin_node=e_out, _filter_properties=True)
-
-    ########### ?e ?p ein . ein p e  (e_in_in and e_in_in_to_e_in) ###########
-
-    # Get all the ein nodes back from subgraph
-    e_ins = []
-    op = access.return_innodes('e')
-    for x in op:
-        for tup in x:
-            e_ins.append(tup[0].getUri())
-
-    labels = ('e_in_in', 'e_in_in_to_e_in', 'e_in')
-
-    for e_in in e_ins:
-        results = dbp.shoot_custom_query(one_triple_left % {'e': e_in})
-
-        # Insert results in subgraph
-        results = pruning(_results=results, _keep_no_results=20, _filter_properties=True, _filter_literals=True,
-                          _filter_entities=False)
-        insert_triple_in_subgraph(G, _results=results,
-                                  _labels=labels, _direction=False,
-                                  _origin_node=e_in, _filter_properties=True)
-    ########### ein ?p ?e . ein p e  (e_in_to_e_in_out and e_in_out) ###########
-
-    # Use the old e_ins variable
-    labels = ('e_in', 'e_in_to_e_in_out', 'e_in_out')
-    for e_in in e_ins:
-        results = dbp.shoot_custom_query(one_triple_right % {'e': e_in})
-
-        # Insert results in subgraph
-        results = pruning(_results=results, _keep_no_results=10, _filter_properties=True, _filter_literals=True,
-                          _filter_entities=False)
-        insert_triple_in_subgraph(G, _results=results,
-                                  _labels=labels, _direction=True,
-                                  _origin_node=e_in, _filter_properties=True)
-
-
-    print "Done generating subgraph for entity ", _uri
-
-    # Pushed all the six kind of nodes in the subgraph. Done!
-    return G
-
-
-def fill_specific_template(_template_id, _mapping,_debug=False):
+def fill_specific_template(_template_id, _mapping):
     '''
         Function to fill a specific template.
         Given the template ID, it is expected to fetch the template from the set
@@ -331,9 +208,13 @@ def fill_specific_template(_template_id, _mapping,_debug=False):
         -> create copy of template from the list
         -> get the needed metadata
         -> push it in the list
+        :param _template_id: int: ID of template (from templates.json)
+        :param _mapping: dict: things to put on the template
+
+        :return @TODO: fill this.
     '''
 
-    global sparql, templates, outputfile
+    global sparqls, templates
 
     # Create a copy of the template
     template = [x for x in templates if x['id'] == _template_id][0]
@@ -342,89 +223,71 @@ def fill_specific_template(_template_id, _mapping,_debug=False):
     # From the template, make a rigid query using mappings
     try:
         template['query'] = template['template'] % _mapping
-        uid = uuid.uuid4()
-        template['_id'] = uid.hex
+        template['_id'] = uuid.uuid4().hex
         template['corrected'] = 'false'
     except KeyError:
-        print "fill_specific_template: ERROR. Mapping does not match. ID: ", _template_id
-        return False
+        raise InvalidTemplateMappingError("Something doesn't fit right.")
 
     # Include the mapping within the template object
     template['mapping'] = _mapping
 
     # Get the Answer of the query
-    # get_answer now returns a dictionary with appropriate variable bindings.
-    #claming answer to not more than 10.
-    temp_answer = dbp.get_answer(template['query'])
-    temp_new_answer = {}
-    for key in temp_answer:
+    answer = dbp.get_answer(template['query'])
+    for key in answer.keys():
+        """
+            Based on answers, you make the following decisions:
+                > If the query has 7 or more answers, we claim that this is a good count query. 
+                    Less than that, and its a bad idea.
+                    
+                > If a variable has more than ten values matched to it, clamp it to 9   
+        
+            Note: expected keys here: x; uri
+        """
 
         #For count templates
         if key == "uri":
-            if len(temp_answer[key]) > 7:
-                #can act as a count query 
-                template['countable'] = "true"
-            else:
-                template['countable'] = "false"
+            #can act as a count query
+            template['countable'] = "true" if len(answer[key]) > NUM_ANSWER_COUNTABLE else "false"
 
         #Store the number of answers in the data too. Will help, act as a good filter and everything.
-        template['answer_count'] = {}
-        template['answer_count'][key] =  len(list(set(temp_answer[key])))
+        template['answer_count'] = {key: len(list(set(answer[key])))}
 
-        if len(temp_answer[key]) > 10:
-            temp_new_answer[key] = temp_answer[key][0:9]
-        else:
-            temp_new_answer[key] = temp_answer[key]
-    template['answer'] = temp_new_answer
+        # Clamp the answes at NUM_ANSWERS_MAX
+        answer[key] = answer[key][:max(len(answer[key]), NUM_ANSWER_MAX)]
+
+    template['answer'] = answer
     
-    # Get the most specific type of the answers.
-    '''
+    """
         ATTENTION: This can create major problems in the future.
         We are assuming that the most specific type of one 'answer' would be the most specific type of all answers.
         In cases where answers are like Bareilly (City), Uttar Pradesh (State) and India (Country),
             the SPARQL and NLQuestion would not be the same.
             (We might expect all in the answers, but the question would put a domain restriction on answer.)
 
-        @TODO: attend to this!
-    '''
-    template['answer_type'] = {}
-    for variable in template['answer']:
-        template['answer_type'][variable] = dbp.get_most_specific_class(template['answer'][variable][0])
-        template['mapping'][variable] = template['answer'][variable][0]
+        [Fixed] @TODO: attend to this? No, lets let it be. For the sake of performance.
+        @TODO: Why do we store only one answer in template['mapping']?
+    """
+    # Get the most specific type of the answers.
+    template['answer_type'] = {variable: dbp.get_most_specific_class(variable[0]) for variable in template['answer']}
+    template['mapping'] = {variable: variable[0] for variable  in template['answer']}
 
-    mapping_type = {}
-    for key in template['mapping']:
-        mapping_type[key] = dbp.get_type_of_resource(template['mapping'][key],_filter_dbpedia = True)
+    # Also get the classes of all the things we're putting in our SPARQL
+    template['mapping_type'] = {key: dbp.get_type_of_resource(key,_filter_dbpedia = True)
+                    for key in template['mapping']}
+    if DEBUG:
+        print(template)
 
-    template['mapping_type'] = mapping_type
-    # if _debug:
-    #     pprint(template)
-    # Push it onto the SPARQL List
-    # perodic write in file.
-    # @TODO: instead of file use a database.
+    # FINALLY, Put this SPARQL in
+    sparqls[_template_id] = sparqls.setdefault(_template_id, []).append(template)
 
-    #WRITING MOVED TO THE LAST OF THE FILE PERMANENTLY
-    try:
-        sparqls[_template_id].append(template)
-        # print len(sparqls[_template_id])
-        if len(sparqls[_template_id]) > 100:
+    # Just check if we have more than 100 SPARQLs for that template, flush them.
+    if len(sparqls[_template_id]) > FLUSH_THRESHOLD:
+        # @TODO: put a lock here, if making it parallel
 
-            
-            fo = open('sparqls/template%d.txt' % _template_id, 'a+')
+        with open('sparqls/template%d.txt' % _template_id, 'a+') as f:
             for value in sparqls[_template_id]:
                 fo.writelines(json.dumps(value) + "\n")
-            fo.close()
 
-            # with open('output/template%s.txt' % str(_template_id), "a+") as out:
-            #     pprint(sparqls[_template_id], stream=out)
-            # with open('output/template%s.json' % str(_template_id), "a+") as out:
-            #     json.dump(sparqls[_template_id], out)
-            sparqls[_template_id] = []
-
-    except KeyError:
-        sparqls[_template_id] = [template]
-    except:
-        print traceback.print_exc()
     return True
 
 
@@ -1237,7 +1100,7 @@ for entity in list_of_entities:
 #         pprint(sparqls[key], stream=out)
 
 print "Pickling properties count to file"
-pickle.dump(properties_count, open('resources/properties_count.pickle','w+'))
+pickle.dump(predicates_count, open('resources/properties_count.pickle', 'w+'))
 print "DONE"
 
 print "Trying to write to file!"
