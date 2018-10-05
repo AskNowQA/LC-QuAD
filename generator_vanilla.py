@@ -195,6 +195,20 @@ def insert_triple_in_subgraph(G,
             subgraph.insert(G=G, data=[(_labels[0], ent), (_labels[1], prop), (_labels[2], _origin_node)])
 
 
+def generate_sparqls(_uri, dbp):
+    try:
+        uri = _uri
+
+        # Generate the local subgraph
+        graph = generate_subgraph(uri)
+
+        # Generate SPARQLS based on subgraph
+        fill_templates(graph, _uri=uri)
+
+    except:
+        traceback.print_exc()
+
+
 def fill_specific_template(_template_id, _mapping):
     '''
         Function to fill a specific template.
@@ -296,14 +310,14 @@ def fill_templates(_graph, _uri):
         This function is programmed to traverse through the Subgraph and create mappings for templates
 
         Per template traverse the graph, and pick out the needed stuff in local variables
+
+        @TODO: make this fn generic. I.E. automatically make a nice dict to fill all templates
     '''
 
     global dbp
 
     access = subgraph.accessGraph(_graph)
  
-    #@TODO: pad the template 1 and 2 code with counters and everything
-
     ''' 
         Template #1: 
             SELECT DISTINCT ?uri WHERE {?uri <%(e_to_e_out)s> <%(e_out)s> } 
@@ -1068,28 +1082,140 @@ def fill_templates(_graph, _uri):
         print _uri, '16'
         entity_went_bad.append(_uri)
 
+
+def generate_subgraph(_uri, dbp):
+    """
+        Returns a JSON of the sort:
+
+    :param _uri:
+    :return:
+    """
+
+    # Create a new graph
+    G = nx.DiGraph()
+    access = subgraph.accessGraph(G)
+
+    ########### e ?p ?e (e_to_e_out and e_out) ###########
+    start = time.clock()
+    results = dbp.shoot_custom_query(one_triple_right % {'e': _uri})
+    # print "shooting custom query to get one triple right from the central entity e" , str(time.clock() - start)
+    # print "total number of entities in right of the central entity is e ", str(len(results))
+    labels = ('e', 'e_to_e_out', 'e_out')
+
+    # Insert results in subgraph
+    # print "inserting triples in right graph "
+    start = time.clock()
+    results = pruning(_results=results, _keep_no_results=10, _filter_properties=True, _filter_literals=True, _filter_entities=False)
+    insert_triple_in_subgraph(G, _results=results,
+                              _labels=labels, _direction=True,
+                              _origin_node=_uri, _filter_properties=True)
+    # print "inserting the right triple took " , str(time.clock() - start)
+    ########### ?e ?p e (e_in and e_in_to_e) ###########
+    # raw_input("check for right")
+    results = dbp.shoot_custom_query(one_triple_left % {'e': _uri})
+    labels = ('e_in', 'e_in_to_e', 'e')
+    # print "total number of entity left of the central entity e is " , str(len(results))
+    # Insert results in subgraph
+    # print "inserting into left graph "
+    start = time.clock()
+    results = pruning(_results=results, _keep_no_results=100, _filter_properties=True, _filter_literals=True,
+                      _filter_entities=False)
+    insert_triple_in_subgraph(G, _results=results,
+                              _labels=labels, _direction=False,
+                              _origin_node=_uri, _filter_properties=True)
+    # print "inserting triples for left of the central entity  took ", str(time.clock() - start)
+    ########### e p eout . eout ?p ?e (e_out_to_e_out_out and e_out_out) ###########
+
+    # Get all the eout nodes back from the subgraph.
+    start = time.clock()
+    e_outs = []
+    op = access.return_outnodes('e')
+    for x in op:
+        for tup in x:
+            e_outs.append(tup[1].getUri())
+
+    labels = ('e_out', 'e_out_to_e_out_out', 'e_out_out')
+
+    # print "insert into e_out_to_e_out_out", str(len(e_outs))
+    # raw_input("check !!")
+    for e_out in e_outs:
+        start = time.clock()
+        results = dbp.shoot_custom_query(one_triple_right % {'e': e_out})
+        # Insert results in subgraph
+        results = pruning(_results=results, _keep_no_results=100, _filter_properties=True, _filter_literals=True,
+                          _filter_entities=False)
+        insert_triple_in_subgraph(G, _results=results,
+                                  _labels=labels, _direction=True,
+                                  _origin_node=e_out, _filter_properties=True)
+
+    ########### e p eout . ?e ?p eout  (e_out_in and e_out_in_to_e_out) ###########
+
+    # Use the old e_outs variable
+    labels = ('e_out_in', 'e_out_in_to_e_out', 'e_out')
+    # print "insert into e_out_in_to_e_out_out", str(len(e_outs))
+    for e_out in e_outs:
+        results = dbp.shoot_custom_query(one_triple_left % {'e': e_out})
+
+        # Insert results in subgraph
+        results = pruning(_results=results, _keep_no_results=20, _filter_properties=True, _filter_literals=True,
+                          _filter_entities=False)
+        insert_triple_in_subgraph(G, _results=results,
+                                  _labels=labels, _direction=False,
+                                  _origin_node=e_out, _filter_properties=True)
+
+    ########### ?e ?p ein . ein p e  (e_in_in and e_in_in_to_e_in) ###########
+
+    # Get all the ein nodes back from subgraph
+    e_ins = []
+    op = access.return_innodes('e')
+    for x in op:
+        for tup in x:
+            e_ins.append(tup[0].getUri())
+
+    labels = ('e_in_in', 'e_in_in_to_e_in', 'e_in')
+
+    for e_in in e_ins:
+        results = dbp.shoot_custom_query(one_triple_left % {'e': e_in})
+
+        # Insert results in subgraph
+        results = pruning(_results=results, _keep_no_results=20, _filter_properties=True, _filter_literals=True,
+                          _filter_entities=False)
+        insert_triple_in_subgraph(G, _results=results,
+                                  _labels=labels, _direction=False,
+                                  _origin_node=e_in, _filter_properties=True)
+    ########### ein ?p ?e . ein p e  (e_in_to_e_in_out and e_in_out) ###########
+
+    # Use the old e_ins variable
+    labels = ('e_in', 'e_in_to_e_in_out', 'e_in_out')
+    for e_in in e_ins:
+        results = dbp.shoot_custom_query(one_triple_right % {'e': e_in})
+
+        # Insert results in subgraph
+        results = pruning(_results=results, _keep_no_results=10, _filter_properties=True, _filter_literals=True,
+                          _filter_entities=False)
+        insert_triple_in_subgraph(G, _results=results,
+                                  _labels=labels, _direction=True,
+                                  _origin_node=e_in, _filter_properties=True)
+
+
+    print "Done generating subgraph for entity ", _uri
+
+    # Pushed all the six kind of nodes in the subgraph. Done!
+    return G
+
+
+
 '''
     Testing the ability to create subgraph given a URI
     Testing the ability to generate sparql templates
 '''
 sparqls = {}
 dbp = db_interface.DBPedia(_verbose=True)
-def generate_answer(_uri, dbp):
-    try:
-        uri = _uri
 
-        # Generate the local subgraph
-        graph = get_local_subgraph(uri)
-
-        # Generate SPARQLS based on subgraph
-        fill_templates(graph, _uri=uri)
-
-    except:
-        print traceback.print_exc()
 
 for entity in list_of_entities:
     try:
-        generate_answer(entity,dbp)
+        generate_sparqls(entity, dbp)
     except:
         print traceback.print_exc()
         continue
