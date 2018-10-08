@@ -1,4 +1,7 @@
+"""
+@TODO: major rewrite here!
 
+"""
 import re
 import sys
 import string
@@ -29,6 +32,7 @@ def better_warning(message, category, filename, lineno, file=None, line=None):
 
 
 def has_url(_string):
+
     if validators.url(_string):
         return True
     return False
@@ -176,11 +180,6 @@ def convert_to_no_symbols(_string):
     return new_string
 
 
-def convert_shorthand_to_uri(_string):
-    # TODO: Dis function
-    return _string
-
-
 def is_alpha_with_underscores(_string):
     for char in _string:
         if not char in string.letters + '_':
@@ -213,24 +212,30 @@ def get_label_via_parsing(_uri, lower=False):
 def remove_stopwords(_tokens):
     return [x for x in _tokens if x.strip().lower() not in stopwords]
 
-def checker(uri,reverse=True,update=True):
-	'''
-		Checks if uri ends and starts with '>' and '<' respectively.
-		if update= True then also update the uri
-	'''
-	if uri[0] != '<':
-		if update:
-			uri = "<" + uri
-		else:
-			return False
-	if uri[-1] != '>':
-		if update:
-			uri =  uri + ">"
-		else:
-			return False
-	if reverse:
-		return uri[1:-1]
-	return uri
+
+def sq_bracket_checker(uri, reverse=True, update=True):
+    """
+        Checks if uri ends and starts with '>' and '<' respectively.
+            if update= True then also update the uri
+    :param uri: str
+    :param reverse: flag: remove sq brackets if there
+    :param update: returns updated uri
+    :return:
+    """
+
+    if uri[0] != '<':
+        if update:
+            uri = "<" + uri
+        else:
+            return False
+    if uri[-1] != '>':
+        if update:
+            uri =  uri + ">"
+        else:
+            return False
+    if reverse:
+        return uri[1:-1]
+    return uri
 
 
 
