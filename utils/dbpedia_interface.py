@@ -20,6 +20,7 @@ from functools import partial
 from pprint import pprint
 import numpy as np
 import traceback
+import textwrap
 import warnings
 import pickle
 import atexit
@@ -118,7 +119,7 @@ GET_LEFT_RIGHT_PROPERTIES_OF_RESOURCE_WITH_LEFT_PROPERTY = '''SELECT DISTINCT ?p
 
 formatwarning_orig = warnings.formatwarning
 warnings.formatwarning = lambda message, category, filename, lineno, line=None: \
-    formatwarning_orig(message, category, filename, lineno, line="")
+    formatwarning_orig(textwrap.fill(str(message)), category, filename, lineno, line="")
 
 
 def save_to_disk(obj, ctr, loc, msg):
@@ -137,6 +138,8 @@ class DBPedia:
         else:
             self.sparql_endpoint = DBPEDIA_ENDPOINT
         self.global_endpoint = 'http://dbpedia.org/sparql'
+
+        warnings.warn("Holy hell!")
 
         self.verbose = _verbose
         if caching:

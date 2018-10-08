@@ -11,6 +11,7 @@ import networkx as nx
 import numpy as np
 import progressbar
 import traceback
+import textwrap
 import warnings
 import pickle
 import random
@@ -24,6 +25,10 @@ from utils.goodies import *
 import utils.dbpedia_interface as db_interface
 import utils.natural_language_utilities as nlutils
 from utils import subgraph as SubG
+
+formatwarning_orig = warnings.formatwarning
+warnings.formatwarning = lambda message, category, filename, lineno, line=None: \
+    formatwarning_orig(textwrap.fill(str(message)), category, filename, lineno, line="")
 
 random.seed(42)
 
@@ -52,7 +57,7 @@ FLUSH_THRESHOLD = 100
 FILTER_PRED, FILTER_LITERAL, FILTER_ENT = True, True, False
 PREDICATE_COUNT_LOC = 'resources/properties_count.pickle'
 DBP_NMSP = 'http://dbpedia.org/'  # DBpedia namespace
-PRUNE_RESULTS = 500
+PRUNE_RESULTS = 20
 
 ''' 
     A dictionary of properties. 
@@ -1261,4 +1266,4 @@ if __name__ == "__main__":
     ent = 'http://dbpedia.org/resource/Nicaragua'
     dbp = db_interface.DBPedia(_verbose=True, caching=False)
     g = generate_subgraph(ent, dbp)
-    print(g)
+    pprint(g)
