@@ -1,11 +1,11 @@
-import numpy as np
 from collections import namedtuple
 from pprint import pprint
 
 from utils.goodies import *
 
 
-PredEntTuple = namedtuple('PredEntTuple', 'pred ent')
+PredEntTuple = namedtuple('PredEntTuple', 'pred ent type')
+PredEntTuple.__new__.__defaults__ = (None, None, '')
 
 
 class SubgraphPreds(dict):
@@ -58,7 +58,7 @@ class Subgraph(dict):
         self['type'] = _type if _type else ''
         self['left'], self['right'] = SubgraphPreds(), SubgraphPreds()
 
-    def find(self, _uri, _caller, _new=True):
+    def find(self, _uri, _caller, _type=None, _new=True):
         """
 
 
@@ -82,8 +82,10 @@ class Subgraph(dict):
             if _uri == subg:
                 return subg
         else:
-            if not _new: raise NoSubgraphFoundError("%s doesn't exist for this subgraph")
-            else: return Subgraph(_uri)
+            if not _new:
+                raise NoSubgraphFoundError("%s doesn't exist for this subgraph")
+            else:
+                return Subgraph(_uri, _type if not _type == None else '')
 
     def __eq__(self, other):
         """
@@ -111,6 +113,10 @@ class Subgraph(dict):
     @property
     def uri(self):
         return self['uri']
+
+    @property
+    def type(self):
+        return self['type']
 
     @property
     def left(self):
@@ -146,7 +152,7 @@ class Subgraph(dict):
         if not _origin:
             _origin = self
         elif type(_origin) == str:
-            _origin = self.find(_origin, _caller=self)
+            _origin = self.find(_origin, _caller=self, _new=False)
 
         # Select which SubgraphPreds to choose from (left/right)
         src = _origin.right if _outgoing else _origin.left
@@ -154,7 +160,7 @@ class Subgraph(dict):
         for datum in _data:
             # Find the predicate in src, ent in self.
             pred = src.setdefault(datum.pred, [])
-            ent = _origin.find(datum.ent, _caller=self)
+            ent = _origin.find(datum.ent, _caller=self, _new=True, _type=datum.type)
 
             # Check if the entity doesn't already exist for this list
             if not datum.ent in pred:
@@ -162,19 +168,18 @@ class Subgraph(dict):
 
 
 if __name__ == "__main__":
-    # Make a 1 level subgraph out of it
     a = Subgraph('dbo:Obama')
 
-    data_out = [PredEntTuple(pred='dbp:prez', ent='dbr:US'),
-                PredEntTuple(pred='dbp:bornin', ent='dbr:Chicago'),
-                PredEntTuple(pred='dbp:left', ent='2014'),
-                PredEntTuple(pred='dbp:spouse', ent='dbr:Michelle'),
-                PredEntTuple(pred='dbp:left', ent='2010')]
+    data_out = [PredEntTuple(pred='dbp:prez', ent='dbr:US', type="country"),
+                PredEntTuple(pred='dbp:bornin', ent='dbr:Chicago', type="city"),
+                PredEntTuple(pred='dbp:left', ent='2014', type="year"),
+                PredEntTuple(pred='dbp:spouse', ent='dbr:Michelle', type="person"),
+                PredEntTuple(pred='dbp:left', ent='2010', type="year")]
 
-    data_in = [PredEntTuple(pred='dbp:son', ent='dbr:BiggerObama'),
-               PredEntTuple(pred='dbp:spouse', ent='dbr:Michelle'),
-               PredEntTuple(pred='dbp:father', ent='dbr:Wut'),
-               PredEntTuple(pred='dbp:hasResident', ent='dbo:Obama')]
+    data_in = [PredEntTuple(pred='dbp:son', ent='dbr:BiggerObama', type="person"),
+               PredEntTuple(pred='dbp:spouse', ent='dbr:Michelle', type="person"),
+               PredEntTuple(pred='dbp:father', ent='dbr:Wut', type="nothing"),
+               PredEntTuple(pred='dbp:hasResident', ent='dbo:Obama', type="person")]
 
     a.insert(data_out, _outgoing=True)
     a.insert(data_in, _outgoing=False)
