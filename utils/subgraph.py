@@ -83,14 +83,20 @@ def permute_dicts(_d1, _d2):
 
     data = []
 
-    for _dict1 in _d1:
-        for _dict2 in _d2:
+    for dict1 in _d1:
+        for dict2 in _d2:
             if common_keys:     # If there are common keys, accept elements only if their values are same.
                 for key in common_keys:
-                    if _dict1[key] == _dict2[key]: pass
-                else: continue
+                    if dict1[key] == dict2[key]:
+                        pass
+                else:
+                    continue
 
-            new_dict =
+            new_dict = dict1.copy()
+            new_dict.update(dict2)
+            data.append(new_dict)
+
+    return data
 
 
 class SubgraphPreds(dict):
@@ -273,7 +279,6 @@ class Subgraph(dict):
         """
         if 'e_out' in _vars or 'e_to_e_out' in _vars:
 
-
             if 'e_to_e_out_2' in _vars or 'e_out_2*' in _vars and len(self.right.predicates) < 2:
                 return []
 
@@ -365,12 +370,12 @@ if __name__ == "__main__":
 
     hop2_data = [PredEntTuple(pred='dbp:continent', ent='dbr:NorthAmerica')]
     a.insert(hop2_data, _origin='dbr:US', _outgoing=True)
+    #
+    # print("Entities: ", a.entities)
+    # print("Predicates: ", a.predicates)
+    # print("Entities: ")
+    #
+    # pprint(a)
 
-    print("Entities: ", a.entities)
-    print("Predicates: ", a.predicates)
-    print("Entities: ")
-
-    pprint(a)
-
-    maps = a.get_mapping_for(['e_out', 'e_to_e_out'], [])
+    maps = a.get_mapping_for(['e_out', 'e_to_e_out', 'e_in'], [])
     pprint(maps)
