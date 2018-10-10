@@ -4,13 +4,20 @@ from pprint import pprint
 from utils.goodies import *
 
 
-VALID_VARS = [
-    'e_out', 'e_in', 'e_out_out', 'e_out_in', 'e_in_in', 'e_in_out',
-    'e_out_2', 'e_out_2*', 'e_in_2', 'e_in_2*', 'class_x', 'class_uri',
-    'e_to_e_out', 'e_out_to_e_out_out', 'e_out_to_e_out_in',
-    'e_in_in_to_e_in', 'e_in_out_to_e_in', 'e_in_to_e',
-    'e_to_e_out_2', 'e_in_to_e_2'
-]
+VAR_HOP1_RIGHT = ['e_out', 'e_to_e_out']
+VAR_HOP1_RIGHT_DUP = ['e_out_2', 'e_out_2*', 'e_to_e_out_2' ]
+VAR_HOP1_LEFT = ['e_in', 'e_in_to_e']
+VAR_HOP1_LEFT_DUP = ['e_in_2', 'e_in_2*', 'e_in_to_e_2']
+VAR_OTHERS = ['e', 'class_uri', 'class_x']
+VAR_HOP2_RIGHT = ['e_out_out', 'e_out_in', 'e_out_to_e_out_out', 'e_out_in_to_e_out']
+VAR_HOP2_LEFT = [ 'e_in_in', 'e_in_out', 'e_in_in_to_e_in', 'e_in_to_e_in_out']
+VAR_HOP1 = VAR_HOP1_LEFT + VAR_HOP1_RIGHT + VAR_HOP1_LEFT_DUP + VAR_HOP1_RIGHT_DUP
+VAR_HOP2 = VAR_HOP2_LEFT + VAR_HOP2_RIGHT
+VARS = VAR_HOP1 + VAR_HOP2 + VAR_OTHERS
+REC_RIGHT_VARS = {'e_out_out': 'e_out', 'e_out_to_e_out_out': 'e_to_e_out', 'e_out': 'e',
+                  'e_out_in': 'e_in', 'e_out_in_to_e_out': 'e_in_to_e'}
+REC_LEFT_VARS = {'e_in_in': 'e_in', 'e_in': 'e', 'e_in_in_to_e_in': 'e_in_to_e',
+                 'e_in_to_e_in_out': 'e_to_e_out', 'e_in_out': 'e_out'}
 
 
 PredEntTuple = namedtuple('PredEntTuple', 'pred ent type')
@@ -97,6 +104,57 @@ def permute_dicts(_d1, _d2):
             data.append(new_dict)
 
     return data
+
+
+rev = lambda mapping: {v: k for k, v in mapping.items()}
+map_keys_list = lambda data, mapping: [mapping[v] for v in data if v in mapping]
+map_keys_dict = lambda data, mapping: {mapping[k]: v for k, v in data.items() if k in mapping}
+
+
+class MappingVarList(list):
+    """
+        Extends list to easy peasy compute a bunch of flags for a list of variables.
+        To be used within Subgraph.get_mapping_for fn, generally.
+    """
+    def __init__(self, _vars, _valcheck=True):
+        super(MappingVarList, self).__init__(_vars)
+
+        if _valcheck:
+            for var in self:                # Check if all vars make sense
+                if var not in VARS:
+                    raise UnknownVarFoundError("Var %s not known." % var)
+
+    @lazy_property
+    def one(self):
+        return MappingVarList([v for v in self if v in VAR_HOP1], False)
+
+    @lazy_property
+    def two(self):
+        return MappingVarList([v for v in self if v in VAR_HOP2], False)
+
+    @lazy_property
+    def right(self):
+        return MappingVarList([v for v in self if v in VAR_HOP2_RIGHT + VAR_HOP1_RIGHT + VAR_HOP1_RIGHT_DUP], False)
+
+    @lazy_property
+    def left(self):
+        return MappingVarList([v for v in self if v in VAR_HOP2_LEFT + VAR_HOP1_LEFT + VAR_HOP1_RIGHT_DUP], False)
+
+    @lazy_property
+    def one_(self):
+        return bool(self.one) > 0
+
+    @lazy_property
+    def two_(self):
+        return bool(self.two)
+
+    @lazy_property
+    def right_(self):
+        return bool(self.right)
+
+    @lazy_property
+    def left_(self):
+        return bool(self.left)
 
 
 class SubgraphPreds(dict):
@@ -283,16 +341,16 @@ class Subgraph(dict):
                 return []
 
             for pred, ents in self.right.items():
-
                 if 'e_out_2' in _vars and len(ents) < 2:
                     continue
 
-                _map = {'e_to_e_out': pred}
+                _map = {'e_to_e_out': pred, 'e': self.uri}
                 maps = take_one(_map, ents, _key='e_out') if 'e_out_2' not in _vars \
                     else take_two(_map, ents, _key_one='e_out',  _key_two='e_out_2')
 
                 # If we need e_out_out or e_out_to_e_out_out pred (2hop right preds)
-                # @TODO: implement a recursive call
+                # @TODO: cond to call the left side of
+                rec_vars = ['e_out', ]
 
                 right_maps += maps
 
@@ -324,7 +382,7 @@ class Subgraph(dict):
                 if 'e_in_2' in _vars and len(ents) < 2:
                     continue
 
-                _map = {'e_in_to_e': pred}
+                _map = {'e_in_to_e': pred, 'e':self.var}
                 maps = take_one(_map, ents, _key='e_in') if 'e_in_2' not in _vars \
                     else take_two(_map, ents, _key_one='e_in', _key_two='e_in_2')
 
