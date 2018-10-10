@@ -5,13 +5,16 @@ from utils.goodies import *
 
 
 VAR_HOP1_RIGHT = ['e_out', 'e_to_e_out']
-VAR_HOP1_RIGHT_DUP = ['e_out_2', 'e_out_2*', 'e_to_e_out_2' ]
+VAR_HOP1_RIGHT_DUP = ['e_out_2*', 'e_to_e_out_2']
+VAR_HOP1_RIGHT_DOUBLE = ['e_out_2']
 VAR_HOP1_LEFT = ['e_in', 'e_in_to_e']
-VAR_HOP1_LEFT_DUP = ['e_in_2', 'e_in_2*', 'e_in_to_e_2']
+VAR_HOP1_LEFT_DUP = ['e_in_2*', 'e_in_to_e_2']
+VAR_HOP1_LEFT_DOUBLE = ['e_in_2']
 VAR_OTHERS = ['e', 'class_uri', 'class_x']
 VAR_HOP2_RIGHT = ['e_out_out', 'e_out_in', 'e_out_to_e_out_out', 'e_out_in_to_e_out']
 VAR_HOP2_LEFT = [ 'e_in_in', 'e_in_out', 'e_in_in_to_e_in', 'e_in_to_e_in_out']
-VAR_HOP1 = VAR_HOP1_LEFT + VAR_HOP1_RIGHT + VAR_HOP1_LEFT_DUP + VAR_HOP1_RIGHT_DUP
+VAR_HOP1 = VAR_HOP1_LEFT + VAR_HOP1_RIGHT + VAR_HOP1_LEFT_DUP + VAR_HOP1_RIGHT_DUP + \
+           VAR_HOP1_LEFT_DOUBLE + VAR_HOP1_RIGHT_DOUBLE
 VAR_HOP2 = VAR_HOP2_LEFT + VAR_HOP2_RIGHT
 VARS = VAR_HOP1 + VAR_HOP2 + VAR_OTHERS
 REC_RIGHT_VARS = {'e_out_out': 'e_out', 'e_out_to_e_out_out': 'e_to_e_out', 'e_out': 'e',
@@ -111,34 +114,45 @@ map_keys_list = lambda data, mapping: [mapping[v] for v in data if v in mapping]
 map_keys_dict = lambda data, mapping: {mapping[k]: v for k, v in data.items() if k in mapping}
 
 
-class MappingVarList(list):
+class VarList(list):
     """
         Extends list to easy peasy compute a bunch of flags for a list of variables.
         To be used within Subgraph.get_mapping_for fn, generally.
     """
     def __init__(self, _vars, _valcheck=True):
-        super(MappingVarList, self).__init__(_vars)
+        super(VarList, self).__init__(_vars)
 
         if _valcheck:
             for var in self:                # Check if all vars make sense
                 if var not in VARS:
                     raise UnknownVarFoundError("Var %s not known." % var)
 
+    def filtered(self, src):
+        return VarList([v for v in self if v in src], False)
+
     @lazy_property
     def one(self):
-        return MappingVarList([v for v in self if v in VAR_HOP1], False)
+        return self.filtered(VAR_HOP1)
 
     @lazy_property
     def two(self):
-        return MappingVarList([v for v in self if v in VAR_HOP2], False)
+        return self.filtered(VAR_HOP2)
 
     @lazy_property
     def right(self):
-        return MappingVarList([v for v in self if v in VAR_HOP2_RIGHT + VAR_HOP1_RIGHT + VAR_HOP1_RIGHT_DUP], False)
+        return self.filtered(VAR_HOP2_RIGHT + VAR_HOP1_RIGHT + VAR_HOP1_RIGHT_DUP)
 
     @lazy_property
     def left(self):
-        return MappingVarList([v for v in self if v in VAR_HOP2_LEFT + VAR_HOP1_LEFT + VAR_HOP1_RIGHT_DUP], False)
+        return self.filtered(VAR_HOP2_LEFT + VAR_HOP1_LEFT + VAR_HOP1_RIGHT_DUP)
+
+    @lazy_property
+    def dup(self):
+        return self.filtered(VAR_HOP1_RIGHT_DUP+VAR_HOP1_LEFT_DUP)
+
+    @lazy_property
+    def double(self):
+        return self.filtered(VAR_HOP1_RIGHT_DOUBLE + VAR_HOP1_LEFT_DOUBLE)
 
     @lazy_property
     def one_(self):
@@ -155,6 +169,14 @@ class MappingVarList(list):
     @lazy_property
     def left_(self):
         return bool(self.left)
+
+    @lazy_property
+    def dup_(self):
+        return bool(self.dup)
+
+    @lazy_property
+    def double_(self):
+        return bool(self.double)
 
 
 class SubgraphPreds(dict):
@@ -306,7 +328,7 @@ class Subgraph(dict):
             if datum.ent not in pred:
                 src[datum.pred].append(ent)
 
-    def get_mapping_for(self, _vars, _equal):
+    def get_mapping_for(self, _vars, _equal=None):
         """
             Returns a list of mapping fitting these vars, satisfying the equal condition.
 
@@ -322,40 +344,33 @@ class Subgraph(dict):
         :return: list of dicts.
         """
 
-        # Check vars validity
-        for var in _vars:
-            try:
-                assert var in VALID_VARS
-            except AssertionError:
-                raise UnknownVarFoundError("Var %s not known." % var)
+        vars = VarList(_vars)
 
         right_maps = []
         left_maps = []
 
+        if (vars.right.dup_ and len(self.right.predicates) < 2) or (vars.left.dup_ and len(self.left.predicates) < 2):
+            return []
+
         """
             Logic for right side
         """
-        if 'e_out' in _vars or 'e_to_e_out' in _vars:
-
-            if 'e_to_e_out_2' in _vars or 'e_out_2*' in _vars and len(self.right.predicates) < 2:
-                return []
+        if vars.one.right_:
 
             for pred, ents in self.right.items():
-                if 'e_out_2' in _vars and len(ents) < 2:
+                if vars.right.double_ and len(ents) < 2:
                     continue
 
                 _map = {'e_to_e_out': pred, 'e': self.uri}
-                maps = take_one(_map, ents, _key='e_out') if 'e_out_2' not in _vars \
+                maps = take_one(_map, ents, _key='e_out') if not vars.right.double_ \
                     else take_two(_map, ents, _key_one='e_out',  _key_two='e_out_2')
 
                 # If we need e_out_out or e_out_to_e_out_out pred (2hop right preds)
                 # @TODO: cond to call the left side of
-                rec_vars = ['e_out', ]
 
                 right_maps += maps
 
-            if 'e_to_e_out_2' in _vars or 'e_out_2*' in _vars:
-
+            if vars.right.dup_:
                 new_right_maps = []
 
                 for _map in right_maps:
@@ -372,18 +387,15 @@ class Subgraph(dict):
         """
             Logic for left
         """
-        if 'e_in' in _vars or 'e_in_to_e' in _vars:
-
-            if 'e_in_to_e_2' in _vars or 'e_in_2*' in _vars and len(self.left.predicates) < 2:
-                return []
+        if vars.one.left_:
 
             for pred, ents in self.left.items():
 
-                if 'e_in_2' in _vars and len(ents) < 2:
+                if vars.left.double_ and len(ents) < 2:
                     continue
 
-                _map = {'e_in_to_e': pred, 'e':self.var}
-                maps = take_one(_map, ents, _key='e_in') if 'e_in_2' not in _vars \
+                _map = {'e_in_to_e': pred, 'e': self.uri}
+                maps = take_one(_map, ents, _key='e_in') if vars.left.double_ \
                     else take_two(_map, ents, _key_one='e_in', _key_two='e_in_2')
 
                 # If we need e_out_out or e_out_to_e_out_out pred (2hop right preds)
@@ -391,8 +403,7 @@ class Subgraph(dict):
 
                 left_maps += maps
 
-            if 'e_in_to_e_2' in _vars or 'e_in_2*' in _vars:
-
+            if vars.left.dup_:
                 new_left_maps = []
 
                 for _map in left_maps:
@@ -435,5 +446,5 @@ if __name__ == "__main__":
     #
     # pprint(a)
 
-    maps = a.get_mapping_for(['e_out', 'e_to_e_out', 'e_in'], [])
+    maps = a.get_mapping_for(['e_out', 'e_to_e_out', 'e_in'])
     pprint(maps)
