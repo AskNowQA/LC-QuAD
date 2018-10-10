@@ -4,9 +4,9 @@ Major:
 
 - Extend subgraph to return an iterator for mappings
 - Write generate query code
-- Update, and fix templates
-- Add uri type to subgraph
-- Test uri type in subgraph
+- ~~\[DONE\] Update, and fix templates~~
+- ~~\[DONE\] Add uri type to subgraph~~
+- ~~\[DONE\] Test uri type in subgraph~~
 
 Minor:
 

@@ -1,21 +1,17 @@
 # Logic for Templates
 
 ## ID Nomenclature:
-- **1-16**: Normal templates. 
+- **1-16**: Normal SPARQL templates. Use old-school string formatting to sub uris in there. (NO SHORTHAND) 
 No count/rdf-type constraint. See [this google doc](https://docs.google.com/document/d/1N4KRy_xMD7B5cAnQWMiytRrPkZ-HwIEiZj4PbI-xROM/edit?usp=sharing) to understand each of them.
 - **+50**: A boolean (`ASK`) counterpart of the query instead of `SELECT`.
 - **+100**: Additional count aggregate on the answer
 - **+300**: Additional rdf:type constraint on either answer or intermediate entities.
-
-----------------------------------------------------------------------
 
 ## Term Nomenclature:
 
 ![Nomenclature of terms in the SPARQL][logo]
 
 [logo]: resources/nomenclature.png "Nomenclature.png"
-
-----------------------------------------------------------------------
 
 ## Mapping Logic
 

@@ -4,8 +4,93 @@ from pprint import pprint
 from utils.goodies import *
 
 
+VALID_VARS = [
+    'e_out', 'e_in', 'e_out_out', 'e_out_in', 'e_in_in', 'e_in_out',
+    'e_out_2', 'e_out_2*', 'e_in_2', 'e_in_2*', 'class_x', 'class_uri',
+    'e_to_e_out', 'e_out_to_e_out_out', 'e_out_to_e_out_in',
+    'e_in_in_to_e_in', 'e_in_out_to_e_in', 'e_in_to_e',
+    'e_to_e_out_2', 'e_in_to_e_2'
+]
+
+
 PredEntTuple = namedtuple('PredEntTuple', 'pred ent type')
 PredEntTuple.__new__.__defaults__ = (None, None, '')
+
+
+def take_one(_map, _data, _key):
+    """
+        Make copies of _map with given _data, taking elements from _data **two** at a time.
+    :param _map: dict
+    :param _data: list of str/Subgraph objs
+    :param _key: str
+    :return: list of dict
+    """
+    _maps = []
+
+    for ent in _data:
+        _map = _map.copy()
+        _map[_key] = ent.uri if isinstance(ent, Subgraph) else ent
+        _maps.append(_map)
+
+    return _maps
+
+
+def take_two(_map, _data, _key_one, _key_two):
+    """
+        Make copies of _map with given _data, taking elements from _data **two** at a time.
+    :param _map: dict
+    :param _data: list of str/Subgraph objs
+    :param _key_one: str
+    :param _key_two: str
+    :return: list of dict
+    """
+    _maps = []
+
+    for i in range(len(_data)):
+        for j in range(len(_data))[i:]:
+            ent_a, ent_b = _data[i], _data[j]
+            _map = _map.copy()
+            _map[_key_one] = ent_a.uri if isinstance(ent_a, Subgraph) else ent_a
+            _map[_key_two] = ent_b.uri if isinstance(ent_b, Subgraph) else ent_b
+            _maps.append(_map)
+
+    return _maps
+
+
+def permute_dicts(_d1, _d2):
+    """
+        Given two list of dicts, it creates a list of dicts having a combination of both values.
+
+        Assumption:
+            - a list's dicts will have same keys
+            - if two dict have common keys, only permute elements whose values for common keys are same.
+
+        @TODO: also input maps to use this func to merge recursively generated dicts
+
+    :param _d1: list of dicts
+    :param _d2: list of dicts
+    :return: list of dicts
+    """
+    if len(_d1) == 0:
+        return _d2
+    elif len(_d2) == 0:
+        return _d1
+
+    # ALSO PUT MAP HERE
+    keys1 = set(_d1[-1].keys())
+    keys2 = set(_d2[-1].keys())
+    common_keys = keys1 & keys2
+
+    data = []
+
+    for _dict1 in _d1:
+        for _dict2 in _d2:
+            if common_keys:     # If there are common keys, accept elements only if their values are same.
+                for key in common_keys:
+                    if _dict1[key] == _dict2[key]: pass
+                else: continue
+
+            new_dict =
 
 
 class SubgraphPreds(dict):
@@ -60,8 +145,6 @@ class Subgraph(dict):
 
     def find(self, _uri, _caller, _type=None, _new=True):
         """
-
-
             Expected to find and return corresponding object of this uri.
 
             First checks if the caller has the given uri.
@@ -70,9 +153,10 @@ class Subgraph(dict):
 
             If not found, creates a new one.
 
-
-            @TODO: Implement logic to find from depth 2 (or rather, recursively)
             :param _uri: str
+            :param _caller: subgraph obj which calls this fn. (Used to return _caller if it matches _uri)
+            :param _type: str: class to which this uri belongs. Needed if we create a new obj and return
+            :param _new: flag: if we want to return a new obj in case no older one is found.
             :returns Subgraph object
         """
         if _uri == _caller:
@@ -85,7 +169,7 @@ class Subgraph(dict):
             if not _new:
                 raise NoSubgraphFoundError("%s doesn't exist for this subgraph")
             else:
-                return Subgraph(_uri, _type if not _type == None else '')
+                return Subgraph(_uri, _type if _type is not None else '')
 
     def __eq__(self, other):
         """
@@ -103,13 +187,6 @@ class Subgraph(dict):
     def __hash__(self):
         return hash(self.uri)
 
-    # @staticmethod
-    # def uniques(subgraphs):
-    #     uniques = []
-    #     for subg in subgraphs:
-    #         if subg not in uniques: uniques.append(subg)
-    #     return uniques
-
     @property
     def uri(self):
         return self['uri']
@@ -126,7 +203,6 @@ class Subgraph(dict):
     def right(self):
         return self['right']
 
-    # @TODO: the below presumes 1hop. not 2.
     @property
     def entities(self):
         return list(set(self.left.entities + self.right.entities))
@@ -163,8 +239,111 @@ class Subgraph(dict):
             ent = _origin.find(datum.ent, _caller=self, _new=True, _type=datum.type)
 
             # Check if the entity doesn't already exist for this list
-            if not datum.ent in pred:
+            if datum.ent not in pred:
                 src[datum.pred].append(ent)
+
+    def get_mapping_for(self, _vars, _equal):
+        """
+            Returns a list of mapping fitting these vars, satisfying the equal condition.
+
+            Logic: check which side of self should we start at (may be both).
+            Function is recursive in nature!
+
+            Assumptions:
+                - won't ask for _2 and _2* for any var in one call
+                - won't ask for _2 of something without its original var.
+
+        :param _vars: list of str: indicate variables that you want the mapping to consist of.
+        :param _equal: only get mapping satisfying this constraint.
+        :return: list of dicts.
+        """
+
+        # Check vars validity
+        for var in _vars:
+            try:
+                assert var in VALID_VARS
+            except AssertionError:
+                raise UnknownVarFoundError("Var %s not known." % var)
+
+        right_maps = []
+        left_maps = []
+
+        """
+            Logic for right side
+        """
+        if 'e_out' in _vars or 'e_to_e_out' in _vars:
+
+
+            if 'e_to_e_out_2' in _vars or 'e_out_2*' in _vars and len(self.right.predicates) < 2:
+                return []
+
+            for pred, ents in self.right.items():
+
+                if 'e_out_2' in _vars and len(ents) < 2:
+                    continue
+
+                _map = {'e_to_e_out': pred}
+                maps = take_one(_map, ents, _key='e_out') if 'e_out_2' not in _vars \
+                    else take_two(_map, ents, _key_one='e_out',  _key_two='e_out_2')
+
+                # If we need e_out_out or e_out_to_e_out_out pred (2hop right preds)
+                # @TODO: implement a recursive call
+
+                right_maps += maps
+
+            if 'e_to_e_out_2' in _vars or 'e_out_2*' in _vars:
+
+                new_right_maps = []
+
+                for _map in right_maps:
+                    for pred, ents in self.right.items():
+
+                        if _map['e_to_e_out'] == pred:
+                            continue
+
+                        _map['e_to_e_out_2'] = pred
+                        new_right_maps += take_one(_map, ents, _key='e_out_2*')
+
+                right_maps = new_right_maps
+
+        """
+            Logic for left
+        """
+        if 'e_in' in _vars or 'e_in_to_e' in _vars:
+
+            if 'e_in_to_e_2' in _vars or 'e_in_2*' in _vars and len(self.left.predicates) < 2:
+                return []
+
+            for pred, ents in self.left.items():
+
+                if 'e_in_2' in _vars and len(ents) < 2:
+                    continue
+
+                _map = {'e_in_to_e': pred}
+                maps = take_one(_map, ents, _key='e_in') if 'e_in_2' not in _vars \
+                    else take_two(_map, ents, _key_one='e_in', _key_two='e_in_2')
+
+                # If we need e_out_out or e_out_to_e_out_out pred (2hop right preds)
+                # @TODO: implement a recursive call
+
+                left_maps += maps
+
+            if 'e_in_to_e_2' in _vars or 'e_in_2*' in _vars:
+
+                new_left_maps = []
+
+                for _map in left_maps:
+                    for pred, ents in self.left.items():
+
+                        if _map['e_in_to_e'] == pred:
+                            continue
+
+                        _map['e_in_to_e_2'] = pred
+                        new_left_maps += take_one(_map, ents, _key='e_in_2*')
+
+                left_maps = new_left_maps
+
+        return permute_dicts(left_maps, right_maps)
 
 
 if __name__ == "__main__":
@@ -184,14 +363,14 @@ if __name__ == "__main__":
     a.insert(data_out, _outgoing=True)
     a.insert(data_in, _outgoing=False)
 
-    pprint(a)
-    print("Entities: ", a.entities)
-    print("Predicates: ", a.predicates)
-    print("Entities: ")
-    pprint(a.entities_)
-
-    input("Press enter to try putting in a two triple thing")
     hop2_data = [PredEntTuple(pred='dbp:continent', ent='dbr:NorthAmerica')]
     a.insert(hop2_data, _origin='dbr:US', _outgoing=True)
 
+    print("Entities: ", a.entities)
+    print("Predicates: ", a.predicates)
+    print("Entities: ")
+
     pprint(a)
+
+    maps = a.get_mapping_for(['e_out', 'e_to_e_out'], [])
+    pprint(maps)

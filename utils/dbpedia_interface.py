@@ -139,8 +139,6 @@ class DBPedia:
             self.sparql_endpoint = DBPEDIA_ENDPOINT
         self.global_endpoint = 'http://dbpedia.org/sparql'
 
-        warnings.warn("Holy hell!")
-
         self.verbose = _verbose
         if caching:
             self.r = redis.StrictRedis(host=REDIS_HOSTNAME, port=6379, db=_db_name)

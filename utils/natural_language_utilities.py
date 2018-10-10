@@ -9,9 +9,7 @@ import os.path
 import warnings
 import html
 import validators
-
-if sys.version[0] == '2': from urlparse import urlparse
-else: from urllib.parse import urlparse
+from urllib.parse import urlparse
 
 # SOME MACROS
 STOPWORDLIST = 'resources/stopwords.txt'
@@ -23,6 +21,7 @@ DBP_SHORTHANDS = {'dbo': 'http://dbpedia.org/ontology/', 'dbp': 'http://dbpedia.
 # Few regex to convert camelCase to _ i.e DonaldTrump to donald trump
 first_cap_re = re.compile('(.)([A-Z][a-z]+)')
 all_cap_re = re.compile('([a-z0-9])([A-Z])')
+variable_regex = r"(?<=%\()\S*(?=\)s)"
 stopwords = open(STOPWORDLIST).read().split('\n')
 
 
@@ -36,6 +35,10 @@ def has_url(_string):
     if validators.url(_string):
         return True
     return False
+
+
+def get_variables(_string):
+    return re.findall(variable_regex, _string, re.MULTILINE)
 
 
 def tokenize(_input, _ignore_brackets=False, _remove_stopwords=False):

@@ -1,10 +1,12 @@
 import time
 
 
-class InvalidTemplateError(Exception): pass
+class InvalidTemplateError(Exception):
+    pass
 
 
-class InvalidTemplateMappingError(Exception): pass
+class InvalidTemplateMappingError(Exception):
+    pass
 
 
 class InvalidSubgraphPreds(Exception):
@@ -16,6 +18,10 @@ class InvalidSubgraph(Exception):
 
 
 class NoSubgraphFoundError(Exception):
+    pass
+
+
+class UnknownVarFoundError(Exception):
     pass
 
 
