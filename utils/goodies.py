@@ -1,4 +1,7 @@
 import time
+from collections import namedtuple
+
+Log = namedtuple('Log', 'uri traceback')
 
 
 def lazy_property(fn):

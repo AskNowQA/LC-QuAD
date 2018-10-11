@@ -122,8 +122,10 @@ class VarList(list):
         To be used within Subgraph.get_mapping_for fn, generally.
     """
 
-    def __init__(self, _vars, _valcheck=True):
+    def __init__(self, _vars, _constraints, _valcheck=True):
         super(VarList, self).__init__(_vars)
+
+        self.constraints = _constraints
 
         if _valcheck:
             for var in self:  # Check if all vars make sense
@@ -196,6 +198,16 @@ class VarList(list):
     def double_(self):
         return bool(self.double)
 
+    @lazy_property
+    def hash(self):
+        # @TODO: handle constraints while computing hash too!
+        if len(self) == 0:
+            return 0
+        h = hash(self[0])
+        for v in self[1:]:
+            h ^= hash(v)
+        return h
+
 
 class SubgraphPreds(dict):
     """
@@ -246,6 +258,7 @@ class Subgraph(dict):
         self['uri'] = _uri if _uri else ''
         self['type'] = _type if _type else ''
         self['left'], self['right'] = SubgraphPreds(), SubgraphPreds()
+        self.mappings = {}
 
     def find(self, _uri, _caller, _type=None, _new=True):
         """
@@ -346,12 +359,15 @@ class Subgraph(dict):
             if datum.ent not in pred:
                 src[datum.pred].append(ent)
 
-    def get_mapping_for(self, _vars, _equal=None):
+    def _get_mapping_for_(self, _vars, _equal=None):
         """
             Returns a list of mapping fitting these vars, satisfying the equal condition.
 
             Logic: check which side of self should we start at (may be both).
             Function is recursive in nature!
+
+            @TODO: fix equal constraints parsing
+            @TODO: remove unnecessary variables upon exit
 
             Assumptions:
                 - won't ask for _2 and _2* for any var in one call
@@ -362,12 +378,13 @@ class Subgraph(dict):
         :return: list of dicts.
         """
 
-        _vars = VarList(_vars)
+        _vars = VarList(_vars, _equal)
 
         right_maps = []
         left_maps = []
 
-        if (_vars.right.dup_ and len(self.right.predicates) < 2) or (_vars.left.dup_ and len(self.left.predicates) < 2):
+        if (_vars.right.dup_ and len(self.right.predicates) < 2) or (
+                _vars.left.dup_ and len(self.left.predicates) < 2):
             return []
 
         """
@@ -387,7 +404,8 @@ class Subgraph(dict):
                     rec_right_maps = []
                     for ent in ents:
                         rec_right_maps += [change_keys_dict(x, rev(REC_RIGHT_VARS))
-                                           for x in ent.get_mapping_for(change_keys_list(_vars.right, REC_RIGHT_VARS))]
+                                           for x in
+                                           ent._get_mapping_for_(change_keys_list(_vars.right, REC_RIGHT_VARS))]
 
                     _maps = permute_dicts(_maps, rec_right_maps, _optional=False)
 
@@ -425,7 +443,7 @@ class Subgraph(dict):
                     rec_left_maps = []
                     for ent in ents:
                         rec_left_maps += [change_keys_dict(x, rev(REC_LEFT_VARS)) for x
-                                          in ent.get_mapping_for(change_keys_list(_vars.right, REC_LEFT_VARS))]
+                                          in ent._get_mapping_for_(change_keys_list(_vars.right, REC_LEFT_VARS))]
 
                     _maps = permute_dicts(_maps, rec_left_maps, _optional=False)
 
@@ -445,7 +463,24 @@ class Subgraph(dict):
 
                 left_maps = dup_left_maps
 
-        return permute_dicts(left_maps, right_maps)
+        mappings = permute_dicts(left_maps, right_maps)
+        self.mappings[_vars.hash] = mappings
+        return mappings
+
+    def gen_maps(self, _vars, _equal=None):
+        """
+            Returns a list of mapping fitting these vars, satisfying the equal condition.
+
+            Hash the params and see if we have it precomputed. If not, call _get_mapping_for_ fn and return op.
+
+        :param _vars: list of str: indicate variables that you want the mapping to consist of.
+        :param _equal: only get mapping satisfying this constraint.
+        :return: list of dicts.
+        """
+
+        _var_obj = VarList(_vars, _equal)
+
+        return self.mappings.get(_var_obj.hash, self._get_mapping_for_(_vars, _equal))
 
 
 if __name__ == "__main__":
@@ -474,6 +509,6 @@ if __name__ == "__main__":
     #
     # pprint(a)
 
-    maps = a.get_mapping_for(['e_out', 'e_out_out'])
-    maps = a.get_mapping_for(['e_in', 'e_in_out'])
+    maps = a.gen_maps(['e_out', 'e_out_out'])
+    maps = a.gen_maps(['e_in', 'e_in_out'])
     pprint(maps)
