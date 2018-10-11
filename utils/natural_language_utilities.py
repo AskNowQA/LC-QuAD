@@ -151,14 +151,14 @@ def is_dbpedia_shorthand(_string, _convert=True):
     splitted_string = _string.split(':')
 
     if len(splitted_string) == 1:
-        warnings.warn("nlutils.is_dbpedia_shorthand: Invalid string: %s \n "
+        warnings.warn("Invalid string: %s \n "
                       + "Please check it yourself, and extrapolate what breaks!")
         return _string if _convert else False
 
     if splitted_string[0] in DBP_SHORTHANDS.keys():
         # Validate the right side of the ':'
         if '/' in splitted_string[1]:
-            warnings.warn("nlutils.is_dbpedia_shorthand: Invalid string: %s \n "
+            warnings.warn("Invalid string: %s \n "
                           + "Please check it yourself, and extrapolate what breaks!")
             return _string if _convert else False
 

@@ -3,7 +3,6 @@ from pprint import pprint
 
 from utils.goodies import *
 
-
 VAR_HOP1_RIGHT = ['e_out', 'e_to_e_out']
 VAR_HOP1_RIGHT_DUP = ['e_out_2*', 'e_to_e_out_2']
 VAR_HOP1_RIGHT_DOUBLE = ['e_out_2']
@@ -12,7 +11,7 @@ VAR_HOP1_LEFT_DUP = ['e_in_2*', 'e_in_to_e_2']
 VAR_HOP1_LEFT_DOUBLE = ['e_in_2']
 VAR_OTHERS = ['e', 'class_uri', 'class_x']
 VAR_HOP2_RIGHT = ['e_out_out', 'e_out_in', 'e_out_to_e_out_out', 'e_out_in_to_e_out']
-VAR_HOP2_LEFT = [ 'e_in_in', 'e_in_out', 'e_in_in_to_e_in', 'e_in_to_e_in_out']
+VAR_HOP2_LEFT = ['e_in_in', 'e_in_out', 'e_in_in_to_e_in', 'e_in_to_e_in_out']
 VAR_HOP1 = VAR_HOP1_LEFT + VAR_HOP1_RIGHT + VAR_HOP1_LEFT_DUP + VAR_HOP1_RIGHT_DUP + \
            VAR_HOP1_LEFT_DOUBLE + VAR_HOP1_RIGHT_DOUBLE
 VAR_HOP2 = VAR_HOP2_LEFT + VAR_HOP2_RIGHT
@@ -21,7 +20,6 @@ REC_RIGHT_VARS = {'e_out_out': 'e_out', 'e_out_to_e_out_out': 'e_to_e_out', 'e_o
                   'e_out_in': 'e_in', 'e_out_in_to_e_out': 'e_in_to_e'}
 REC_LEFT_VARS = {'e_in_in': 'e_in', 'e_in': 'e', 'e_in_in_to_e_in': 'e_in_to_e',
                  'e_in_to_e_in_out': 'e_to_e_out', 'e_in_out': 'e_out'}
-
 
 PredEntTuple = namedtuple('PredEntTuple', 'pred ent type')
 PredEntTuple.__new__.__defaults__ = (None, None, '')
@@ -67,7 +65,7 @@ def take_two(_map, _data, _key_one, _key_two):
     return _maps
 
 
-def permute_dicts(_d1, _d2):
+def permute_dicts(_d1, _d2, _optional=True):
     """
         Given two list of dicts, it creates a list of dicts having a combination of both values.
 
@@ -79,8 +77,11 @@ def permute_dicts(_d1, _d2):
 
     :param _d1: list of dicts
     :param _d2: list of dicts
+    :param _optional: bool: flag which if False, will return nothing if one of _d* is empty.
     :return: list of dicts
     """
+    if not _optional and (len(_d1) == 0 or len(_d2) == 0):
+        return []
     if len(_d1) == 0:
         return _d2
     elif len(_d2) == 0:
@@ -95,11 +96,12 @@ def permute_dicts(_d1, _d2):
 
     for dict1 in _d1:
         for dict2 in _d2:
-            if common_keys:     # If there are common keys, accept elements only if their values are same.
+            if common_keys:  # If there are common keys, accept elements only if their values are same.
+                disjoint = False
                 for key in common_keys:
-                    if dict1[key] == dict2[key]:
-                        pass
-                else:
+                    if dict1[key] != dict2[key]:
+                        disjoint = True
+                if disjoint:
                     continue
 
             new_dict = dict1.copy()
@@ -110,8 +112,8 @@ def permute_dicts(_d1, _d2):
 
 
 rev = lambda mapping: {v: k for k, v in mapping.items()}
-map_keys_list = lambda data, mapping: [mapping[v] for v in data if v in mapping]
-map_keys_dict = lambda data, mapping: {mapping[k]: v for k, v in data.items() if k in mapping}
+change_keys_list = lambda data, mapping: [mapping[v] for v in data if v in mapping]
+change_keys_dict = lambda data, mapping: {mapping[k]: v for k, v in data.items() if k in mapping}
 
 
 class VarList(list):
@@ -119,16 +121,32 @@ class VarList(list):
         Extends list to easy peasy compute a bunch of flags for a list of variables.
         To be used within Subgraph.get_mapping_for fn, generally.
     """
+
     def __init__(self, _vars, _valcheck=True):
         super(VarList, self).__init__(_vars)
 
         if _valcheck:
-            for var in self:                # Check if all vars make sense
+            for var in self:  # Check if all vars make sense
                 if var not in VARS:
                     raise UnknownVarFoundError("Var %s not known." % var)
 
     def filtered(self, src):
         return VarList([v for v in self if v in src], False)
+
+    # def mapped(self, mapping):
+    #     return VarList([mapping[v] for v in self if v in mapping], False)
+    #
+    # def map_to_skip_hop_right(self):
+    #     return self.mapped(REC_RIGHT_VARS)
+    #
+    # def map_to_skip_hop_left(self):
+    #     return self.mapped(REC_LEFT_VARS)
+    #
+    # def map_from_skip_hop_left(self):
+    #     return self.mapped(rev(REC_RIGHT_VARS))
+    #
+    # def map_from_skip_hop_right(self):
+    #     return self.mapped(rev(REC_LEFT_VARS))
 
     @lazy_property
     def one(self):
@@ -140,15 +158,15 @@ class VarList(list):
 
     @lazy_property
     def right(self):
-        return self.filtered(VAR_HOP2_RIGHT + VAR_HOP1_RIGHT + VAR_HOP1_RIGHT_DUP)
+        return self.filtered(VAR_HOP2_RIGHT + VAR_HOP1_RIGHT + VAR_HOP1_RIGHT_DUP + VAR_HOP1_RIGHT_DOUBLE)
 
     @lazy_property
     def left(self):
-        return self.filtered(VAR_HOP2_LEFT + VAR_HOP1_LEFT + VAR_HOP1_RIGHT_DUP)
+        return self.filtered(VAR_HOP2_LEFT + VAR_HOP1_LEFT + VAR_HOP1_LEFT_DUP + VAR_HOP1_LEFT_DOUBLE)
 
     @lazy_property
     def dup(self):
-        return self.filtered(VAR_HOP1_RIGHT_DUP+VAR_HOP1_LEFT_DUP)
+        return self.filtered(VAR_HOP1_RIGHT_DUP + VAR_HOP1_LEFT_DUP)
 
     @lazy_property
     def double(self):
@@ -344,34 +362,39 @@ class Subgraph(dict):
         :return: list of dicts.
         """
 
-        vars = VarList(_vars)
+        _vars = VarList(_vars)
 
         right_maps = []
         left_maps = []
 
-        if (vars.right.dup_ and len(self.right.predicates) < 2) or (vars.left.dup_ and len(self.left.predicates) < 2):
+        if (_vars.right.dup_ and len(self.right.predicates) < 2) or (_vars.left.dup_ and len(self.left.predicates) < 2):
             return []
 
         """
             Logic for right side
         """
-        if vars.one.right_:
+        if _vars.one.right_:
 
             for pred, ents in self.right.items():
-                if vars.right.double_ and len(ents) < 2:
+                if _vars.right.double_ and len(ents) < 2:
                     continue
 
                 _map = {'e_to_e_out': pred, 'e': self.uri}
-                maps = take_one(_map, ents, _key='e_out') if not vars.right.double_ \
-                    else take_two(_map, ents, _key_one='e_out',  _key_two='e_out_2')
+                _maps = take_one(_map, ents, _key='e_out') if not _vars.right.double_ \
+                    else take_two(_map, ents, _key_one='e_out', _key_two='e_out_2')
 
-                # If we need e_out_out or e_out_to_e_out_out pred (2hop right preds)
-                # @TODO: cond to call the left side of
+                if _vars.right.two_:
+                    rec_right_maps = []
+                    for ent in ents:
+                        rec_right_maps += [change_keys_dict(x, rev(REC_RIGHT_VARS))
+                                           for x in ent.get_mapping_for(change_keys_list(_vars.right, REC_RIGHT_VARS))]
 
-                right_maps += maps
+                    _maps = permute_dicts(_maps, rec_right_maps, _optional=False)
 
-            if vars.right.dup_:
-                new_right_maps = []
+                right_maps += _maps
+
+            if _vars.right.dup_:
+                dup_right_maps = []
 
                 for _map in right_maps:
                     for pred, ents in self.right.items():
@@ -380,31 +403,36 @@ class Subgraph(dict):
                             continue
 
                         _map['e_to_e_out_2'] = pred
-                        new_right_maps += take_one(_map, ents, _key='e_out_2*')
+                        dup_right_maps += take_one(_map, ents, _key='e_out_2*')
 
-                right_maps = new_right_maps
+                right_maps = dup_right_maps
 
         """
             Logic for left
         """
-        if vars.one.left_:
+        if _vars.one.left_:
 
             for pred, ents in self.left.items():
 
-                if vars.left.double_ and len(ents) < 2:
+                if _vars.left.double_ and len(ents) < 2:
                     continue
 
                 _map = {'e_in_to_e': pred, 'e': self.uri}
-                maps = take_one(_map, ents, _key='e_in') if vars.left.double_ \
+                _maps = take_one(_map, ents, _key='e_in') if not _vars.left.double_ \
                     else take_two(_map, ents, _key_one='e_in', _key_two='e_in_2')
 
-                # If we need e_out_out or e_out_to_e_out_out pred (2hop right preds)
-                # @TODO: implement a recursive call
+                if _vars.left.two_:
+                    rec_left_maps = []
+                    for ent in ents:
+                        rec_left_maps += [change_keys_dict(x, rev(REC_LEFT_VARS)) for x
+                                          in ent.get_mapping_for(change_keys_list(_vars.right, REC_LEFT_VARS))]
 
-                left_maps += maps
+                    _maps = permute_dicts(_maps, rec_left_maps, _optional=False)
 
-            if vars.left.dup_:
-                new_left_maps = []
+                left_maps += _maps
+
+            if _vars.left.dup_:
+                dup_left_maps = []
 
                 for _map in left_maps:
                     for pred, ents in self.left.items():
@@ -413,9 +441,9 @@ class Subgraph(dict):
                             continue
 
                         _map['e_in_to_e_2'] = pred
-                        new_left_maps += take_one(_map, ents, _key='e_in_2*')
+                        dup_left_maps += take_one(_map, ents, _key='e_in_2*')
 
-                left_maps = new_left_maps
+                left_maps = dup_left_maps
 
         return permute_dicts(left_maps, right_maps)
 
@@ -432,7 +460,7 @@ if __name__ == "__main__":
     data_in = [PredEntTuple(pred='dbp:son', ent='dbr:BiggerObama', type="person"),
                PredEntTuple(pred='dbp:spouse', ent='dbr:Michelle', type="person"),
                PredEntTuple(pred='dbp:father', ent='dbr:Wut', type="nothing"),
-               PredEntTuple(pred='dbp:hasResident', ent='dbo:Obama', type="person")]
+               PredEntTuple(pred='dbp:hasResident', ent='dbr:US', type="person")]
 
     a.insert(data_out, _outgoing=True)
     a.insert(data_in, _outgoing=False)
@@ -446,5 +474,6 @@ if __name__ == "__main__":
     #
     # pprint(a)
 
-    maps = a.get_mapping_for(['e_out', 'e_to_e_out', 'e_in'])
+    maps = a.get_mapping_for(['e_out', 'e_out_out'])
+    maps = a.get_mapping_for(['e_in', 'e_in_out'])
     pprint(maps)
