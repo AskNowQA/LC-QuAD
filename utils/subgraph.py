@@ -9,16 +9,16 @@ VAR_HOP1_RIGHT_DOUBLE = ['e_out_2']
 VAR_HOP1_LEFT = ['e_in', 'e_in_to_e']
 VAR_HOP1_LEFT_DUP = ['e_in_2*', 'e_in_to_e_2']
 VAR_HOP1_LEFT_DOUBLE = ['e_in_2']
-VAR_OTHERS = ['e', 'class_uri', 'class_x']
+VAR_OTHERS = ['uri', 'class_uri', 'class_x']
 VAR_HOP2_RIGHT = ['e_out_out', 'e_out_in', 'e_out_to_e_out_out', 'e_out_in_to_e_out']
 VAR_HOP2_LEFT = ['e_in_in', 'e_in_out', 'e_in_in_to_e_in', 'e_in_to_e_in_out']
 VAR_HOP1 = VAR_HOP1_LEFT + VAR_HOP1_RIGHT + VAR_HOP1_LEFT_DUP + VAR_HOP1_RIGHT_DUP + \
            VAR_HOP1_LEFT_DOUBLE + VAR_HOP1_RIGHT_DOUBLE
 VAR_HOP2 = VAR_HOP2_LEFT + VAR_HOP2_RIGHT
 VARS = VAR_HOP1 + VAR_HOP2 + VAR_OTHERS
-REC_RIGHT_VARS = {'e_out_out': 'e_out', 'e_out_to_e_out_out': 'e_to_e_out', 'e_out': 'e',
+REC_RIGHT_VARS = {'e_out_out': 'e_out', 'e_out_to_e_out_out': 'e_to_e_out', 'e_out': 'uri',
                   'e_out_in': 'e_in', 'e_out_in_to_e_out': 'e_in_to_e'}
-REC_LEFT_VARS = {'e_in_in': 'e_in', 'e_in': 'e', 'e_in_in_to_e_in': 'e_in_to_e',
+REC_LEFT_VARS = {'e_in_in': 'e_in', 'e_in': 'uri', 'e_in_in_to_e_in': 'e_in_to_e',
                  'e_in_to_e_in_out': 'e_to_e_out', 'e_in_out': 'e_out'}
 
 PredEntTuple = namedtuple('PredEntTuple', 'pred ent type')
@@ -396,7 +396,7 @@ class Subgraph(dict):
                 if _vars.right.double_ and len(ents) < 2:
                     continue
 
-                _map = {'e_to_e_out': pred, 'e': self.uri}
+                _map = {'e_to_e_out': pred, 'uri': self.uri}
                 _maps = take_one(_map, ents, _key='e_out') if not _vars.right.double_ \
                     else take_two(_map, ents, _key_one='e_out', _key_two='e_out_2')
 
@@ -435,7 +435,7 @@ class Subgraph(dict):
                 if _vars.left.double_ and len(ents) < 2:
                     continue
 
-                _map = {'e_in_to_e': pred, 'e': self.uri}
+                _map = {'e_in_to_e': pred, 'uri': self.uri}
                 _maps = take_one(_map, ents, _key='e_in') if not _vars.left.double_ \
                     else take_two(_map, ents, _key_one='e_in', _key_two='e_in_2')
 

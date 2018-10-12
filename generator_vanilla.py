@@ -1,15 +1,12 @@
-'''
+"""
     This file generates subgraphs and SPARQL for a given set of entites.
 
     Changelog:
         -> Removed probabilistic filtering (for easier deployment)
-'''
+"""
 
 # Importing some external libraries
 from pprint import pprint
-import networkx as nx
-import numpy as np
-import progressbar
 import traceback
 import textwrap
 import warnings
@@ -18,13 +15,12 @@ import random
 import json
 import copy
 import uuid
-import time
 
 # Importing internal classes/libraries
 from utils.goodies import *
 import utils.dbpedia_interface as db_interface
 import utils.natural_language_utilities as nlutils
-from utils import subgraph as SubG
+from utils import subgraph
 
 formatwarning_orig = warnings.formatwarning
 warnings.formatwarning = lambda message, category, filename, lineno, line=None: \
@@ -38,7 +34,7 @@ predicates = open('resources/relations.txt', 'r').read().split('\n')
 # Contains whitelisted entities classes
 entity_classes = open('resources/entity_classes.txt', 'r').read().split('\n')
 
-# Contains list of entites for which the question would be asked
+# Contains list of entities for which the question would be asked
 entities = open('resources/entities.txt', 'r').read().split('\n')
 
 # Contains all the SPARQL templates existing in templates.py
@@ -49,7 +45,7 @@ entity_went_bad = []
 sparqls = {}
 dbp = None
 
-# Some macros because hardcoding kills puppies
+# Some macros because hardcoding params kills puppies
 DEBUG = True
 NUM_ANSWER_COUNTABLE = 7
 NUM_ANSWER_MAX = 10
@@ -57,13 +53,13 @@ FLUSH_THRESHOLD = 100
 FILTER_PRED, FILTER_LITERAL, FILTER_ENT = True, True, False
 PREDICATE_COUNT_LOC = 'resources/properties_count.pickle'
 DBP_NMSP = 'http://dbpedia.org/'  # DBpedia namespace
-PRUNE_RESULTS = 20
+SUBG_MAX_RESULTS = 50
 
-''' 
+'''
     A dictionary of properties. 
     **key** parent entity 
     **value** a dictionary {'predicate':count}
-        **key** of property and **value** being number of times it has already occured .
+        **key** of property and **value** being number of times it has already occurred .
     {"/agent" : [ {"/birthPlace" : 1 }, {"/deathPlace" : 2}] }
 
     This needs to be pickled. @TODO: When?
@@ -96,16 +92,16 @@ one_triple_left = '''
             }'''
 
 
-def filter(_results,
-           _keep_no_results=None,
-           _filter_dbpedia=False,
-           _filter_predicates=True,
-           _filter_literals=True,
-           _filter_entities=False,
-           _filter_count=False,
-           _k=5
-           ):
-    '''
+def filter_triples(_results,
+                   _keep_no_results=None,
+                   _filter_dbpedia=False,
+                   _filter_predicates=True,
+                   _filter_literals=True,
+                   _filter_entities=False,
+                   _filter_count=False,
+                   _k=5
+                   ):
+    """
     Implements pruing in the results.
     Used to push the results of different queries into the subgraph.
 
@@ -128,7 +124,7 @@ def filter(_results,
     :param _k: int: limit on _filter_count
 
     :return: A list of results which can directly be used for inserting into a graph
-    '''
+    """
     global predicates_count
 
     results_list = []
@@ -139,7 +135,7 @@ def filter(_results,
 
         # Put in filters
         if _filter_dbpedia and (not pred.startswith(DBP_NMSP) or not ent.startswith(DBP_NMSP)): continue
-        if _filter_predicates and not pred in predicates: continue
+        if _filter_predicates and pred not in predicates: continue
         if _filter_literals and nlutils.is_literal(ent): continue
 
         cls = dbp.get_most_specific_class(ent) if not nlutils.is_literal(ent) else None
@@ -159,25 +155,20 @@ def filter(_results,
     return results_list
 
 
-# @TODO: fix
-def insert_triples_in_subgraph(G,
-                               _results,
-                               _outgoing,
-                               _origin,
-                               _save_classes=False):
+def insert_triples_in_subgraph(subg, _results, _outgoing, _origin, _save_classes=False):
     """
         Function used to push the results of different queries into the subgraph.
         USAGE: only within the get_local_subgraph function.
 
     # @TODO: implement save classes here.
 
-    :param G: the subgraph object within which the triples are to be pushed
+    :param subg: the subgraph object within which the triples are to be pushed
     :param _results: a result list which contains the sparql variables 'e' and 'p'.
                 They can be of either left or right queries as the cell above.
-    :param _labels: a tuple with three strings, which depict the nomenclature of the resources to be pushed
     :param _outgoing: True -> one triple right; False -> one triple left
     :param _origin: the results variable only gives us one p and one e.
                 Depending on the direction, this node will act as the other e to complete the triple
+    :param _save_classes: boolL True -> also store the rdftype value of the entites
     :return: Nothing
     """
 
@@ -187,35 +178,37 @@ def insert_triples_in_subgraph(G,
         # A bit of cleaning here might help
 
         pred = result[u'p'][u'value']
-        ent = result[u'e'][u'value']
-        cls = dbp.get_most_specific_class(ent) if _save_classes else ''
+        enty = result[u'e'][u'value']
+        cls = dbp.get_most_specific_class(enty) if _save_classes else ''
 
-        if not nlutils.is_clean_url(ent):
+        if not nlutils.is_clean_url(enty):
             continue
 
         if not nlutils.is_clean_url(pred):
             continue
 
         # Push the data in subgraph
-        G.insert([SubG.PredEntTuple(pred, ent, cls)], _origin=_origin, _outgoing=_outgoing)
+        subg.insert([subgraph.PredEntTuple(pred, enty, cls)], _origin=_origin, _outgoing=_outgoing)
 
 
-# @TODO: fix
-def generate_sparqls(_uri, dbp):
-    try:
-        uri = _uri
+def _generate_sparqls_(_uri, _dbp):
+    """
+        Internal fn which orchestrates everything. Calls fn to gen subgraph,
+            and then generates SPARQL based on the subgraph
 
-        # Generate the local subgraph
-        graph = generate_subgraph(uri)
+    :param _uri: str of entity
+    :param _dbp: dbpedia interface obj
+    :return:
+    """
 
-        # Generate SPARQLS based on subgraph
-        fill_templates(graph, _uri=uri)
+    # Generate the local subgraph
+    graph = generate_subgraph(_uri, _dbp=_dbp)
 
-    except:
-        traceback.print_exc()
+    # Generate SPARQLS based on subgraph
+    fill_templates(graph, _dbp=_dbp)
 
 
-def _fill_one_template_(_template, _map, _graph):
+def _fill_one_template_(_template, _map, _graph, _dbp):
     """
         Function to fill a given template.
             by juxtaposing the mapping on the template.
@@ -230,6 +223,7 @@ def _fill_one_template_(_template, _map, _graph):
         :param _template: dict: one of the template from `templates.json`
         :param _map: dict: of vars needed in template. (maybe more)
         :param _graph: Subgraph obj
+        :param _dbp: dbpedia obj
 
         :return _template: dict.
     """
@@ -248,6 +242,7 @@ def _fill_one_template_(_template, _map, _graph):
     # Include the mapping within the template object
     template['mapping'] = _map
 
+    # @TODO: Answer is in byte encoded string right now. Change it back.
     # Get the Answer of the query
     answer = dbp.get_answer(template['query'])
     for key in answer.keys():
@@ -270,29 +265,32 @@ def _fill_one_template_(_template, _map, _graph):
         if key == "uri" and template["type"] == "count" and (answer['key']) < NUM_ANSWER_COUNTABLE:
             # Query has too less results. Bad for count
             return None
-    #
-    # template['answer'] = answer
-    #
-    # """
-    #     ATTENTION: This can create major problems in the future.
-    #     We are assuming that the most specific type of one 'answer' would be the most specific type of all answers.
-    #     In cases where answers are like Bareilly (City), Uttar Pradesh (State) and India (Country),
-    #         the SPARQL and NLQuestion would not be the same.
-    #         (We might expect all in the answers, but the question would put a domain restriction on answer.)
-    #
-    #     [Fixed] @TODO: attend to this? No, lets let it be. For the sake of performance.
-    #     @TODO: Why do we store only one answer in template['mapping']?
-    # """
-    # # Get the most specific type of the answers.
-    # template['answer_type'] = {variable: dbp.get_most_specific_class(variable[0]) for variable in template['answer']}
-    # template['mapping'] = {variable: variable[0] for variable in template['answer']}
-    #
-    # # Also get the classes of all the things we're putting in our SPARQL
-    # template['mapping_type'] = {key: dbp.get_type_of_resource(key, _filter_dbpedia=True)
-    #                             for key in template['mapping']}
-    # if DEBUG:
-    #     print(template)
-    #
+
+    template['answer'] = answer
+
+    """
+        ATTENTION: This can create major problems in the future.
+        We are assuming that the most specific type of one 'answer' would be the most specific type of all answers.
+        In cases where answers are like Bareilly (City), Uttar Pradesh (State) and India (Country),
+            the SPARQL and NLQuestion would not be the same.
+            (We might expect all in the answers, but the question would put a domain restriction on answer.)
+
+        [Fixed] @TODO: attend to this? @Ans: No, lets let it be. For the sake of performance.
+        @TODO: Why do we store only one answer in template['mapping']?
+    """
+    # Get the most specific type of the answers.
+    template['answer_type'] = {variable: dbp.get_most_specific_class(variable[0]) for variable in template['answer']}
+    template['mapping'].update({variable: answer[variable][0] for variable in template['answer'] if variable != 'uri'})
+
+    # Also get the classes of all the things we're putting in our SPARQL
+    template['mapping_type'] = {key: dbp.get_most_specific_class(value)
+                                for key, value in template['mapping'].items()}
+    if DEBUG:
+        print(template)
+
+    return template
+
+    # @TODO: put in code to add this data to global vars somehow.
     # # FINALLY, Put this SPARQL in
     # sparqls[_template_id] = sparqls.setdefault(_template_id, []).append(template)
     #
@@ -311,52 +309,54 @@ def get_vars(_template):
     return _template.get('vars', nlutils.get_variables(_template['template']))
 
 
-def fill_templates(_graph):
+def fill_templates(_graph, _dbp):
     """
         Will generate valid SPARQLs for different templates, based on the keys that the SPARQL needs.
         Expects a populated Subgraph object.
 
         :param _graph: Subgraph obj
+        :param _dbp: dbpedia interface obj
         :return List of strings (SPARQL)
     """
     sparqls_local = []
 
     try:
         for template in templates:
-            mappings = _graph.gen_maps(get_vars(template), template.get('equal', []))[:template.get('max'), None]
+            mappings = _graph.gen_maps(get_vars(template), template.get('equal', []))[:template.get('max', None)]
 
             for mapping in mappings:
-                sparqls_local += [_fill_one_template_(_template=template, _map=mapping, _graph=_graph)]
-    except:
+                sparqls_local += [_fill_one_template_(_template=template, _map=mapping, _graph=_graph, _dbp=_dbp)]
+    except Exception:
         entity_went_bad.append(Log(uri=_graph.uri, traceback=traceback.format_exc()))
 
     return sparqls_local
 
 
-def generate_subgraph(_uri, dbp):
+def generate_subgraph(_uri, _dbp):
     """
         Returns a JSON of the sort:
 
-    :param _uri:
+    :param _uri: str of entity
+    :param _dbp: dbpedia object
     :return:
     """
 
     # Create a new graph
-    G = SubG.Subgraph(_uri, _type=dbp.get_most_specific_class(_uri))
+    g = subgraph.Subgraph(_uri, _type=_dbp.get_most_specific_class(_uri))
 
     # ########## e ?p ?e (e_to_e_out and e_out) ##########
 
     with Timer() as timer:
 
-        results = dbp.shoot_custom_query(one_triple_right % {'e': _uri})
-        results = filter(_results=results,
-                         _keep_no_results=PRUNE_RESULTS,
-                         _filter_dbpedia=True,
-                         _filter_predicates=FILTER_PRED,
-                         _filter_literals=FILTER_LITERAL,
-                         _filter_entities=FILTER_ENT,
-                         _filter_count=False)
-        insert_triples_in_subgraph(G, _results=results, _outgoing=True, _origin=_uri, _save_classes=True)
+        results = _dbp.shoot_custom_query(one_triple_right % {'e': _uri})
+        results = filter_triples(_results=results,
+                                 _keep_no_results=SUBG_MAX_RESULTS,
+                                 _filter_dbpedia=True,
+                                 _filter_predicates=FILTER_PRED,
+                                 _filter_literals=FILTER_LITERAL,
+                                 _filter_entities=FILTER_ENT,
+                                 _filter_count=False)
+        insert_triples_in_subgraph(g, _results=results, _outgoing=True, _origin=_uri, _save_classes=True)
 
     if DEBUG:
         print("GenSub: 1-hop right for %(uri)s. Time: %(time).03f. Len: %(len)d" %
@@ -366,15 +366,15 @@ def generate_subgraph(_uri, dbp):
 
     with Timer() as timer:
 
-        results = dbp.shoot_custom_query(one_triple_left % {'e': _uri})
-        results = filter(_results=results,
-                         _keep_no_results=PRUNE_RESULTS,
-                         _filter_dbpedia=True,
-                         _filter_predicates=FILTER_PRED,
-                         _filter_literals=FILTER_LITERAL,
-                         _filter_entities=FILTER_ENT,
-                         _filter_count=False)
-        insert_triples_in_subgraph(G, _results=results, _outgoing=False, _origin=_uri, _save_classes=True)
+        results = _dbp.shoot_custom_query(one_triple_left % {'e': _uri})
+        results = filter_triples(_results=results,
+                                 _keep_no_results=SUBG_MAX_RESULTS,
+                                 _filter_dbpedia=True,
+                                 _filter_predicates=FILTER_PRED,
+                                 _filter_literals=FILTER_LITERAL,
+                                 _filter_entities=FILTER_ENT,
+                                 _filter_count=False)
+        insert_triples_in_subgraph(g, _results=results, _outgoing=False, _origin=_uri, _save_classes=True)
 
     if DEBUG:
         print("GenSub: 1-hop left for %(uri)s. Time: %(time).03f. Len: %(len)d" %
@@ -385,19 +385,19 @@ def generate_subgraph(_uri, dbp):
     with Timer() as timer:
 
         # Get all the e_out nodes back from the subgraph.
-        e_outs = G.right.entities
+        e_outs = g.right.entities
         len_res = 0
         for e_out in e_outs:
-            results = dbp.shoot_custom_query(one_triple_right % {'e': e_out})
-            results = filter(_results=results,
-                             _keep_no_results=PRUNE_RESULTS,
-                             _filter_dbpedia=True,
-                             _filter_predicates=FILTER_PRED,
-                             _filter_literals=FILTER_LITERAL,
-                             _filter_entities=FILTER_ENT,
-                             _filter_count=False)
+            results = _dbp.shoot_custom_query(one_triple_right % {'e': e_out})
+            results = filter_triples(_results=results,
+                                     _keep_no_results=SUBG_MAX_RESULTS,
+                                     _filter_dbpedia=True,
+                                     _filter_predicates=FILTER_PRED,
+                                     _filter_literals=FILTER_LITERAL,
+                                     _filter_entities=FILTER_ENT,
+                                     _filter_count=False)
             len_res = len(results)
-            insert_triples_in_subgraph(G, _results=results, _outgoing=True, _origin=e_out, _save_classes=True)
+            insert_triples_in_subgraph(g, _results=results, _outgoing=True, _origin=e_out, _save_classes=True)
 
     if DEBUG:
         print("GenSub: 2-hop right (e_out_to_e_out_out and e_out_out) for %(uri)s. Time: %(time).03f. Len: %(len)d" %
@@ -407,20 +407,20 @@ def generate_subgraph(_uri, dbp):
 
     with Timer() as timer:
 
-        e_outs = G.right.entities
+        e_outs = g.right.entities
         len_res = 0
         for e_out in e_outs:
-            results = dbp.shoot_custom_query(one_triple_left % {'e': e_out})
-            results = filter(_results=results,
-                             _keep_no_results=PRUNE_RESULTS,
-                             _filter_dbpedia=True,
-                             _filter_predicates=FILTER_PRED,
-                             _filter_literals=FILTER_LITERAL,
-                             _filter_entities=FILTER_ENT,
-                             _filter_count=False)
+            results = _dbp.shoot_custom_query(one_triple_left % {'e': e_out})
+            results = filter_triples(_results=results,
+                                     _keep_no_results=SUBG_MAX_RESULTS,
+                                     _filter_dbpedia=True,
+                                     _filter_predicates=FILTER_PRED,
+                                     _filter_literals=FILTER_LITERAL,
+                                     _filter_entities=FILTER_ENT,
+                                     _filter_count=False)
             len_res += len(results)
             # print("Here ",len(results), e_out)
-            insert_triples_in_subgraph(G, _results=results, _outgoing=False, _origin=e_out, _save_classes=True)
+            insert_triples_in_subgraph(g, _results=results, _outgoing=False, _origin=e_out, _save_classes=True)
 
     if DEBUG:
         print("GenSub: 2-hop left (e_out_in and e_out_in_to_e_out) for %(uri)s. Time: %(time).03f. Len: %(len)d" %
@@ -430,19 +430,19 @@ def generate_subgraph(_uri, dbp):
 
     with Timer() as timer:
 
-        e_ins = G.left.entities
+        e_ins = g.left.entities
         len_res = 0
         for e_in in e_ins:
-            results = dbp.shoot_custom_query(one_triple_left % {'e': e_in})
-            results = filter(_results=results,
-                             _keep_no_results=PRUNE_RESULTS,
-                             _filter_dbpedia=True,
-                             _filter_predicates=FILTER_PRED,
-                             _filter_literals=FILTER_LITERAL,
-                             _filter_entities=FILTER_ENT,
-                             _filter_count=False)
+            results = _dbp.shoot_custom_query(one_triple_left % {'e': e_in})
+            results = filter_triples(_results=results,
+                                     _keep_no_results=SUBG_MAX_RESULTS,
+                                     _filter_dbpedia=True,
+                                     _filter_predicates=FILTER_PRED,
+                                     _filter_literals=FILTER_LITERAL,
+                                     _filter_entities=FILTER_ENT,
+                                     _filter_count=False)
             len_res += len(results)
-            insert_triples_in_subgraph(G, _results=results, _outgoing=False, _origin=e_in, _save_classes=True)
+            insert_triples_in_subgraph(g, _results=results, _outgoing=False, _origin=e_in, _save_classes=True)
 
     if DEBUG:
         print("GenSub: 2-hop left (e_in_in and e_in_in_to_e_in) for %(uri)s. Time: %(time).03f. Len: %(len)d" %
@@ -452,19 +452,19 @@ def generate_subgraph(_uri, dbp):
 
     with Timer() as timer:
 
-        e_ins = G.left.entities
+        e_ins = g.left.entities
         len_res = 0
         for e_in in e_ins:
-            results = dbp.shoot_custom_query(one_triple_right % {'e': e_in})
-            results = filter(_results=results,
-                             _keep_no_results=PRUNE_RESULTS,
-                             _filter_dbpedia=True,
-                             _filter_predicates=FILTER_PRED,
-                             _filter_literals=FILTER_LITERAL,
-                             _filter_entities=FILTER_ENT,
-                             _filter_count=False)
+            results = _dbp.shoot_custom_query(one_triple_right % {'e': e_in})
+            results = filter_triples(_results=results,
+                                     _keep_no_results=SUBG_MAX_RESULTS,
+                                     _filter_dbpedia=True,
+                                     _filter_predicates=FILTER_PRED,
+                                     _filter_literals=FILTER_LITERAL,
+                                     _filter_entities=FILTER_ENT,
+                                     _filter_count=False)
             len_res = len(results)
-            insert_triples_in_subgraph(G, _results=results, _outgoing=True, _origin=e_in, _save_classes=True)
+            insert_triples_in_subgraph(g, _results=results, _outgoing=True, _origin=e_in, _save_classes=True)
 
     if DEBUG:
         print("GenSub: 2-hop right (e_in_to_e_in_out and e_in_out) for %(uri)s. Time: %(time).03f. Len: %(len)d" %
@@ -473,47 +473,40 @@ def generate_subgraph(_uri, dbp):
     print("Done generating subgraph for entity ", _uri)
 
     # Pushed all the six kind of nodes in the subgraph. Done!
-    return G
+    return g
 
 
-# def generate_sparqls():
-#     """
-#         The main function which generates and writes sparqls to file.
-#
-#         Intend to break this up in multiple fns.
-#
-#     :return:
-#     """
-#     dbp = db_interface.DBPedia(_verbose=True)
-#
-#     for entity in entities:
-#         try:
-#             generate_sparqls(entity, dbp)
-#         except:
-#             print traceback.print_exc()
-#             continue
-#
-#     # Commented it out to help the case of cluttered output folder
-#     # for key in sparqls:
-#     #     with open('output/template%d.txt' % key, 'a+') as out:
-#     #         pprint(sparqls[key], stream=out)
-#
-#     print("Pickling properties count to file")
-#     pickle.dump(predicates_count, open('resources/properties_count.pickle', 'w+'))
-#
-#     print("Trying to write SPARQLs to file!")
-#     for key in sparqls:
-#         fo = open('sparqls/template%d.txt' % key, 'a+')
-#         for value in sparqls[key]:
-#             fo.writelines(json.dumps(value) + "\n")
-#         fo.close()
-#
-#     print("These entities did not generating something")
-#     pprint(list(set(entity_went_bad)))
+def generate_sparqls(_dbp):
+    """
+        The main function which generates and writes sparqls to file.
+
+    :param _dbp: Dbpedia Interface obj.
+    :return: @TODO: what indeed
+    """
+
+    for ent in entities:
+        _generate_sparqls_(ent, _dbp)
+
+    # Commented it out to help the case of cluttered output folder
+    # for key in sparqls:
+    #     with open('output/template%d.txt' % key, 'a+') as out:
+    #         pprint(sparqls[key], stream=out)
+
+    print("Pickling properties count to file")
+    pickle.dump(predicates_count, open('resources/properties_count.pickle', 'w+'))
+
+    print("Trying to write SPARQLs to file!")
+    for key in sparqls:
+        fo = open('sparqls/template%d.txt' % key, 'a+')
+        for value in sparqls[key]:
+            fo.writelines(json.dumps(value) + "\n")
+        fo.close()
+
+    print("These entities did not generating something")
+    pprint(list(set(entity_went_bad)))
 
 
 if __name__ == "__main__":
-    ent = 'http://dbpedia.org/resource/Nicaragua'
+    entity = 'http://dbpedia.org/resource/Nicaragua'
     dbp = db_interface.DBPedia(_verbose=True, caching=False)
-    g = generate_subgraph(ent, dbp)
-    pprint(g)
+    generate_sparqls(dbp)

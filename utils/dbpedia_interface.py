@@ -316,7 +316,7 @@ class DBPedia:
 
         # NOTE: Assuming that there's only one variable
         for index in range(0, len(variables)):
-            value = [x[variables[index]][u'value'].encode('ascii', 'ignore') for x in response[u'results'][u'bindings']]
+            value = [x[variables[index]][u'value'] for x in response[u'results'][u'bindings']]
             values[variables[index]] = value
         return values
 
