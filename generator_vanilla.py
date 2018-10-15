@@ -49,7 +49,7 @@ dbp = None
 DEBUG = True
 NUM_ANSWER_COUNTABLE = 7
 NUM_ANSWER_MAX = 10
-FLUSH_THRESHOLD = 100
+FLUSH_THRESHOLD = 20
 FILTER_PRED, FILTER_LITERAL, FILTER_ENT = True, True, False
 PREDICATE_COUNT_LOC = 'resources/properties_count.pickle'
 DBP_NMSP = 'http://dbpedia.org/'  # DBpedia namespace
@@ -120,7 +120,7 @@ def filter_triples(_results,
     :param _filter_predicates: bool: if True, only properties existing in properties whitelist will be returned.
     :param _filter_literals: bool: if True, no literals will be returned.
     :param _filter_entities: bool: if True, only entities belonging to `entity_classes` will be returned.
-    :param _filter_count: bool: if True, we ensure that only _k instances of a property alongwith entity type are returned
+    :param _filter_count: bool: if True we ensure that only _k instances of a property alongwith entitytype are returned
     :param _k: int: limit on _filter_count
 
     :return: A list of results which can directly be used for inserting into a graph
@@ -203,9 +203,11 @@ def _generate_sparqls_(_uri, _dbp):
 
     # Generate the local subgraph
     graph = generate_subgraph(_uri, _dbp=_dbp)
+    print("Done generating subgraph for entity ", _uri)
 
     # Generate SPARQLS based on subgraph
     fill_templates(graph, _dbp=_dbp)
+    print("Done generating SPARQLs for entity  ", _uri)
 
 
 def _fill_one_template_(_template, _map, _graph, _dbp):
@@ -290,23 +292,36 @@ def _fill_one_template_(_template, _map, _graph, _dbp):
 
     return template
 
-    # @TODO: put in code to add this data to global vars somehow.
-    # # FINALLY, Put this SPARQL in
-    # sparqls[_template_id] = sparqls.setdefault(_template_id, []).append(template)
-    #
-    # # Just check if we have more than 100 SPARQLs for that template, flush them.
-    # if len(sparqls[_template_id]) > FLUSH_THRESHOLD:
-    #     # @TODO: put a lock here, if making it parallel
-    #
-    #     with open('sparqls/template%d.txt' % _template_id, 'a+') as f:
-    #         for value in sparqls[_template_id]:
-    #             fo.writelines(json.dumps(value) + "\n")
-    #
-    # return True
-
 
 def get_vars(_template):
     return _template.get('vars', nlutils.get_variables(_template['template']))
+
+
+def add(_data):
+    """
+        Safely store generated template obj (full with SPARQL and whatnot) in a global var.
+        Also keep flushing it now and then.
+
+    :param _data: dict
+    :return: None
+    """
+    global sparqls
+    t_id = _data['template_id']
+
+    sparqls[t_id] = sparqls.get(t_id, []).append(_data)
+
+    # Just check if we have more than 100 SPARQLs for that template, flush them.
+    if len(sparqls[t_id]) > FLUSH_THRESHOLD:
+
+        # @TODO: put a lock here, if making it parallel
+
+        with open("sparqls/template%d.txt" % t_id, "a+") as fo:
+            print(f"Flushing sparqls for id {t_id}")
+            for value in sparqls[t_id]:
+                fo.writelines(json.dumps(value) + "\n")
+            sparqls.pop(t_id)
+
+    return True
 
 
 def fill_templates(_graph, _dbp):
@@ -318,18 +333,16 @@ def fill_templates(_graph, _dbp):
         :param _dbp: dbpedia interface obj
         :return List of strings (SPARQL)
     """
-    sparqls_local = []
 
     try:
         for template in templates:
             mappings = _graph.gen_maps(get_vars(template), template.get('equal', []))[:template.get('max', None)]
 
             for mapping in mappings:
-                sparqls_local += [_fill_one_template_(_template=template, _map=mapping, _graph=_graph, _dbp=_dbp)]
+                add(_data=[_fill_one_template_(_template=template, _map=mapping, _graph=_graph, _dbp=_dbp)])
+
     except Exception:
         entity_went_bad.append(Log(uri=_graph.uri, traceback=traceback.format_exc()))
-
-    return sparqls_local
 
 
 def generate_subgraph(_uri, _dbp):
@@ -470,8 +483,6 @@ def generate_subgraph(_uri, _dbp):
         print("GenSub: 2-hop right (e_in_to_e_in_out and e_in_out) for %(uri)s. Time: %(time).03f. Len: %(len)d" %
               {'uri': _uri, 'time': timer.interval, 'len': len_res})
 
-    print("Done generating subgraph for entity ", _uri)
-
     # Pushed all the six kind of nodes in the subgraph. Done!
     return g
 
@@ -507,6 +518,7 @@ def generate_sparqls(_dbp):
 
 
 if __name__ == "__main__":
-    entity = 'http://dbpedia.org/resource/Nicaragua'
+    # entity = 'http://dbpedia.org/resource/Nicaragua'
+    DEBUG = True
     dbp = db_interface.DBPedia(_verbose=True, caching=False)
     generate_sparqls(dbp)

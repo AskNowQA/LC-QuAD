@@ -1,4 +1,3 @@
-from collections import namedtuple
 from pprint import pprint
 
 from utils.goodies import *
@@ -23,6 +22,12 @@ REC_LEFT_VARS = {'e_in_in': 'e_in', 'e_in': 'uri', 'e_in_in_to_e_in': 'e_in_to_e
 
 PredEntTuple = namedtuple('PredEntTuple', 'pred ent type')
 PredEntTuple.__new__.__defaults__ = (None, None, '')
+
+# Some lambda functions
+rev = lambda mapping: {v: k for k, v in mapping.items()}
+change_keys_list = lambda data, mapping: [mapping[v] for v in data if v in mapping]
+change_keys_dict = lambda data, mapping: {mapping[k]: v for k, v in data.items() if k in mapping}
+hashable = lambda data, keys: "+++".join(str(data[key]) for key in keys)
 
 
 def take_one(_map, _data, _key):
@@ -65,6 +70,60 @@ def take_two(_map, _data, _key_one, _key_two):
     return _maps
 
 
+def _enforce_equal_constraints_(_dicts, _keys):
+    """
+        Remove the dicts whose values aren't equal in these positions as specified by keys.
+        For instance if
+        _dict = [{'a':1, 'b':2, 'c':3}, {'a':1, 'b':2, 'c':1}, {'a':1, 'b':1, 'c':1}]
+        _keys = [''a','c']
+        returns [{'a':1, 'b':2, 'c':1}, {'a':1, 'b':1, 'c':1}]
+
+    Assumption: the _keys are present in _dict as keys
+
+    :param _dicts: list of dicts
+    :param _keys: list of str (keys of dict above)
+    :return: filtered list of dicts
+    """
+    if len(_keys) < 2:
+        return list(_dicts)
+
+    equal_dicts = []
+
+    for _dict in _dicts:
+
+        val_one = _dict[_keys[0]]
+        equal_flag = True
+        for val_i in _keys[1:]:
+            if _dict[val_i] != val_one:
+                equal_flag = False
+                break
+        if equal_flag:
+            equal_dicts.append(_dict)
+
+    return equal_dicts
+
+
+def trim_dicts(_dicts, _keys, _equal):
+    """
+        Remove the keys which aren't provided in _keys arg.
+
+        - Assumes all the elements of the dict have the same keyv
+        - Also remove duplicates (if any) after some keys have been removed.
+
+    :param _dicts: list of dictionaries (with the same set of keys)
+    :param _keys: list of keys that we should keep in there.
+    :param _equal: list of keys whose values should be equal in every list
+    :return:
+    """
+    for _dict in _dicts:
+        for _key in list(_dict.keys()):
+            if _key not in _keys:
+                _dict.pop(_key)
+
+    # Now to take care of uniques.
+    return _enforce_equal_constraints_(dict((hashable(v, _keys), v) for v in _dicts).values(), _equal)
+
+
 def permute_dicts(_d1, _d2, _optional=True):
     """
         Given two list of dicts, it creates a list of dicts having a combination of both values.
@@ -72,8 +131,6 @@ def permute_dicts(_d1, _d2, _optional=True):
         Assumption:
             - a list's dicts will have same keys
             - if two dict have common keys, only permute elements whose values for common keys are same.
-
-        @TODO: also input maps to use this func to merge recursively generated dicts
 
     :param _d1: list of dicts
     :param _d2: list of dicts
@@ -111,21 +168,14 @@ def permute_dicts(_d1, _d2, _optional=True):
     return data
 
 
-rev = lambda mapping: {v: k for k, v in mapping.items()}
-change_keys_list = lambda data, mapping: [mapping[v] for v in data if v in mapping]
-change_keys_dict = lambda data, mapping: {mapping[k]: v for k, v in data.items() if k in mapping}
-
-
 class VarList(list):
     """
         Extends list to easy peasy compute a bunch of flags for a list of variables.
         To be used within Subgraph.get_mapping_for fn, generally.
     """
 
-    def __init__(self, _vars, _constraints, _valcheck=True):
+    def __init__(self, _vars, _valcheck=True):
         super(VarList, self).__init__(_vars)
-
-        self.constraints = _constraints
 
         if _valcheck:
             for var in self:  # Check if all vars make sense
@@ -359,7 +409,7 @@ class Subgraph(dict):
             if datum.ent not in pred:
                 src[datum.pred].append(ent)
 
-    def _get_mapping_for_(self, _vars, _equal=None):
+    def _get_mapping_for_(self, _vars, _equal=[]):
         """
             Returns a list of mapping fitting these vars, satisfying the equal condition.
 
@@ -367,7 +417,6 @@ class Subgraph(dict):
             Function is recursive in nature!
 
             @TODO: fix equal constraints parsing
-            @TODO: remove unnecessary variables upon exit
 
             Assumptions:
                 - won't ask for _2 and _2* for any var in one call
@@ -378,7 +427,7 @@ class Subgraph(dict):
         :return: list of dicts.
         """
 
-        _vars = VarList(_vars, _equal)
+        _vars = VarList(_vars)
 
         right_maps = []
         left_maps = []
@@ -463,7 +512,7 @@ class Subgraph(dict):
 
                 left_maps = dup_left_maps
 
-        mappings = permute_dicts(left_maps, right_maps)
+        mappings = trim_dicts(permute_dicts(left_maps, right_maps), _equal=_equal)
         self.mappings[_vars.hash] = mappings
         return mappings
 
