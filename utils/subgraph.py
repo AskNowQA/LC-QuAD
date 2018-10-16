@@ -2,23 +2,26 @@ from pprint import pprint
 
 from utils.goodies import *
 
+TYPE_BLACKLIST = ['owl:Thing', 'http://www.w3.org/2002/07/owl#Thing']
+
 VAR_HOP1_RIGHT = ['e_out', 'e_to_e_out']
 VAR_HOP1_RIGHT_DUP = ['e_out_2*', 'e_to_e_out_2']
 VAR_HOP1_RIGHT_DOUBLE = ['e_out_2']
 VAR_HOP1_LEFT = ['e_in', 'e_in_to_e']
 VAR_HOP1_LEFT_DUP = ['e_in_2*', 'e_in_to_e_2']
 VAR_HOP1_LEFT_DOUBLE = ['e_in_2']
-VAR_OTHERS = ['uri', 'class_uri', 'class_x']
+VAR_CLASS = ['class_uri', 'class_x']
 VAR_HOP2_RIGHT = ['e_out_out', 'e_out_in', 'e_out_to_e_out_out', 'e_out_in_to_e_out']
 VAR_HOP2_LEFT = ['e_in_in', 'e_in_out', 'e_in_in_to_e_in', 'e_in_to_e_in_out']
+VAR_OTHERS = ['uri'] + VAR_CLASS
 VAR_HOP1 = VAR_HOP1_LEFT + VAR_HOP1_RIGHT + VAR_HOP1_LEFT_DUP + VAR_HOP1_RIGHT_DUP + \
            VAR_HOP1_LEFT_DOUBLE + VAR_HOP1_RIGHT_DOUBLE
 VAR_HOP2 = VAR_HOP2_LEFT + VAR_HOP2_RIGHT
 VARS = VAR_HOP1 + VAR_HOP2 + VAR_OTHERS
 REC_RIGHT_VARS = {'e_out_out': 'e_out', 'e_out_to_e_out_out': 'e_to_e_out', 'e_out': 'uri',
-                  'e_out_in': 'e_in', 'e_out_in_to_e_out': 'e_in_to_e'}
+                  'e_out_in': 'e_in', 'e_out_in_to_e_out': 'e_in_to_e', 'class_x': 'class_uri'}
 REC_LEFT_VARS = {'e_in_in': 'e_in', 'e_in': 'uri', 'e_in_in_to_e_in': 'e_in_to_e',
-                 'e_in_to_e_in_out': 'e_to_e_out', 'e_in_out': 'e_out'}
+                 'e_in_to_e_in_out': 'e_to_e_out', 'e_in_out': 'e_out', 'class_x': 'class_uri'}
 
 PredEntTuple = namedtuple('PredEntTuple', 'pred ent type')
 PredEntTuple.__new__.__defaults__ = (None, None, '')
@@ -30,7 +33,7 @@ change_keys_dict = lambda data, mapping: {mapping[k]: v for k, v in data.items()
 hashable = lambda data, keys: "+++".join(str(data[key]) for key in keys)
 
 
-def take_one(_map, _data, _key):
+def _take_one_(_map, _data, _key):
     """
         Make copies of _map with given _data, taking elements from _data **two** at a time.
     :param _map: dict
@@ -48,7 +51,7 @@ def take_one(_map, _data, _key):
     return _maps
 
 
-def take_two(_map, _data, _key_one, _key_two):
+def _take_two_(_map, _data, _key_one, _key_two):
     """
         Make copies of _map with given _data, taking elements from _data **two** at a time.
     :param _map: dict
@@ -78,7 +81,7 @@ def _enforce_equal_constraints_(_dicts, _keys):
         _keys = [''a','c']
         returns [{'a':1, 'b':2, 'c':1}, {'a':1, 'b':1, 'c':1}]
 
-    Assumption: the _keys are present in _dict as keys
+        Assumption: the _keys are present in _dict as keys
 
     :param _dicts: list of dicts
     :param _keys: list of str (keys of dict above)
@@ -113,7 +116,7 @@ def trim_dicts(_dicts, _keys, _equal):
     :param _dicts: list of dictionaries (with the same set of keys)
     :param _keys: list of keys that we should keep in there.
     :param _equal: list of keys whose values should be equal in every list
-    :return:
+    :return: list of dicts
     """
     for _dict in _dicts:
         for _key in list(_dict.keys()):
@@ -185,21 +188,6 @@ class VarList(list):
     def filtered(self, src):
         return VarList([v for v in self if v in src], False)
 
-    # def mapped(self, mapping):
-    #     return VarList([mapping[v] for v in self if v in mapping], False)
-    #
-    # def map_to_skip_hop_right(self):
-    #     return self.mapped(REC_RIGHT_VARS)
-    #
-    # def map_to_skip_hop_left(self):
-    #     return self.mapped(REC_LEFT_VARS)
-    #
-    # def map_from_skip_hop_left(self):
-    #     return self.mapped(rev(REC_RIGHT_VARS))
-    #
-    # def map_from_skip_hop_right(self):
-    #     return self.mapped(rev(REC_LEFT_VARS))
-
     @lazy_property
     def one(self):
         return self.filtered(VAR_HOP1)
@@ -210,11 +198,11 @@ class VarList(list):
 
     @lazy_property
     def right(self):
-        return self.filtered(VAR_HOP2_RIGHT + VAR_HOP1_RIGHT + VAR_HOP1_RIGHT_DUP + VAR_HOP1_RIGHT_DOUBLE)
+        return self.filtered(VAR_HOP2_RIGHT + VAR_HOP1_RIGHT + VAR_HOP1_RIGHT_DUP + VAR_HOP1_RIGHT_DOUBLE + VAR_CLASS)
 
     @lazy_property
     def left(self):
-        return self.filtered(VAR_HOP2_LEFT + VAR_HOP1_LEFT + VAR_HOP1_LEFT_DUP + VAR_HOP1_LEFT_DOUBLE)
+        return self.filtered(VAR_HOP2_LEFT + VAR_HOP1_LEFT + VAR_HOP1_LEFT_DUP + VAR_HOP1_LEFT_DOUBLE + VAR_CLASS)
 
     @lazy_property
     def dup(self):
@@ -223,6 +211,10 @@ class VarList(list):
     @lazy_property
     def double(self):
         return self.filtered(VAR_HOP1_RIGHT_DOUBLE + VAR_HOP1_LEFT_DOUBLE)
+
+    @lazy_property
+    def type(self):
+        return self.filtered(VAR_CLASS)
 
     @lazy_property
     def one_(self):
@@ -247,6 +239,10 @@ class VarList(list):
     @lazy_property
     def double_(self):
         return bool(self.double)
+
+    @lazy_property
+    def type_(self):
+        return bool(self.type)
 
     @lazy_property
     def hash(self):
@@ -409,7 +405,7 @@ class Subgraph(dict):
             if datum.ent not in pred:
                 src[datum.pred].append(ent)
 
-    def _get_mapping_for_(self, _vars, _equal=[]):
+    def _get_mapping_for_(self, _vars, _equal):
         """
             Returns a list of mapping fitting these vars, satisfying the equal condition.
 
@@ -446,15 +442,18 @@ class Subgraph(dict):
                     continue
 
                 _map = {'e_to_e_out': pred, 'uri': self.uri}
-                _maps = take_one(_map, ents, _key='e_out') if not _vars.right.double_ \
-                    else take_two(_map, ents, _key_one='e_out', _key_two='e_out_2')
+                if 'class_uri' in _vars:
+                    _map.update({'class_uri': self.type})
+
+                _maps = _take_one_(_map, ents, _key='e_out') if not _vars.right.double_ \
+                    else _take_two_(_map, ents, _key_one='e_out', _key_two='e_out_2')
 
                 if _vars.right.two_:
                     rec_right_maps = []
                     for ent in ents:
                         rec_right_maps += [change_keys_dict(x, rev(REC_RIGHT_VARS))
                                            for x in
-                                           ent._get_mapping_for_(change_keys_list(_vars.right, REC_RIGHT_VARS))]
+                                           ent._get_mapping_for_(change_keys_list(_vars.right, REC_RIGHT_VARS), [])]
 
                     _maps = permute_dicts(_maps, rec_right_maps, _optional=False)
 
@@ -470,7 +469,7 @@ class Subgraph(dict):
                             continue
 
                         _map['e_to_e_out_2'] = pred
-                        dup_right_maps += take_one(_map, ents, _key='e_out_2*')
+                        dup_right_maps += _take_one_(_map, ents, _key='e_out_2*')
 
                 right_maps = dup_right_maps
 
@@ -485,14 +484,17 @@ class Subgraph(dict):
                     continue
 
                 _map = {'e_in_to_e': pred, 'uri': self.uri}
-                _maps = take_one(_map, ents, _key='e_in') if not _vars.left.double_ \
-                    else take_two(_map, ents, _key_one='e_in', _key_two='e_in_2')
+                if 'class_uri' in _vars:
+                    _map.update({'class_uri': self.type})
+
+                _maps = _take_one_(_map, ents, _key='e_in') if not _vars.left.double_ \
+                    else _take_two_(_map, ents, _key_one='e_in', _key_two='e_in_2')
 
                 if _vars.left.two_:
                     rec_left_maps = []
                     for ent in ents:
                         rec_left_maps += [change_keys_dict(x, rev(REC_LEFT_VARS)) for x
-                                          in ent._get_mapping_for_(change_keys_list(_vars.right, REC_LEFT_VARS))]
+                                          in ent._get_mapping_for_(change_keys_list(_vars.right, REC_LEFT_VARS), [])]
 
                     _maps = permute_dicts(_maps, rec_left_maps, _optional=False)
 
@@ -508,15 +510,15 @@ class Subgraph(dict):
                             continue
 
                         _map['e_in_to_e_2'] = pred
-                        dup_left_maps += take_one(_map, ents, _key='e_in_2*')
+                        dup_left_maps += _take_one_(_map, ents, _key='e_in_2*')
 
                 left_maps = dup_left_maps
 
-        mappings = trim_dicts(permute_dicts(left_maps, right_maps), _equal=_equal)
+        mappings = trim_dicts(permute_dicts(left_maps, right_maps), _keys=_vars, _equal=_equal)
         self.mappings[_vars.hash] = mappings
         return mappings
 
-    def gen_maps(self, _vars, _equal=None):
+    def gen_maps(self, _vars, _equal=[]):
         """
             Returns a list of mapping fitting these vars, satisfying the equal condition.
 
@@ -533,31 +535,34 @@ class Subgraph(dict):
 
 
 if __name__ == "__main__":
-    a = Subgraph('dbo:Obama')
+    a = Subgraph('dbr:Obama', 'dbo:Person')
 
-    data_out = [PredEntTuple(pred='dbp:prez', ent='dbr:US', type="country"),
-                PredEntTuple(pred='dbp:bornin', ent='dbr:Chicago', type="city"),
-                PredEntTuple(pred='dbp:left', ent='2014', type="year"),
-                PredEntTuple(pred='dbp:spouse', ent='dbr:Michelle', type="person"),
-                PredEntTuple(pred='dbp:left', ent='2010', type="year")]
+    # Add 1 hop stuff
+    data_out = [PredEntTuple(pred='dbp:prez', ent='dbr:US', type="dbo:Country"),
+                PredEntTuple(pred='dbp:bornin', ent='dbr:Chicago', type="dbo:City"),
+                PredEntTuple(pred='dbp:left', ent='2014', type="dbo:Year"),
+                PredEntTuple(pred='dbp:spouse', ent='dbr:Michelle', type="dbo:Person"),
+                PredEntTuple(pred='dbp:left', ent='2010', type="dbo:Year")]
 
-    data_in = [PredEntTuple(pred='dbp:son', ent='dbr:BiggerObama', type="person"),
-               PredEntTuple(pred='dbp:spouse', ent='dbr:Michelle', type="person"),
-               PredEntTuple(pred='dbp:father', ent='dbr:Wut', type="nothing"),
-               PredEntTuple(pred='dbp:hasResident', ent='dbr:US', type="person")]
+    data_in = [PredEntTuple(pred='dbp:son', ent='dbr:BiggerObama', type="dbo:Person"),
+               PredEntTuple(pred='dbp:spouse', ent='dbr:Michelle', type="dbo:Person"),
+               PredEntTuple(pred='dbp:father', ent='dbr:Wut', type="dbo:Nothing"),
+               PredEntTuple(pred='dbp:hasResident', ent='dbr:US', type="dbo:Person")]
 
     a.insert(data_out, _outgoing=True)
     a.insert(data_in, _outgoing=False)
 
-    hop2_data = [PredEntTuple(pred='dbp:continent', ent='dbr:NorthAmerica')]
-    a.insert(hop2_data, _origin='dbr:US', _outgoing=True)
-    #
-    # print("Entities: ", a.entities)
-    # print("Predicates: ", a.predicates)
-    # print("Entities: ")
-    #
-    # pprint(a)
+    us = a.find('dbr:US', a)
+    a.insert([
+        PredEntTuple(pred='dbp:hasResident', ent='dbr:Obama', type='dbo:Person'),
+        PredEntTuple(pred='dbp:capital', ent='dbr:WashingtonDC', type='dbo:City'),
+        PredEntTuple(pred='dbp:continent', ent='dbr:NorthAmerica', type='dbo:Continent')
+        ], _outgoing=True, _origin=us)
+    a.insert([
+        PredEntTuple(pred='dbp:bornin', ent='dbr:Trump', type='dbo:Person'),
+        PredEntTuple(pred='dbp:location', ent='dbr:Stanford', type='dbo:Uni'),
+    ], _outgoing=False, _origin=us)
 
-    maps = a.gen_maps(['e_out', 'e_out_out'])
-    maps = a.gen_maps(['e_in', 'e_in_out'])
+    maps = a.gen_maps(['e_to_e_out', 'e_out_to_e_out_out', 'e_out_out', 'class_x'])
+
     pprint(maps)
