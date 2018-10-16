@@ -49,7 +49,7 @@ dbp = None
 DEBUG = True
 NUM_ANSWER_COUNTABLE = 7
 NUM_ANSWER_MAX = 10
-FLUSH_THRESHOLD = 20
+FLUSH_THRESHOLD = 100
 FILTER_PRED, FILTER_LITERAL, FILTER_ENT = True, True, False
 PREDICATE_COUNT_LOC = 'resources/properties_count.pickle'
 DBP_NMSP = 'http://dbpedia.org/'  # DBpedia namespace
@@ -70,6 +70,7 @@ except FileNotFoundError:
     warnings.warn("Cannot find pickled properties count at %s." % PREDICATE_COUNT_LOC)
     # traceback.print_exc()
     predicates_count = {}
+
 
 '''
     Some SPARQL Queries.
@@ -200,14 +201,18 @@ def _generate_sparqls_(_uri, _dbp):
     :param _dbp: dbpedia interface obj
     :return:
     """
+    with Timer() as timed:
 
-    # Generate the local subgraph
-    graph = generate_subgraph(_uri, _dbp=_dbp)
-    print("Done generating subgraph for entity ", _uri)
+        # Generate the local subgraph
+        graph = generate_subgraph(_uri, _dbp=_dbp)
 
-    # Generate SPARQLS based on subgraph
-    fill_templates(graph, _dbp=_dbp)
-    print("Done generating SPARQLs for entity  ", _uri)
+    print("Done generating subgraph for entity %(ent)s. Time: %(time).03f." % {'ent': _uri, 'time': timed.interval})
+
+    with Timer() as timed:
+
+        # Generate the local subgraph
+        fill_templates(graph, _dbp=_dbp)
+    print("Done generating sparqls for entity %(ent)s . Time: %(time).03f." % {'ent': _uri, 'time': timed.interval})
 
 
 def _fill_one_template_(_template, _map, _graph, _dbp):
@@ -244,57 +249,51 @@ def _fill_one_template_(_template, _map, _graph, _dbp):
     # Include the mapping within the template object
     template['mapping'] = _map
 
-    # @TODO: Answer is in byte encoded string right now. Change it back.
-    # Get the Answer of the query
-    answer = dbp.get_answer(template['query'])
-    for key in answer.keys():
-        """
-            Based on answers, you make the following decisions:
-                > If the query has COUNT_THRESHOLD or more answers, we claim that this is a good count query.
-                    Less than that, and its a bad idea.
-
-                > If a variable has more than ten values matched to it, clamp it to 9
-
-            Note: expected keys here: x; uri
-        """
-
-        # Store the number of answers in the data too. Will help, act as a good filter and everything.
-        template['answer_count'] = {key: len(list(set(answer[key])))}
-        # Clamp the answes at NUM_ANSWERS_MAX
-        answer[key] = answer[key][:max(len(answer[key]), NUM_ANSWER_MAX)]
-
-        # For count templates
-        if key == "uri" and template["type"] == "count" and (answer['key']) < NUM_ANSWER_COUNTABLE:
-            # Query has too less results. Bad for count
-            return None
-
-    template['answer'] = answer
-
-    """
-        ATTENTION: This can create major problems in the future.
-        We are assuming that the most specific type of one 'answer' would be the most specific type of all answers.
-        In cases where answers are like Bareilly (City), Uttar Pradesh (State) and India (Country),
-            the SPARQL and NLQuestion would not be the same.
-            (We might expect all in the answers, but the question would put a domain restriction on answer.)
-
-        [Fixed] @TODO: attend to this? @Ans: No, lets let it be. For the sake of performance.
-        @TODO: Why do we store only one answer in template['mapping']?
-    """
-    # Get the most specific type of the answers.
-    template['answer_type'] = {variable: dbp.get_most_specific_class(variable[0]) for variable in template['answer']}
-    template['mapping'].update({variable: answer[variable][0] for variable in template['answer'] if variable != 'uri'})
-
     # Also get the classes of all the things we're putting in our SPARQL
     template['mapping_type'] = {key: dbp.get_most_specific_class(value)
-                                for key, value in template['mapping'].items()}
-    if DEBUG:
-        print(template)
+                                for key, value in _map.items()}
+
+    # Get the Answer of the query
+    answer = dbp.get_answer(template['query'])
+    template['answer'] = answer
+
+    # Store answers accordingly
+    if template['type'] == 'ask':
+        template['answer_num'] = {'boolean': -1}
+        template['boolean'] = answer['boolean']
+    else:
+        template['answer_num'] = {}
+        for key in answer.keys():
+            """
+                Based on answers, you make the following decisions:
+                    > If the query has COUNT_THRESHOLD or more answers, we claim that this is a good count query.
+                        Less than that, and its a bad idea.
+    
+                    > If a variable has more than ten values matched to it, clamp it to 9
+    
+                Note: expected keys here: x; uri
+            """
+
+            try:
+                template['answer_num'].update({key: len(list(set(answer[key])))})
+            except TypeError:
+                print(answer[key], key)
+                print(template['type'], template['type'] == 'ask')
+                raise IOError
+
+            # Clamp the answers at NUM_ANSWERS_MAX
+            answer[key] = answer[key][:max(len(answer[key]), NUM_ANSWER_MAX)]
+
+            # For count templates
+            if key == "uri" and template["type"] == "count" and (answer['key']) < NUM_ANSWER_COUNTABLE:
+                # Query has too less results. Bad for count
+                return None
 
     return template
 
 
 def get_vars(_template):
-    return _template.get('vars', nlutils.get_variables(_template['template']))
+    return _template.get('vars', nlutils.get_variables(_template['template'])) + ['class_uri']
 
 
 def add(_data):
@@ -308,7 +307,7 @@ def add(_data):
     global sparqls
     t_id = _data['template_id']
 
-    sparqls[t_id] = sparqls.get(t_id, []).append(_data)
+    sparqls[t_id] = sparqls.get(t_id, []) + [_data]
 
     # Just check if we have more than 100 SPARQLs for that template, flush them.
     if len(sparqls[t_id]) > FLUSH_THRESHOLD:
@@ -333,16 +332,21 @@ def fill_templates(_graph, _dbp):
         :param _dbp: dbpedia interface obj
         :return List of strings (SPARQL)
     """
+    for template in templates:
+        mappings = _graph.gen_maps(get_vars(template), template.get('equal', []))[:template.get('max', None)]
 
-    try:
-        for template in templates:
-            mappings = _graph.gen_maps(get_vars(template), template.get('equal', []))[:template.get('max', None)]
+        for mapping in mappings:
+            add(_data=_fill_one_template_(_template=template, _map=mapping, _graph=_graph, _dbp=_dbp))
 
-            for mapping in mappings:
-                add(_data=[_fill_one_template_(_template=template, _map=mapping, _graph=_graph, _dbp=_dbp)])
+    # try:
+    #     for template in templates:
+    #         mappings = _graph.gen_maps(get_vars(template), template.get('equal', []))[:template.get('max', None)]
+    #
+    #         for mapping in mappings:
+    #             add(_data=_fill_one_template_(_template=template, _map=mapping, _graph=_graph, _dbp=_dbp))
 
-    except Exception:
-        entity_went_bad.append(Log(uri=_graph.uri, traceback=traceback.format_exc()))
+    # except Exception:
+    #     entity_went_bad.append(Log(uri=_graph.uri, traceback=traceback.format_exc()))
 
 
 def generate_subgraph(_uri, _dbp):
