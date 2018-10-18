@@ -35,6 +35,11 @@ try:
 except ImportError:
     from utils import natural_language_utilities as nlutils
 
+try:
+    from goodies import *
+except ImportError:
+    from utils.goodies import *
+
 # GLOBAL MACROS
 # DBPEDIA_ENDPOINTS = 'http://dbpedia.org/sparql/'
 DBPEDIA_ENDPOINT = 'http://localhost:8890/sparql/'
@@ -43,7 +48,7 @@ DBPEDIA_ENDPOINT = 'http://localhost:8890/sparql/'
 # DBPEDIA_ENDPOINTS = 'http://sda-srv01.iai.uni-bonn.de:8164/sparql'
 # REDIS_HOSTNAME = 'sda-srv01'
 REDIS_HOSTNAME  = '127.0.0.1'
-MAX_WAIT_TIME = 10.0
+MAX_WAIT_TIME = 100.0
 ASK_RE_PATTERN = '(?i)ask\s*where'
 
 LABELS_LOC = 'resources/labels.pickle'
@@ -429,7 +434,7 @@ class DBPedia:
             return max(length_array, key=itemgetter(1))[0]
         else:
             # If there is no results from the filter type , return it as owl Thing
-            warnings.warn("Could not find classes for %s. Returning owl:Thing." % _resource_uri)
+            warnings.warn("Could not find classes for %s. Returning owl:Thing." % _resource_uri, EntityTypeNotFound)
             return "http://www.w3.org/2002/07/owl#Thing"
 
     def is_common_parent(self, _resource_uri_1, _resource_uri_2):

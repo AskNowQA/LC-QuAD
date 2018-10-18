@@ -1,7 +1,12 @@
 import time
+import warnings
 from collections import namedtuple
 
 Log = namedtuple('Log', 'uri traceback')
+
+
+class EntityTypeNotFound(Warning):
+    pass
 
 
 def lazy_property(fn):
