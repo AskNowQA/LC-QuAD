@@ -136,7 +136,7 @@ def save_to_disk(obj, ctr, loc, msg):
 
 class DBPedia:
 
-    def __init__(self, _verbose=False, _db_name=0, _endpoint=None, caching=True):
+    def __init__(self, _verbose=False, _db_name=0, _endpoint=None, _caching=True):
 
         if not _endpoint:
             self.sparql_endpoint = DBPEDIA_ENDPOINT
@@ -145,7 +145,7 @@ class DBPedia:
         self.global_endpoint = 'http://dbpedia.org/sparql'
 
         self.verbose = _verbose
-        if caching:
+        if _caching:
             self.r = redis.StrictRedis(host=REDIS_HOSTNAME, port=6379, db=_db_name)
         else:
             self.r = False
@@ -605,7 +605,7 @@ class DBPedia:
 if __name__ == '__main__':
     pass
     # print "\n\nBill Gates"
-    dbp = DBPedia(caching=True)
+    dbp = DBPedia(_caching=True)
     # pprint(dbp.get_type_of_resource('http://dbpedia.org/resource/M._J._P._Rohilkhand_University', _filter_dbpedia = True))
     # print "\n\nIndia"
     # pprint(dbp.get_type_of_resource('http://dbpedia.org/resource/India', _filter_dbpedia = True))

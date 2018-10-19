@@ -294,14 +294,14 @@ def _fill_one_template_(_template, _map, _graph, _dbp):
 
     # Store answers accordingly
     if template['type'] == 'ask':
-        template['answer_num'] = {'boolean': -1}
+        template['answer_num'] = -1
     else:
         # Clamp the answers at NUM_ANSWERS_MAX and put in template IF NOT BOOLEAN
         answer = {k: v[:max(len(list(set(v))), NUM_ANSWER_MAX)] for k, v in answer.items()}
         if template['type'] == 'count':
-            template['answer_num'] = {'count': -1}
+            template['answer_num'] = -1
         else:
-            template['answer_num'] = {'uri': len(list(set(answer['uri'])))}
+            template['answer_num'] = len(list(set(answer['uri'])))
 
     template['answer'] = answer
 
@@ -541,5 +541,5 @@ if __name__ == "__main__":
     DEBUG = False
     warnings.simplefilter('once', EntityTypeNotFound)
 
-    dbp = db_interface.DBPedia(_verbose=True, caching=True)
+    dbp = db_interface.DBPedia(_verbose=True, _caching=True)
     generate_sparqls(dbp)

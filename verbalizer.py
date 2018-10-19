@@ -1,279 +1,177 @@
-'''
-	Author: Priyansh Trivedi
+"""
+    Contains ways to verbalize sparqls.
 
-	Class: Verbalizer
+    Usage: call verbalizer class over
 
-	Since every template verbalizing was a little different, we started with individual scripts for each template. 
-		However, there was a lot of code repetition and while changing anything, things could go really really bad. 
+    SPARQL looks like this:
+        {
+            "template": "SELECT DISTINCT COUNT(?uri) WHERE {
+                    ?x <%(e_out_to_e_out_out)s> <%(e_out_out)s> . ?uri <%(e_to_e_out)s> ?x .
+                } ",
+            "template_id": 106,
+            "n_entities": 1,
+            "type": "count",
+            "max": 100,
+            "query": "SELECT DISTINCT COUNT(?uri) WHERE {
+                    ?x <http://dbpedia.org/property/governmentType> <http://dbpedia.org/resource/Suva_City_Council> .
+                    ?uri <http://dbpedia.org/property/capital> ?x .
+                } ",
+            "_id": "cfb7a9fae1074751a52a6115038dc59d",
+            "corrected": "false",
+            "mapping": {
+                    "e_to_e_out": "http://dbpedia.org/property/capital",
+                    "class_uri": "http://dbpedia.org/ontology/MusicalArtist",
+                    "e_out_to_e_out_out": "http://dbpedia.org/property/governmentType",
+                    "e_out_out": "http://dbpedia.org/resource/Suva_City_Council"
+                },
+            "mapping_type": {
+                    "e_to_e_out": "http://www.w3.org/2002/07/owl#Thing",
+                    "class_uri": "http://www.w3.org/2002/07/owl#Thing",
+                    "e_out_to_e_out_out": "http://www.w3.org/2002/07/owl#Thing",
+                    "e_out_out": "http://dbpedia.org/ontology/Organisation"
+                },
+            "answer_num": {"callret-0": 1}, "answer": {"callret-0": ["2"]}}
 
-	This class is thus responsible for taking data from the output folder, and verbalizing it, based on what kind of template it is. 
-	NOTE: this is an abstract class and will be used in different places
+        ANOTHER
+        {
+            "template": " SELECT DISTINCT ?uri WHERE {?uri <%(e_to_e_out)s> <%(e_out)s> . } ",
+            "template_id": 1,
+            "n_entities": 1,
+            "type": "vanilla",
+            "max": 100,
+            "query": " SELECT DISTINCT ?uri WHERE {
+                    ?uri <http://dbpedia.org/property/capital> <http://dbpedia.org/resource/Suva> .
+                } ",
+            "_id": "01f0be26f67c48028506e999d265d3e2",
+            "corrected": "false",
+            "mapping": {
+                    "e_to_e_out": "http://dbpedia.org/property/capital",
+                    "class_uri": "http://dbpedia.org/ontology/MusicalArtist",
+                    "e_out": "http://dbpedia.org/resource/Suva"
+                },
+            "mapping_type": {
+                    "e_to_e_out": "http://www.w3.org/2002/07/owl#Thing",
+                    "class_uri": "http://www.w3.org/2002/07/owl#Thing",
+                    "e_out": "http://dbpedia.org/ontology/City"
+                },
+            "answer_num": {"uri": 2},
+            "answer": {"uri": ["http://dbpedia.org/resource/Fiji", "http://dbpedia.org/resource/Colony_of_Fiji"]}
+        }
+"""
 
-'''
-
-import csv
 import uuid
 import json
 import random
 import numpy as np
-import utils.dbpedia_interface as db_interface
-import utils.natural_language_utilities as nlutils
-from pattern.en import pluralize
-from pprint import pprint
+import numpy.random as npr
+
+from utils.goodies import *
+from utils import dbpedia_interface as dbi
+
+NUM_ANSWER_PLURAL = 3
+
+
+class Templates(object):
+    _1 = FancyDict(vanilla=["%(prefix)s is the <%(class_uri)s> whose <%(e_to_e_out)s> is <%(e_out)s>?",
+                            "%(prefix)s <%(e_to_e_out)s> is <%(e_out)s>"],
+                   plural=["%(prefix)s are the things whose <%(e_to_e_out)s> is <%(e_out)s>?",
+                           "%(prefix)s <%(e_to_e_out)s> is <%(e_out)s>"])
+    _2 = FancyDict(vanilla=["%(prefix)s is the <%(e_in_to_e)s> of %(e_in)s ?"],
+                   plural=["%(prefix)s are the <%(e_in_to_e)s> of %(e_in)s?"])
+    _101 = FancyDict(vanilla=["How many things are there whose <%(e_to_e_out)s> is <%(e_out)s>?",
+                              "Give me a count of things whose <%(e_to_e_out)s> is <%(e_out)s>?"])
+    _102 = FancyDict(vanilla=["Count the number of <%(e_in_to_e)s> in <%(e_in)s>?",
+                              "Count the <%(e_in_to_e)s> in <%(e_in)s>?",
+                              "How many <%(e_in_to_e)s> are there in <%(e_in)s>?"])
 
 
 class Verbalizer:
+    """
+        Don't bother creating instances of this thing.
+        Use it to get different natural language templates.
 
-	'''
-		Class variables. 
-			template_id: the template ID (corresponds to the file from where we pick sparqls. Corresponds to ID in templates.json)
-			has_x: if the x (or x's type) has been generated and expected to be in the mapping. 
-			has_uri: same for URI
-			template type: vanilla (for not count/filter/ask), count, filter_a, filter_b, ask (@TODO: Add a reference of this on the Doc)
-			template id offset: if it's a vanilla then 0, 100 for count... 
-	'''
-	template_id = 0
-	template_type = 'Vanilla'
-	template_id_offset = 0
-	has_x = False
-	has_uri = False
-	question_templates = {}		#Placeholder to keep all the templates here. In the form key: list, key:list
+        Logic:
+            Instantiate with a given template id, it pulls nl templates.
+            Then navigates based on the keys mentioned in the templates.
+                @TODO: how do make this iterative in nature
+            Once decided on a *list* of templates (devoid of rules), it selects randomly b/w them.
 
-	
-	def __init__(self):
-		'''
-			-> Open the template file with this ID. Convert to [JSON,JSON..]
-				-> Pass the JSON from the filter
-				-> Select a template based on rules
-				-> Put a map on the template to verbalize a question
-			-> Write the JSONs to file
-		'''
+            This is done for all diff sparqls, individually.
 
-		sparqls = []			#Holds the un-verbalized data
-		questions = []			#Holds the verbalized data
+        @TODO: can we make this filtering perform on the entire group?
+        @TODO: figure out all the data we need to make this decision.
 
-		self.hard_relation_filter_map = {} 		#Keeps count of relations and limits. (Used in filter class)
-		self.log = []							#Keeps count of e1 r1 e2 r2 in the templates that they occur.
-		self.dbp = db_interface.DBPedia(_verbose=True) 	#To be used to fetch labels
+    """
+    def __init__(self, _id: int):
+        self.templates = getattr(Templates, '_'+str(_id))
+        self.dbp = dbi.DBPedia(_verbose=False, _caching=True)
 
-		'''
-			Since we have too few questions, its time to make the hard filter a little softer. Thus, we need a list of relations which are simply way too frequent.
-		'''
-		self.common_relations = open('resources/common_relations.txt').read().split()
-		template_id = self.template_id + self.template_id_offset
+    @staticmethod
+    def _get_prefix_(datum, _apostrophe=False):
+        """
+            Returns Who/What or Whose/What's based on apostrophe flag
+        :param datum: dict
+        :param _apostrophe: bool
+        :return: str
+        """
 
-		with open('sparqls/template%s.txt' % template_id) as data_file:
-			for line in data_file:
-				try:
-					jsn = json.loads(line.replace('\n',""))
-					sparqls.append(jsn)
-				except:
-					print line
-					# raw_input("Waiting for input to continue")
-					traceback.print_exc()
+        if 'http://dbpedia.org/ontology/Agent' in datum['answer_type'] \
+                and "http://dbpedia.org/ontology/Organisation" not in datum['answer_type']:
+            return "Who" if not _apostrophe else "Whose"
+        else:
+            return "What" if not _apostrophe else "What's"
 
-		#Shuffling the sparqls list to promote diversity
-		random.shuffle(sparqls)
-		# print len(sparqls)
-		# raw_input("Enter to continue")
+    def _get_template_(self, templates, sparql):
+        """
+            Recursive fn which finally will home down on a concrete list of templates.
 
-		for counter in range(len(sparqls)):
+            Logic:
+                there will be two keys. One will be named vanilla. One something else.
+                E.g. vanilla, plural -> if less than some, choose vanilla. else choose plural
+                @TODO: other such constraints
 
-			#Declate the verbalized flag
-			sparqls[counter]['verbalized'] = False
+        :param sparql: the data based on which our decisions are made
+        :return: list of str/dict based on recursive or not
+        """
+        if type(templates) is list:
+            return templates
 
-			datum = sparqls[counter]
-			maps = datum["mapping"]
+        keys = list(templates.keys()).copy()
+        keys.pop(keys.index('vanilla'))
+        keys = keys[0]
 
-			if self.has_uri:
-				try:
-					uri = datum["answer_type"]["uri"]
-					maps["uri"] = uri
-				except:
-					continue
+        if keys == 'plural':
+            num_ans = sparql['answer_num']
+            return self._get_template_(templates.plural if num_ans >= NUM_ANSWER_PLURAL else templates.vanillla, sparql)
 
-			if self.has_x:
-				try:
-					x = datum["answer_type"]["x"]
-					maps["x"] = x
-				except:
-					continue
+    def _get_sf_(self, map):
+        """
+            Replace
+        :param map:
+        :return:
+        """
+        return {k: self.dbp.get_label(v) for k, v in map.items()}
 
-			#See if you want this filtered
-			if not self.filter(_datum = datum, _maps = maps):
-				#Don't bother verbalizing this
-				continue
+    def verbalize(self, datum):
+        """
+            Navigate based on particulars of this sparql, and decide what conditions to follow.
 
-			#Convert the URIs to their corresponding labels
-			#@TODO: Use dbpedia labels to do this.
-			for element in maps:
-				# maps[element] = nlutils.get_label_via_parsing(maps[element], lower = True)  #Get their labels
-				maps[element] = self.dbp.get_label(maps[element])  #Get their labels
+        :param datum: dict (mentioned @ start of script)
+        :return: dict (mentioned @ start of script) + new fields
+        """
 
-			if self.template_type == 'Count':
-				uid = uuid.uuid4()
-				sparqls[counter]['_id'] = uid.hex
-				sparqls[counter]['query'] = self.sparql_editing_count(_maps = maps,_datum = datum)
+        # Select the correct template.
+        template = npr.choice(self._get_template_(self.templates, datum))
 
-			#Select a template for this question
-			maps, question_format = self.rules(_maps = maps,_datum = datum)
+        datum['mapping']['prefix'] = self._get_prefix_(datum)
+        datum['question_verbalized'] = template % self._get_sf_(datum['mapping'])
+        datum['question_template'] = template
 
-			sparqls[counter]['verbalized_question'] = question_format % maps
-			sparqls[counter]['verbalized'] = True
-			sparqls[counter]['id'] = self.template_id + self.template_id_offset
-			sparqls[counter]['type'] = self.template_type
-
-		#Writing everything to file
-		id = self.template_id + self.template_id_offset
-		fo = open('output/verbalized_template%s.txt' % id, 'w+')
-		for datum in sparqls:
-			if datum['verbalized'] == True:
-				fo.writelines(json.dumps(datum) + "\n")
-		fo.close()
-
-		questions = 0
-		with open('output/verbalized_template%s_readable.txt' % id,'w+') as output_file:
-			for datum in sparqls:
-				try:
-					output_file.write(datum['verbalized_question'].encode('utf-8')+'\n')
-					output_file.write(datum['query'].encode('utf-8')+'\n\n')
-					questions += 1
-				except:
-					continue
-
-		#Count the number of verbalized questions
-		# print "Template ID: ", id
-		# print "Generated Questions: ", questions
-		# print "Total data items: ", len(sparqls), 
-		print ' '.join([str(id),str(questions),str(len(sparqls))])
-		# return questions, len(sparqls)
-		self.count_sparqls = len(sparqls)
-		self.count_nlq = questions
-
-	def rules(self, _maps, _datum):
-		'''
-			Define the rules to select a question template here
-
-			Also pluralize what needs pluralizing.
-			Return the selected template. Return updated maps
-		'''
-
-		pass
-
-	def filter(self, _datum, _maps):
-		'''
-			Put in all the conditions here which might stop a template from getting verbalized.
-
-			Return type: Boolean
-				Semantics:
-					True: verbalize
-					False: don't verbalize
-		'''
-		pass
-
-	def sparql_editing_count(self, _datum, _maps):
-		'''
-			The header of SPARQL query has to be changed in the case of count templates.
-			Should be called within init itself.
-		'''
-
-		sparql = _datum['query']
-		sparql = sparql.replace('SELECT DISTINCT ?uri, ?x', 'SELECT DISTINCT COUNT(?uri)')
-		sparql = sparql.replace('SELECT DISTINCT ?uri','SELECT DISTINCT COUNT(?uri)')
-		return sparql
-
-	def hard_relation_filter(self, _pred1,_pred2 = None, _limit = 1, _limit_rels = 3):
-		'''
-			Keep the track of one of the predicates appearing in the mapping, and then only allow one question per predicate
-			Uses a class variable (like a global var)
-
-			USAGE: MANUAL! invoke in the filter class if needed
-
-			Params:
-				_pred: type: string. 
-				_limit: the number of questions permitted per relation. Should be more than 1
-
-			Return type: Boolean
-				Semantics:
-					True: verbalize
-					False: don't verbalize
+        return datum
 
 
-			UPDATE: if the relations in question are not very common, then ease the filters for them.
-		'''
-		if not _pred2:
-
-			if not _pred1 in self.common_relations:
-				_limit = 2
-
-			try:
-				if self.hard_relation_filter_map[_pred1] >= _limit:
-					return False
-				self.hard_relation_filter_map[_pred1] += 1
-			except:
-				self.hard_relation_filter_map[_pred1] = 1
-			return True
-
-		else:
-
-			if not _pred1 in self.common_relations and not _pred2 in self.common_relations:
-				_limit = 3
-				_limit_rels = 10
-
-			try:
-				if self.hard_relation_filter_map[_pred1][_pred2] >= _limit:
-					return False
-				self.hard_relation_filter_map[_pred1][_pred2] += 1
-			except KeyError:
-				#Either [_pred1][_pred2] does not exist, or [_pred1] does and [_pred2] does not.
-				try:
-					if len(self.hard_relation_filter_map[_pred1].keys()) > _limit_rels:
-						return False
-
-					#If here, then pred1 exists in the map. But pred2 does not. Also not more than 3 pred2 exist wrt to pred1. Hence, put pred1 in the list too
-					self.hard_relation_filter_map[_pred1][_pred2] = 1
-				except KeyError:
-					self.hard_relation_filter_map[_pred1] = {_pred2 : 1} 
-			return True
-
-	def duplicate_prevention_filter(self, _e1,_p1,_e2,_p2):
-		'''
-			In templates where there can be the duplication issue (explained below), deliberately take care of avoiding it. 
-			eg: 
-				e1 r1 ?u 		&		e2 r2 ?u
-				e2 r2 ?u 		&		e1 r1 ?u
-
-			Keep track of all these four things, and once the combination has occured, see that it doesn't again.
-		'''
-
-		entry = set([_e1,_p1,_e2,_p2])
-		if entry in self.log:
-			return False
-		else:
-			self.log.append(entry)
-			return True
-
-
-
-	def meine_family_filter(self,_pred1,_pred2):
-		'''
-			Implementing a general rule that 
-				if either of the relations down there in 'family_relations' are in one of the predicates,
-				and the other one is 'relation', return false
-
-				else return true
-		'''
-		family_relations = ['spouse','father','mother','child','husband','wife']
-		rel1 = _pred1.split('/')[-1]
-		rel2 = _pred2.split('/')[-1]
-
-		if rel1 == 'relation' or rel2 == 'relation':
-			if rel1 in family_relations or rel2 in family_relations:
-				# print rel1, rel2
-				# raw_input()
-				return False
-			return True
-		else:
-			return True
-
-
+if __name__ == "__main__":
+    data = {"template": " SELECT DISTINCT ?uri WHERE {?uri <%(e_to_e_out)s> <%(e_out)s> . } ", "template_id": 1, "n_entities": 1, "type": "vanilla", "max": 100, "query": " SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/genre> <http://dbpedia.org/resource/Abstract_strategy_game> . } ", "_id": "75a170adb55245cdb0d63e8fa70cf3bc", "corrected": "false", "entity": "http://dbpedia.org/resource/Chess", "mapping": {"e_to_e_out": "http://dbpedia.org/property/genre", "class_uri": "http://dbpedia.org/ontology/VideoGame", "e_out": "http://dbpedia.org/resource/Abstract_strategy_game"}, "mapping_type": {"e_to_e_out": "http://www.w3.org/2002/07/owl#Thing", "class_uri": "http://www.w3.org/2002/07/owl#Thing", "e_out": "http://dbpedia.org/ontology/MusicGenre"}, "answer_type": ["http://dbpedia.org/ontology/VideoGame", "http://dbpedia.org/ontology/Activity", "http://dbpedia.org/ontology/Game", "http://dbpedia.org/ontology/Sport"], "answer_num": 50, "answer": {"uri": ["http://dbpedia.org/resource/Chess", "http://dbpedia.org/resource/Chinese_checkers", "http://dbpedia.org/resource/Reversi", "http://dbpedia.org/resource/Shogi", "http://dbpedia.org/resource/Abalone_(board_game)", "http://dbpedia.org/resource/Fanorona", "http://dbpedia.org/resource/Hex_(board_game)", "http://dbpedia.org/resource/Nine_Men's_Morris", "http://dbpedia.org/resource/Xiangqi", "http://dbpedia.org/resource/Epaminondas_(game)", "http://dbpedia.org/resource/Renju", "http://dbpedia.org/resource/Arimaa", "http://dbpedia.org/resource/GIPF_(game)", "http://dbpedia.org/resource/YINSH", "http://dbpedia.org/resource/Tori_shogi", "http://dbpedia.org/resource/Terakh", "http://dbpedia.org/resource/Tafl_games", "http://dbpedia.org/resource/Connect_Four", "http://dbpedia.org/resource/DVONN", "http://dbpedia.org/resource/Janggi", "http://dbpedia.org/resource/Dablot_Prejjesne", "http://dbpedia.org/resource/Connect_4x4", "http://dbpedia.org/resource/Chu_shogi", "http://dbpedia.org/resource/Ludus_latrunculorum", "http://dbpedia.org/resource/Circular_chess", "http://dbpedia.org/resource/Terrace_(board_game)", "http://dbpedia.org/resource/Breakthru_(board_game)", "http://dbpedia.org/resource/Alquerque", "http://dbpedia.org/resource/Draughts", "http://dbpedia.org/resource/Go_(game)", "http://dbpedia.org/resource/International_draughts", "http://dbpedia.org/resource/Yot\u00e9", "http://dbpedia.org/resource/Halma", "http://dbpedia.org/resource/Four-player_chess", "http://dbpedia.org/resource/Lasca", "http://dbpedia.org/resource/Russian_draughts", "http://dbpedia.org/resource/Fangqi", "http://dbpedia.org/resource/Spot:_The_Video_Game", "http://dbpedia.org/resource/EuroShogi", "http://dbpedia.org/resource/Four_Fronts", "http://dbpedia.org/resource/Jungle_(board_game)", "http://dbpedia.org/resource/English_draughts", "http://dbpedia.org/resource/Morabaraba", "http://dbpedia.org/resource/Conspirateurs", "http://dbpedia.org/resource/Camelot_(board_game)", "http://dbpedia.org/resource/Cubic_chess", "http://dbpedia.org/resource/Choko_(game)", "http://dbpedia.org/resource/Lines_of_Action", "http://dbpedia.org/resource/Game_of_the_Seven_Kingdoms", "http://dbpedia.org/resource/The_Duke_(board_game)"]}}
+    v = Verbalizer(1)
+    v.verbalize(data)
+    print(data)

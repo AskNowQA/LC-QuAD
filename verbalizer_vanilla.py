@@ -3,7 +3,7 @@
 
 	Script to verbalize the vanilla templates.
 	Each template ID will have a different class.
-		All extend the class created in verbalizer.py and edit it as per their requirements.
+		All extend the class created in verbalizer_old.py and edit it as per their requirements.
 
 	Finally, a function will create an object of all of them and run it.
 '''
@@ -13,8 +13,8 @@ from pprint import pprint
 from pattern.en import pluralize
 import utils.natural_language_utilities as nlutils
 
-import verbalizer
-class Verbalizer_01(verbalizer.Verbalizer):
+import verbalizer_old
+class Verbalizer_01(verbalizer_old.Verbalizer):
 
 	template_id = 1
 	template_type = 'Vanilla'
@@ -38,20 +38,19 @@ class Verbalizer_01(verbalizer.Verbalizer):
 		return self.hard_relation_filter(_maps['e_to_e_out'])
 
 	def rules(self, _datum, _maps):
-		'''
+		"""
 			Cardinality rule:
 				If there are more than 3 answers to the URI, then use plural template. Otherwise use the singular template.
 
 			Person rule:
 				If the uri is a person, then change what to who.
-
-		'''
+		"""
 		if _datum['answer_count']['uri'] > 3:
 			#Plural rule
 			try: 
 				_maps['uri'] = pluralize(_maps['uri'])
 			except:
-				print "Cannot pluralize ", _maps['uri']
+				print("Cannot pluralize ", _maps['uri'])
 
 			question_format = np.random.choice(self.question_templates['plural'], p=[0.8,0.2])
 		else:
@@ -65,8 +64,7 @@ class Verbalizer_01(verbalizer.Verbalizer):
 		return _maps, question_format
 
 
-
-class Verbalizer_02(verbalizer.Verbalizer):
+class Verbalizer_02(verbalizer_old.Verbalizer):
 
 	template_id = 2
 	template_type = 'Vanilla'
@@ -113,7 +111,7 @@ class Verbalizer_02(verbalizer.Verbalizer):
 
 		return _maps, question_format
 
-class Verbalizer_03(verbalizer.Verbalizer):
+class Verbalizer_03(verbalizer_old.Verbalizer):
 
 	template_id = 3
 	template_type = 'Vanilla'
@@ -147,7 +145,7 @@ class Verbalizer_03(verbalizer.Verbalizer):
 		return _maps, question_format
 
 
-class Verbalizer_05(verbalizer.Verbalizer):
+class Verbalizer_05(verbalizer_old.Verbalizer):
 
 	template_id = 5
 	template_type = 'Vanilla'
@@ -225,7 +223,7 @@ class Verbalizer_05(verbalizer.Verbalizer):
 		return _maps, question_format
 
 
-class Verbalizer_06(verbalizer.Verbalizer):
+class Verbalizer_06(verbalizer_old.Verbalizer):
 	
 	template_id = 6
 	template_type = 'Vanilla'
@@ -323,7 +321,7 @@ class Verbalizer_06(verbalizer.Verbalizer):
 		return _maps, question_format
 
 
-class Verbalizer_07(verbalizer.Verbalizer):
+class Verbalizer_07(verbalizer_old.Verbalizer):
 	template_id = 7
 	template_type = 'Vanilla'
 	template_id_offset = 0
@@ -401,7 +399,7 @@ class Verbalizer_07(verbalizer.Verbalizer):
 		return _maps, question_format
 
 
-class Verbalizer_08(verbalizer.Verbalizer):
+class Verbalizer_08(verbalizer_old.Verbalizer):
 	
 	template_id = 8
 	template_type = 'Vanilla'
@@ -534,7 +532,7 @@ class Verbalizer_08(verbalizer.Verbalizer):
 		return _maps, question_format
 
 
-class Verbalizer_09(verbalizer.Verbalizer):
+class Verbalizer_09(verbalizer_old.Verbalizer):
 	
 	template_id = 9
 	template_type = 'Vanilla'
@@ -573,7 +571,7 @@ class Verbalizer_09(verbalizer.Verbalizer):
 
 		return _maps, question_format
 
-class Verbalizer_11(verbalizer.Verbalizer):
+class Verbalizer_11(verbalizer_old.Verbalizer):
 
 	template_id = 11
 	template_type = 'Vanilla'
@@ -626,7 +624,7 @@ class Verbalizer_11(verbalizer.Verbalizer):
 
 		return _maps, question_format
 
-class Verbalizer_15(verbalizer.Verbalizer):
+class Verbalizer_15(verbalizer_old.Verbalizer):
 	
 	template_id = 15
 	template_type = 'Vanilla'
@@ -668,7 +666,7 @@ class Verbalizer_15(verbalizer.Verbalizer):
 
 		return _maps, question_format
 
-class Verbalizer_16(verbalizer.Verbalizer):
+class Verbalizer_16(verbalizer_old.Verbalizer):
 	
 	template_id = 16
 	template_type = 'Vanilla'

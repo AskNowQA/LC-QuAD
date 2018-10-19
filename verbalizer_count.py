@@ -3,7 +3,7 @@
 
 	Script to verbalize the count templates
 	Each template ID will have a different class
-		All extend the class created in verbalizer.py and edit it as per their requirements.
+		All extend the class created in verbalizer_old.py and edit it as per their requirements.
 
 	Finally, a function will create an object of all of them and run it.
 
@@ -14,9 +14,9 @@ from pprint import pprint
 from pattern.en import pluralize
 import utils.natural_language_utilities as nlutils
 
-import verbalizer
+import verbalizer_old
 
-class Verbalizer_01_Count(verbalizer.Verbalizer):
+class Verbalizer_01_Count(verbalizer_old.Verbalizer):
 
 	template_id = 1
 	template_type = 'Count'
@@ -46,7 +46,7 @@ class Verbalizer_01_Count(verbalizer.Verbalizer):
 
 		return _maps, question_format
 
-class Verbalizer_02_Count(verbalizer.Verbalizer):
+class Verbalizer_02_Count(verbalizer_old.Verbalizer):
 
 	template_id = 2
 	template_type = 'Count'
@@ -75,7 +75,7 @@ class Verbalizer_02_Count(verbalizer.Verbalizer):
 
 		return _maps, question_format
 
-class Verbalizer_03_Count(verbalizer.Verbalizer):
+class Verbalizer_03_Count(verbalizer_old.Verbalizer):
 
 	template_id = 3
 	template_type = 'Count'
@@ -129,7 +129,7 @@ class Verbalizer_03_Count(verbalizer.Verbalizer):
 
 		return _maps, question_format
 
-class Verbalizer_05_Count(verbalizer.Verbalizer):
+class Verbalizer_05_Count(verbalizer_old.Verbalizer):
 	template_id = 5
 	template_type = 'Count'
 	template_id_offset = 100
@@ -190,7 +190,7 @@ class Verbalizer_05_Count(verbalizer.Verbalizer):
 
 		return _maps, question_format
 
-class Verbalizer_06_Count(verbalizer.Verbalizer):
+class Verbalizer_06_Count(verbalizer_old.Verbalizer):
 	template_id = 6
 	template_type = 'Count'
 	template_id_offset = 100
@@ -257,7 +257,7 @@ class Verbalizer_06_Count(verbalizer.Verbalizer):
 		return _maps, question_format
 
 
-class Verbalizer_07_Count(verbalizer.Verbalizer):
+class Verbalizer_07_Count(verbalizer_old.Verbalizer):
 	template_id = 7
 	template_type = 'Count'
 	template_id_offset = 100
@@ -301,7 +301,7 @@ class Verbalizer_07_Count(verbalizer.Verbalizer):
 
 		return _maps, question_format
 
-class Verbalizer_08_Count(verbalizer.Verbalizer):
+class Verbalizer_08_Count(verbalizer_old.Verbalizer):
 	template_id = 8
 	template_type = 'Count'
 	template_id_offset = 100
@@ -399,7 +399,7 @@ class Verbalizer_08_Count(verbalizer.Verbalizer):
 
 		return _maps, question_format
 
-class Verbalizer_11_Count(verbalizer.Verbalizer):
+class Verbalizer_11_Count(verbalizer_old.Verbalizer):
 	template_id = 11
 	template_type = 'Count'
 	template_id_offset = 100
