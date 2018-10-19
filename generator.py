@@ -3,10 +3,13 @@
 
     Changelog:
         -> Removed probabilistic filtering (for easier deployment)
+
+        @TODO: Figure out why _fill_one_template_ fucks up answer and answer type, num
 """
 
 # Importing some external libraries
 from pprint import pprint
+from oset import oset
 import textwrap
 import warnings
 import pickle
@@ -43,10 +46,9 @@ predicates = open(RES_RELATION_LOC, 'r').read().split('\n')
 entity_classes = open(RES_ENTITIY_CLASSES_LOC, 'r').read().split('\n')
 
 # Contains list of entities for which the question would be asked
-entities = set(open(RES_ENTITIES_LOC, 'r').read().split('\n'))
-entities_done = set(open(DONE_ENTITIES_DONE_LOC, 'r+').read().split('\n'))
-entities -= entities_done
-entities = list(entities)
+entities = oset(open(RES_ENTITIES_LOC, 'r').read().split('\n'))
+entities_done = oset(open(DONE_ENTITIES_DONE_LOC, 'r+').read().split('\n'))
+entities = list(entities - entities_done)
 
 # Contains all the SPARQL templates existing in templates.py
 templates = json.load(open(RES_TEMPLATES_LOC))
@@ -234,6 +236,10 @@ def _fill_one_template_(_template, _map, _graph, _dbp):
              -> Returns the answer of the query, and the answer type
              -> In some templates, it also fetches the intermediate hidden variable and it's types too.
 
+        Reject:
+            -> if count template and less answers, reject.
+            -> if not rdf constraints based template, and some answers have no common class with _graph.uri, reject.
+
         -> create copy of template from the list
         -> get the needed metadata
         -> push it in the list
@@ -253,6 +259,7 @@ def _fill_one_template_(_template, _map, _graph, _dbp):
         template['query'] = template['template'] % _map
         template['_id'] = uuid.uuid4().hex
         template['corrected'] = 'false'
+        template['entity'] = _graph.uri
     except KeyError:
         raise InvalidTemplateMappingError("Something doesn't fit right. Var Map %s" % str(_map))
 
@@ -265,32 +272,36 @@ def _fill_one_template_(_template, _map, _graph, _dbp):
 
     # Get the Answer of the query
     answer = dbp.get_answer(template['query'])
+    classes_uri = set(dbp.get_type_of_resource(template['entity'], _filter_dbpedia=True))
+    template['answer_type'] = list(classes_uri)
+
+    # Check for reject condition 1
+    if template["type"] == "count":
+        if (int(answer[list(answer.keys())[0]][0])) < NUM_ANSWER_COUNTABLE:
+            return None
+
+    if 'uri' in answer.keys():
+        classes_answer = [dbp.get_type_of_resource(uri, _filter_dbpedia=True) for uri in answer['uri']
+                          if not nlutils.is_literal(uri)]
+
+        # Check for reject condition 2
+        if 300 >= template['template_id']:
+            # If not a template with rdf type constraint
+            for cls in classes_answer:
+                if not classes_uri & set(cls):
+                    # No common class
+                    return None
 
     # Store answers accordingly
     if template['type'] == 'ask':
         template['answer_num'] = {'boolean': -1}
     else:
-        template['answer_num'] = {}
-        for key in answer.keys():
-            """
-                Based on answers, you make the following decisions:
-                    > If the query has COUNT_THRESHOLD or more answers, we claim that this is a good count query.
-                        Less than that, and its a bad idea.
-    
-                    > If a variable has more than ten values matched to it, clamp it to 9
-    
-                Note: expected keys here: x; uri
-            """
-
-            template['answer_num'].update({key: len(list(set(answer[key])))})
-
-            # Clamp the answers at NUM_ANSWERS_MAX
-            answer[key] = answer[key][:max(len(answer[key]), NUM_ANSWER_MAX)]
-
-            # For count templates
-            if key == "uri" and template["type"] == "count" and (answer[key]) < NUM_ANSWER_COUNTABLE:
-                # Query has too less results. Bad for count
-                return None
+        # Clamp the answers at NUM_ANSWERS_MAX and put in template IF NOT BOOLEAN
+        answer = {k: v[:max(len(list(set(v))), NUM_ANSWER_MAX)] for k, v in answer.items()}
+        if template['type'] == 'count':
+            template['answer_num'] = {'count': -1}
+        else:
+            template['answer_num'] = {'uri': len(list(set(answer['uri'])))}
 
     template['answer'] = answer
 
@@ -304,18 +315,19 @@ def get_vars(_template):
 def add(_data):
     """
         Safely store generated template obj (full with SPARQL and whatnot) in a global var.
-t.a
+
     :param _data: dict
     :return: None
     """
     global sparqls
-    sparqls[_data['template_id']] = sparqls.get(_data['template_id'], []) + [_data]
+    if _data:
+        sparqls[_data['template_id']] = sparqls.get(_data['template_id'], []) + [_data]
     return True
 
 
 def flush(_uri):
     """
-        Need a lock here
+        @TODO: Need a lock here
 
         :param _uri: str of the entity in question
         :return: Nothing
@@ -357,7 +369,7 @@ def fill_templates(_graph, _dbp):
 
 def generate_subgraph(_uri, _dbp):
     """
-        Returns a JSON of the sort:
+        Returns a subgraph object.
 
     :param _uri: str of entity
     :param _dbp: dbpedia object
@@ -368,7 +380,6 @@ def generate_subgraph(_uri, _dbp):
     g = subgraph.Subgraph(_uri, _type=_dbp.get_most_specific_class(_uri))
 
     # ########## e ?p ?e (e_to_e_out and e_out) ##########
-
     with Timer() as timer:
 
         results = _dbp.shoot_custom_query(one_triple_right % {'e': _uri})
@@ -386,7 +397,6 @@ def generate_subgraph(_uri, _dbp):
               {'uri': _uri, 'time': timer.interval, 'len': len(results)})
 
     # ########## ?e ?p e (e_in and e_in_to_e) ##########
-
     with Timer() as timer:
 
         results = _dbp.shoot_custom_query(one_triple_left % {'e': _uri})
@@ -404,7 +414,6 @@ def generate_subgraph(_uri, _dbp):
               {'uri': _uri, 'time': timer.interval, 'len': len(results)})
 
     # ########## e p eout . eout ?p ?e (e_out_to_e_out_out and e_out_out) ##########
-
     with Timer() as timer:
 
         # Get all the e_out nodes back from the subgraph.
@@ -427,7 +436,6 @@ def generate_subgraph(_uri, _dbp):
               {'uri': _uri, 'time': timer.interval, 'len': len_res})
 
     # ########## e p eout . ?e ?p eout  (e_out_in and e_out_in_to_e_out) ##########
-
     with Timer() as timer:
 
         e_outs = g.right.entities
@@ -450,7 +458,6 @@ def generate_subgraph(_uri, _dbp):
               {'uri': _uri, 'time': timer.interval, 'len': len_res})
 
     # ########## ?e ?p ein . ein p e  (e_in_in and e_in_in_to_e_in) ##########
-
     with Timer() as timer:
 
         e_ins = g.left.entities
@@ -472,7 +479,6 @@ def generate_subgraph(_uri, _dbp):
               {'uri': _uri, 'time': timer.interval, 'len': len_res})
 
     # ########## ein ?p ?e . ein p e  (e_in_to_e_in_out and e_in_out) ##########
-
     with Timer() as timer:
 
         e_ins = g.left.entities

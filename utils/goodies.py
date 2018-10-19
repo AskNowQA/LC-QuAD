@@ -9,6 +9,12 @@ class EntityTypeNotFound(Warning):
     pass
 
 
+class FancyDict(dict):
+    def __init__(self, *args, **kwargs):
+        super().__init__(**kwargs)
+        self.__dict__ = self
+
+
 def lazy_property(fn):
     """
         Got the following decorator from https://stevenloria.com/lazy-properties/
