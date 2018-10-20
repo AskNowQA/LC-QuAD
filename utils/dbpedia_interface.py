@@ -52,7 +52,7 @@ MAX_WAIT_TIME = 10.0
 ASK_RE_PATTERN = '(?i)ask\s*where'
 
 LABELS_LOC = 'resources/labels.pickle'
-CLASSES_LOC = 'resources/spclasses.pickle'
+CLASSES_LOC = 'resources/classes.json'
 
 
 '''
@@ -129,8 +129,8 @@ warnings.formatwarning = lambda message, category, filename, lineno, line=None: 
 
 def save_to_disk(obj, ctr, loc, msg):
     if len(obj) > ctr:
-        with open(loc, 'wb+') as f:
-            pickle.dump(obj, f)
+        with open(loc, 'w+') as f:
+            json.dump(obj, f)
             print(msg)
 
 
@@ -161,7 +161,7 @@ class DBPedia:
 
         # Try pulling URI class list from disk
         try:
-            self.classes = pickle.load(open(CLASSES_LOC, 'rb'))
+            self.classes = json.load(open(CLASSES_LOC))
         except (UnicodeDecodeError, IOError, FileNotFoundError, EOFError) as e:
             warnings.warn("Specific Classes cache can't be loaded from %s. Creating a new one" % LABELS_LOC)
             self.classes = {}
