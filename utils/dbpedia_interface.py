@@ -48,7 +48,7 @@ DBPEDIA_ENDPOINT = 'http://localhost:8890/sparql/'
 # DBPEDIA_ENDPOINTS = 'http://sda-srv01.iai.uni-bonn.de:8164/sparql'
 # REDIS_HOSTNAME = 'sda-srv01'
 REDIS_HOSTNAME  = '127.0.0.1'
-MAX_WAIT_TIME = 10.0
+MAX_WAIT_TIME = 50.0
 ASK_RE_PATTERN = '(?i)ask\s*where'
 
 LABELS_LOC = 'resources/labels.pickle'

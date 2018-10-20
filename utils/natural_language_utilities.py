@@ -3,11 +3,11 @@
 
 """
 import re
-import sys
+import html
 import string
 import os.path
+import inflect
 import warnings
-import html
 import validators
 from urllib.parse import urlparse
 
@@ -18,10 +18,14 @@ DBP_SHORTHANDS = {'dbo': 'http://dbpedia.org/ontology/', 'dbp': 'http://dbpedia.
                   'dbr': 'http://dbpedia.org/resource/', 'res': 'http://dbpedia.org/resource/'}
 # @TODO Import the above list from http://dbpedia.org/sparql?nsdecl
 
+p = inflect.engine()
+
+
 # Few regex to convert camelCase to _ i.e DonaldTrump to donald trump
 first_cap_re = re.compile('(.)([A-Z][a-z]+)')
 all_cap_re = re.compile('([a-z0-9])([A-Z])')
 variable_regex = r"(?<=%\()\S*(?=\)s)"
+re1 = re.compile(r'  +')
 stopwords = open(STOPWORDLIST).read().split('\n')
 
 
@@ -174,23 +178,6 @@ def is_literal(_string):
     return True
 
 
-def convert_to_no_symbols(_string):
-    new_string = ''
-    for char in _string:
-        if char not in string.letters + string.digits + ' *':
-            continue
-        new_string += char
-    return new_string
-
-
-def is_alpha_with_underscores(_string):
-    for char in _string:
-        if not char in string.letters + '_':
-            return False
-
-    return True
-
-
 def convert(_string):
     s1 = first_cap_re.sub(r'\1_\2', _string)
     return all_cap_re.sub(r'\1_\2', s1)
@@ -241,16 +228,21 @@ def sq_bracket_checker(uri, reverse=True, update=True):
     return uri
 
 
-
-re1 = re.compile(r'  +')
-
 def fixup(x):
     x = x.replace('#39;', "'").replace('amp;', '&').replace('#146;', "'").replace(
         'nbsp;', ' ').replace('#36;', '$').replace('\\n', "\n").replace('quot;', "'").replace(
-        '<br />', "\n").replace('\\"', '"').replace('<unk>','u_n').replace(' @.@ ','.').replace(
+        '<br />', "\n").replace('\\"', '"').replace('<unk>','u_n').replace(' @.@ ', '.').replace(
         ' @-@ ','-').replace('\\', ' \\ ')
     return re1.sub(' ', html.unescape(x))
 
+
+def get_plural(_words):
+    """
+        Input can be one word or more. We need to get its plural form.
+    :param _words: str
+    :return: str
+    """
+    return p.plural(_words)
 
 
 if __name__ == "__main__":

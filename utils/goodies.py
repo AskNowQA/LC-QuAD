@@ -57,6 +57,10 @@ class UnknownVarFoundError(Exception):
     pass
 
 
+class InvalidNLQTemplate(Exception):
+    pass
+
+
 class Timer:
     def __enter__(self):
         self.start = time.perf_counter()
