@@ -63,8 +63,11 @@ def _take_two_(_map, _data, _key_one, _key_two):
     """
     _maps = []
 
+    if len(_data) <= 1:
+        return []
+
     for i in range(len(_data)):
-        for j in range(len(_data))[i:]:
+        for j in range(len(_data))[i+1:]:
             ent_a, ent_b = _data[i], _data[j]
             _map = _map.copy()
             _map[_key_one] = ent_a.uri if isinstance(ent_a, Subgraph) else ent_a
@@ -449,6 +452,9 @@ class Subgraph(dict):
                 _maps = _take_one_(_map, ents, _key='e_out') if not _vars.right.double_ \
                     else _take_two_(_map, ents, _key_one='e_out', _key_two='e_out_2')
 
+                if len(_maps) == 0:
+                    return []
+
                 if _vars.right.two_:
                     rec_right_maps = []
                     for ent in ents:
@@ -466,7 +472,7 @@ class Subgraph(dict):
                 for _map in right_maps:
                     for pred, ents in self.right.items():
 
-                        if _map['e_to_e_out'] == pred:
+                        if _map['e_to_e_out'] == pred or pred.split('/')[-1] == _map['e_to_e_out'].split('/')[-1]:
                             continue
 
                         _map['e_to_e_out_2'] = pred
@@ -491,6 +497,9 @@ class Subgraph(dict):
                 _maps = _take_one_(_map, ents, _key='e_in') if not _vars.left.double_ \
                     else _take_two_(_map, ents, _key_one='e_in', _key_two='e_in_2')
 
+                if len(_maps) == 0:
+                    return []
+
                 if _vars.left.two_:
                     rec_left_maps = []
                     for ent in ents:
@@ -507,7 +516,7 @@ class Subgraph(dict):
                 for _map in left_maps:
                     for pred, ents in self.left.items():
 
-                        if _map['e_in_to_e'] == pred:
+                        if _map['e_in_to_e'] == pred or pred.split('/')[-1] == _map['e_in_to_e'].split('/')[-1]:
                             continue
 
                         _map['e_in_to_e_2'] = pred
@@ -532,38 +541,44 @@ class Subgraph(dict):
 
         _var_obj = VarList(_vars, _equal)
 
-        return self.mappings.get(_var_obj.hash, self._get_mapping_for_(_vars, _equal))
+        return self.mappings.get(_var_obj.hash, [x for x in self._get_mapping_for_(_vars, _equal) if len(x) != 0])
 
 
 if __name__ == "__main__":
-    a = Subgraph('dbr:Obama', 'dbo:Person')
+    # a = Subgraph('dbr:Obama', 'dbo:Person')
+    #
+    # # Add 1 hop stuff
+    # data_out = [PredEntTuple(pred='dbp:prez', ent='dbr:US', type="dbo:Country"),
+    #             PredEntTuple(pred='dbp:bornin', ent='dbr:Chicago', type="dbo:City"),
+    #             PredEntTuple(pred='dbp:left', ent='2014', type="dbo:Year"),
+    #             PredEntTuple(pred='dbp:spouse', ent='dbr:Michelle', type="dbo:Person"),
+    #             PredEntTuple(pred='dbp:left', ent='2010', type="dbo:Year")]
+    #
+    # data_in = [PredEntTuple(pred='dbp:son', ent='dbr:BiggerObama', type="dbo:Person"),
+    #            PredEntTuple(pred='dbp:spouse', ent='dbr:Michelle', type="dbo:Person"),
+    #            PredEntTuple(pred='dbp:father', ent='dbr:Wut', type="dbo:Nothing"),
+    #            PredEntTuple(pred='dbp:hasResident', ent='dbr:US', type="dbo:Person")]
+    #
+    # a.insert(data_out, _outgoing=True)
+    # a.insert(data_in, _outgoing=False)
+    #
+    # us = a.find('dbr:US', a)
+    # a.insert([
+    #     PredEntTuple(pred='dbp:hasResident', ent='dbr:Obama', type='dbo:Person'),
+    #     PredEntTuple(pred='dbp:capital', ent='dbr:WashingtonDC', type='dbo:City'),
+    #     PredEntTuple(pred='dbp:continent', ent='dbr:NorthAmerica', type='dbo:Continent')
+    #     ], _outgoing=True, _origin=us)
+    # a.insert([
+    #     PredEntTuple(pred='dbp:bornin', ent='dbr:Trump', type='dbo:Person'),
+    #     PredEntTuple(pred='dbp:location', ent='dbr:Stanford', type='dbo:Uni'),
+    # ], _outgoing=False, _origin=us)
+    #
+    # maps = a.gen_maps(['e_to_e_out', 'e_out_to_e_out_out', 'e_out_out', 'class_x'])
+    #
+    # pprint(maps)
 
-    # Add 1 hop stuff
-    data_out = [PredEntTuple(pred='dbp:prez', ent='dbr:US', type="dbo:Country"),
-                PredEntTuple(pred='dbp:bornin', ent='dbr:Chicago', type="dbo:City"),
-                PredEntTuple(pred='dbp:left', ent='2014', type="dbo:Year"),
-                PredEntTuple(pred='dbp:spouse', ent='dbr:Michelle', type="dbo:Person"),
-                PredEntTuple(pred='dbp:left', ent='2010', type="dbo:Year")]
-
-    data_in = [PredEntTuple(pred='dbp:son', ent='dbr:BiggerObama', type="dbo:Person"),
-               PredEntTuple(pred='dbp:spouse', ent='dbr:Michelle', type="dbo:Person"),
-               PredEntTuple(pred='dbp:father', ent='dbr:Wut', type="dbo:Nothing"),
-               PredEntTuple(pred='dbp:hasResident', ent='dbr:US', type="dbo:Person")]
-
-    a.insert(data_out, _outgoing=True)
-    a.insert(data_in, _outgoing=False)
-
-    us = a.find('dbr:US', a)
-    a.insert([
-        PredEntTuple(pred='dbp:hasResident', ent='dbr:Obama', type='dbo:Person'),
-        PredEntTuple(pred='dbp:capital', ent='dbr:WashingtonDC', type='dbo:City'),
-        PredEntTuple(pred='dbp:continent', ent='dbr:NorthAmerica', type='dbo:Continent')
-        ], _outgoing=True, _origin=us)
-    a.insert([
-        PredEntTuple(pred='dbp:bornin', ent='dbr:Trump', type='dbo:Person'),
-        PredEntTuple(pred='dbp:location', ent='dbr:Stanford', type='dbo:Uni'),
-    ], _outgoing=False, _origin=us)
-
-    maps = a.gen_maps(['e_to_e_out', 'e_out_to_e_out_out', 'e_out_out', 'class_x'])
-
-    pprint(maps)
+    map = {'e_in_to_e':'color'}
+    data = ['blue', 'red','yellow','green', 'white', 'black']
+    key1, key2 = 'e', 'ee'
+    a = _take_two_(map, data, key1, key2)
+    print(a)

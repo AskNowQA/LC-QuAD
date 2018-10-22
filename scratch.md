@@ -15,6 +15,7 @@
 - Rework nlutils, to internally call functions properly. No code duplication.
 - ~~Write a warning system which neatly breaks lines~~
 - [DOING] Clean up the repo, and file structure.
+- Update nomenclature png with class_uri, class_x
 
 ## Feeling Lucky:
 
