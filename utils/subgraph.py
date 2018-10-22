@@ -1,6 +1,7 @@
 from pprint import pprint
-
 from utils.goodies import *
+
+# @TODO: remove lazy properties, implement manual caching.
 
 TYPE_BLACKLIST = ['owl:Thing', 'http://www.w3.org/2002/07/owl#Thing']
 

@@ -47,7 +47,7 @@ DBPEDIA_ENDPOINT = 'http://localhost:8890/sparql/'
 # DBPEDIA_ENDPOINTS = 'http://localhost:8164/sparql/'
 # DBPEDIA_ENDPOINTS = 'http://sda-srv01.iai.uni-bonn.de:8164/sparql'
 # REDIS_HOSTNAME = 'sda-srv01'
-REDIS_HOSTNAME  = '127.0.0.1'
+REDIS_HOSTNAME = '127.0.0.1'
 MAX_WAIT_TIME = 50.0
 ASK_RE_PATTERN = '(?i)ask\s*where'
 
@@ -95,6 +95,9 @@ GET_TYPE_OF_RESOURCE = '''SELECT DISTINCT ?type WHERE { %(target_resource)s <htt
 GET_CLASS_PATH = '''SELECT DISTINCT ?type WHERE { %(target_class)s rdfs:subClassOf* ?type }'''
 
 GET_SUPERCLASS = '''SELECT DISTINCT ?type WHERE { %(target_class)s rdfs:subClassOf ?type }'''
+
+GET_EQUIVALENTCLASS = '''SELECT DISTINCT ?type WHERE { { %(target_class)s <http://www.w3.org/2002/07/owl#equivalentClass> ?type . } 
+                         UNION { ?type <http://www.w3.org/2002/07/owl#equivalentClass> %(target_class)s . } }'''
 
 CHECK_URL = '''ASk {<%(target_resource)s> a owl:Thing} '''
 
@@ -301,7 +304,28 @@ class DBPedia:
 
         return type_list
 
-    def get_answer(self, _sparql_query):
+    def get_parent_of_class(self, _resource_class, _filter_dbpedia=False):
+        """
+            Function fetches the superclass of a given dbo:class
+            and can optionally filter out the ones of DBPedia only
+        """
+        _resource_class = self._prep_uri_(_resource_class)
+        response = self.shoot_custom_query(GET_SUPERCLASS % {'target_class': _resource_class}, _at_global=True)
+
+        if len(response['results']['bindings']) == 0:
+            return self.get_answer(GET_EQUIVALENTCLASS % {'target_class': _resource_class}, _at_global=True)[0]
+
+        type_list = [x[u'type'][u'value'] for x in response[u'results'][u'bindings']]
+
+        # If we need only DBPedia's types
+        if _filter_dbpedia:
+            filtered_type_list = [x for x in type_list if
+                                  x[:28] in ['http://dbpedia.org/ontology/'] or x == 'http://www.w3.org/2002/07/owl#Thing']
+            return filtered_type_list
+
+        return type_list
+
+    def get_answer(self, _sparql_query, _at_global=False):
         """
             Function used to shoot a query and get the answers back. Easy peasy.
 
@@ -309,7 +333,7 @@ class DBPedia:
             NOTE: Only give it queries with one variable
 
         """
-        response = self.shoot_custom_query(_sparql_query)
+        response = self.shoot_custom_query(_sparql_query, _at_global=_at_global)
 
         matcher = re.search(ASK_RE_PATTERN, _sparql_query, 0)
         values = {}
@@ -465,29 +489,6 @@ class DBPedia:
         else:
             return False
 
-    def get_parent(self, _resource_uri):
-        specific_class_uri_1 = "<" + self.get_most_specific_class(_resource_uri) + ">"
-        try:
-            response_uri_1 = self.shoot_custom_query(GET_SUPERCLASS % {'target_class': specific_class_uri_1})
-        except:
-
-            print(traceback.print_exception())
-        try:
-            results_1 = [x[u'type'][u'value'].encode('ascii', 'ignore') for x in
-                         response_uri_1[u'results'][u'bindings']]
-        except:
-
-            print(traceback.print_exception())
-        filtered_type_list_1 = [x for x in results_1 if
-                                x[:28] in ['http://dbpedia.org/ontology/', 'http://dbpedia.org/property/']]
-        if len(filtered_type_list_1) >= 1:
-            return filtered_type_list_1[0]
-        else:
-            if filtered_type_list_1:
-                return filtered_type_list_1
-            else:
-                return "http://www.w3.org/2002/07/owl#Thing"
-
     def is_Url(self, url):
         response = self.shoot_custom_query(CHECK_URL % {'target_resource': url})
         return response["boolean"]
@@ -601,6 +602,21 @@ class DBPedia:
 
         return right_property_list, left_property_list
 
+    def get_most_generic_class(self, _resource_uri, _is_class=False):
+
+        if _is_class:
+            dbo_class = _resource_uri
+        else:
+            # Get the DBpedia classes of resource
+            classes = self.get_type_of_resource(_resource_uri, _filter_dbpedia=True)
+            dbo_class = classes[0]
+
+        while True:
+            sup_class = self.get_parent_of_class(dbo_class, _filter_dbpedia=True)[0]
+            if sup_class == 'http://www.w3.org/2002/07/owl#Thing':
+                return dbo_class
+            dbo_class = sup_class
+
 
 if __name__ == '__main__':
     pass
@@ -621,7 +637,6 @@ if __name__ == '__main__':
     # pprint(dbp.get_label(q))
     # q = 'http://dbpedia.org/resource/Mumbai'
 
-    print(dbp.get_parent(uri))
     pprint(dbp.get_properties(uri))
 # r = 'http://dbpedia.org/resource/India'
 
