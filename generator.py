@@ -224,7 +224,8 @@ def _generate_sparqls_(_uri, _dbp):
     with Timer() as timed:
         # Generate the local subgraph
         fill_templates(graph, _dbp=_dbp)
-    print(" %(ent)s: Done generating sparqls. Time: %(time).03f." % {'ent': _uri, 'time': timed.interval})
+    print("%(ent)s: Done generating sparqls. Time: %(time).03f." % {'ent': _uri, 'time': timed.interval})
+    print("%(ent)s: Time spent inside subG: %(time).03f." % {'ent': _uri, 'time': graph.time_maps})
 
 
 def _fill_one_template_(_template, _map, _graph, _dbp):
@@ -266,6 +267,7 @@ def _fill_one_template_(_template, _map, _graph, _dbp):
     # Include the mapping within the template object
     template['mapping'] = _map
 
+    # @TODO: try finding it in the subgraph, and getting the class from there.
     # Also get the classes of all the things we're putting in our SPARQL
     template['mapping_type'] = {key: dbp.get_most_specific_class(value)
                                 for key, value in _map.items()}
@@ -309,7 +311,9 @@ def _fill_one_template_(_template, _map, _graph, _dbp):
 
 
 def get_vars(_template):
-    return _template.get('vars', nlutils.get_variables(_template['template'])) + ['class_uri']
+    _vars = _template.get('vars', nlutils.get_variables(_template['template']))
+    _vars += ['class_uri'] if 'class_uri' not in _vars else []
+    return _vars
 
 
 def add(_data):

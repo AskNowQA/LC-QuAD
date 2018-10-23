@@ -123,9 +123,11 @@ class Templates(object):
         vanilla=["How many things are there whose <%(e_to_e_out)s> is <%(e_out)s>?",
                  "%(count_prefix)s things whose <%(e_to_e_out)s> is <%(e_out)s>?"])
     _102 = FancyDict(
-        vanilla=["%(count_prefix)s <%(e_in_to_e)s> in <%(e_in)s>?",
-                 "%(count_prefix)s <%(e_in_to_e)s> in <%(e_in)s>?",
-                 "%(count_prefix)s <%(e_in_to_e)s> are there in <%(e_in)s>?"])
+        vanilla=["%(count_prefix_a)s <%(e_in_to_e)s> in <%(e_in)s>?",
+                 "%(count_prefix_a)s <%(e_in_to_e)s> in <%(e_in)s>?",
+                 "%(count_prefix_b)s <%(e_in_to_e)s> are there in <%(e_in)s>?"])
+    _106 = FancyDict(
+        vanilla=["<%(top_class)s> whose <%(e_to_e_out)s>'s <%(e_out_to_e_out_out)s> is <%(e_out_out)s>"])
     _107 = FancyDict(
         vanilla=["%(count_prefix_b)s <%(top_class_uri_s)s> are there whose <%(e_to_e_out)s> are %(both)s<%(e_out)s> %(and_aswellas)s <%(e_out_2)s>?",
                  "%(count_prefix_a)s <%(top_class_uri_s)s> whose <%(e_to_e_out)s> are %(both)s<%(e_out)s> %(and_aswellas)s <%(e_out_2)s>."])
@@ -452,6 +454,7 @@ if __name__ == "__main__":
                 "answer_type": ["http://dbpedia.org/ontology/Activity", "http://dbpedia.org/ontology/Sport",
                                 "http://dbpedia.org/ontology/Game", "http://dbpedia.org/ontology/VideoGame"], "answer_num": -1,
                 "answer": {"uri": ["13"]}}
+    data_106 = {"template": "SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE { ?x <%(e_out_to_e_out_out)s> <%(e_out_out)s> . ?uri <%(e_to_e_out)s> ?x . } ", "template_id": 106, "n_entities": 1, "type": "count", "max": 100, "query": "SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE { ?x <http://dbpedia.org/property/sovereigntyType> <http://dbpedia.org/resource/History_of_Norway> . ?uri <http://dbpedia.org/property/country> ?x . } ", "_id": "9af4c44f353a4b27afd86a8d2c78082f", "corrected": "false", "entity": "http://dbpedia.org/resource/Nobel_Prize", "mapping": {"e_to_e_out": "http://dbpedia.org/property/country", "class_uri": "http://dbpedia.org/ontology/TelevisionShow", "e_out_to_e_out_out": "http://dbpedia.org/property/sovereigntyType", "e_out_out": "http://dbpedia.org/resource/History_of_Norway"}, "mapping_type": {"e_to_e_out": "http://www.w3.org/2002/07/owl#Thing", "class_uri": "http://www.w3.org/2002/07/owl#Thing", "e_out_to_e_out_out": "http://www.w3.org/2002/07/owl#Thing", "e_out_out": "http://www.w3.org/2002/07/owl#Thing"}, "answer_type": ["http://dbpedia.org/ontology/Award", "http://dbpedia.org/ontology/Organization", "http://dbpedia.org/ontology/TelevisionShow"], "answer_num": -1, "answer": {"uri": ["2298"]}}
     data_107 = {
         "template": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE { ?uri <%(e_to_e_out)s> <%(e_out)s> . ?uri <%(e_to_e_out)s> <%(e_out_2)s> . } ",
         "template_id": 107, "n_entities": 2, "type": "count", "max": 100,
