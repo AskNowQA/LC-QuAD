@@ -302,7 +302,7 @@
     }, 
     {
         "_id": "3432", 
-        "corrected_question": "What is the birth place of the astronaut whose mission was the Vostok programmer?", 
+        "corrected_question": "What is the birth place of the astronaut whose mission was the Vostok programme?",
         "intermediary_question": "What is the <birth place> of the <astronaut> whose <mission> is <Vostok programme> ?", 
         "sparql_query": "SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/mission> <http://dbpedia.org/resource/Vostok_programme> . ?x <http://dbpedia.org/ontology/birthPlace> ?uri  . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Astronaut>}", 
         "sparql_template_id": 305
@@ -414,7 +414,7 @@
     }, 
     {
         "_id": "3572", 
-        "corrected_question": "Whihc uni did Joshua A. Siegel attend ?", 
+        "corrected_question": "Which uni did Joshua A. Siegel attend ?", 
         "intermediary_question": "What is the <university attended> of Joshua A. Siegel ?", 
         "sparql_query": " SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Joshua_A._Siegel> <http://dbpedia.org/property/education> ?uri } ", 
         "sparql_template_id": 2
@@ -1618,7 +1618,7 @@
     }, 
     {
         "_id": "901", 
-        "corrected_question": "Which are the countires where Pioneer Corporation has flourished?", 
+        "corrected_question": "Which are the countries where Pioneer Corporation has flourished?",
         "intermediary_question": "What are the <country> of Pioneer Corporation?", 
         "sparql_query": " SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Pioneer_Corporation> <http://dbpedia.org/property/country> ?uri } ", 
         "sparql_template_id": 2
@@ -2227,7 +2227,7 @@
     }, 
     {
         "_id": "2878", 
-        "corrected_question": "List the movies edited by Julian Doyle in which music was composed by Geoffrey Brugon ?", 
+        "corrected_question": "List the movies edited by Julian Doyle in which music was composed by Geoffrey Burgon ?",
         "intermediary_question": "What is the <movie> whose <music> is <Geoffrey Burgon> and <editor> is <Julian Doyle (filmmaker)>?", 
         "sparql_query": "SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/music> <http://dbpedia.org/resource/Geoffrey_Burgon> . ?uri <http://dbpedia.org/property/editing> <http://dbpedia.org/resource/Julian_Doyle_(filmmaker)>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/Film>}", 
         "sparql_template_id": 308
@@ -2514,7 +2514,7 @@
     }, 
     {
         "_id": "2128", 
-        "corrected_question": "Where Everybody knows you is the theme album of which show ?", 
+        "corrected_question": "Where Everybody knows your name is the theme album of which show ?",
         "intermediary_question": "What is the <album> of Where Everybody Knows Your Name ?", 
         "sparql_query": " SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Where_Everybody_Knows_Your_Name> <http://dbpedia.org/ontology/album> ?uri } ", 
         "sparql_template_id": 2
@@ -2528,7 +2528,7 @@
     }, 
     {
         "_id": "4367", 
-        "corrected_question": "Which rivers have source origins asnorth western, Zambia ?", 
+        "corrected_question": "Which rivers have source origins as north western, Zambia ?",
         "intermediary_question": "What is the <river> whose <source region> is <North-Western Province, Zambia>?", 
         "sparql_query": "SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/sourceRegion> <http://dbpedia.org/resource/North-Western_Province,_Zambia>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/River>}", 
         "sparql_template_id": 301
@@ -2612,7 +2612,7 @@
     }, 
     {
         "_id": "3278", 
-        "corrected_question": "Whihc birthpalce of Svetlana Gounkina is also the largest city of Union State ?", 
+        "corrected_question": "Which birthplace of Svetlana Gounkina is also the largest city of Union State ?",
         "intermediary_question": "What is the <largest city> of the <Union State> and <born at> of the <Svetlana Gounkina>", 
         "sparql_query": " SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Union_State> <http://dbpedia.org/property/largestCity> ?uri. <http://dbpedia.org/resource/Svetlana_Gounkina> <http://dbpedia.org/ontology/birthPlace> ?uri} ", 
         "sparql_template_id": 16
@@ -3298,7 +3298,7 @@
     }, 
     {
         "_id": "1384", 
-        "corrected_question": "In which city wasThe Triple Door (The Courage album)  performed live?", 
+        "corrected_question": "In which city was The Triple Door (The Courage album)  performed live?",
         "intermediary_question": "What is the <Recorded> of Live at The Triple Door (The Courage album) ?", 
         "sparql_query": " SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Live_at_The_Triple_Door_(The_Courage_album)> <http://dbpedia.org/property/recorded> ?uri } ", 
         "sparql_template_id": 2
@@ -4537,7 +4537,7 @@
     }, 
     {
         "_id": "4853", 
-        "corrected_question": "Which american football team is owned by Mark davis and is located in O.co Colliseum ?", 
+        "corrected_question": "Which american football team is owned by Mark davis and is located in O.co Coliseum ?",
         "intermediary_question": "What is the <american football Team> whose <is owned by> is <Mark Davis (American football)> and <location city> is <O.co Coliseum>?", 
         "sparql_query": "SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/ontology/owner> <http://dbpedia.org/resource/Mark_Davis_(American_football)> . ?uri <http://dbpedia.org/ontology/locationCity> <http://dbpedia.org/resource/O.co_Coliseum>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/AmericanFootballTeam>}", 
         "sparql_template_id": 308
