@@ -42,7 +42,7 @@ except ImportError:
 
 # GLOBAL MACROS
 # DBPEDIA_ENDPOINTS = 'http://dbpedia.org/sparql/'
-DBPEDIA_ENDPOINT = 'http://localhost:8890/sparql/'
+DBPEDIA_ENDPOINT = 'http://localhost:8164/sparql/'
 # DBPEDIA_ENDPOINTS = 'http://131.220.153.66:7890/sparql'
 # DBPEDIA_ENDPOINTS = 'http://localhost:8164/sparql/'
 # DBPEDIA_ENDPOINTS = 'http://sda-srv01.iai.uni-bonn.de:8164/sparql'

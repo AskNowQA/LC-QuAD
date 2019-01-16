@@ -1,13 +1,15 @@
 # Overall Todos
 
-## Major:
+## Major/BUGS:
 
 - ~~Extend subgraph to return an iterator for mappings~~
 - ~~Write generate query code~~
 - ~~Update, and fix templates~~
 - ~~Add uri type to subgraph~~
 - ~~Test uri type in subgraph~~
-- Verbalize template 1, 2, 101, 102
+- ~~Verbalize template 1, 2, 101, 102~~
+- **CHECK WHY SOME TEMPALTES ARE NOT BEING GENERATED!!!**
+- **Template 8/108 might not satisfy conditions. Check!**
 
 ## Minor:
 
@@ -22,3 +24,9 @@
 - ~~Extend generator_vanilla to generate all sorts of SPARQLs~~
 - ~~Write code to gen SPARQL, which is agnostic to actual template str.~~
 - **Improve mapping generation performance.**
+
+## Discuss
+
+- Template `107`, `108` have top class URI mentioned in the question, which can lead to RDF class being there. 
+What should we do? Shall we replace them all with `things`?
+Eg. `Count the <Works> whose <director> is <Orson  Welles> and <producer> is <Orson  Welles>?` (108)

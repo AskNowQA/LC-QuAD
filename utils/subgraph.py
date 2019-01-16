@@ -546,47 +546,52 @@ class Subgraph(dict):
 
         self.time_maps += timer.interval
         print("%(uri)s | %(time).03f : %(len)03d : %(var)s :" %
-              {'uri': self.uri, 'time': timer.interval, 'var': str(_var_obj), 'len': len(mappings)})
+              {'uri': self.uri.split('/')[-1], 'time': timer.interval, 'var': str(_var_obj), 'len': len(mappings)})
 
         return mappings
 
+
 if __name__ == "__main__":
-    a = Subgraph('dbr:Obama', 'dbo:Person')
 
-    # Add 1 hop stuff
-    data_out = [PredEntTuple(pred='dbp:prez', ent='dbr:US', type="dbo:Country"),
-                PredEntTuple(pred='dbp:bornin', ent='dbr:Chicago', type="dbo:City"),
-                PredEntTuple(pred='dbp:left', ent='2014', type="dbo:Year"),
-                PredEntTuple(pred='dbp:spouse', ent='dbr:Michelle', type="dbo:Person"),
-                PredEntTuple(pred='dbp:left', ent='2010', type="dbo:Year")]
+    test = 'generic'
 
-    data_in = [PredEntTuple(pred='dbp:son', ent='dbr:BiggerObama', type="dbo:Person"),
-               PredEntTuple(pred='dbp:spouse', ent='dbr:Michelle', type="dbo:Person"),
-               PredEntTuple(pred='dbp:father', ent='dbr:Wut', type="dbo:Nothing"),
-               PredEntTuple(pred='dbp:hasResident', ent='dbr:US', type="dbo:Person")]
+    if test is 'generic':
+        a = Subgraph('dbr:Obama', 'dbo:Person')
 
-    a.insert(data_out, _outgoing=True)
-    a.insert(data_in, _outgoing=False)
+        # Add 1 hop stuff
+        data_out = [PredEntTuple(pred='dbp:prez', ent='dbr:US', type="dbo:Country"),
+                    PredEntTuple(pred='dbp:bornin', ent='dbr:Chicago', type="dbo:City"),
+                    PredEntTuple(pred='dbp:left', ent='2014', type="dbo:Year"),
+                    PredEntTuple(pred='dbp:spouse', ent='dbr:Michelle', type="dbo:Person"),
+                    PredEntTuple(pred='dbp:left', ent='2010', type="dbo:Year")]
 
-    us = a.find('dbr:US', a)
-    a.insert([
-        PredEntTuple(pred='dbp:hasResident', ent='dbr:Obama', type='dbo:Person'),
-        PredEntTuple(pred='dbp:capital', ent='dbr:WashingtonDC', type='dbo:City'),
-        PredEntTuple(pred='dbp:continent', ent='dbr:NorthAmerica', type='dbo:Continent')
-        ], _outgoing=True, _origin=us)
-    a.insert([
-        PredEntTuple(pred='dbp:bornin', ent='dbr:Trump', type='dbo:Person'),
-        PredEntTuple(pred='dbp:location', ent='dbr:Stanford', type='dbo:Uni'),
-    ], _outgoing=False, _origin=us)
+        data_in = [PredEntTuple(pred='dbp:son', ent='dbr:BiggerObama', type="dbo:Person"),
+                   PredEntTuple(pred='dbp:spouse', ent='dbr:Michelle', type="dbo:Person"),
+                   PredEntTuple(pred='dbp:father', ent='dbr:Wut', type="dbo:Nothing"),
+                   PredEntTuple(pred='dbp:hasResident', ent='dbr:US', type="dbo:Person")]
 
-    maps = a.gen_maps(['e_to_e_out', 'e_out_to_e_out_out', 'e_out_out', 'class_x'])
-    maps_2 = a.gen_maps(['e_to_e_out', 'e_out_to_e_out_out', 'e_out_out', 'class_x'])
-    maps_1 = a.gen_maps(['e_in', 'e_in_to_e', 'class_uri'])
+        a.insert(data_out, _outgoing=True)
+        a.insert(data_in, _outgoing=False)
 
-    # pprint(maps)
-    print(a.time_maps)
-    # map = {'e_in_to_e':'color'}
-    # data = ['blue', 'red','yellow','green', 'white', 'black']
-    # key1, key2 = 'e', 'ee'
-    # a = _take_two_(map, data, key1, key2)
-    # print(a)
+        us = a.find('dbr:US', a)
+        a.insert([
+            PredEntTuple(pred='dbp:hasResident', ent='dbr:Obama', type='dbo:Person'),
+            PredEntTuple(pred='dbp:capital', ent='dbr:WashingtonDC', type='dbo:City'),
+            PredEntTuple(pred='dbp:continent', ent='dbr:NorthAmerica', type='dbo:Continent')
+            ], _outgoing=True, _origin=us)
+        a.insert([
+            PredEntTuple(pred='dbp:bornin', ent='dbr:Trump', type='dbo:Person'),
+            PredEntTuple(pred='dbp:location', ent='dbr:Stanford', type='dbo:Uni'),
+        ], _outgoing=False, _origin=us)
+
+        maps = a.gen_maps(['e_to_e_out', 'e_out_to_e_out_out', 'e_out_out', 'class_x'])
+        maps_2 = a.gen_maps(['e_to_e_out', 'e_out_to_e_out_out', 'e_out_out', 'class_x'])
+        maps_1 = a.gen_maps(['e_in', 'e_in_to_e', 'class_uri'])
+
+        # pprint(maps)
+        print(a.time_maps)
+
+    if test is 'equal':
+
+        # Define some things for the sake of template 11
+        pass
