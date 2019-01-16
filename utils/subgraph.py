@@ -504,7 +504,7 @@ class Subgraph(dict):
                     rec_left_maps = []
                     for ent in ents:
                         rec_left_maps += [change_keys_dict(x, rev(REC_LEFT_VARS)) for x
-                                          in ent._get_mapping_for_(change_keys_list(_vars.right, REC_LEFT_VARS), [])]
+                                          in ent._get_mapping_for_(change_keys_list(_vars.left, REC_LEFT_VARS), [])]
 
                     _maps = permute_dicts(_maps, rec_left_maps, _optional=False)
 
@@ -553,7 +553,7 @@ class Subgraph(dict):
 
 if __name__ == "__main__":
 
-    test = 'generic'
+    test = 'equal'
 
     if test is 'generic':
         a = Subgraph('dbr:Obama', 'dbo:Person')
@@ -594,4 +594,20 @@ if __name__ == "__main__":
     if test is 'equal':
 
         # Define some things for the sake of template 11
-        pass
+        # SPARQL: SELECT DISTINCT ?uri WHERE { ?x <%(e_in_to_e_in_out)s> <%(e_in_out)s> . ?x <%(e_in_to_e)s> ?uri  }
+        a = Subgraph('dbr:Obama', 'dbo:Person')
+        data_in = [PredEntTuple(pred='dbp:president', ent='dbr:US'),
+                   PredEntTuple(pred='dbp:generic', ent='dbr:potato')]
+        a.insert(data_in, _outgoing=False)
+        potato = a.find('dbr:potato', a)
+        data_in_in = [PredEntTuple(pred='dbp:generic', ent='dbr:thing'), PredEntTuple(pred='dbp:ingridient', ent='dbr:fries')]
+        data_in_out = [PredEntTuple(pred='dbp:origin', ent='dbr:Argentina'), PredEntTuple(pred='dbp:production', ent='10000kg'),
+                       PredEntTuple(pred='dbp:generic', ent='dbr:thing')]
+        potato.insert(data_in_in, _outgoing=False)
+        potato.insert(data_in_out, _outgoing=True)
+        pprint(a)
+
+        _vars = ['e_in_to_e_in_out', 'e_in_out', 'e_in_to_e']
+        _eq = ['e_in_to_e_in_out', 'e_in_to_e']
+        maps = a.gen_maps(_vars, _eq)
+        pprint(maps)

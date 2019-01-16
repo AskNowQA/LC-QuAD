@@ -227,7 +227,7 @@
 	"equal": ["e_in_to_e_in_out", "e_in_to_e"],
 	"max": 100
 }, {
-	"template": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE { ?x <%(e_in_to_e_in_out)s> <%(e_in_out)s> . ?x <%(e_in_to_e)s>. ?uri . ?x rdf:type  <%(class_x)s> . }",
+	"template": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE { ?x <%(e_in_to_e_in_out)s> <%(e_in_out)s> . ?x <%(e_in_to_e)s> ?uri . ?x rdf:type  <%(class_x)s> . }",
 	"template_id": 411,
 	"n_entities": 1,
 	"type": "count",
