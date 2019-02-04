@@ -59,8 +59,8 @@
         }
 
 
-    TEMPLATES covered: 1, 2, 6, 7, 8, 15, 16, 101, 102, 106, 107, 108
-    TOTEST: 3, 5, 9
+    TEMPLATES covered: 1, 2, 3, 6, 7, 8, 11, 15, 16, 101, 102, 103, 106, 107, 108
+    TOTEST: 5, 9
 """
 import warnings
 import numpy.random as npr
@@ -72,7 +72,8 @@ from utils import dbpedia_interface as dbi
 from utils import natural_language_utilities as nlutils
 
 NUM_ANSWER_PLURAL = 3
-NO_SURFACE_FORM = ['count_prefix_a', 'count_prefix_b', 'Who_What', 'who_which', 'and_aswellas', 'alsothe', 'both', 'arethere_exists']
+NO_SURFACE_FORM = ['count_prefix_a', 'count_prefix_b', 'Who_What', 'who_which', 'and_aswellas', 'alsothe', 'both',
+                   'arethere_exists', 'things_thething']
 # npr.seed(42)
 
 
@@ -97,18 +98,18 @@ class Templates(object):
         vanilla=["%(Who_What)s is the <%(e_in_to_e)s> of %(e_in)s?"],
         plural=["%(Who_What)s are the <%(e_in_to_e_s)s> of %(e_in)s?"])
     _3 = FancyDict(
-        vanilla=["What is the <%(e_in_to_e)s> of the <%(class_x)s %(who_which)s is the <%(e_in_in_to_e_in)s> of <%(e_in_in)s>?"])
+        vanilla=["What is the <%(e_in_to_e)s> of %(things_thething)s %(who_which)s is the <%(e_in_in_to_e_in)s> of <%(e_in_in)s>?"])
     _5 = FancyDict(
-        vanilla=["%(Who_What)s is the <%(e_in_to_e)s> of the <%(class_x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>?",
-                 "Tell me the <%(e_in_to_e)s> of the <%(class_x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>?"],
-        plural=["List the <%(e_in_to_e)s> of the <%(class_x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>?",
-                "%(Who_What)s the <%(e_in_to_e)s> of the <%(class_x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>?"])
+        vanilla=["%(Who_What)s is the <%(e_in_to_e)s> of %(things_thething)s whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>?",
+                 "Tell me the <%(e_in_to_e)s> of %(things_thething)s whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>?"],
+        plural=["List the <%(e_in_to_e)s> of the things whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>?",
+                "%(Who_What)s the <%(e_in_to_e)s> of the things whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>?"])
     _6 = FancyDict(
         vanilla=["%(Who_What)s is the <%(top_class_uri)s> whose <%(e_to_e_out)s>'s <%(e_out_to_e_out_out)s> is <%(e_out_out)s>?",
                  "Name the <%(top_class_uri)s> whose <%(e_to_e_out)s>'s <%(e_out_to_e_out_out)s> is <%(e_out_out)s>?",
                  "<%(e_out_out)s> is the <%(e_out_to_e_out_out)s> of the <%(e_to_e_out)s> of %(Who_What)s?"],
         plural=["%(Who_What)s are the <%(top_class_uri_s)s> whose <%(e_to_e_out)s>'s <%(e_out_to_e_out_out)s> is <%(e_out_out)s>?",
-                "List the <%(tokeysp_class_uri_s)s> whose <%(e_to_e_out)s>'s <%(e_out_to_e_out_out)s> is <%(e_out_out)s>."])
+                "List the <%(sp_class_uri_s)s> whose <%(e_to_e_out)s>'s <%(e_out_to_e_out_out)s> is <%(e_out_out)s>."])
     _7 = FancyDict(
         vanilla=FancyDict(
             vanilla=["Whose <%(e_to_e_out)s> includes both <%(e_out)s>, %(and_aswellas)s <%(e_out_2)s>?",
@@ -120,7 +121,11 @@ class Templates(object):
         vanilla=["%(Who_What)s is the <%(top_class_uri)s> whose <%(e_to_e_out)s> is <%(e_out)s> and <%(e_to_e_out_2)s> is <%(e_out_2*)s>?"],
         plural=["%(Who_What)s are the <%(top_class_uri_s)s> whose <%(e_to_e_out)s> is <%(e_out)s> and <%(e_to_e_out_2)s> is <%(e_out_2*)s>?"])
     _9 = FancyDict(
-        vanilla=["%(Who_What)s is <%(e_in_to_e)s> of the <%(class_x)s> %(who_which) is the <%(e_in_in_to_e_in)s> of <%(e_in_in)s>"])
+        vanilla=["%(Who_What)s is <%(e_in_to_e)s> of %(things_thething)s %(who_which) is the <%(e_in_in_to_e_in)s> of <%(e_in_in)s>"])
+    _11 = FancyDict(
+        vanilla=["List the other <%(e_in_to_e)s> of %(things_thething)s one of whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.",
+                 "Name some other <%(e_in_to_e)s> of those things one of whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.",
+                 "What are the other <%(e_in_to_e)s> of %(things_thething)s one of whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>?"])
     _15 = FancyDict(
         vanilla=["%(Who_What)s is the <%(e_in_to_e)s> of the <%(e_in)s> %(and_aswellas)s <%(e_in_2)s>?"],
         plural=["%(Who_What)s are the <%(e_in_to_e)s> of the <%(e_in)s> %(and_aswellas)s <%(e_in_2)s>?"])
@@ -128,14 +133,17 @@ class Templates(object):
         vanilla=["%(Who_What)s is the <%(e_in_to_e)s> of the <%(e_in)s> and %(alsothe)s<%(e_in_to_e_2)s> of the <%(e_in_2*)s>?"],
         plural=["%(Who_What)s are the <%(e_in_to_e)s> of the <%(e_in)s> and %(alsothe)s<%(e_in_to_e_2)s> of the <%(e_in_2*)s>?"])
     _101 = FancyDict(
-        vanilla=["How many things are there whose <%(e_to_e_out)s> is <%(e_out)s>?",
-                 "%(count_prefix)s things whose <%(e_to_e_out)s> is <%(e_out)s>?"])
+        vanilla=["How many things are there whose <%(e_to_e_out)s> is <%(e_out_s)s>?",
+                 "%(count_prefix)s things whose <%(e_to_e_out)s> is <%(e_out_s)s>?"])
     _102 = FancyDict(
-        vanilla=["%(count_prefix_a)s <%(e_in_to_e)s> in <%(e_in)s>?",
-                 "%(count_prefix_a)s <%(e_in_to_e)s> in <%(e_in)s>?",
-                 "%(count_prefix_b)s <%(e_in_to_e)s> are there in <%(e_in)s>?"])
+        vanilla=["%(count_prefix_a)s <%(e_in_to_e_s)s> in <%(e_in_s)s>?",
+                 "%(count_prefix_a)s <%(e_in_to_e_s)s> in <%(e_in_s)s>?",
+                 "%(count_prefix_b)s <%(e_in_to_e_s)s> are there in <%(e_in_s)s>?"])
+    _103 = FancyDict(
+        vanilla=["%(count_prefix_b)s <%(e_in_to_e_s)s> are there of the thing %(who_which)s is the <%(e_in_in_to_e_in)s> of <%(e_in_in_s)s> ?"],
+        continuous=["%(count_prefix_b)s <%(e_in_to_e_s)s> are there of the thing %(who_which)s is the <%(e_in_in_to_e_in)s> in <%(e_in_in_s)s> ?"])
     _106 = FancyDict(
-        vanilla=["<%(top_class)s> whose <%(e_to_e_out)s>'s <%(e_out_to_e_out_out)s> is <%(e_out_out)s>"])
+        vanilla=["%(count_prefix_a)s <%(top_class_uri_s)s> whose <%(e_to_e_out)s>'s <%(e_out_to_e_out_out)s> is <%(e_out_out)s>?"])
     _107 = FancyDict(
         vanilla=["%(count_prefix_b)s <%(top_class_uri_s)s> are there whose <%(e_to_e_out)s> are %(both)s<%(e_out)s> %(and_aswellas)s <%(e_out_2)s>?",
                  "%(count_prefix_a)s <%(top_class_uri_s)s> whose <%(e_to_e_out)s> are %(both)s<%(e_out)s> %(and_aswellas)s <%(e_out_2)s>."])
@@ -143,7 +151,12 @@ class Templates(object):
         vanilla=["%(count_prefix_b)s <%(top_class_uri_s)s> %(arethere_exists)s whose <%(e_to_e_out)s> is <%(e_out)s> and <%(e_to_e_out_2)s> is <%(e_out_2*)s>?",
                  "%(count_prefix_a)s <%(top_class_uri_s)s> whose <%(e_to_e_out)s> is <%(e_out)s> and <%(e_to_e_out_2)s> is <%(e_out_2*)s>?",
                  "%(count_prefix_b)s things %(arethere_exists)s whose <%(e_to_e_out)s> is <%(e_out)s> and <%(e_to_e_out_2)s> is <%(e_out_2*)s>?",
-                 "%(count_prefix_a)s things whose <%(e_to_e_out)s> is <%(e_out)s> and <%(e_to_e_out_2)s> is <%(e_out_2*)s>?"                 ])
+                 "%(count_prefix_a)s things whose <%(e_to_e_out)s> is <%(e_out)s> and <%(e_to_e_out_2)s> is <%(e_out_2*)s"])
+    _111 = FancyDict(
+        vanilla=["Give me the total number of <%(e_in_to_e_s)s> of the %(things_thething)s whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.",
+                 "Count the other <%(e_in_to_e_s)s> of the %(things_thething)s whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.",
+                 "Count the number of other <%(e_in_to_e_s)s> of the %(things_thething)s whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.",
+                 "How many other <%(e_in_to_e_s)s> %(arethere_exists)s of the %(things_thething)s whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>?"])
 
 
 def _answer_is_person_(datum):
@@ -230,6 +243,10 @@ class Verbalizer:
             by = sparql['mapping']['e_to_e_out'].split()[-1].lower() == 'by'
             return self._get_template_(templates.preposition if by else templates.vanilla, sparql)
 
+        if keys == 'continuous':
+            continuous_pred = 'ing' in sparql['mapping']['e_in_in_to_e_in']
+            return self._get_template_(templates.continuous if continuous_pred else templates.vanilla, sparql)
+
     def _get_sf_(self, mapping):
         """
             Replace url with its surface form
@@ -267,6 +284,7 @@ class Verbalizer:
         datum['mapping']['Who_What'] = 'Who' if _answer_is_person_(datum) else npr.choice(['What', 'Which'], p=[0.3, 0.7])
         datum['mapping']['and_aswellas'] = npr.choice(['and', 'as well as'])
         datum['mapping']['alsothe'] = npr.choice(['also the ', ''])
+        datum['mapping']['things_thething'] = npr.choice(['things', 'the thing'], p=[0.8, 0.2])
         datum['mapping']['arethere_exists'] = npr.choice(['are there', 'exists'], p=[0.1, 0.9])
         datum['mapping']['both'] = npr.choice(['both ', ''])
 
@@ -334,6 +352,32 @@ if __name__ == "__main__":
                                  "http://dbpedia.org/resource/Football", "http://dbpedia.org/resource/Track_and_field",
                                  "http://dbpedia.org/resource/Flying_disc_games", "http://dbpedia.org/resource/Swimming_(sport)",
                                  "http://dbpedia.org/resource/Combat_sport"]}}
+    data_3 = {"template": " SELECT DISTINCT ?uri WHERE { <%(e_in_in)s> <%(e_in_in_to_e_in)s> ?x . ?x <%(e_in_to_e)s> ?uri . } ",
+              "template_id": 3, "n_entities": 1, "type": "vanilla", "max": 100,
+              "query": " SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/The_Bad_and_the_Beautiful> <http://dbpedia.org/property/basedOn> ?x . ?x <http://dbpedia.org/ontology/deathCause> ?uri . } ",
+              "_id": "075c95528e8746d0856c3b42e97a23d2", "corrected": "false",
+              "entity": "http://dbpedia.org/resource/Cholera",
+              "mapping": {"e_in_to_e": "http://dbpedia.org/ontology/deathCause", "class_uri": "http://dbpedia.org/ontology/Disease",
+                          "e_in_in_to_e_in": "http://dbpedia.org/property/basedOn", "e_in_in": "http://dbpedia.org/resource/The_Bad_and_the_Beautiful"},
+              "mapping_type": {"e_in_to_e": "http://www.w3.org/2002/07/owl#Thing", "class_uri": "http://www.w3.org/2002/07/owl#Thing",
+                               "e_in_in_to_e_in": "http://www.w3.org/2002/07/owl#Thing", "e_in_in": "http://dbpedia.org/ontology/Archive"},
+              "answer_type": ["http://dbpedia.org/ontology/Disease"], "answer_num": 1,
+              "answer": {"uri": ["http://dbpedia.org/resource/Cholera"]}}
+    data_3 = {"template": " SELECT DISTINCT ?uri WHERE { <%(e_in_in)s> <%(e_in_in_to_e_in)s> ?x . ?x <%(e_in_to_e)s> ?uri . } ",
+              "template_id": 3, "n_entities": 1, "type": "vanilla", "max": 100,
+              "query": " SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/List_of_Band_of_Brothers_episodes> <http://dbpedia.org/property/writtenby> ?x . ?x <http://dbpedia.org/ontology/notableWork> ?uri . } ",
+              "_id": "58ddb98ab93349d6990e5fce124217e0", "corrected": "false",
+              "entity": "http://dbpedia.org/resource/Band_of_Brothers_(miniseries)",
+              "mapping": {"e_in_to_e": "http://dbpedia.org/ontology/notableWork", "class_uri": "http://dbpedia.org/ontology/Drama",
+                          "e_in_in_to_e_in": "http://dbpedia.org/property/writtenby",
+                          "e_in_in": "http://dbpedia.org/resource/List_of_Band_of_Brothers_episodes"},
+              "mapping_type": {"e_in_to_e": "http://www.w3.org/2002/07/owl#Thing",
+                               "class_uri": "http://www.w3.org/2002/07/owl#Thing",
+                               "e_in_in_to_e_in": "http://www.w3.org/2002/07/owl#Thing",
+                               "e_in_in": "http://dbpedia.org/ontology/Person"},
+              "answer_type": ["http://dbpedia.org/ontology/TelevisionShow", "http://dbpedia.org/ontology/Drama", "http://dbpedia.org/ontology/Work", "http://dbpedia.org/ontology/Film"],
+              "answer_num": 3,
+              "answer": {"uri": ["http://dbpedia.org/resource/Band_of_Brothers_(miniseries)", "http://dbpedia.org/resource/Legend_of_the_Guardians:_The_Owls_of_Ga'Hoole", "http://dbpedia.org/resource/A_Mighty_Heart_(film)"]}}
     data_6 = {"template": "SELECT DISTINCT ?uri WHERE { ?x <%(e_out_to_e_out_out)s> <%(e_out_out)s> . ?uri <%(e_to_e_out)s> ?x . } ",
               "template_id": 6, "n_entities": 1, "type": "vanilla", "max": 100,
               "query": "SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/property/headquarters> <http://dbpedia.org/resource/Stockholm> . ?uri <http://dbpedia.org/property/presenter> ?x . } ",
@@ -419,6 +463,18 @@ if __name__ == "__main__":
                     "http://dbpedia.org/resource/Conspirateurs", "http://dbpedia.org/resource/Camelot_(board_game)",
                     "http://dbpedia.org/resource/Choko_(game)", "http://dbpedia.org/resource/Lines_of_Action",
                     "http://dbpedia.org/resource/The_Duke_(board_game)"]}}
+    data_11 = {
+        "template": " SELECT DISTINCT ?uri WHERE { ?x <%(e_in_to_e_in_out)s> <%(e_in_out)s> . ?x <%(e_in_to_e)s> ?uri  }",
+        "template_id": 11, "n_entities": 1, "type": "vanilla",
+        "equal": ["e_in_to_e_in_out", "e_in_to_e"], "max": 100,
+        "query": " SELECT DISTINCT ?uri WHERE { ?x <http://dbpedia.org/ontology/location> <http://dbpedia.org/resource/North_America> . ?x <http://dbpedia.org/ontology/location> ?uri  }",
+        "_id": "58de057f78954500bab909cf52ef0dfc", "corrected": "false",
+        "entity": "http://dbpedia.org/resource/North_America",
+        "mapping": {"e_in_to_e": "http://dbpedia.org/ontology/location", "class_uri": "http://dbpedia.org/ontology/Continent", "e_in_to_e_in_out": "http://dbpedia.org/ontology/location", "e_in_out": "http://dbpedia.org/resource/North_America"},
+        "mapping_type": {"e_in_to_e": "http://www.w3.org/2002/07/owl#Thing", "class_uri": "http://www.w3.org/2002/07/owl#Thing", "e_in_to_e_in_out": "http://www.w3.org/2002/07/owl#Thing", "e_in_out": "http://dbpedia.org/ontology/Continent"},
+        "answer_type": ["http://dbpedia.org/ontology/Country", "http://dbpedia.org/ontology/Place", "http://dbpedia.org/ontology/PopulatedPlace", "http://dbpedia.org/ontology/Location", "http://dbpedia.org/ontology/Continent"],
+         "answer_num": 11,
+         "answer": {"uri": ["http://dbpedia.org/resource/North_America", "http://dbpedia.org/resource/California", "http://dbpedia.org/resource/San_Francisco", "http://dbpedia.org/resource/United_States", "http://dbpedia.org/resource/Mexico", "http://dbpedia.org/resource/London", "http://dbpedia.org/resource/United_Kingdom", "http://dbpedia.org/resource/Europe", "http://dbpedia.org/resource/Florida", "http://dbpedia.org/resource/Sanford,_Florida", "http://dbpedia.org/resource/Minnesota"]}}
     data_15 = {"template": " SELECT DISTINCT ?uri WHERE { <%(e_in)s> <%(e_in_to_e)s> ?uri . <%(e_in_2)s> <%(e_in_to_e)s> ?uri . } ",
                "template_id": 15, "n_entities": 2, "type": "vanilla", "max": 100,
                "query": " SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Polytechnic_University_of_the_Philippines> <http://dbpedia.org/ontology/sport> ?uri . <http://dbpedia.org/resource/Harvest_Christian_Academy_(Honduras)> <http://dbpedia.org/ontology/sport> ?uri . } ",
@@ -470,6 +526,9 @@ if __name__ == "__main__":
                 "answer_type": ["http://dbpedia.org/ontology/Activity", "http://dbpedia.org/ontology/Sport",
                                 "http://dbpedia.org/ontology/Game", "http://dbpedia.org/ontology/VideoGame"], "answer_num": -1,
                 "answer": {"uri": ["13"]}}
+    data_103 = npr.choice([{
+        "template": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE { <%(e_in_in)s> <%(e_in_in_to_e_in)s> ?x . ?x <%(e_in_to_e)s> ?uri . } ", "template_id": 103, "n_entities": 1, "type": "count", "max": 100, "query": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE { <http://dbpedia.org/resource/Qazi_Touqeer> <http://dbpedia.org/property/origin> ?x . ?x <http://dbpedia.org/property/label> ?uri . } ", "_id": "c580fb02cfe64144a7f480a252769fed", "corrected": "false", "entity": "http://dbpedia.org/resource/Buddhism", "mapping": {"e_in_to_e": "http://dbpedia.org/property/label", "class_uri": "http://dbpedia.org/ontology/Country", "e_in_in_to_e_in": "http://dbpedia.org/property/origin", "e_in_in": "http://dbpedia.org/resource/Qazi_Touqeer"}, "mapping_type": {"e_in_to_e": "http://www.w3.org/2002/07/owl#Thing", "class_uri": "http://www.w3.org/2002/07/owl#Thing", "e_in_in_to_e_in": "http://www.w3.org/2002/07/owl#Thing", "e_in_in": "http://dbpedia.org/ontology/Singer"}, "answer_type": ["http://dbpedia.org/ontology/Country", "http://dbpedia.org/ontology/EthnicGroup"], "answer_num": -1, "answer": {"uri": ["8"]}}, {
+            "template": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE { <%(e_in_in)s> <%(e_in_in_to_e_in)s> ?x . ?x <%(e_in_to_e)s> ?uri . } ", "template_id": 103, "n_entities": 1, "type": "count", "max": 100, "query": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE { <http://dbpedia.org/resource/Shingo_La> <http://dbpedia.org/ontology/location> ?x . ?x <http://dbpedia.org/property/label> ?uri . } ", "_id": "00a05db68b8f407ea5bbe654f478328e", "corrected": "false", "entity": "http://dbpedia.org/resource/Buddhism", "mapping": {"e_in_to_e": "http://dbpedia.org/property/label", "class_uri": "http://dbpedia.org/ontology/Country", "e_in_in_to_e_in": "http://dbpedia.org/ontology/location", "e_in_in": "http://dbpedia.org/resource/Shingo_La"}, "mapping_type": {"e_in_to_e": "http://www.w3.org/2002/07/owl#Thing", "class_uri": "http://www.w3.org/2002/07/owl#Thing", "e_in_in_to_e_in": "http://www.w3.org/2002/07/owl#Thing", "e_in_in": "http://dbpedia.org/ontology/MountainPass"}, "answer_type": ["http://dbpedia.org/ontology/Country", "http://dbpedia.org/ontology/EthnicGroup"], "answer_num": -1, "answer": {"uri": ["8"]}}])
     data_106 = {
         "template": "SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE { ?x <%(e_out_to_e_out_out)s> <%(e_out_out)s> . ?uri <%(e_to_e_out)s> ?x . } ",
         "template_id": 106, "n_entities": 1, "type": "count", "max": 100,
@@ -499,21 +558,35 @@ if __name__ == "__main__":
         "answer_type": ["http://dbpedia.org/ontology/Game", "http://dbpedia.org/ontology/Sport",
                         "http://dbpedia.org/ontology/VideoGame", "http://dbpedia.org/ontology/Activity"], "answer_num": -1,
         "answer": {"uri": ["41"]}}
-    data_108 = {"template": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE {?uri <%(e_to_e_out)s> <%(e_out)s> . ?uri <%(e_to_e_out_2)s> <%(e_out_2*)s> . } ",
-                "template_id": 108, "n_entities": 2, "type": "count", "max": 100,
-                "query": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE {?uri <http://dbpedia.org/property/director> <http://dbpedia.org/resource/Orson_Welles> . ?uri <http://dbpedia.org/ontology/producer> <http://dbpedia.org/resource/Orson_Welles> . } ",
-                "_id": "f275d3c2b28f44f397ed52c892139617", "corrected": "false", "entity": "http://dbpedia.org/resource/Citizen_Kane",
-                "mapping": {"e_to_e_out": "http://dbpedia.org/property/director", "class_uri": "http://dbpedia.org/ontology/Archive",
-                            "e_out": "http://dbpedia.org/resource/Orson_Welles", "e_to_e_out_2": "http://dbpedia.org/ontology/producer",
-                            "e_out_2*": "http://dbpedia.org/resource/Orson_Welles"},
-                "mapping_type": {"e_to_e_out": "http://www.w3.org/2002/07/owl#Thing", "class_uri": "http://www.w3.org/2002/07/owl#Thing",
-                                 "e_out": "http://dbpedia.org/ontology/Actor", "e_to_e_out_2": "http://www.w3.org/2002/07/owl#Thing",
-                                 "e_out_2*": "http://dbpedia.org/ontology/Actor"},
-                "answer_type": ["http://dbpedia.org/ontology/Film", "http://dbpedia.org/ontology/Wikidata:Q11424",
-                                "http://dbpedia.org/ontology/Work", "http://dbpedia.org/ontology/Archive"],
-                "answer_num": -1, "answer": {"uri": ["15"]}}
-    data_108 = {"template": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE {?uri <%(e_to_e_out)s> <%(e_out)s> . ?uri <%(e_to_e_out_2)s> <%(e_out_2*)s> . } ", "template_id": 108, "n_entities": 2, "type": "count", "max": 100, "query": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE {?uri <http://dbpedia.org/property/distributor> <http://dbpedia.org/resource/RKO_Pictures> . ?uri <http://dbpedia.org/property/cinematography> <http://dbpedia.org/resource/Gregg_Toland> . } ", "_id": "fb2ffa4189e348e990d5247f840366b8", "corrected": "false", "entity": "http://dbpedia.org/resource/Citizen_Kane", "mapping": {"e_to_e_out": "http://dbpedia.org/property/distributor", "class_uri": "http://dbpedia.org/ontology/Archive", "e_out": "http://dbpedia.org/resource/RKO_Pictures", "e_to_e_out_2": "http://dbpedia.org/property/cinematography", "e_out_2*": "http://dbpedia.org/resource/Gregg_Toland"}, "mapping_type": {"e_to_e_out": "http://www.w3.org/2002/07/owl#Thing", "class_uri": "http://www.w3.org/2002/07/owl#Thing", "e_out": "http://dbpedia.org/ontology/Company", "e_to_e_out_2": "http://www.w3.org/2002/07/owl#Thing", "e_out_2*": "http://dbpedia.org/ontology/Person"}, "answer_type": ["http://dbpedia.org/ontology/Film", "http://dbpedia.org/ontology/Wikidata:Q11424", "http://dbpedia.org/ontology/Work", "http://dbpedia.org/ontology/Archive"], "answer_num": -1, "answer": {"uri": ["9"]}}
-    verb = Verbalizer(108)
-    data = verb.verbalize(data_108)
+    data_108 = {
+        "template": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE {?uri <%(e_to_e_out)s> <%(e_out)s> . ?uri <%(e_to_e_out_2)s> <%(e_out_2*)s> . } ",
+        "template_id": 108, "n_entities": 2, "type": "count", "max": 100,
+        "query": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE {?uri <http://dbpedia.org/property/director> <http://dbpedia.org/resource/Orson_Welles> . ?uri <http://dbpedia.org/ontology/producer> <http://dbpedia.org/resource/Orson_Welles> . } ",
+        "_id": "f275d3c2b28f44f397ed52c892139617", "corrected": "false", "entity": "http://dbpedia.org/resource/Citizen_Kane",
+        "mapping": {"e_to_e_out": "http://dbpedia.org/property/director", "class_uri": "http://dbpedia.org/ontology/Archive",
+                    "e_out": "http://dbpedia.org/resource/Orson_Welles", "e_to_e_out_2": "http://dbpedia.org/ontology/producer",
+                    "e_out_2*": "http://dbpedia.org/resource/Orson_Welles"},
+        "mapping_type": {"e_to_e_out": "http://www.w3.org/2002/07/owl#Thing", "class_uri": "http://www.w3.org/2002/07/owl#Thing",
+                         "e_out": "http://dbpedia.org/ontology/Actor", "e_to_e_out_2": "http://www.w3.org/2002/07/owl#Thing",
+                         "e_out_2*": "http://dbpedia.org/ontology/Actor"},
+        "answer_type": ["http://dbpedia.org/ontology/Film", "http://dbpedia.org/ontology/Wikidata:Q11424",
+                        "http://dbpedia.org/ontology/Work", "http://dbpedia.org/ontology/Archive"],
+        "answer_num": -1, "answer": {"uri": ["15"]}}
+    data_108 = {
+        "template": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE {?uri <%(e_to_e_out)s> <%(e_out)s> . ?uri <%(e_to_e_out_2)s> <%(e_out_2*)s> . } ",
+        "template_id": 108, "n_entities": 2, "type": "count", "max": 100,
+        "query": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE {?uri <http://dbpedia.org/property/distributor> <http://dbpedia.org/resource/RKO_Pictures> . ?uri <http://dbpedia.org/property/cinematography> <http://dbpedia.org/resource/Gregg_Toland> . } ",
+        "_id": "fb2ffa4189e348e990d5247f840366b8", "corrected": "false", "entity": "http://dbpedia.org/resource/Citizen_Kane",
+        "mapping": {"e_to_e_out": "http://dbpedia.org/property/distributor",
+                    "class_uri": "http://dbpedia.org/ontology/Archive", "e_out": "http://dbpedia.org/resource/RKO_Pictures",
+                    "e_to_e_out_2": "http://dbpedia.org/property/cinematography",
+                    "e_out_2*": "http://dbpedia.org/resource/Gregg_Toland"},
+        "mapping_type": {"e_to_e_out": "http://www.w3.org/2002/07/owl#Thing",
+                         "class_uri": "http://www.w3.org/2002/07/owl#Thing", "e_out": "http://dbpedia.org/ontology/Company",
+                         "e_to_e_out_2": "http://www.w3.org/2002/07/owl#Thing", "e_out_2*": "http://dbpedia.org/ontology/Person"},
+        "answer_type": ["http://dbpedia.org/ontology/Film", "http://dbpedia.org/ontology/Wikidata:Q11424", "http://dbpedia.org/ontology/Work", "http://dbpedia.org/ontology/Archive"],
+        "answer_num": -1, "answer": {"uri": ["9"]}}
+    verb = Verbalizer(11)
+    data = verb.verbalize(data_11)
 
     print(data['question_verbalized'])

@@ -6,7 +6,7 @@
 	"type": "vanilla",
 	"max": 100
 }, {
-	"template": " SELECT DISTINCT ?uri WHERE {?uri <%(e_to_e_out)s> <%(e_out)s> . ?uri rdf:type <%(class_uri)s> . } ",
+	"template": " SELECT DISTINCT ?uri WHERE {?uri <%(e_to_e_out)s> <%(e_out)s> . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <%(class_uri)s> . } ",
 	"template_id": 301,
 	"n_entities": 1,
 	"type": "vanilla",
@@ -18,7 +18,7 @@
 	"type": "vanilla",
 	"max": 100
 }, {
-	"template": " SELECT DISTINCT ?uri WHERE { <%(e_in)s> <%(e_in_to_e)s> ?uri  . ?uri rdf:type <%(class_uri)s> . } ",
+	"template": " SELECT DISTINCT ?uri WHERE { <%(e_in)s> <%(e_in_to_e)s> ?uri  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <%(class_uri)s> . } ",
 	"template_id": 302,
 	"n_entities": 1,
 	"type": "vanilla",
@@ -30,7 +30,7 @@
 	"type": "vanilla",
 	"max": 100
 }, {
-	"template": " SELECT DISTINCT ?uri WHERE { <%(e_in_in)s> <%(e_in_in_to_e_in)s> ?x . ?x <%(e_in_to_e)s> ?uri . ?x rdf:type <%(class_x)s> } ",
+	"template": " SELECT DISTINCT ?uri WHERE { <%(e_in_in)s> <%(e_in_in_to_e_in)s> ?x . ?x <%(e_in_to_e)s> ?uri . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <%(class_x)s> } ",
 	"template_id": 303,
 	"n_entities": 1,
 	"type": "vanilla",
@@ -42,7 +42,7 @@
 	"type": "vanilla",
 	"max": 100
 }, {
-	"template": " SELECT DISTINCT ?uri WHERE { ?x <%(e_in_to_e_in_out)s> <%(e_in_out)s> . ?x <%(e_in_to_e)s> ?uri . ?uri rdf:type <%(class_uri)s> . } ",
+	"template": " SELECT DISTINCT ?uri WHERE { ?x <%(e_in_to_e_in_out)s> <%(e_in_out)s> . ?x <%(e_in_to_e)s> ?uri . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <%(class_uri)s> . } ",
 	"template_id": 305,
 	"n_entities": 1,
 	"type": "vanilla",
@@ -54,7 +54,7 @@
 	"type": "vanilla",
 	"max": 100
 }, {
-	"template": "SELECT DISTINCT ?uri WHERE { ?x <%(e_out_to_e_out_out)s> <%(e_out_out)s> . ?uri <%(e_to_e_out)s> ?x . ?uri rdf:type <%(class_x)s> . } ",
+	"template": "SELECT DISTINCT ?uri WHERE { ?x <%(e_out_to_e_out_out)s> <%(e_out_out)s> . ?uri <%(e_to_e_out)s> ?x . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <%(class_x)s> . } ",
 	"template_id": 306,
 	"n_entities": 1,
 	"type": "vanilla",
@@ -66,7 +66,7 @@
 	"type": "vanilla",
 	"max": 100
 }, {
-	"template": " SELECT DISTINCT ?uri WHERE { ?uri <%(e_to_e_out)s> <%(e_out)s> . ?uri <%(e_to_e_out)s> <%(e_out_2)s> . ?uri rdf:type <%(class_uri)s> . } ",
+	"template": " SELECT DISTINCT ?uri WHERE { ?uri <%(e_to_e_out)s> <%(e_out)s> . ?uri <%(e_to_e_out)s> <%(e_out_2)s> . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <%(class_uri)s> . } ",
 	"template_id": 307,
 	"n_entities": 2,
 	"type": "vanilla",
@@ -78,7 +78,7 @@
 	"type": "vanilla",
 	"max": 100
 }, {
-	"template": " SELECT DISTINCT ?uri WHERE {?uri <%(e_to_e_out)s> <%(e_out)s> . ?uri <%(e_to_e_out_2)s> <%(e_out_2*)s> . ?uri rdf:type <%(class_uri)s> . } ",
+	"template": " SELECT DISTINCT ?uri WHERE {?uri <%(e_to_e_out)s> <%(e_out)s> . ?uri <%(e_to_e_out_2)s> <%(e_out_2*)s> . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <%(class_uri)s> . } ",
 	"template_id": 308,
 	"n_entities": 2,
 	"type": "vanilla",
@@ -91,7 +91,7 @@
 	"equal": ["e_in_in_to_e_in", "e_in_to_e"],
 	"max": 100
 }, {
-	"template": " SELECT DISTINCT ?uri WHERE { <%(e_in_in)s>  <%(e_in_in_to_e_in)s> ?x .  ?x <%(e_in_to_e)s>  ?uri . ?x rdf:type <%(class_x)s> .}",
+	"template": " SELECT DISTINCT ?uri WHERE { <%(e_in_in)s>  <%(e_in_in_to_e_in)s> ?x .  ?x <%(e_in_to_e)s>  ?uri . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <%(class_x)s> .}",
 	"template_id": 309,
 	"n_entities": 1,
 	"type": "vanilla",
@@ -105,7 +105,7 @@
 	"equal": ["e_in_to_e_in_out", "e_in_to_e"],
 	"max": 100
 }, {
-	"template": " SELECT DISTINCT ?uri WHERE { ?x <%(e_in_to_e_in_out)s> <%(e_in_out)s> . ?x <%(e_in_to_e)s> ?uri . ?x rdf:type <%(class_x)s> . }",
+	"template": " SELECT DISTINCT ?uri WHERE { ?x <%(e_in_to_e_in_out)s> <%(e_in_out)s> . ?x <%(e_in_to_e)s> ?uri . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <%(class_x)s> . }",
 	"template_id": 311,
 	"n_entities": 1,
 	"type": "vanilla",
@@ -118,7 +118,7 @@
 	"type": "vanilla",
 	"max": 100
 }, {
-	"template": " SELECT DISTINCT ?uri WHERE { <%(e_in)s> <%(e_in_to_e)s> ?uri . <%(e_in_2)s> <%(e_in_to_e)s> ?uri . ?uri rdf:type <%(class_uri)s> . }  ",
+	"template": " SELECT DISTINCT ?uri WHERE { <%(e_in)s> <%(e_in_to_e)s> ?uri . <%(e_in_2)s> <%(e_in_to_e)s> ?uri . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <%(class_uri)s> . }  ",
 	"template_id": 315,
 	"n_entities": 2,
 	"type": "vanilla",
@@ -130,7 +130,7 @@
 	"type": "vanilla",
 	"max": 100
 }, {
-	"template": " SELECT DISTINCT ?uri WHERE { <%(e_in)s> <%(e_in_to_e)s> ?uri . <%(e_in_2*)s> <%(e_in_to_e_2)s> ?uri . ?uri rdf:type <%(class_uri)s> . } ",
+	"template": " SELECT DISTINCT ?uri WHERE { <%(e_in)s> <%(e_in_to_e)s> ?uri . <%(e_in_2*)s> <%(e_in_to_e_2)s> ?uri . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <%(class_uri)s> . } ",
 	"template_id": 316,
 	"n_entities": 2,
 	"type": "vanilla",
@@ -142,7 +142,7 @@
 	"type": "count",
 	"max": 100
 }, {
-	"template": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE {?uri <%(e_to_e_out)s> <%(e_out)s> . ?uri rdf:type <%(class_uri)s> . } ",
+	"template": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE {?uri <%(e_to_e_out)s> <%(e_out)s> . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <%(class_uri)s> . } ",
 	"template_id": 401,
 	"n_entities": 1,
 	"type": "count",
@@ -154,7 +154,7 @@
 	"type": "count",
 	"max": 100
 }, {
-	"template": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE { <%(e_in)s> <%(e_in_to_e)s> ?uri . ?uri rdf:type <%(class_uri)s> . }",
+	"template": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE { <%(e_in)s> <%(e_in_to_e)s> ?uri . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <%(class_uri)s> . }",
 	"template_id": 402,
 	"n_entities": 1,
 	"type": "count",
@@ -166,7 +166,7 @@
 	"type": "count",
 	"max": 100
 }, {
-	"template": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE { <%(e_in_in)s> <%(e_in_in_to_e_in)s> ?x . ?x <%(e_in_to_e)s> ?uri . ?x rdf:type <%(class_x)s> . } ",
+	"template": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE { <%(e_in_in)s> <%(e_in_in_to_e_in)s> ?x . ?x <%(e_in_to_e)s> ?uri . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <%(class_x)s> . } ",
 	"template_id": 403,
 	"n_entities": 1,
 	"type": "count",
@@ -178,7 +178,7 @@
 	"type": "count",
 	"max": 100
 }, {
-	"template": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE { ?x <%(e_in_to_e_in_out)s> <%(e_in_out)s> . ?x <%(e_in_to_e)s> ?uri . ?uri rdf:type <%(class_uri)s> . }",
+	"template": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE { ?x <%(e_in_to_e_in_out)s> <%(e_in_out)s> . ?x <%(e_in_to_e)s> ?uri . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <%(class_uri)s> . }",
 	"template_id": 405,
 	"n_entities": 1,
 	"type": "count",
@@ -190,7 +190,7 @@
 	"type": "count",
 	"max": 100
 }, {
-	"template": "SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE { ?x <%(e_out_to_e_out_out)s> <%(e_out_out)s> . ?uri <%(e_to_e_out)s> ?x . ?uri rdf:type <%(class_uri)s> . } ",
+	"template": "SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE { ?x <%(e_out_to_e_out_out)s> <%(e_out_out)s> . ?uri <%(e_to_e_out)s> ?x . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <%(class_uri)s> . } ",
 	"template_id": 406,
 	"n_entities": 1,
 	"type": "count",
@@ -202,7 +202,7 @@
 	"type": "count",
 	"max": 100
 }, {
-	"template": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE { ?uri <%(e_to_e_out)s> <%(e_out)s> . ?uri <%(e_to_e_out)s> <%(e_out_2)s> . ?uri rdf:type <%(class_uri)s> . }",
+	"template": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE { ?uri <%(e_to_e_out)s> <%(e_out)s> . ?uri <%(e_to_e_out)s> <%(e_out_2)s> . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <%(class_uri)s> . }",
 	"template_id": 407,
 	"n_entities": 2,
 	"type": "count",
@@ -214,7 +214,7 @@
 	"type": "count",
 	"max": 100
 }, {
-	"template": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE {?uri <%(e_to_e_out)s> <%(e_out)s> . ?uri <%(e_to_e_out_2)s> <%(e_out_2*)s> . ?uri rdf:type <%(class_uri)s> . }",
+	"template": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE {?uri <%(e_to_e_out)s> <%(e_out)s> . ?uri <%(e_to_e_out_2)s> <%(e_out_2*)s> . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <%(class_uri)s> . }",
 	"template_id": 408,
 	"n_entities": 2,
 	"type": "count",
@@ -227,7 +227,7 @@
 	"equal": ["e_in_to_e_in_out", "e_in_to_e"],
 	"max": 100
 }, {
-	"template": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE { ?x <%(e_in_to_e_in_out)s> <%(e_in_out)s> . ?x <%(e_in_to_e)s> ?uri . ?x rdf:type  <%(class_x)s> . }",
+	"template": " SELECT (COUNT(DISTINCT ?uri) as ?uri) WHERE { ?x <%(e_in_to_e_in_out)s> <%(e_in_out)s> . ?x <%(e_in_to_e)s> ?uri . ?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>  <%(class_x)s> . }",
 	"template_id": 411,
 	"n_entities": 1,
 	"type": "count",
@@ -240,7 +240,7 @@
 	"type": "ask",
 	"max": 100
 }, {
-	"template": "ASK WHERE { <%(uri)s> <%(e_to_e_out)s> <%(e_out)s> . <%(uri)s>  rdf:type <%(class_uri)s> . }",
+	"template": "ASK WHERE { <%(uri)s> <%(e_to_e_out)s> <%(e_out)s> . <%(uri)s>  <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <%(class_uri)s> . }",
 	"template_id": 451,
 	"n_entities": 1,
 	"type": "ask",
@@ -252,7 +252,7 @@
 	"type": "ask",
 	"max": 100
 }, {
-	"template": "ASK WHERE { <%(e_in)s> <%(e_in_to_e)s> <%(uri)s> . <%(uri)s> rdf:type <%(class_uri)s> . }",
+	"template": "ASK WHERE { <%(e_in)s> <%(e_in_to_e)s> <%(uri)s> . <%(uri)s> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <%(class_uri)s> . }",
 	"template_id": 452,
 	"n_entities": 1,
 	"type": "ask",

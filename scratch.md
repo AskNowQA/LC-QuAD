@@ -30,3 +30,16 @@
 - Template `107`, `108` have top class URI mentioned in the question, which can lead to RDF class being there. 
 What should we do? Shall we replace them all with `things`?
 Eg. `Count the <Works> whose <director> is <Orson  Welles> and <producer> is <Orson  Welles>?` (108)
+
+
+
+-------------------------
+
+# Reformatting for LCQuAD v2
+
+## Major Todos
+
+- Get entity in question and not in answer.
+    - What algorithm?
+    
+       we can

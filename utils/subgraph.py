@@ -193,6 +193,14 @@ class VarList(list):
         return VarList([v for v in self if v in src], False)
 
     @lazy_property
+    def entities(self):
+        return [x for x in self if '_to_' not in x and x.startswith('e')]
+
+    @lazy_property
+    def predicates(self):
+        return [x for x in self if '_to_' in x]
+
+    @lazy_property
     def one(self):
         return self.filtered(VAR_HOP1)
 
@@ -433,6 +441,7 @@ class Subgraph(dict):
         right_maps = []
         left_maps = []
 
+
         if (_vars.right.dup_ and len(self.right.predicates) < 2) or (
                 _vars.left.dup_ and len(self.left.predicates) < 2):
             return []
@@ -553,7 +562,7 @@ class Subgraph(dict):
 
 if __name__ == "__main__":
 
-    test = 'equal'
+    test = 'generic'
 
     if test is 'generic':
         a = Subgraph('dbr:Obama', 'dbo:Person')

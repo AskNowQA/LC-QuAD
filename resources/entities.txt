@@ -43,7 +43,6 @@ http://dbpedia.org/resource/The_Trial
 http://dbpedia.org/resource/Direct3D
 http://dbpedia.org/resource/Band_of_Brothers_(miniseries)
 http://dbpedia.org/resource/Cholera
-http://dbpedia.org/resource/Tamera_Mowry
 http://dbpedia.org/resource/Queen_Latifah
 http://dbpedia.org/resource/North_America
 http://dbpedia.org/resource/Buddhism
@@ -1367,3 +1366,4 @@ http://dbpedia.org/resource/Roger_Federer
 http://dbpedia.org/resource/Python
 http://dbpedia.org/resource/Stanford_University
 http://dbpedia.org/resource/Facebook
+http://dbpedia.org/resource/Tamera_Mowry

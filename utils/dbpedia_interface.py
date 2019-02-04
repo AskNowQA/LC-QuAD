@@ -43,6 +43,7 @@ except ImportError:
 # GLOBAL MACROS
 # DBPEDIA_ENDPOINTS = 'http://dbpedia.org/sparql/'
 DBPEDIA_ENDPOINT = 'http://localhost:8164/sparql/'
+# DBPEDIA_ENDPOINT = 'http://id.nlm.nih.gov/mesh/sparql'
 # DBPEDIA_ENDPOINTS = 'http://131.220.153.66:7890/sparql'
 # DBPEDIA_ENDPOINTS = 'http://localhost:8164/sparql/'
 # DBPEDIA_ENDPOINTS = 'http://sda-srv01.iai.uni-bonn.de:8164/sparql'
@@ -342,6 +343,7 @@ class DBPedia:
             return values
         # Now to parse the response
         variables = [x for x in response[u'head'][u'vars']]
+
 
         # NOTE: Assuming that there's only one variable
         for index in range(0, len(variables)):
