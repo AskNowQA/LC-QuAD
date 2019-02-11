@@ -18,6 +18,7 @@
 - ~~Write a warning system which neatly breaks lines~~
 - [DOING] Clean up the repo, and file structure.
 - Update nomenclature png with class_uri, class_x
+- Can have the same entity in question as the answer. Eg. where is the leader of nepal born? -> nepal (FML!). Need a filter.
 
 ## Feeling Lucky:
 

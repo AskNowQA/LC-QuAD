@@ -1,5 +1,8 @@
+import os
 import time
 import warnings
+
+from pathlib import Path
 from collections import namedtuple
 
 Log = namedtuple('Log', 'uri traceback')
@@ -69,3 +72,5 @@ class Timer:
     def __exit__(self, *args):
         self.end = time.perf_counter()
         self.interval = self.end - self.start
+
+

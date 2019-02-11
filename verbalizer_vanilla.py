@@ -63,7 +63,6 @@ class Verbalizer_01(verbalizer_old.Verbalizer):
 
 		return _maps, question_format
 
-
 class Verbalizer_02(verbalizer_old.Verbalizer):
 
 	template_id = 2
@@ -571,6 +570,7 @@ class Verbalizer_09(verbalizer_old.Verbalizer):
 
 		return _maps, question_format
 
+
 class Verbalizer_11(verbalizer_old.Verbalizer):
 
 	template_id = 11
@@ -581,7 +581,7 @@ class Verbalizer_11(verbalizer_old.Verbalizer):
 	question_templates = {
 		'vanilla': 
 			[ "List the other <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.",
-			"What are the other <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>>" ],
+			"What are the other <%(e_in_to_e)s> of the <%(x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>" ],
 
 		'type': 
 			[ "List the other <%(e_in_to_e)s> of the <%(x)s> which are <%(e_in_out)s>.", 

@@ -11,10 +11,9 @@ VAR_HOP1_RIGHT_DOUBLE = ['e_out_2']
 VAR_HOP1_LEFT = ['e_in', 'e_in_to_e']
 VAR_HOP1_LEFT_DUP = ['e_in_2*', 'e_in_to_e_2']
 VAR_HOP1_LEFT_DOUBLE = ['e_in_2']
-VAR_CLASS = ['class_uri', 'class_x']
 VAR_HOP2_RIGHT = ['e_out_out', 'e_out_in', 'e_out_to_e_out_out', 'e_out_in_to_e_out']
 VAR_HOP2_LEFT = ['e_in_in', 'e_in_out', 'e_in_in_to_e_in', 'e_in_to_e_in_out']
-VAR_OTHERS = ['uri'] + VAR_CLASS
+VAR_OTHERS = ['uri']
 VAR_HOP1 = VAR_HOP1_LEFT + VAR_HOP1_RIGHT + VAR_HOP1_LEFT_DUP + VAR_HOP1_RIGHT_DUP + \
            VAR_HOP1_LEFT_DOUBLE + VAR_HOP1_RIGHT_DOUBLE
 VAR_HOP2 = VAR_HOP2_LEFT + VAR_HOP2_RIGHT
@@ -67,7 +66,7 @@ def _take_two_(_map, _data, _key_one, _key_two):
         return []
 
     for i in range(len(_data)):
-        for j in range(len(_data))[i+1:]:
+        for j in range(len(_data))[i + 1:]:
             ent_a, ent_b = _data[i], _data[j]
             _map = _map.copy()
             _map[_key_one] = ent_a.uri if isinstance(ent_a, Subgraph) else ent_a
@@ -186,19 +185,23 @@ class VarList(list):
 
         if _valcheck:
             for var in self:  # Check if all vars make sense
-                if var not in VARS:
+                if var not in VARS and not var.startswith('class'):
                     raise UnknownVarFoundError("Var %s not known." % var)
 
     def filtered(self, src):
         return VarList([v for v in self if v in src], False)
 
     @lazy_property
+    def classes(self):
+        return VarList([v for v in self if v.startswith('class')])
+
+    @lazy_property
     def entities(self):
-        return [x for x in self if '_to_' not in x and x.startswith('e')]
+        return VarList([x for x in self if '_to_' not in x and x.startswith('e')])
 
     @lazy_property
     def predicates(self):
-        return [x for x in self if '_to_' in x]
+        return VarList([x for x in self if '_to_' in x])
 
     @lazy_property
     def one(self):
@@ -210,11 +213,11 @@ class VarList(list):
 
     @lazy_property
     def right(self):
-        return self.filtered(VAR_HOP2_RIGHT + VAR_HOP1_RIGHT + VAR_HOP1_RIGHT_DUP + VAR_HOP1_RIGHT_DOUBLE + VAR_CLASS)
+        return self.filtered(VAR_HOP2_RIGHT + VAR_HOP1_RIGHT + VAR_HOP1_RIGHT_DUP + VAR_HOP1_RIGHT_DOUBLE)
 
     @lazy_property
     def left(self):
-        return self.filtered(VAR_HOP2_LEFT + VAR_HOP1_LEFT + VAR_HOP1_LEFT_DUP + VAR_HOP1_LEFT_DOUBLE + VAR_CLASS)
+        return self.filtered(VAR_HOP2_LEFT + VAR_HOP1_LEFT + VAR_HOP1_LEFT_DUP + VAR_HOP1_LEFT_DOUBLE)
 
     @lazy_property
     def dup(self):
@@ -224,9 +227,9 @@ class VarList(list):
     def double(self):
         return self.filtered(VAR_HOP1_RIGHT_DOUBLE + VAR_HOP1_LEFT_DOUBLE)
 
-    @lazy_property
-    def type(self):
-        return self.filtered(VAR_CLASS)
+    # @lazy_property
+    # def type(self):
+    #     return self.filtered(VAR_CLASS)
 
     @lazy_property
     def one_(self):
@@ -418,7 +421,7 @@ class Subgraph(dict):
             if datum.ent not in pred:
                 src[datum.pred].append(ent)
 
-    def _get_mapping_for_(self, _vars, _equal):
+    def _get_mapping_for_(self, _vars, _equal, _dbp=None):
         """
             Returns a list of mapping fitting these vars, satisfying the equal condition.
 
@@ -433,6 +436,7 @@ class Subgraph(dict):
 
         :param _vars: list of str: indicate variables that you want the mapping to consist of.
         :param _equal: only get mapping satisfying this constraint.
+        :param _dbp: a dbpedia instance (may be used to fetch classes of some entities. None by default.
         :return: list of dicts.
         """
 
@@ -440,7 +444,6 @@ class Subgraph(dict):
 
         right_maps = []
         left_maps = []
-
 
         if (_vars.right.dup_ and len(self.right.predicates) < 2) or (
                 _vars.left.dup_ and len(self.left.predicates) < 2):
@@ -456,8 +459,8 @@ class Subgraph(dict):
                     continue
 
                 _map = {'e_to_e_out': pred, 'uri': self.uri}
-                if 'class_uri' in _vars:
-                    _map.update({'class_uri': self.type})
+                # if 'class_uri' in _vars:
+                #     _map.update({'class_uri': self.type})
 
                 _maps = _take_one_(_map, ents, _key='e_out') if not _vars.right.double_ \
                     else _take_two_(_map, ents, _key_one='e_out', _key_two='e_out_2')
@@ -500,8 +503,8 @@ class Subgraph(dict):
                     continue
 
                 _map = {'e_in_to_e': pred, 'uri': self.uri}
-                if 'class_uri' in _vars:
-                    _map.update({'class_uri': self.type})
+                # if 'class_uri' in _vars:
+                #     _map.update({'class_uri': self.type})
 
                 _maps = _take_one_(_map, ents, _key='e_in') if not _vars.left.double_ \
                     else _take_two_(_map, ents, _key_one='e_in', _key_two='e_in_2')
@@ -534,10 +537,23 @@ class Subgraph(dict):
                 left_maps = dup_left_maps
 
         mappings = trim_dicts(permute_dicts(left_maps, right_maps), _keys=_vars, _equal=_equal)
+        mappings = self._update_with_class_vars_(_maps=mappings, _vars=_vars)
         self.mappings[_vars.hash] = mappings
         return mappings
 
-    def gen_maps(self, _vars, _equal=[]):
+    def _update_with_class_vars_(self, _maps: list, _vars: VarList, _dbp: None):
+        for mapping in _maps:
+            for var in _vars.classes:
+
+                map_var_subg = self.find(mapping[var[len('class_'):]], _caller=self, _new=False)
+                if map_var_subg.type == '':
+                    map_var_subg.type = _dbp.get_most_specific_class(map_var_subg.uri)
+
+                mapping.update({var: map_var_subg.type})
+
+        return _maps
+
+    def gen_maps(self, _vars, _equal=[], _dbp=None):
         """
             Returns a list of mapping fitting these vars, satisfying the equal condition.
 
@@ -545,13 +561,14 @@ class Subgraph(dict):
 
         :param _vars: list of str: indicate variables that you want the mapping to consist of.
         :param _equal: only get mapping satisfying this constraint.
+        :param _dbp: dbpedia interface object to be used somewhere later inside. Defaults to none.
         :return: list of dicts.
         """
 
         _var_obj = VarList(_vars)
 
         with Timer() as timer:
-            mappings = self.mappings.get(_var_obj.hash, [x for x in self._get_mapping_for_(_vars, _equal) if len(x) != 0])
+            mappings = self.mappings.get(_var_obj.hash, [x for x in self._get_mapping_for_(_vars, _equal, _dbp) if len(x) != 0])
 
         self.time_maps += timer.interval
         print("%(uri)s | %(time).03f : %(len)03d : %(var)s :" %
@@ -562,7 +579,7 @@ class Subgraph(dict):
 
 if __name__ == "__main__":
 
-    test = 'generic'
+    test = 'nepal'
 
     if test is 'generic':
         a = Subgraph('dbr:Obama', 'dbo:Person')
@@ -587,7 +604,7 @@ if __name__ == "__main__":
             PredEntTuple(pred='dbp:hasResident', ent='dbr:Obama', type='dbo:Person'),
             PredEntTuple(pred='dbp:capital', ent='dbr:WashingtonDC', type='dbo:City'),
             PredEntTuple(pred='dbp:continent', ent='dbr:NorthAmerica', type='dbo:Continent')
-            ], _outgoing=True, _origin=us)
+        ], _outgoing=True, _origin=us)
         a.insert([
             PredEntTuple(pred='dbp:bornin', ent='dbr:Trump', type='dbo:Person'),
             PredEntTuple(pred='dbp:location', ent='dbr:Stanford', type='dbo:Uni'),
@@ -601,7 +618,6 @@ if __name__ == "__main__":
         print(a.time_maps)
 
     if test is 'equal':
-
         # Define some things for the sake of template 11
         # SPARQL: SELECT DISTINCT ?uri WHERE { ?x <%(e_in_to_e_in_out)s> <%(e_in_out)s> . ?x <%(e_in_to_e)s> ?uri  }
         a = Subgraph('dbr:Obama', 'dbo:Person')
@@ -620,3 +636,13 @@ if __name__ == "__main__":
         _eq = ['e_in_to_e_in_out', 'e_in_to_e']
         maps = a.gen_maps(_vars, _eq)
         pprint(maps)
+
+    if test is 'nepal':
+        import pickle
+
+        a = pickle.load(open('./nepal.pkl', 'rb'))
+
+        maps_1 = a.gen_maps(['e_in', 'e_in_to_e', 'uri', 'class_e_in'])
+        maps_2 = a.gen_maps(['uri', 'e_out', 'e_to_e_out', 'e_out_to_e_out_out', 'e_out_out'])
+        print(a.time_maps)
+        print(len(a))
