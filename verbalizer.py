@@ -59,10 +59,12 @@
         }
 
 
-    TEMPLATES covered: 1, 2, 3, 6, 7, 8, 11, 15, 16, 101, 102, 103, 106, 107, 108
+    TEMPLATES covered: 1, 2, 3, 6, 7, 8, 11, 15, 16, 101, 102, 103, 106, 107, 108, 301, 302, 303, 305
     TOTEST: 5, 9
 """
+import json
 import warnings
+from pprint import pprint
 import numpy.random as npr
 
 warnings.filterwarnings("ignore")
@@ -94,16 +96,31 @@ class Templates(object):
                  "%(Who_What)s <%(e_to_e_out)s> is <%(e_out)s>?"],
         plural=["%(Who_What)s are the things whose <%(e_to_e_out)s> is <%(e_out)s>?",
                 "%(Who_What)s <%(e_to_e_out)s> is <%(e_out)s>?"])
+    _301 = FancyDict(
+        vanilla = ["%(Who_What)s is the <%(class_uri)s> whose <%(e_to_e_out)s> is <%(e_out)s>?"],
+        plural = ["%(Who_What)s are the <%(class_uri)s> whose <%(e_to_e_out)s> is <%(e_out)s>?",
+                "%(Who_What)s <%(class_uri)s>'s <%(e_to_e_out)s> is <%(e_out)s>?"]
+    )
     _2 = FancyDict(
-        vanilla=["%(Who_What)s is the <%(e_in_to_e)s> of %(e_in)s?"],
-        plural=["%(Who_What)s are the <%(e_in_to_e_s)s> of %(e_in)s?"])
+        vanilla=["%(Who_What)s is the <%(e_in_to_e)s> of <%(e_in)s>?"],
+        plural=["%(Who_What)s are the <%(e_in_to_e_s)s> of <%(e_in)s>?"])
+    _302 = FancyDict(
+        vanilla=["%(Who_What)s <%(class_uri)s> is the <%(e_in_to_e)s> of <%(e_in)s>?"],
+        plural=["%(Who_What)s <%(class_uri)s> are the <%(e_in_to_e_s)s> of <%(e_in)s>?"])
     _3 = FancyDict(
         vanilla=["What is the <%(e_in_to_e)s> of %(things_thething)s %(who_which)s is the <%(e_in_in_to_e_in)s> of <%(e_in_in)s>?"])
+    _303 = FancyDict(
+        vanilla=["What is the <%(e_in_to_e)s> of <%(class_x)s> %(who_which)s is the <%(e_in_in_to_e_in)s> of <%(e_in_in)s>?"])
     _5 = FancyDict(
         vanilla=["%(Who_What)s is the <%(e_in_to_e)s> of %(things_thething)s whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>?",
                  "Tell me the <%(e_in_to_e)s> of %(things_thething)s whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>?"],
         plural=["List the <%(e_in_to_e)s> of the things whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>?",
                 "%(Who_What)s the <%(e_in_to_e)s> of the things whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>?"])
+    _305 = FancyDict(
+        vanilla=["%(Who_What)s is the <%(e_in_to_e)s> of <%(class_uri)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>?",
+                 "Tell me the <%(e_in_to_e)s> of <%(class_uri)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>?"],
+        plural=["List the <%(e_in_to_e)s> of the <%(class_uri)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>?",
+                "%(Who_What)s the <%(e_in_to_e)s> of the <%(class_uri)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>?"])
     _6 = FancyDict(
         vanilla=["%(Who_What)s is the <%(top_class_uri)s> whose <%(e_to_e_out)s>'s <%(e_out_to_e_out_out)s> is <%(e_out_out)s>?",
                  "Name the <%(top_class_uri)s> whose <%(e_to_e_out)s>'s <%(e_out_to_e_out_out)s> is <%(e_out_out)s>?",
@@ -297,6 +314,23 @@ class Verbalizer:
         datum['question_template'] = template
 
         return datum
+
+
+def test_template(id:int, skip:int = 0, show:bool = False) -> None:
+    f = open(f'./sparqls/template{id}.txt', 'r')
+    counter = 0
+    for line in f.readlines():
+        data = json.loads(line)
+        if counter >= skip:
+            break
+        counter += 1
+
+    verb = Verbalizer(id)
+    data = verb.verbalize(data)
+    print(data['question_verbalized'])
+    if show:
+        pprint(data['query'])
+
 
 
 if __name__ == "__main__":
@@ -586,7 +620,97 @@ if __name__ == "__main__":
                          "e_to_e_out_2": "http://www.w3.org/2002/07/owl#Thing", "e_out_2*": "http://dbpedia.org/ontology/Person"},
         "answer_type": ["http://dbpedia.org/ontology/Film", "http://dbpedia.org/ontology/Wikidata:Q11424", "http://dbpedia.org/ontology/Work", "http://dbpedia.org/ontology/Archive"],
         "answer_num": -1, "answer": {"uri": ["9"]}}
-    verb = Verbalizer(11)
-    data = verb.verbalize(data_11)
 
-    print(data['question_verbalized'])
+    '''
+        Start of 300 series. None of them have been implemented till now
+    '''
+    data_301 = {'template': ' SELECT DISTINCT ?uri WHERE {?uri <%(e_to_e_out)s> <%(e_out)s> . ?uri rdf:type <%(class_uri)s> . } ',
+         'template_id': 301,
+         'n_entities': 1,
+         'type': 'vanilla',
+         'max': 100,
+         'query': ' SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/property/genre> <http://dbpedia.org/resource/Abstract_strategy_game> . ?uri rdf:type <http://dbpedia.org/ontology/VideoGame> . } ',
+         '_id': '30321ccbd1544930bc1bce2fdc734ba8',
+         'corrected': 'false',
+         'entity': 'http://dbpedia.org/resource/Chess',
+         'mapping': {'e_to_e_out': 'http://dbpedia.org/property/genre',
+          'class_uri': 'http://dbpedia.org/ontology/VideoGame',
+          'e_out': 'http://dbpedia.org/resource/Abstract_strategy_game'},
+         'mapping_type': {'e_to_e_out': 'http://www.w3.org/2002/07/owl#Thing',
+          'class_uri': 'http://www.w3.org/2002/07/owl#Thing',
+          'e_out': 'http://dbpedia.org/ontology/MusicGenre'},
+         'answer_type': ['http://dbpedia.org/ontology/Sport',
+          'http://dbpedia.org/ontology/VideoGame',
+          'http://dbpedia.org/ontology/Game',
+          'http://dbpedia.org/ontology/Activity'],
+         'answer_num': 36,
+         'answer': {'uri': ['http://dbpedia.org/resource/Chess',
+           'http://dbpedia.org/resource/Chinese_checkers',
+           'http://dbpedia.org/resource/Reversi',
+           'http://dbpedia.org/resource/Shogi',
+           'http://dbpedia.org/resource/Fanorona',
+           'http://dbpedia.org/resource/Hex_(board_game)',
+           "http://dbpedia.org/resource/Nine_Men's_Morris",
+           'http://dbpedia.org/resource/Xiangqi',
+           'http://dbpedia.org/resource/Epaminondas_(game)',
+           'http://dbpedia.org/resource/Arimaa',
+           'http://dbpedia.org/resource/GIPF_(game)',
+           'http://dbpedia.org/resource/YINSH',
+           'http://dbpedia.org/resource/Terakh',
+           'http://dbpedia.org/resource/Connect_Four',
+           'http://dbpedia.org/resource/DVONN',
+           'http://dbpedia.org/resource/Janggi',
+           'http://dbpedia.org/resource/Dablot_Prejjesne',
+           'http://dbpedia.org/resource/Connect_4x4',
+           'http://dbpedia.org/resource/Chu_shogi',
+           'http://dbpedia.org/resource/Ludus_latrunculorum',
+           'http://dbpedia.org/resource/Terrace_(board_game)',
+           'http://dbpedia.org/resource/Breakthru_(board_game)',
+           'http://dbpedia.org/resource/Alquerque',
+           'http://dbpedia.org/resource/Go_(game)',
+           'http://dbpedia.org/resource/International_draughts',
+           'http://dbpedia.org/resource/Yoté',
+           'http://dbpedia.org/resource/Halma',
+           'http://dbpedia.org/resource/Fangqi',
+           'http://dbpedia.org/resource/Spot:_The_Video_Game',
+           'http://dbpedia.org/resource/Four_Fronts',
+           'http://dbpedia.org/resource/Jungle_(board_game)',
+           'http://dbpedia.org/resource/Morabaraba',
+           'http://dbpedia.org/resource/Camelot_(board_game)',
+           'http://dbpedia.org/resource/Choko_(game)',
+           'http://dbpedia.org/resource/Lines_of_Action',
+           'http://dbpedia.org/resource/The_Duke_(board_game)']}}
+    data_302 = {'template': ' SELECT DISTINCT ?uri WHERE { <%(e_in)s> <%(e_in_to_e)s> ?uri  . ?uri rdf:type <%(class_uri)s> . } ',
+ 'template_id': 302,
+ 'n_entities': 1,
+ 'type': 'vanilla',
+ 'max': 100,
+ 'query': ' SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/Polytechnic_University_of_the_Philippines> <http://dbpedia.org/ontology/sport> ?uri  . ?uri rdf:type <http://dbpedia.org/ontology/VideoGame> . } ',
+ '_id': '77cdc46939c549b2a1b0d547837911f5',
+ 'corrected': 'false',
+ 'entity': 'http://dbpedia.org/resource/Chess',
+ 'mapping': {'e_in_to_e': 'http://dbpedia.org/ontology/sport',
+  'class_uri': 'http://dbpedia.org/ontology/VideoGame',
+  'e_in': 'http://dbpedia.org/resource/Polytechnic_University_of_the_Philippines'},
+ 'mapping_type': {'e_in_to_e': 'http://www.w3.org/2002/07/owl#Thing',
+  'class_uri': 'http://www.w3.org/2002/07/owl#Thing',
+  'e_in': 'http://dbpedia.org/ontology/School'},
+ 'answer_type': ['http://dbpedia.org/ontology/Sport',
+  'http://dbpedia.org/ontology/VideoGame',
+  'http://dbpedia.org/ontology/Game',
+  'http://dbpedia.org/ontology/Activity'],
+ 'answer_num': 2,
+ 'answer': {'uri': ['http://dbpedia.org/resource/Chess',
+   'http://dbpedia.org/resource/Flying_disc_games']}}
+    data_303 = {
+        "template": " SELECT DISTINCT ?uri WHERE { <%(e_in_in)s> <%(e_in_in_to_e_in)s> ?x . ?x <%(e_in_to_e)s> ?uri . ?x rdf:type <%(class_x)s> } ", "template_id": 303, "n_entities": 1, "type": "vanilla", "max": 100, "query": " SELECT DISTINCT ?uri WHERE { <http://dbpedia.org/resource/1999_Formula_Shell_Zoom_Masters_season> <http://dbpedia.org/property/school> ?x . ?x <http://dbpedia.org/ontology/sport> ?uri . ?x rdf:type <http://dbpedia.org/ontology/School> } ", "_id": "5c0e70a2299f4a51ae56b1ec52d7d595", "corrected": "false", "entity": "http://dbpedia.org/resource/Chess", "mapping": {"e_in_to_e": "http://dbpedia.org/ontology/sport", "class_uri": "http://dbpedia.org/ontology/VideoGame", "e_in_in_to_e_in": "http://dbpedia.org/property/school", "class_x": "http://dbpedia.org/ontology/School", "e_in_in": "http://dbpedia.org/resource/1999_Formula_Shell_Zoom_Masters_season"}, "mapping_type": {"e_in_to_e": "http://www.w3.org/2002/07/owl#Thing", "class_uri": "http://www.w3.org/2002/07/owl#Thing", "e_in_in_to_e_in": "http://www.w3.org/2002/07/owl#Thing", "class_x": "http://www.w3.org/2002/07/owl#Thing", "e_in_in": "http://dbpedia.org/ontology/FootballLeagueSeason"}, "answer_type": ["http://dbpedia.org/ontology/Sport", "http://dbpedia.org/ontology/VideoGame", "http://dbpedia.org/ontology/Game", "http://dbpedia.org/ontology/Activity"], "answer_num": 13, "answer": {"uri": ["http://dbpedia.org/resource/Archery", "http://dbpedia.org/resource/Badminton", "http://dbpedia.org/resource/Basketball", "http://dbpedia.org/resource/Chess", "http://dbpedia.org/resource/Tennis", "http://dbpedia.org/resource/Ultimate_(sport)", "http://dbpedia.org/resource/Volleyball", "http://dbpedia.org/resource/Water_polo", "http://dbpedia.org/resource/Football", "http://dbpedia.org/resource/Track_and_field", "http://dbpedia.org/resource/Flying_disc_games", "http://dbpedia.org/resource/Swimming_(sport)", "http://dbpedia.org/resource/Combat_sport"]}}
+
+
+
+
+    # verb = Verbalizer(303)
+    # data = verb.verbalize(data_303)
+    #
+    # print(data['question_verbalized'])
+
+    test_template(id=306, skip=12, show=True)
