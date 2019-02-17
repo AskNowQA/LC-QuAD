@@ -59,8 +59,11 @@
         }
 
 
-    TEMPLATES covered: 1, 2, 3, 6, 7, 8, 11, 15, 16, 101, 102, 103, 106, 107, 108, 301, 302, 303, 305
-    TOTEST: 5, 9
+    TEMPLATES covered: 1, 2, 3, 6, 7, 8, 11, 15, 16, 101, 102, 103, 106, 107, 108, 301, 302, 303, 305, 306,
+    307, 308, 309, 311, 315, 316
+    401, 402, 403, 406, 407, 408, 411
+    TOTEST: 5, 9, 402
+    LEFT: 105,405, 451, 452
 """
 import json
 import warnings
@@ -127,6 +130,15 @@ class Templates(object):
                  "<%(e_out_out)s> is the <%(e_out_to_e_out_out)s> of the <%(e_to_e_out)s> of %(Who_What)s?"],
         plural=["%(Who_What)s are the <%(top_class_uri_s)s> whose <%(e_to_e_out)s>'s <%(e_out_to_e_out_out)s> is <%(e_out_out)s>?",
                 "List the <%(sp_class_uri_s)s> whose <%(e_to_e_out)s>'s <%(e_out_to_e_out_out)s> is <%(e_out_out)s>."])
+    _306 = FancyDict(
+        vanilla=[
+            "%(Who_What)s is the <%(class_x)s> whose <%(e_to_e_out)s>'s <%(e_out_to_e_out_out)s> is <%(e_out_out)s>?",
+            "Name the <%(class_x)s> whose <%(e_to_e_out)s>'s <%(e_out_to_e_out_out)s> is <%(e_out_out)s>?",
+            "<%(e_out_out)s> is the <%(e_out_to_e_out_out)s> of the <%(e_to_e_out)s> of %(Who_What)s?",
+            "<%(e_out_out)s> is the <%(e_out_to_e_out_out)s> of %(Who_What)s <%(class_x)s>'s <%(e_to_e_out)s>?"],
+        plural=[
+            "%(Who_What)s are the <%(class_x)s> whose <%(e_to_e_out)s>'s <%(e_out_to_e_out_out)s> is <%(e_out_out)s>?",
+            "List the <%(class_x)s> whose <%(e_to_e_out)s>'s <%(e_out_to_e_out_out)s> is <%(e_out_out)s>."])
     _7 = FancyDict(
         vanilla=FancyDict(
             vanilla=["Whose <%(e_to_e_out)s> includes both <%(e_out)s>, %(and_aswellas)s <%(e_out_2)s>?",
@@ -134,46 +146,115 @@ class Templates(object):
             plural=["<%(e_to_e_out_s)s> of %(Who_What)s are <%(e_out)s> %(and_aswellas)s <%(e_out_2)s>?",
                     "%(Who_What)s are the <%(top_class_uri_s)s> whose <%(e_to_e_out)s> are <%(e_out)s> and <%(e_out_2)s>?"]),
         preposition=["What is <%(e_to_e_out)s> <%(e_out)s> and <%(e_out_2)s>?"])
+    _307 = FancyDict(
+        vanilla=FancyDict(
+            vanilla=["Which <%(class_uri)s>'s <%(e_to_e_out)s> includes both <%(e_out)s>, %(and_aswellas)s <%(e_out_2)s>?",
+                     "%(Who_What)s is the <%(class_uri)s> whose <%(e_to_e_out)s> are <%(e_out)s> %(and_aswellas)s <%(e_out_2)s>?"],
+            plural=["<%(e_to_e_out_s)s> of %(Who_What)s <%(class_uri)s>'s are <%(e_out)s> %(and_aswellas)s <%(e_out_2)s>?",
+                    "%(Who_What)s are the <%(class_uri)s> whose <%(e_to_e_out)s> are <%(e_out)s> and <%(e_out_2)s>?"]),
+        preposition=["Which <%(class_uri)s> is <%(e_to_e_out)s> <%(e_out)s> and <%(e_out_2)s>?"])
     _8 = FancyDict(
         vanilla=["%(Who_What)s is the <%(top_class_uri)s> whose <%(e_to_e_out)s> is <%(e_out)s> and <%(e_to_e_out_2)s> is <%(e_out_2*)s>?"],
         plural=["%(Who_What)s are the <%(top_class_uri_s)s> whose <%(e_to_e_out)s> is <%(e_out)s> and <%(e_to_e_out_2)s> is <%(e_out_2*)s>?"])
+    _308 = FancyDict(
+        vanilla=[
+            "%(Who_What)s is the <%(class_uri)s> whose <%(e_to_e_out)s> is <%(e_out)s> and <%(e_to_e_out_2)s> is <%(e_out_2*)s>?"],
+        plural=[
+            "%(Who_What)s are the <%(class_uri)s> whose <%(e_to_e_out)s> is <%(e_out)s> and <%(e_to_e_out_2)s> is <%(e_out_2*)s>?"])
     _9 = FancyDict(
         vanilla=["%(Who_What)s is <%(e_in_to_e)s> of %(things_thething)s %(who_which) is the <%(e_in_in_to_e_in)s> of <%(e_in_in)s>"])
+    _309 = FancyDict(
+        vanilla=[
+            "%(Who_What)s is <%(e_in_to_e)s> of <%(class_x)s> %(who_which)s is the <%(e_in_in_to_e_in)s> of <%(e_in_in)s>"])
     _11 = FancyDict(
         vanilla=["List the other <%(e_in_to_e)s> of %(things_thething)s one of whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.",
                  "Name some other <%(e_in_to_e)s> of those things one of whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.",
                  "What are the other <%(e_in_to_e)s> of %(things_thething)s one of whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>?"])
+    _311 = FancyDict(
+        vanilla=[
+            "List the other <%(e_in_to_e)s> of <%(class_x)s> one of whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.",
+            "Name some other <%(e_in_to_e)s> of those <%(class_x)s> one of whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.",
+            "What are the other <%(e_in_to_e)s> of <%(class_x)s> one of whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>?"])
     _15 = FancyDict(
         vanilla=["%(Who_What)s is the <%(e_in_to_e)s> of the <%(e_in)s> %(and_aswellas)s <%(e_in_2)s>?"],
         plural=["%(Who_What)s are the <%(e_in_to_e)s> of the <%(e_in)s> %(and_aswellas)s <%(e_in_2)s>?"])
+    _315 = FancyDict(
+        vanilla=["%(Who_What)s <%(class_uri)s> is the <%(e_in_to_e)s> of the <%(e_in)s> %(and_aswellas)s <%(e_in_2)s>?"],
+        plural=["%(Who_What)s <%(class_uri)s> are the <%(e_in_to_e)s> of the <%(e_in)s> %(and_aswellas)s <%(e_in_2)s>?"])
     _16 = FancyDict(
         vanilla=["%(Who_What)s is the <%(e_in_to_e)s> of the <%(e_in)s> and %(alsothe)s<%(e_in_to_e_2)s> of the <%(e_in_2*)s>?"],
         plural=["%(Who_What)s are the <%(e_in_to_e)s> of the <%(e_in)s> and %(alsothe)s<%(e_in_to_e_2)s> of the <%(e_in_2*)s>?"])
+    _316 = FancyDict(
+        vanilla=[
+            "%(Who_What)s <%(class_uri)s> is the <%(e_in_to_e)s> of the <%(e_in)s> and %(alsothe)s<%(e_in_to_e_2)s> of the <%(e_in_2*)s>?"],
+        plural=[
+            "%(Who_What)s <%(class_uri)s> are the <%(e_in_to_e)s> of the <%(e_in)s> and %(alsothe)s<%(e_in_to_e_2)s> of the <%(e_in_2*)s>?"])
     _101 = FancyDict(
         vanilla=["How many things are there whose <%(e_to_e_out)s> is <%(e_out_s)s>?",
-                 "%(count_prefix)s things whose <%(e_to_e_out)s> is <%(e_out_s)s>?"])
+                 "%(count_prefix_a)s things whose <%(e_to_e_out)s> is <%(e_out_s)s>?"])
+    _401 = FancyDict(
+        vanilla=["How many <%(class_uri)s> are there whose <%(e_to_e_out)s> is <%(e_out_s)s>?",
+                 "%(count_prefix_a)s <%(class_uri)s> whose <%(e_to_e_out)s> is <%(e_out_s)s>?"])
     _102 = FancyDict(
         vanilla=["%(count_prefix_a)s <%(e_in_to_e_s)s> in <%(e_in_s)s>?",
                  "%(count_prefix_a)s <%(e_in_to_e_s)s> in <%(e_in_s)s>?",
                  "%(count_prefix_b)s <%(e_in_to_e_s)s> are there in <%(e_in_s)s>?"])
+
+    _402 = FancyDict(
+        vanilla=["%(count_prefix_a)s <%(class_uri)s> <%(e_in_to_e_s)s> in <%(e_in_s)s>?",
+                 "%(count_prefix_a)s <%(class_uri)s> <%(e_in_to_e_s)s> in <%(e_in_s)s>?",
+                 "%(count_prefix_b)s <%(class_uri)s> <%(e_in_to_e_s)s> are there in <%(e_in_s)s>?"])
+
     _103 = FancyDict(
         vanilla=["%(count_prefix_b)s <%(e_in_to_e_s)s> are there of the thing %(who_which)s is the <%(e_in_in_to_e_in)s> of <%(e_in_in_s)s> ?"],
         continuous=["%(count_prefix_b)s <%(e_in_to_e_s)s> are there of the thing %(who_which)s is the <%(e_in_in_to_e_in)s> in <%(e_in_in_s)s> ?"])
+
+    _403 = FancyDict(
+        vanilla=["%(count_prefix_b)s <%(e_in_to_e_s)s> are there of the <%(class_x)s> %(who_which)s is the <%(e_in_in_to_e_in)s> of <%(e_in_in_s)s> ?"],
+        continuous=["%(count_prefix_b)s <%(e_in_to_e_s)s> are there of the <%(class_x)s> %(who_which)s is the <%(e_in_in_to_e_in)s> in <%(e_in_in_s)s> ?"])
+
+
     _106 = FancyDict(
         vanilla=["%(count_prefix_a)s <%(top_class_uri_s)s> whose <%(e_to_e_out)s>'s <%(e_out_to_e_out_out)s> is <%(e_out_out)s>?"])
+
+    _406 = FancyDict(
+        vanilla=[
+            "%(count_prefix_a)s <%(class_uri)s> whose <%(e_to_e_out)s>'s <%(e_out_to_e_out_out)s> is <%(e_out_out)s>?"])
+
     _107 = FancyDict(
         vanilla=["%(count_prefix_b)s <%(top_class_uri_s)s> are there whose <%(e_to_e_out)s> are %(both)s<%(e_out)s> %(and_aswellas)s <%(e_out_2)s>?",
                  "%(count_prefix_a)s <%(top_class_uri_s)s> whose <%(e_to_e_out)s> are %(both)s<%(e_out)s> %(and_aswellas)s <%(e_out_2)s>."])
+
+    _407 = FancyDict(
+        vanilla=[
+            "%(count_prefix_b)s <%(class_uri)s> are there whose <%(e_to_e_out)s> are %(both)s<%(e_out)s> %(and_aswellas)s <%(e_out_2)s>?",
+            "%(count_prefix_a)s <%(class_uri)s> whose <%(e_to_e_out)s> are %(both)s<%(e_out)s> %(and_aswellas)s <%(e_out_2)s>."])
     _108 = FancyDict(
         vanilla=["%(count_prefix_b)s <%(top_class_uri_s)s> %(arethere_exists)s whose <%(e_to_e_out)s> is <%(e_out)s> and <%(e_to_e_out_2)s> is <%(e_out_2*)s>?",
                  "%(count_prefix_a)s <%(top_class_uri_s)s> whose <%(e_to_e_out)s> is <%(e_out)s> and <%(e_to_e_out_2)s> is <%(e_out_2*)s>?",
                  "%(count_prefix_b)s things %(arethere_exists)s whose <%(e_to_e_out)s> is <%(e_out)s> and <%(e_to_e_out_2)s> is <%(e_out_2*)s>?",
                  "%(count_prefix_a)s things whose <%(e_to_e_out)s> is <%(e_out)s> and <%(e_to_e_out_2)s> is <%(e_out_2*)s"])
+
+    _408 = FancyDict(
+        vanilla=[
+            "%(count_prefix_b)s <%(class_uri)s> %(arethere_exists)s whose <%(e_to_e_out)s> is <%(e_out)s> and <%(e_to_e_out_2)s> is <%(e_out_2*)s>?",
+            "%(count_prefix_a)s <%(class_uri)s> whose <%(e_to_e_out)s> is <%(e_out)s> and <%(e_to_e_out_2)s> is <%(e_out_2*)s>?",
+            "%(count_prefix_b)s <%(class_uri)s> %(arethere_exists)s whose <%(e_to_e_out)s> is <%(e_out)s> and <%(e_to_e_out_2)s> is <%(e_out_2*)s>?",
+            "%(count_prefix_a)s <%(class_uri)s> whose <%(e_to_e_out)s> is <%(e_out)s> and <%(e_to_e_out_2)s> is <%(e_out_2*)s"])
+
+
     _111 = FancyDict(
         vanilla=["Give me the total number of <%(e_in_to_e_s)s> of the %(things_thething)s whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.",
                  "Count the other <%(e_in_to_e_s)s> of the %(things_thething)s whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.",
                  "Count the number of other <%(e_in_to_e_s)s> of the %(things_thething)s whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.",
                  "How many other <%(e_in_to_e_s)s> %(arethere_exists)s of the %(things_thething)s whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>?"])
+
+    _411 = FancyDict(
+        vanilla=[
+            "Give me the total number of <%(e_in_to_e_s)s> of the <%(class_x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.",
+            "Count the other <%(e_in_to_e_s)s> of the <%(class_x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.",
+            "Count the number of other <%(e_in_to_e_s)s> of the <%(class_x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>.",
+            "How many other <%(e_in_to_e_s)s> %(arethere_exists)s of the <%(class_x)s> whose <%(e_in_to_e_in_out)s> is <%(e_in_out)s>?"])
 
 
 def _answer_is_person_(datum):
@@ -215,7 +296,7 @@ class Verbalizer:
 
     def __init__(self, _id: int):
         self.templates = getattr(Templates, '_' + str(_id))
-        self.dbp = dbi.DBPedia(_verbose=False, _caching=True)
+        self.dbp = dbi.DBPedia(_verbose=False, _caching=False)
 
         # If in count range, put plural in flags by default
         if 100 < _id < 120 or 400 < _id < 420:
@@ -309,7 +390,6 @@ class Verbalizer:
         datum['mapping_sf'] = self._get_sf_(datum['mapping'])
         if 'plural' in self.flags:
             datum['mapping_sf'] = _get_plural_maps_(datum['mapping_sf'])
-
         datum['question_verbalized'] = template % datum['mapping_sf']
         datum['question_template'] = template
 
@@ -317,19 +397,19 @@ class Verbalizer:
 
 
 def test_template(id:int, skip:int = 0, show:bool = False) -> None:
-    f = open(f'./sparqls/template{id}.txt', 'r')
+    f = open(f'resources/sparqls/template{id}.txt', 'r')
     counter = 0
     for line in f.readlines():
         data = json.loads(line)
         if counter >= skip:
             break
         counter += 1
-
+    if show:
+        pprint(data['query'])
     verb = Verbalizer(id)
     data = verb.verbalize(data)
     print(data['question_verbalized'])
-    if show:
-        pprint(data['query'])
+
 
 
 
@@ -713,4 +793,4 @@ if __name__ == "__main__":
     #
     # print(data['question_verbalized'])
 
-    test_template(id=306, skip=12, show=True)
+    test_template(id=411, skip=98, show=True)

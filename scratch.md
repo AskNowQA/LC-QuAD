@@ -11,6 +11,7 @@
 - **CHECK WHY SOME TEMPALTES ARE NOT BEING GENERATED!!!**
 - **Template 8/108 might not satisfy conditions. Check!**
 - Enforce that things are unequal in template 305 (and others?)
+- Don't pluralize entites in the count templates
 
 ## Minor:
 
