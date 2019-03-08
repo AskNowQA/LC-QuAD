@@ -550,12 +550,12 @@ class Subgraph(dict):
 
         _var_obj = VarList(_vars)
 
-        with Timer() as timer:
+        with Timer() as timerr:
             mappings = self.mappings.get(_var_obj.hash, [x for x in self._get_mapping_for_(_vars, _equal) if len(x) != 0])
 
-        self.time_maps += timer.interval
-        print("%(uri)s | %(time).03f : %(len)03d : %(var)s :" %
-              {'uri': self.uri.split('/')[-1], 'time': timer.interval, 'var': str(_var_obj), 'len': len(mappings)})
+        print("%(uri)s | %(time).04f min : %(len)03d : %(var)s :" %
+              {'uri': self.uri.split('/')[-1], 'time': timerr.interval, 'var': str(_var_obj), 'len': len(mappings)})
+        self.time_maps += timerr.interval
 
         return mappings
 

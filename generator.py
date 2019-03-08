@@ -10,6 +10,7 @@
 # Importing some external libraries
 from pprint import pprint
 from oset import oset
+from tqdm import tqdm
 import textwrap
 import warnings
 import pickle
@@ -364,7 +365,7 @@ def fill_templates(_graph, _dbp):
     for template in templates:
         mappings = _graph.gen_maps(get_vars(template), template.get('equal', []))[:template.get('max', None)]
 
-        for mapping in mappings:
+        for mapping in tqdm(mappings):
             add(_data=_fill_one_template_(_template=template, _map=mapping, _graph=_graph, _dbp=_dbp))
 
     # Write everything to disk

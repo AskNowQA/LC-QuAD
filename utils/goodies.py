@@ -1,6 +1,7 @@
 import time
 import warnings
 from collections import namedtuple
+from contextlib import contextmanager
 
 Log = namedtuple('Log', 'uri traceback')
 
@@ -63,9 +64,17 @@ class InvalidNLQTemplate(Exception):
 
 class Timer:
     def __enter__(self):
-        self.start = time.perf_counter()
+        self.start = time.time()
         return self
 
     def __exit__(self, *args):
-        self.end = time.perf_counter()
+        self.end = time.time()
         self.interval = self.end - self.start
+
+
+# @contextmanager
+# def Timer_(name):
+#     startTime = time.time()
+#     yield
+#     elapsedTime = time.time() - startTime
+#     print('[{}] finished in {} ms'.format(name, int(elapsedTime * 1000)))

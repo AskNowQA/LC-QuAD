@@ -292,6 +292,8 @@ class DBPedia:
         """
             Function fetches the type of a given entity
             and can optionally filter out the ones of DBPedia only
+
+            @TODO: interface it so that it first checks for the value in self.classes
         """
         _resource_uri = self._prep_uri_(_resource_uri)
         response = self.shoot_custom_query(GET_TYPE_OF_RESOURCE % {'target_resource': _resource_uri})
