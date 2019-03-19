@@ -295,17 +295,21 @@ class DBPedia:
 
             @TODO: interface it so that it first checks for the value in self.classes
         """
-        _resource_uri = self._prep_uri_(_resource_uri)
-        response = self.shoot_custom_query(GET_TYPE_OF_RESOURCE % {'target_resource': _resource_uri})
-        type_list = [x[u'type'][u'value'] for x in response[u'results'][u'bindings']]
 
-        # If we need only DBPedia's types
-        if _filter_dbpedia:
-            filtered_type_list = [x for x in type_list if
-                                  x[:28] in ['http://dbpedia.org/ontology/']]
-            return filtered_type_list
+        try:
+            return self.classes[_resource_uri]
+        except KeyError:
+            _resource_uri = self._prep_uri_(_resource_uri)
+            response = self.shoot_custom_query(GET_TYPE_OF_RESOURCE % {'target_resource': _resource_uri})
+            type_list = [x[u'type'][u'value'] for x in response[u'results'][u'bindings']]
 
-        return type_list
+            # If we need only DBPedia's types
+            if _filter_dbpedia:
+                filtered_type_list = [x for x in type_list if
+                                      x[:28] in ['http://dbpedia.org/ontology/']]
+                return filtered_type_list
+
+            return type_list
 
     def get_parent_of_class(self, _resource_class, _filter_dbpedia=False):
         """
