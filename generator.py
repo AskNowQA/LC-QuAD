@@ -275,8 +275,8 @@ def _fill_one_template_(_template, _map, _graph, _dbp):
 
     # Get the Answer of the query
     answer = dbp.get_answer(template['query'])
-    classes_uri = set(dbp.get_type_of_resource(template['entity'], _filter_dbpedia=True))
-    template['answer_type'] = list(classes_uri)
+    classes_uri = dbp.get_type_of_resource(template['entity'], _filter_dbpedia=True)
+    template['answer_type'] = classes_uri
 
     # Check for reject condition 1
     if template["type"] == "count":
