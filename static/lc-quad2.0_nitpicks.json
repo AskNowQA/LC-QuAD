@@ -1,0 +1,115 @@
+[
+  {
+		"question": "Who are the employees of Food and Drug Administration?",
+		"sparql_dbpedia18": "select distinct ?answer where { ?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> <http://wikidata.dbpedia.org/resource/Q204711> . ?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P1128> . ?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> ?answer. }"
+	},
+	{
+		"question": "Who is the developer of Free Software Foundation?",
+		"sparql_dbpedia18": "select distinct ?answer where { ?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject>  ?answer. ?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P178> . ?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> <http://wikidata.dbpedia.org/resource/Q48413>. }"
+	},
+	{
+		"question": "Who is the translator of The Jungle Book?",
+		"sparql_dbpedia18": "select distinct ?obj where { ?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> <http://wikidata.dbpedia.org/resource/Q189509> . ?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P655> . ?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> ?obj . ?obj <http://www.wikidata.org/entity/P31> <http://wikidata.dbpedia.org/resource/Q5> } ",
+		"sparql_wikidata": " select distinct ?obj where { wd:Q189509 wdt:P655 ?obj . ?obj wdt:P31 wd:Q5 } "
+	},
+	{
+		"question": "How many episodes are in the television series Friends?",
+		"sparql_dbpedia18": "select distinct ?subj where { ?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> ?subj . ?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P179> . ?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> <http://wikidata.dbpedia.org/resource/Q79784> . ?subj <http://www.wikidata.org/entity/P31> <http://wikidata.dbpedia.org/resource/Q21191270> } ",
+		"sparql_wikidata": " select distinct ?sbj where { ?sbj wdt:P179 wd:Q79784 . ?sbj wdt:P31 wd:Q21191270 } "
+	},
+	{
+		"question": "Who are the writers of The Second Coming, whose deathplace is Menton?",
+		"sparql_dbpedia18": "SELECT ?answer WHERE { ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> <http://wikidata.dbpedia.org/resource/Q1754273> . ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P50>. ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> ?answer . ?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> ?answer. ?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P20> . ?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> <http://wikidata.dbpedia.org/resource/Q180083> . }",
+		"sparql_wikidata": "SELECT ?answer WHERE { wd:Q1754273 wdt:P50 ?answer . ?answer wdt:P20 wd:Q180083}"
+	},
+	{
+		"question": "What land are alumni of Francis from?",
+		"sparql_dbpedia18": "SELECT ?answer WHERE { ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> <http://wikidata.dbpedia.org/resource/Q450675> . ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P69>. ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> ?X . ?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> ?X. ?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P17> . ?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> ?answer . }",
+		"sparql_wikidata": "SELECT ?answer WHERE { wd:Q450675 wdt:P69 ?X . ?X wdt:P17 ?answer}"
+	},
+	{
+		"question": "What kind of oil was used in the portrait of Vista geral do Centro S. Paulo 103?",
+		"sparql_dbpedia18": "SELECT ?answer WHERE { ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> <http://wikidata.dbpedia.org/resource/Q51099374> . ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P180>. ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> ?X . ?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> ?X. ?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P618> . ?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> ?answer . }",
+		"sparql_wikidata": "SELECT ?answer WHERE { wd:Q51099374 wdt:P180 ?X . ?X wdt:P618 ?answer}"
+	},
+	{
+		"question": "What was William Butler Yeats nominated for in the year 1918?",
+		"sparql_dbpedia18": "select distinct ?obj  where {\n?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> <http://wikidata.dbpedia.org/resource/Q40213> .\n?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P1411> .\n?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> ?obj .\n?statement <http://www.wikidata.org/entity/P585> <1918-1-1>\n} \n",
+		"sparql_wikidata": "SELECT ?obj WHERE { wd:Q40213 p:P1411 ?s . ?s ps:P1411 ?obj . ?s pq:P585 ?x filter(contains(?x,'1918-1-1')) }"
+	},
+	{
+		"question": "How long was Shirley Temple the United States Ambassador to Ghana?",
+		"sparql_dbpedia18": "select distinct ?value  where {\n?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> <http://wikidata.dbpedia.org/resource/Q182580> .\n?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P39> .\n?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> <http://wikidata.dbpedia.org/resource/Q7889302> .\n?statement <http://www.wikidata.org/entity/P582> ?value. \n} \n",
+		"sparql_wikidata": "SELECT ?value WHERE { wd:Q182580 p:P39 ?s . ?s ps:P39 wd:Q7889302 . ?s pq:P582 ?value}"
+	},
+	{
+		"question": "Who is the film editor and director of Reservoir Dogs?",
+		"sparql_dbpedia18": " SELECT ?ans_1 ?ans_2 WHERE { ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> <http://wikidata.dbpedia.org/resource/Q72962> . ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P1040> . ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> ?ans_1. ?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> <http://wikidata.dbpedia.org/resource/Q72962> . ?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P57> . ?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> ?ans_2. } ",
+		"sparql_wikidata": "SELECT ?ans_1 ?ans_2 WHERE { wd:Q72962 wdt:P1040 ?ans_1 . wd:Q72962 wdt:P57 ?ans_2 }"
+	},
+	{
+		"sparql_dbpedia18": "select distinct ?value1 ?value2 where { ?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> <http://wikidata.dbpedia.org/resource/Q855> . ?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P40> . ?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> <http://wikidata.dbpedia.org/resource/Q163816>. ?statement <http://www.wikidata.org/entity/P580> ?value1 . ?statement <http://www.wikidata.org/entity/P2842> ?value2 } ",
+		"question": "Who is the mother of Joseph Stalin and Yakov Dzhugashvili and when were they born?",
+		"sparql_wikidata": "SELECT ?value1 ?value2 WHERE { wd:Q855 p:P40 ?s . ?s ps:P40 wd:Q163816 . ?s pq:P25 ?value1 . ?s pq:P569 ?value2 }"
+	},
+	{
+		"question": "David Beckham is a member of what sports team and how many matches has he played?",
+		"sparql_dbpedia18": "select distinct ?dataprop1 ?obj where { ?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> <http://wikidata.dbpedia.org/resource/Q10520> . ?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P54> . ?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> ?obj . ?statement <http://www.wikidata.org/entity/P580> ?dataprop1 . } ",
+		"sparql_wikidata": "SELECT ?value1 ?obj WHERE { wd:Q10520 p:P54 ?s . ?s ps:P54 ?obj . ?s pq:P1350 ?value1 . }"
+	},
+	{
+		"question": "Is Juan Jos\u00e9 Ibarretxe a chairperson of FC Barcelona?",
+		"sparql_dbpedia18": " ASK { ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> <http://wikidata.dbpedia.org/resource/Q7156> . ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P488> . ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> <http://wikidata.dbpedia.org/resource/Q351738>. } ",
+		"sparql_wikidata": "ASK WHERE { wd:Q7156 wdt:P488 wd:Q351738 }"
+	},
+	{
+		"question": "Were Dutch and Hungarian the official languages of the Holy Roman Empire?",
+		"sparql_dbpedia18": " ASK { ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> <http://wikidata.dbpedia.org/resource/Q12548> . ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P37> . ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> <http://wikidata.dbpedia.org/resource/Q7411>. ?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> <http://wikidata.dbpedia.org/resource/Q12548> . ?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P37> . ?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> <http://wikidata.dbpedia.org/resource/Q9067>. } ",
+		"sparql_wikidata": "ASK WHERE { wd:Q12548 wdt:P37 wd:Q7411 . wd:Q12548 wdt:P37 wd:Q9067 }"
+	},
+	{
+		"question": "Does chicken has a heart rate equal to 275?",
+		"sparql_dbpedia18": "ASK { ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> <http://wikidata.dbpedia.org/resource/Q780> . ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P3395>. ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> ?obj. filter(?obj = 275) }",
+		"sparql_wikidata": "ASK WHERE { wd:Q780 wdt:P3395 ?obj filter(?obj = 275) } "
+	},
+	{
+		"question": "How many siblings did Edward III of England have?",
+		"sparql_dbpedia18": "SELECT (COUNT(?obj) AS ?objs ) {\n?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> <http://wikidata.dbpedia.org/resource/Q129247> .\n?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P3373> .\n?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> ?obj .\n} \n",
+		"sparql_wikidata": "SELECT (COUNT(?obj) AS ?value ) { wd:Q129247 wdt:P3373 ?obj }"
+	},
+	{
+		"question": "What is the number of copyrights that Apple owns?",
+		"sparql_dbpedia18": "SELECT (COUNT(?sub) AS ?subs ) {\n?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> ?sub .\n?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P3931> .\n?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> http://wikidata.dbpedia.org/resource/Q312 .\n} \n",
+		"sparql_wikidata": "SELECT (COUNT(?sub) AS ?value ) { ?sub wdt:P3931 wd:Q312 }"
+	},
+	{
+		"question": "Which landlocked country has the highest GDP PPP?",
+		"sparql_dbpedia18": "select ?ent where {\n?ent <http://www.wikidata.org/entity/P31> <http://wikidata.dbpedia.org/resource/Q123480>.\n?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> ?ent .\n?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P4010>.\n?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> ?obj .}\nORDER BY DESC(?obj)\nLIMIT 5",
+		"sparql_wikidata": "select ?ent where { ?ent wdt:P31 wd:Q123480 . ?ent wdt:P4010 ?obj } ORDER BY DESC(?obj)LIMIT 5 "
+	},
+	{
+		"question": "Which central bank has the highest target interest rate ?",
+		"sparql_dbpedia18": "select ?ent where {\n?ent <http://www.wikidata.org/entity/P31> <http://wikidata.dbpedia.org/resource/Q4830453>.\n\n?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> ?ent .\n?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P2661>.\n?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> ?obj1.\n\n?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> ?ent .\n?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P31> .\n?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> <http://wikidata.dbpedia.org/resource/Q66344> .\n\n}\nORDER BY DESC(?obj1)\nLIMIT 5",
+		"sparql_wikidata": "select ?ent where { ?ent wdt:P31 wd:Q4830453 . ?ent wdt:P2661 ?obj } ?ent wdt:P31 wd:Q66344 ORDER BY DESC(?obj)LIMIT 5 "
+	},
+	{
+		"question": "What is the name of a battle that has the word siege in it.",
+		"sparql_dbpedia18": "SELECT DISTINCT ?sbj ?sbj_label { ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> ?sbj . ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P31> . ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> <http://wikidata.dbpedia.org/resource/Q178561>. ?sbj rdfs:label ?sbj_label . FILTER(CONTAINS(lcase(?sbj_label), 'siege')) . FILTER (lang(?sbj_label) = 'en') } LIMIT 25",
+		"sparql_wikidata": "SELECT DISTINCT ?sbj ?sbj_label WHERE { ?sbj wdt:P31 wd:Q178561 . ?sbj rdfs:label ?sbj_label . FILTER(CONTAINS(lcase(?sbj_label), 'siege')) . FILTER (lang(?sbj_label) = 'en') } LIMIT 25 "
+	},
+	{
+		"sparql_dbpedia18": "SELECT DISTINCT ?sbj ?sbj_label { ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> ?sbj . ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P31> . ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> <http://wikidata.dbpedia.org/resource/Q515>. ?sbj rdfs:label ?sbj_label . FILTER(STRSTARTS(lcase(?sbj_label), 'w')) . FILTER (lang(?sbj_label) = 'en') } LIMIT 25",
+		"question": "What are the city which start with the letter w",
+		"sparql_wikidata": "SELECT DISTINCT ?sbj ?sbj_label WHERE { ?sbj wdt:P31 wd:Q515 . ?sbj rdfs:label ?sbj_label . FILTER(STRSTARTS(lcase(?sbj_label), 'w')) . FILTER (lang(?sbj_label) = 'en') } LIMIT 25 "
+	},
+	{
+		"question": "Which is the magazine with place of publication in New York City and that contains the word vibe in it's name?",
+		"sparql_dbpedia18": "SELECT DISTINCT ?sbj ?sbj_label { ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> ?sbj . ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P31> . ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> <http://wikidata.dbpedia.org/resource/Q41298>. ?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> ?sbj . ?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P291> . ?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> <http://wikidata.dbpedia.org/resource/Q60>. ?sbj rdfs:label ?sbj_label . FILTER(CONTAINS(lcase(?sbj_label), 'vibe')) . FILTER (lang(?sbj_label) = 'en') } LIMIT 25",
+		"sparql_wikidata": "SELECT DISTINCT ?sbj ?sbj_label WHERE { ?sbj wdt:P31 wd:Q41298 . ?sbj wdt:P291 wd:Q60 . ?sbj rdfs:label ?sbj_label . FILTER(CONTAINS(lcase(?sbj_label), 'vibe')) . FILTER (lang(?sbj_label) = 'en') } LIMIT 25 "
+	},
+	{
+		"sparql_dbpedia18": "SELECT DISTINCT ?sbj ?sbj_label { ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> ?sbj . ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P31> . ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> <http://wikidata.dbpedia.org/resource/Q5>. ?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> ?sbj . ?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P410> . ?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> <http://wikidata.dbpedia.org/resource/Q111837>. ?sbj rdfs:label ?sbj_label . FILTER(STRSTARTS(lcase(?sbj_label), 'm')) . FILTER (lang(?sbj_label) = 'en') } LIMIT 25",
+		"question": "Name a military rank that starts with letter M",
+		"sparql_wikidata": "SELECT DISTINCT ?sbj ?sbj_label WHERE { ?sbj wdt:P31 wd:Q5 . ?sbj wdt:P410 wd:Q111837 . ?sbj rdfs:label ?sbj_label . FILTER(STRSTARTS(lcase(?sbj_label), 'm')) . FILTER (lang(?sbj_label) = 'en') } LIMIT 25 "
+	}
+]
