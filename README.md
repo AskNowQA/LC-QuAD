@@ -1,6 +1,8 @@
  # LC-QuAD
 ## Largescale Complex Question Answering Dataset
 
+##  :loudspeaker: Announcement: LCQUAD 2.0 is now released, checkout our website http://lc-quad.sda.tech .
+
 ### Download 
  :hatching_chick: [Train](train-data.json), [Test](test-data.json) Data 
  
